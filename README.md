@@ -1,5 +1,5 @@
 # A distributed data processing system 
 
-Uses C++ code to implement core algorithms for high-performance computing and 
+Uses C++ code to implement core algorithms for high-performance computing 
 
-Java to complete application layer development
+and Java to complete application layer development
