@@ -6,5 +6,4 @@ cd build
 cmake ..
 make
 ```
-这将生成一个名为libdataprocessing.so（在Linux上）或dataprocessing.dll（在Windows上）的共享库。
-
+这将生成一个名为 `libdataprocessing.so（Linux）`或`dataprocessing.dll（Windows）`或`libdataprocessing.dylib（Mac）`的共享库。
