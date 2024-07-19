@@ -1,5 +1,7 @@
 # Smart Autonomous Vehicle Management System
 
+![result](./asset/architecture.png)
+
 Uses C++ code to implement core algorithms for high-performance computing 
 
 and Java to complete application layer development
