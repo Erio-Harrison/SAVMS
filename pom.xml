@@ -46,6 +46,13 @@
 			<version>20240303</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.google.maps/google-maps-services -->
+		<dependency>
+			<groupId>com.google.maps</groupId>
+			<artifactId>google-maps-services</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

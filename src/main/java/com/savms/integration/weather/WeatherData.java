@@ -1,164 +1,118 @@
 package com.savms.integration.weather;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Scanner;
 
 public class WeatherData {
+    private String location;
+    private double temperature;
+    private double precipitation;  //Sum of daily precipitation (including rain, showers and snowfall) (mm)
+    /**
+     * weatherCode means the most severe weather condition on a given day.
+     * weatherCode	Description
+     * 0	Clear sky
+     * 1, 2, 3	Mainly clear, partly cloudy, and overcast
+     * 45, 48	Fog and depositing rime fog
+     * 51, 53, 55	Drizzle: Light, moderate, and dense intensity
+     * 56, 57	Freezing Drizzle: Light and dense intensity
+     * 61, 63, 65	Rain: Slight, moderate and heavy intensity
+     * 66, 67	Freezing Rain: Light and heavy intensity
+     * 71, 73, 75	Snow fall: Slight, moderate, and heavy intensity
+     * 77	Snow grains
+     * 80, 81, 82	Rain showers: Slight, moderate, and violent
+     * 85, 86	Snow showers slight and heavy
+     * 95 *	Thunderstorm: Slight or moderate
+     * 96, 99 *	Thunderstorm with slight and heavy hail
+     */
+    private int weatherCode;
+    private double windSpeed;
+    private boolean isDay;
+    private String time;
+
+    // Getters and Setters
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public double getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(double temperature) {
+        this.temperature = temperature;
+    }
+
+    public double getPrecipitation() {
+        return precipitation;
+    }
+
+    public void setPrecipitation(double precipitation) {
+        this.precipitation = precipitation;
+    }
+
+    public int getWeatherCode() {
+        return weatherCode;
+    }
+
+    public void setWeatherCode(int weatherCode) {
+        this.weatherCode = weatherCode;
+    }
+
+    public double getWindSpeed() {
+        return windSpeed;
+    }
+
+    public void setWindSpeed(double windSpeed) {
+        this.windSpeed = windSpeed;
+    }
+
+    public boolean isDay() {
+        return isDay;
+    }
+
+    public void setIsDay(boolean isDay) {
+        this.isDay = isDay;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     public static void main(String[] args) {
-        try {
-            Scanner scanner = new Scanner(System.in);
-            String location;
-            do {
-                // Retrieve user input
-                System.out.println("===================================================");
-                System.out.print("Enter Location (Say No to Quit): ");
-                location = scanner.nextLine();
+        WeatherIntegrationService weatherService = new WeatherIntegrationService();
+        Scanner scanner = new Scanner(System.in);
+        String location;
 
-                if (location.equalsIgnoreCase("No")) break;
+        do {
+            System.out.println("===================================================");
+            System.out.print("Enter Location (Say No to Quit): ");
+            location = scanner.nextLine();
 
-                // Get location data
-                JSONObject cityLocationData = getLocationData(location);
-                if (cityLocationData == null) {
-                    System.out.println("No data found for the city.");
-                    continue;
-                }
+            if (location.equalsIgnoreCase("No")) break;
 
-                double latitude = ((BigDecimal) cityLocationData.get("latitude")).doubleValue();
-                double longitude = ((BigDecimal) cityLocationData.get("longitude")).doubleValue();
+            // Retrieve weather data for the given location
+            WeatherData weatherData = weatherService.getWeatherData(location);
 
-                // Display weather data based on the obtained latitude and longitude
-                displayWeatherData(latitude, longitude);
-            } while (!location.equalsIgnoreCase("No"));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static JSONObject getLocationData(String city) {
-        city = city.replaceAll(" ", "+");
-
-        String urlString = "https://geocoding-api.open-meteo.com/v1/search?name=" +
-                city + "&count=1&language=en&format=json";
-
-        try {
-            // 1. Fetch the API response based on the API URL
-            HttpURLConnection apiConnection = fetchApiResponse(urlString);
-
-            // Check for response status
-            // 200 - means that the connection was successful
-            if (apiConnection.getResponseCode() != 200) {
-                System.out.println("Error: Could not connect to API");
-                return null;
+            // Display the retrieved data
+            if (weatherData != null) {
+                System.out.println("Location: " + weatherData.getLocation());
+                System.out.println("Current Time: " + weatherData.getTime());
+                System.out.println("Current Temperature (C): " + weatherData.getTemperature());
+                System.out.println("Precipitation: " + weatherData.getPrecipitation());
+                System.out.println("Weather Code: " + weatherData.getWeatherCode());
+                System.out.println("Wind Speed (m/s): " + weatherData.getWindSpeed());
+                System.out.println("Is Day: " + (weatherData.isDay() ? "Yes" : "No"));
+            } else {
+                System.out.println("No data found for the given location.");
             }
 
-            // 2. Read the response and store it as a String
-            String jsonResponse = readApiResponse(apiConnection);
-
-            // 3. Parse the String into a JSON Object
-            JSONObject resultsJsonObj = new JSONObject(jsonResponse);
-
-            // 4. Retrieve Location Data
-            JSONArray locationData = resultsJsonObj.getJSONArray("results");
-            if (locationData.isEmpty()) {
-                return null;
-            }
-            return locationData.getJSONObject(0);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private static void displayWeatherData(double latitude, double longitude) {
-        try {
-            // 1. Fetch the API response based on the latitude and longitude
-            String url = "https://api.open-meteo.com/v1/forecast?latitude=" + latitude +
-                    "&longitude=" + longitude + "&current=temperature_2m,relative_humidity_2m,wind_speed_10m&timezone=auto";
-            HttpURLConnection apiConnection = fetchApiResponse(url);
-
-            // Check for response status
-            // 200 - means that the connection was successful
-            if (apiConnection.getResponseCode() != 200) {
-                System.out.println("Error: Could not connect to API");
-                return;
-            }
-
-            // 2. Read the response and store it as a String
-            String jsonResponse = readApiResponse(apiConnection);
-
-            // 3. Parse the String into a JSON Object
-            JSONObject jsonObject = new JSONObject(jsonResponse);
-            JSONObject currentWeatherJson = jsonObject.getJSONObject("current");
-
-            // 4. Store the data into their corresponding data types
-            String time = (String) currentWeatherJson.get("time");
-            System.out.println("Current Time: " + time);
-
-            double temperature = ((BigDecimal) currentWeatherJson.get("temperature_2m")).doubleValue();
-            System.out.println("Current Temperature (C): " + temperature);
-
-            Object relativeHumidityObj = currentWeatherJson.get("relative_humidity_2m");
-            long relativeHumidity = relativeHumidityObj instanceof Number ? ((Number) relativeHumidityObj).longValue() : 0;
-            System.out.println("Relative Humidity: " + relativeHumidity);
-
-            Object windSpeedObj = currentWeatherJson.get("wind_speed_10m");
-            double windSpeed = windSpeedObj instanceof Number ? ((Number) windSpeedObj).doubleValue() : 0.0;
-            System.out.println("Wind Speed (m/s): " + windSpeed);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static String readApiResponse(HttpURLConnection apiConnection) {
-        try {
-            // Create a StringBuilder to store the resulting JSON data
-            StringBuilder resultJson = new StringBuilder();
-
-            // Create a Scanner to read from the InputStream of the HttpURLConnection
-            Scanner scanner = new Scanner(apiConnection.getInputStream());
-
-            // Loop through each line in the response and append it to the StringBuilder
-            while (scanner.hasNext()) {
-                resultJson.append(scanner.nextLine());
-            }
-
-            // Close the Scanner to release resources
-            scanner.close();
-
-            // Return the JSON data as a String
-            return resultJson.toString();
-
-        } catch (IOException e) {
-            // Print the exception details in case of an IOException
-            e.printStackTrace();
-        }
-
-        // Return null if there was an issue reading the response
-        return null;
-    }
-
-    private static HttpURLConnection fetchApiResponse(String urlString) {
-        try {
-            // Attempt to create a connection
-            URL url = new URL(urlString);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-            // Set request method to GET
-            conn.setRequestMethod("GET");
-
-            return conn;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // Return null if the connection could not be made
-        return null;
+        } while (!location.equalsIgnoreCase("No"));
     }
 }
