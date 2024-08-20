@@ -1,9 +1,12 @@
+import Routes from "./Routes"
+import { UserContextProvider } from './UserContext';
 
 function App() {
-
   return (
-    <div className='bg-primary font-sans h-screen'>test</div>
-  )
+    <UserContextProvider>
+      <Routes />
+    </UserContextProvider>
+  );
 }
 
-export default App
+export default App;
