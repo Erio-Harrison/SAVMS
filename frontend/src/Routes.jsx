@@ -4,7 +4,7 @@ import SCUVMS from "./pages/SCUVMS";
 import RegisterAndLogin from "./pages/RegisterAndLogin";
 
 export default function Routes() {
-    const { id } = useContext(UserContext);
+  const { id } = useContext(UserContext);
 
-    return (id) ? <SCUVMS /> : <RegisterAndLogin />;
-  }
+  return (id) ? <SCUVMS /> : <SCUVMS />;
+}
