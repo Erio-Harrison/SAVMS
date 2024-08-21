@@ -1,7 +1,7 @@
 package com.savms.service.vehicle;
 
-import com.savms.model.Vehicle;
-import com.savms.model.VehicleStatus;
+import com.savms.model.vo.Vehicle01;
+import com.savms.model.vo.VehicleStatus;
 import com.savms.repository.VehicleRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,46 +12,46 @@ import java.util.List;
 
 @Service
 public class VehicleService {
-
+    @Autowired
     private final VehicleRepository vehicleRepository;
 
-    @Autowired
+
     public VehicleService(VehicleRepository vehicleRepository) {
         this.vehicleRepository = vehicleRepository;
     }
 
     @Transactional(readOnly = true)
-    public Vehicle getVehicleById(String vehicleId) {
+    public Vehicle01 getVehicleById(String vehicleId) {
         return vehicleRepository.findByVehicleId(vehicleId)
                 .orElseThrow();
     }
 
     @Transactional
-    public Vehicle createVehicle(Vehicle vehicle) {
+    public Vehicle01 createVehicle(Vehicle01 vehicle) {
         return vehicleRepository.save(vehicle);
     }
 
     @Transactional
-    public Vehicle updateVehicleStatus(String vehicleId, VehicleStatus newStatus) {
-        Vehicle vehicle = getVehicleById(vehicleId);
+    public Vehicle01 updateVehicleStatus(String vehicleId, VehicleStatus newStatus) {
+        Vehicle01 vehicle = getVehicleById(vehicleId);
         vehicle.setStatus(newStatus);
         return vehicleRepository.save(vehicle);
     }
 
     @Transactional
     public void deleteVehicle(String vehicleId) {
-        Vehicle vehicle = getVehicleById(vehicleId);
+        Vehicle01 vehicle = getVehicleById(vehicleId);
         vehicleRepository.delete(vehicle);
     }
 
     @Transactional(readOnly = true)
-    public List<Vehicle> getVehiclesByStatus(VehicleStatus status) {
+    public List<Vehicle01> getVehiclesByStatus(VehicleStatus status) {
         return vehicleRepository.findByStatus(status);
     }
 
     @Transactional
-    public Vehicle updateVehicleLocation(String vehicleId, double latitude, double longitude) {
-        Vehicle vehicle = getVehicleById(vehicleId);
+    public Vehicle01 updateVehicleLocation(String vehicleId, double latitude, double longitude) {
+        Vehicle01 vehicle = getVehicleById(vehicleId);
         vehicle.setLatitude(latitude);
         vehicle.setLongitude(longitude);
         return vehicleRepository.save(vehicle);

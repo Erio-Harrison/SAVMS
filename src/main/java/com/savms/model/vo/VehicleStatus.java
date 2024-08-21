@@ -1,4 +1,4 @@
-package com.savms.model;
+package com.savms.model.vo;
 
 public class VehicleStatus {
 

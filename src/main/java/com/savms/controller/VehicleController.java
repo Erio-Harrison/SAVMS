@@ -1,45 +1,48 @@
 package com.savms.controller;
 
+import com.savms.model.entity.Vehicle;
+import com.savms.result.Result;
+import com.savms.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.savms.model.Vehicle;
-import com.savms.model.VehicleStatus;
-import com.savms.service.vehicle.VehicleService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/vehicles")
+@RequestMapping("/api/vehicle")
 public class VehicleController {
-
-    private final VehicleService vehicleService;
-
     @Autowired
-    public VehicleController(VehicleService vehicleService) {
-        this.vehicleService = vehicleService;
-    }
+    private VehicleService vehicleService;
 
     @PostMapping
-    public ResponseEntity<Vehicle> createVehicle(@RequestBody Vehicle vehicle) {
-        Vehicle createdVehicle = vehicleService.createVehicle(vehicle);
-        return ResponseEntity.ok(createdVehicle);
+    public Result  createVehicle(@RequestBody Vehicle vehicle) {
+        vehicleService.createVehicle(vehicle);
+
+        return Result.success();
+    }
+    @GetMapping("/vehicle")
+    public Result getVehicle(@RequestParam(required = false) Long id) {
+        Vehicle vehicle = null;
+        if (id != null) {
+            vehicle = vehicleService.findVehicleById(id);
+        }
+        if (vehicle == null) {
+            return Result.error("Vehicle not found");
+        }
+        return Result.success(vehicle);
+    }
+    @RequestMapping()
+    public Result updateVehicle( @RequestBody Vehicle vehicle) {
+        vehicleService.updateVehicle(vehicle);
+
+        return Result.success();
+    }
+    //以query 类型传递id参数
+    @DeleteMapping
+    public Result deleteVehicle(Long id){
+        vehicleService.deleteByid(id);
+        return Result.success();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Vehicle> getVehicle(@PathVariable String id) {
-        Vehicle vehicle = vehicleService.getVehicleById(id);
-        return ResponseEntity.ok(vehicle);
-    }
 
-    @PutMapping("/{id}/status")
-    public ResponseEntity<Vehicle> updateVehicleStatus(@PathVariable String id, @RequestBody VehicleStatus status) {
-        Vehicle updatedVehicle = vehicleService.updateVehicleStatus(id, status);
-        return ResponseEntity.ok(updatedVehicle);
-    }
+
+
 }

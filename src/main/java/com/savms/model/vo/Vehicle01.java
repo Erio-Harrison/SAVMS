@@ -1,6 +1,6 @@
-package com.savms.model;
+package com.savms.model.vo;
 
-public class Vehicle {
+public class Vehicle01 {
 
     public void setStatus(VehicleStatus newStatus) {
         // TODO Auto-generated method stub
