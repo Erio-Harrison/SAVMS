@@ -5,12 +5,14 @@ import CarInfo from "../components/CarInfo";
 import HourlyForecastCard from "../components/HourlyForecastCard";
 import SearchBar from "../components/SearchBar";
 import CurrentWeatherCard from "../components/CurrentWeatherCard";
+import Map from "../components/Map";
 
 export default function SCUVMS() {
     const [carInfo, setCarInfo] = useState({});
     const [city, setCity] = useState('Canberra');
-    const [currentWeather, setCurrentWeather] = useState({})
+    const [currentWeather, setCurrentWeather] = useState({});
     const [weatherArray, setWeatherArray] = useState([]);
+    const [coordinate, setCoordinate] = useState({lat: -35.2809, lng: 149.1300});
 
     useEffect(() => {
         const fetchCarInfo = async () => {
@@ -41,6 +43,8 @@ export default function SCUVMS() {
 
     const handleSearch = (query) => {
         setCity(query);
+        // get query cooredinate
+        setCoordinate({lat: -35.2809, lng: 149.1300});
     };
 
     return (
@@ -65,7 +69,7 @@ export default function SCUVMS() {
                 </div>
                 {/* TODO: map section*/}
                 <div className="h-2/3 bg-white rounded-3xl">
-
+                    <Map lat={coordinate.lat} lng={coordinate.lng}/>
                 </div>
             </div>
         </div>
