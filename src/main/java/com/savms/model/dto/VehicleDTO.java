@@ -1,4 +1,4 @@
-package com.savms.dto;
+package com.savms.model.dto;
 
 public class VehicleDTO {
     private String vehicleId;
