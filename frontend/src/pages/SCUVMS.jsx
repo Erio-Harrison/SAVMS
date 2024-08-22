@@ -13,15 +13,8 @@ export default function SCUVMS() {
     const [currentWeather, setCurrentWeather] = useState({});
     const [weatherArray, setWeatherArray] = useState([]);
     const [coordinate, setCoordinate] = useState({lat: -35.2809, lng: 149.1300});
-
-    useEffect(() => {
-        const fetchCarInfo = async () => {
-            // TODO: axios get car info
-            const carInfoData = { vehicleId: '#12345678', plateNum: 'XYZ-123' };
-            setCarInfo(carInfoData);
-        };
-        fetchCarInfo();
-    }, []); // set dependency when select a car on map
+    const [markers, setMarkers] = useState([]);
+    const [selectedCar, setSelectedCar] = useState(false);
 
     useEffect(() => {
         const fetchWeather = async () => {
@@ -41,16 +34,39 @@ export default function SCUVMS() {
         fetchWeather();
     }, []);
 
+    useEffect(() => {
+        const fetchMarkers = async () => {
+            // TODO: axios get markers
+            const newMarkersData = [
+                { lat: -35.2600, lng: 149.1300 },
+                { lat: -35.2800, lng: 149.1500 },
+                { lat: -35.3000, lng: 149.1600 },
+            ];
+            setMarkers(newMarkersData);
+        };
+        fetchMarkers();
+    }, []);
+
     const handleSearch = (query) => {
         setCity(query);
-        // get query cooredinate
+        // TODO: get query cooredinate
         setCoordinate({lat: -35.2809, lng: 149.1300});
+    };
+
+    const handleMarkerClick = (marker) => {
+        const fetchCarInfo = async () => {
+            // TODO: axios get car info
+            const carInfoData = { vehicleId: '#12345678', plateNum: 'XYZ-123' };
+            setCarInfo(carInfoData);
+        };
+        fetchCarInfo();
+        setSelectedCar(true);
     };
 
     return (
         <div className="bg-primary h-screen flex p-4 font-sans gap-4">
             <Sidebar />
-            <CarInfo carInfo={carInfo} />
+            <CarInfo carInfo={carInfo} selectedCar={selectedCar}/>
 
             {/* Weather and Map Section */}
             <div className="flex flex-col w-3/4 gap-4">
@@ -67,9 +83,8 @@ export default function SCUVMS() {
                     </div>
                     <CurrentWeatherCard city={city} currentWeather={currentWeather}/>
                 </div>
-                {/* TODO: map section*/}
                 <div className="h-2/3 bg-white rounded-3xl">
-                    <Map lat={coordinate.lat} lng={coordinate.lng}/>
+                    <Map lat={coordinate.lat} lng={coordinate.lng} markers={markers} onMarkerClick={handleMarkerClick}/>
                 </div>
             </div>
         </div>
