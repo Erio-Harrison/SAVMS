@@ -1,4 +1,4 @@
-package com.savms.result;
+package com.savms.utils;
 
 import lombok.Data;
 
