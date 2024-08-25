@@ -56,6 +56,7 @@ public class MapData {
     }
 }
 
+
 //    a possible solution to the public API key
 //    public MapIntegrationService() {
 //        String apiKey = System.getenv("GOOGLE_MAPS_API_KEY"); // 从环境变量中读取API密钥
