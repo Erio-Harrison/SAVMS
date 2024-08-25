@@ -55,3 +55,14 @@ public class MapData {
         mapService.shutdown();
     }
 }
+
+//    a possible solution to the public API key
+//    public MapIntegrationService() {
+//        String apiKey = System.getenv("GOOGLE_MAPS_API_KEY"); // 从环境变量中读取API密钥
+//        if (apiKey == null || apiKey.isEmpty()) {
+//            throw new IllegalStateException("Google Maps API key is not set in the environment variables.");
+//        }
+//        this.context = new GeoApiContext.Builder()
+//                .apiKey(apiKey)
+//                .build();
+//    }
