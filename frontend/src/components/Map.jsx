@@ -22,7 +22,7 @@ export default function Map({ lat, lng, markers, onMarkerClick }) {
                 onMarkerClick(marker);
             });
         });
-    }, [lat, lng, markers, onMarkerClick]);
+    }, [lat, lng, markers]);
 
     return <div className='rounded-3xl' id="map" style={{ height: '100%', width: '100%' }}></div>;
 }

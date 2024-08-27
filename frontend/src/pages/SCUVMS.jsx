@@ -66,8 +66,14 @@ export default function SCUVMS() {
     return (
         <div className="bg-primary h-screen flex p-4 font-sans gap-4">
             <Sidebar />
-            <CarInfo carInfo={carInfo} selectedCar={selectedCar}/>
-
+            <div className="flex flex-col w-1/4 gap-4 flex-grow">
+                <div className="text-2xl font-bold">Tracking</div>
+                <div className="bg-accent rounded-3xl p-4 flex flex-col h-screen">
+                    {selectedCar && <CarInfo carInfo={carInfo}/>}
+                    {!selectedCar && <></>}
+                </div>
+            </div>
+            
             {/* Weather and Map Section */}
             <div className="flex flex-col w-3/4 gap-4">
                 <div className="h-1/3 flex gap-4">
