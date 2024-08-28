@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import axios from 'axios';
+import axiosInstance from '../axiosInstance';
 import { UserContext } from "../UserContext";
 import { Logo } from '../assets/Logo';
 
@@ -7,18 +7,28 @@ export default function RegisterAndLogin() {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [role, setRole] = useState('client');
     const [isLoginMode, setIsLoginMode] = useState(true);
 
     const { setId } = useContext(UserContext);
 
     async function registerOrLogin(e) {
         e.preventDefault();
-        if (isLoginMode) {
-            // TODO: axios post username and password (login)
-            // set id
-        } else {
-            // TODO: axios post username and password (register)
-            // set id
+        const endpoint = isLoginMode ? '/login' : '/register';
+        const roleId = (role == 'admin') ? 1 : 2;
+        const user = {
+            account: username,
+            password: password,
+            role: roleId
+        };
+
+        try {
+            const response = await axiosInstance.post(endpoint, user);
+            const userId = response.data.data.id;
+
+            setId(userId);
+        } catch (err) {
+            console.error('Error', err.response ? err.response.data : err.message);
         }
     }
 
@@ -46,6 +56,23 @@ export default function RegisterAndLogin() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
+                    {isLoginMode && (
+                        <div className="relative mb-6">
+                            <select
+                                className="block w-full rounded-full px-4 py-2 pr-10 focus:outline-none bg-secondary appearance-none"
+                                value={role}
+                                onChange={(e) => setRole(e.target.value)}
+                            >
+                                <option value="client">Client</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                <svg className="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    )}
                     <button
                         type="submit"
                         className="bg-accent block w-full rounded-full p-2 mb-6 text-gray-darkest font-semibold"
