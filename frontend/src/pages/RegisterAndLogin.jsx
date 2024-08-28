@@ -22,15 +22,13 @@ export default function RegisterAndLogin() {
             role: roleId
         };
 
-        console.log(roleId);
-
         try {
             const response = await axiosInstance.post(endpoint, user);
             const userId = response.data.data.id;
 
             setId(userId);
         } catch (err) {
-            console.error('Error', err);
+            console.error('Error', err.response ? err.response.data : err.message);
         }
     }
 
