@@ -6,6 +6,7 @@ import HourlyForecastCard from "../components/HourlyForecastCard";
 import SearchBar from "../components/SearchBar";
 import CurrentWeatherCard from "../components/CurrentWeatherCard";
 import Map from "../components/Map";
+import AddNewCar from "../components/AddNewCar";
 
 export default function SCUVMS() {
     const [carInfo, setCarInfo] = useState({});
@@ -63,6 +64,10 @@ export default function SCUVMS() {
         setSelectedCar(true);
     };
 
+    const SubmitNewCar = (newCarInfo) => {
+        console.log(newCarInfo);
+    }
+
     return (
         <div className="bg-primary h-screen flex p-4 font-sans gap-4">
             <Sidebar />
@@ -70,7 +75,7 @@ export default function SCUVMS() {
                 <div className="text-2xl font-bold">Tracking</div>
                 <div className="bg-accent rounded-3xl p-4 flex flex-col h-screen">
                     {selectedCar && <CarInfo carInfo={carInfo}/>}
-                    {!selectedCar && <></>}
+                    {!selectedCar && <AddNewCar SubmitNewCar={SubmitNewCar}/>}
                 </div>
             </div>
             
