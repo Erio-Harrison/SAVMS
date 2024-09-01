@@ -18,4 +18,4 @@ This will generate a shared library named `libdataprocessing.so (Linux)` or `dat
 
 # How to use in Java
 
-wait~~
+![result](./asset/JNISpring.png)
