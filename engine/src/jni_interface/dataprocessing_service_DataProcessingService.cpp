@@ -1,11 +1,11 @@
-#include "com_example_dataprocessing_service_DataProcessingService.h"
+#include "dataprocessing_service_DataProcessingService.h"
 #include "../data_collector/data_collector.h"
 #include "../data_processor/data_processor.h"
 #include "../computation_engine/computation_engine.h"
 #include <string>
 #include <vector>
 
-JNIEXPORT jstring JNICALL Java_com_example_dataprocessing_service_DataProcessingService_processDataNative
+JNIEXPORT jstring JNICALL Java_com_savms_service_DataProcessingService_processDataNative
   (JNIEnv *env, jobject, jstring jInput) {
     const char *input = env->GetStringUTFChars(jInput, 0);
     std::string dataSource(input);
