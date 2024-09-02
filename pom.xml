@@ -70,7 +70,19 @@
 			<artifactId>jakarta.annotation-api</artifactId>
 		</dependency>
 
-    </dependencies>
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.zeromq</groupId>
+			<artifactId>jeromq</artifactId>
+			<version>0.5.3</version>
+		</dependency>
+
+	</dependencies>
 
 	<build>
 		<plugins>
