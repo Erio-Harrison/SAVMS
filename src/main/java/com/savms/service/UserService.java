@@ -46,7 +46,7 @@ public class UserService extends ServiceImpl<UserMapper, Account> {
         if(dbUser != null){
             throw new ServiceException("账号已存在");
         }
-        account.setAccount("默认用户名");
+        account.setAccount(account.getAccount());
         userMapper.insert(account);
         return account;
     }
