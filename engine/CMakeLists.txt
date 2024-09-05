@@ -44,7 +44,7 @@ set(SOURCES
     src/data_collector/data_collector.cpp
     src/data_processor/data_processor.cpp
     src/computation_engine/computation_engine.cpp
-    src/jni_interface/com_example_dataprocessing_service_DataProcessingService.cpp
+    src/jni_interface/dataprocessing_service_DataProcessingService.cpp
 )
 
 # 创建共享库
