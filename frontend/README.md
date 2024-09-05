@@ -48,3 +48,31 @@ yarn dev
 ```
 
 ## Windows
+
+1. Download Node.js
+```bash
+https://nodejs.org/dist/v20.17.0/node-v20.17.0-x64.msi
+```
+
+2. Install it and test in cmd
+```bash
+node -v
+npm -v
+```
+
+3. Switch to the local directory.
+```bash
+cd yourdirection\SAVMS\frontend
+```
+
+4. Run the project
+```bash
+npm run dev
+```
+
+5. (Optional) use yarn to run the project
+```bash
+yarn install
+cd yourdirection\SAVMS\frontend
+yarn dev
+```
