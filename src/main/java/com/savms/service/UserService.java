@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.savms.entity.Account;
 import com.savms.mapper.UserMapper;
+import com.savms.utils.Md5Util;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -42,11 +43,16 @@ public class UserService extends ServiceImpl<UserMapper, Account> {
     }
 
     public Account register(Account account) {
-        Account dbUser = selectByUsername(account.getAccount());
-        if(dbUser != null){
-            throw new ServiceException("账号已存在");
-        }
-        account.setAccount(account.getAccount());
+//        Account dbUser = selectByUsername(account.getAccount());
+//        if(dbUser != null){
+//            throw new ServiceException("账号已存在");
+//        }
+//        account.setAccount(account.getAccount());
+//        userMapper.insert(account);
+//        return account;
+        String password = account.getPassword();
+        password = Md5Util.getMD5String(password);
+        account.setPassword(password);
         userMapper.insert(account);
         return account;
     }

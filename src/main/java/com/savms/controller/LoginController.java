@@ -4,6 +4,7 @@ import com.savms.entity.Account;
 import com.savms.service.UserService;
 import com.savms.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,8 +32,15 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public Result register(@RequestBody Account user){
-        user = userService.register(user);
-        return Result.success(user);
+    public Result register(@Validated @RequestBody Account user){
+        String accountStr = user.getAccount();
+        Account searchUser = userService.selectByUsername(accountStr);
+        if (searchUser == null){
+            user = userService.register(user);
+            return Result.success(user);
+        }else {
+            return Result.error("The account has been exist");
+        }
+
     }
 }
