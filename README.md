@@ -56,7 +56,7 @@ make
 
 This will generate a shared library named:
 - `libdataprocessing.so` (Linux)
-- `dataprocessing.dll` (Windows)
+- `libdataprocessing.dll` (Windows)
 - `libdataprocessing.dylib` (Mac)
 
 ### Setting up the Frontend
