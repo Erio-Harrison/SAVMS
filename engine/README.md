@@ -1,4 +1,12 @@
-在engine目录下运行：
+# JNI Name
+
+![result](./asset/JNIname.png)
+
+# Data Flow
+
+![result](./asset/dataflow.png)
+
+# Run in the engine directory:
 
 ```bash
 mkdir build
@@ -6,4 +14,8 @@ cd build
 cmake ..
 make
 ```
-这将生成一个名为 `libdataprocessing.so（Linux）`或`dataprocessing.dll（Windows）`或`libdataprocessing.dylib（Mac）`的共享库。
+This will generate a shared library named `libdataprocessing.so (Linux)` or `dataprocessing.dll (Windows)` or `libdataprocessing.dylib (Mac)`.
+
+# How to use in Java
+
+![result](./asset/JNISpring.png)
