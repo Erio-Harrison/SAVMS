@@ -11,7 +11,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.savms.entity.Account;
 import com.savms.mapper.UserMapper;
 import com.savms.utils.Md5Util;
+import com.savms.utils.Result;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Service;
 
 
@@ -31,29 +34,39 @@ public class UserService extends ServiceImpl<UserMapper, Account> {
         userMapper.insert(user);
     }
 
-    public Account login(Account user) {
-        Account dbUser = selectByUsername(user.getAccount());
+    public Result login(Account user, HttpServletResponse response) {
+        Account dbUser = this.selectByUsername(user.getAccount());
         if(dbUser == null){
-            throw new ServiceException("账号不存在");
+            return Result.error("The account doesn't exist");
         }
-        if(!user.getPassword().equals(dbUser.getPassword())){
-            throw new ServiceException("用户名或密码错误");
+        if(!Md5Util.checkPassword(user.getPassword(),dbUser.getPassword())){
+            return Result.error("Account or password is incorrect.");
+        }else {
+            addCookie(response,"username", dbUser.getAccount());
+            return Result.success(dbUser);
         }
-        return dbUser;
     }
 
-    public Account register(Account account) {
-//        Account dbUser = selectByUsername(account.getAccount());
-//        if(dbUser != null){
-//            throw new ServiceException("账号已存在");
-//        }
-//        account.setAccount(account.getAccount());
-//        userMapper.insert(account);
-//        return account;
-        String password = account.getPassword();
-        password = Md5Util.getMD5String(password);
-        account.setPassword(password);
-        userMapper.insert(account);
-        return account;
+    public Result register(Account account) {
+        String accountStr = account.getAccount();
+        Account searchUser = this.selectByUsername(accountStr);
+        if (searchUser == null){
+            String password = account.getPassword();
+            password = Md5Util.getMD5String(password);
+            account.setPassword(password);
+            userMapper.insert(account);
+            return Result.success(account);
+        }else {
+            return Result.error("The account has been exist");
+        }
+    }
+
+    private void addCookie(HttpServletResponse response, String name, String value) {
+        Cookie cookie = new Cookie(name, value);
+        cookie.setMaxAge(7 * 24 * 60 * 60); // 设置Cookie的有效期为一周
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        System.out.println(cookie.toString());
     }
 }

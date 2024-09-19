@@ -3,6 +3,7 @@ package com.savms.controller;
 import com.savms.entity.Account;
 import com.savms.service.UserService;
 import com.savms.utils.Result;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,21 +27,15 @@ public class LoginController {
     public Result hello(){return Result.success("success");}
 
     @PostMapping("/login")
-    public Result login(@RequestBody Account user){
-        user = userService.login(user);
-        return Result.success(user);
+    public Result login(@RequestBody Account user, HttpServletResponse response){
+        Result rs = userService.login(user,response);
+        return rs;
     }
 
     @PostMapping("/register")
     public Result register(@Validated @RequestBody Account user){
-        String accountStr = user.getAccount();
-        Account searchUser = userService.selectByUsername(accountStr);
-        if (searchUser == null){
-            user = userService.register(user);
-            return Result.success(user);
-        }else {
-            return Result.error("The account has been exist");
-        }
+        Result rs = userService.register(user);
+        return rs;
 
     }
 }
