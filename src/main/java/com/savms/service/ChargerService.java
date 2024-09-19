@@ -1,16 +1,16 @@
 package com.savms.service;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.savms.entity.Vehicle;
-import com.savms.mapper.VehicleMapper;
+import com.savms.entity.Charger;
+import com.savms.mapper.ChargerMapper;
 import org.springframework.stereotype.Service;
 
 /**
  * Author: Surui Liu
  * Date: 2024/8/23
- * Description: vehicle service
+ * Description: charger service
  */
 
 @Service
-public class VehicleService extends ServiceImpl<VehicleMapper, Vehicle> {
+public class ChargerService extends ServiceImpl<ChargerMapper, Charger> {
 }
