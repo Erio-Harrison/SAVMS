@@ -48,6 +48,3 @@ yarn dev
 ```
 
 ## Windows
-
-
-
