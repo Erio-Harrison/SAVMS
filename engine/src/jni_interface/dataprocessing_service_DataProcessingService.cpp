@@ -4,6 +4,7 @@
 #include "../computation_engine/computation_engine.h"
 #include <string>
 #include <vector>
+#include <iostream>
 
 JNIEXPORT jstring JNICALL Java_com_savms_service_DataProcessingService_processDataNative
   (JNIEnv *env, jobject, jstring jInput) {
@@ -11,20 +12,29 @@ JNIEXPORT jstring JNICALL Java_com_savms_service_DataProcessingService_processDa
     std::string dataSource(input);
     env->ReleaseStringUTFChars(jInput, input);
 
+    std::cout << "\n====== Starting Data Processing Pipeline ======\n" << std::endl;
+
     DataCollector collector;
     DataProcessor processor;
     ComputationEngine engine;
 
-    // 采集数据
-    collector.connect(dataSource);
-    std::vector<std::string> rawData = collector.collectData(10);
-    collector.disconnect();
+    try {
+        std::cout << "Initializing connection to: " << dataSource << std::endl;
+        collector.connect(dataSource);
 
-    // 处理数据
-    std::vector<std::string> processedData = processor.processData(rawData);
+        std::cout << "\nStarting data collection phase..." << std::endl;
+        std::vector<std::string> rawData = collector.collectData(5);  // 采集5辆车的数据
+        collector.disconnect();
 
-    // 计算结果
-    std::string result = engine.computeResult(processedData);
+        std::vector<std::string> processedData = processor.processData(rawData);
+        std::string result = engine.computeResult(processedData);
 
-    return env->NewStringUTF(result.c_str());
+        std::cout << "\n====== Data Processing Pipeline Completed ======\n" << std::endl;
+        return env->NewStringUTF(result.c_str());
+    }
+    catch (const std::exception& e) {
+        std::string error = "Error in processing pipeline: " + std::string(e.what());
+        std::cout << "\nERROR: " << error << std::endl;
+        return env->NewStringUTF(error.c_str());
+    }
 }

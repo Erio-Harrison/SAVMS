@@ -47,9 +47,22 @@ public class ZeroMQService {
         }
     }
 
+    private String bytesToHex(byte[] bytes) {
+        StringBuilder hexString = new StringBuilder(2 * bytes.length);
+        for (byte b : bytes) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    }
+
     private void handleMessage(ZMQ.Socket socket, byte[] identity, byte[] message) {
         String messageStr = new String(message);
-        System.out.println("Received message from " + new String(identity) + ": " + messageStr);
+        String identityHex = bytesToHex(identity);
+        System.out.println("Received message from " + identityHex + ": " + messageStr);
 
         // Process the message here
         // For now, we'll just echo it back
