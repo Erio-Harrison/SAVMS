@@ -8,13 +8,18 @@ DataProcessor::~DataProcessor() {}
 
 std::vector<std::string> DataProcessor::processData(const std::vector<std::string>& rawData) {
     std::vector<std::string> processedData;
+    std::cout << "\nProcessing vehicle data..." << std::endl;
 
     for (const auto& data : rawData) {
-        // 实现数据处理逻辑，这里只是一个简单的示例
-        std::string processed = data + " - processed";
+        // 模拟数据处理，添加分析结果
+        std::string processed = data + " | Analysis: "
+            + "Status=Normal, "
+            + "FuelLevel=85%, "
+            + "NextService=2000km";
         processedData.push_back(processed);
+        std::cout << "Processed: " << processed << std::endl;
     }
 
-    std::cout << "Processed " << processedData.size() << " data points" << std::endl;
+    std::cout << "\n=== Processed " << processedData.size() << " data entries ===\n" << std::endl;
     return processedData;
 }

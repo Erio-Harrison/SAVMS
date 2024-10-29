@@ -2,18 +2,30 @@ package com.savms.controller;
 
 import com.savms.service.DataProcessingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/api/test")
 public class DataProcessingController {
 
-    @Autowired
-    private DataProcessingService dataProcessingService;
+    private final DataProcessingService dataProcessingService;
 
-    @PostMapping("/process")
-    public String processData(@RequestBody String input) {
-        return dataProcessingService.processData(input);
+    @Autowired
+    public DataProcessingController(DataProcessingService dataProcessingService) {
+        this.dataProcessingService = dataProcessingService;
+    }
+
+    @GetMapping("/jni")
+    public ResponseEntity<String> testJNI() {
+        try {
+            String result = dataProcessingService.processData("TestSource");
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError()
+                    .body("Error in JNI test: " + e.getMessage());
+        }
     }
 }

@@ -21,13 +21,19 @@ std::vector<std::string> DataCollector::collectData(int batchSize) {
         throw std::runtime_error("Not connected to data source");
     }
 
-    // 模拟数据采集
+    // 模拟车辆数据采集
     std::vector<std::string> collectedData;
     for (int i = 0; i < batchSize; ++i) {
-        collectedData.push_back("Sample data " + std::to_string(i));
+        std::string vehicleData = "Vehicle_" + std::to_string(i) + ": "
+            + "Position(x=" + std::to_string(i * 1.5)
+            + ", y=" + std::to_string(i * 2.0) + ") "
+            + "Speed=" + std::to_string(30 + i * 2) + "km/h "
+            + "Direction=" + std::to_string(45 + i * 10) + "deg";
+        collectedData.push_back(vehicleData);
+        std::cout << "Collected: " << vehicleData << std::endl;
     }
 
-    std::cout << "Collected " << collectedData.size() << " data points" << std::endl;
+    std::cout << "\n=== Collected " << collectedData.size() << " vehicle data points ===\n" << std::endl;
     return collectedData;
 }
 
