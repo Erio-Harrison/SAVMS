@@ -6,6 +6,8 @@ import com.savms.model.entity.Vehicle;
 public interface ChargeStationService {
     void createStationService(Charger charger);
 
+    // test
+
     Charger findStationById(Long id);
 
     void updateStation(Charger charger);
