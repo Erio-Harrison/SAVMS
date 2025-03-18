@@ -1,5 +1,10 @@
 package com.savms.dto;
 
+/**
+ * Data Transfer Object (DTO) for encapsulating login response data.
+ * Used to send standardized login results to clients.
+ */
+
 public class LoginResponse {
     private String token;
     private String id;
@@ -7,7 +12,13 @@ public class LoginResponse {
     private String email;
     private String error;
 
-    // 成功构造器（移除 roles）
+    /**
+     * Constructor for successful login responses.
+     * @param token  Placeholder authentication token (to be replaced with JWT)
+     * @param id     User's unique ID
+     * @param username Authenticated username
+     * @param email  User's registered email
+     */
     public LoginResponse(String token, String id, String username, String email) {
         this.token = token;
         this.id = id;
@@ -15,7 +26,10 @@ public class LoginResponse {
         this.email = email;
     }
 
-    // 错误构造器
+    /**
+     * Constructor for failed login attempts.
+     * @param error Description of authentication failure
+     */
     public LoginResponse(String error) {
         this.error = error;
     }

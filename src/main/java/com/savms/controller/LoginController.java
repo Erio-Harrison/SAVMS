@@ -22,18 +22,18 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
         try {
-            // 1. 通过用户名查询用户
+            // 1. Query user by username from the database
             User user = userService.getUserByUsername(loginRequest.getUsername())
-                    .orElseThrow(() -> new RuntimeException("用户不存在"));
+                    .orElseThrow(() -> new RuntimeException("User not found"));
 
-            // 2. 验证密码（明文比对）
+            // 2. Validate password
             if (!user.getPassword().equals(loginRequest.getPassword())) {
-                throw new RuntimeException("密码错误");
+                throw new RuntimeException("Wrong password");
             }
 
-            // 3. 构建响应（无 token 和 roles）
+            // 3.  Build login response (token is a placeholder for future JWT implementation)
             return ResponseEntity.ok(new LoginResponse(
-                    "dummy-token", // 占位符
+                    "dummy-token", //
                     user.getId(),
                     user.getUsername(),
                     user.getEmail()
@@ -41,7 +41,7 @@ public class LoginController {
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(new LoginResponse("登录失败: " + e.getMessage()));
+                    .body(new LoginResponse("Login failed: " + e.getMessage()));
         }
     }
 }
