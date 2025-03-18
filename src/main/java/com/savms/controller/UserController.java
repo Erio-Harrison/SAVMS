@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * User controller class.
+ * Receive and handle data from user service.
+ * @author Yutong Cheng u7739713
+ */
 @RestController
 @RequestMapping("/users")
 public class UserController

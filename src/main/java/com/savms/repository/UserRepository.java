@@ -1,4 +1,4 @@
-package com.savms.entity;
+package com.savms.repository;
 
 import com.savms.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +9,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * User repository class.
+ * Receive and handle data from MongoDB database.
+ * @author Yutong Cheng u7739713
+ */
 @Repository
 public class UserRepository {
 

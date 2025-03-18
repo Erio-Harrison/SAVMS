@@ -1,6 +1,6 @@
 package com.savms.service;
 
-import com.savms.entity.UserRepository;
+import com.savms.repository.UserRepository;
 import com.savms.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * User service class.
+ * Receive and handle data from user repository.
+ * @author Yutong Cheng u7739713
+ */
 @Service
 public class UserService
 {
