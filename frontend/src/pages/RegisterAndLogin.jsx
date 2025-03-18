@@ -17,7 +17,7 @@ export default function RegisterAndLogin() {
         const endpoint = isLoginMode ? '/login' : '/register';
         const roleId = (role == 'admin') ? 1 : 2;
         const user = {
-            account: username,
+            username: username,
             password: password,
             role: roleId
         };
