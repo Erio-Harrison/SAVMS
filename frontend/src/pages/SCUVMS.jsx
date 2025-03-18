@@ -37,7 +37,12 @@ export default function SCUVMS() {
                 if (result.code === 1) {
                     const weatherInfo = JSON.parse(result.data);
 
-                    const currentWeatherData = { weather: 'Sunny', temperature: weatherInfo.current.temp_c, chanceOfRain: weatherInfo.forecast.forecastday[0].day.daily_chance_of_rain };
+                    const currentWeatherData = {
+                        weather: weatherInfo.current.condition.code,
+                        temperature: weatherInfo.current.temp_c,
+                        chanceOfRain: weatherInfo.forecast.forecastday[0].day.daily_chance_of_rain,
+                        description: weatherInfo.current.condition.text,
+                    };
                     const currentLocalTime = weatherInfo.location.localtime; // "2025-03-17 23:50"
                     const currentHour = parseInt(currentLocalTime.split(' ')[1].split(':')[0]); // 23
                     const todayHours = weatherInfo.forecast.forecastday[0].hour.filter(hourItem => {
@@ -52,7 +57,7 @@ export default function SCUVMS() {
 
                     const weatherArrayData = displayHours.map(hourItem => ({
                         time: hourItem.time.split(' ')[1], // 只取小时分钟
-                        weather: 'Sunny',
+                        weather: hourItem.condition.code,
                         temperature: hourItem.temp_c,
                     }));
 
