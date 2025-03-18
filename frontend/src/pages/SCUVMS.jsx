@@ -42,6 +42,7 @@ export default function SCUVMS() {
                         temperature: weatherInfo.current.temp_c,
                         chanceOfRain: weatherInfo.forecast.forecastday[0].day.daily_chance_of_rain,
                         description: weatherInfo.current.condition.text,
+                        isDay: weatherInfo.current.is_day,
                     };
                     const currentLocalTime = weatherInfo.location.localtime; // "2025-03-17 23:50"
                     const currentHour = parseInt(currentLocalTime.split(' ')[1].split(':')[0]); // 23
@@ -59,6 +60,7 @@ export default function SCUVMS() {
                         time: hourItem.time.split(' ')[1], // 只取小时分钟
                         weather: hourItem.condition.code,
                         temperature: hourItem.temp_c,
+                        isDay: hourItem.is_day,
                     }));
 
 
@@ -125,7 +127,7 @@ export default function SCUVMS() {
                         <div className="px-6 py-4 rounded-3xl flex flex-grow bg-radial-gradient text-white justify-between items-center">
                             {weatherArray.map((weather, index) => (
                                 <HourlyForecastCard
-                                    key={index} time={weather.time} weather={weather.weather} temperature={weather.temperature}
+                                    key={index} time={weather.time} weather={weather.weather} temperature={weather.temperature} isDay={weather.isDay}
                                 />
                             ))}
                         </div>

@@ -6,7 +6,7 @@ export default function CurrentWeatherCard({ city, currentWeather }) {
     const [weatherIcon, setWeatherIcon] = useState('');
 
     useEffect(() => {
-        setWeatherIcon(getWeatherIcon(currentWeather.weather));
+        setWeatherIcon(getWeatherIcon(currentWeather.weather, currentWeather.isDay));
     }, [currentWeather.weather]);
 
     return (
