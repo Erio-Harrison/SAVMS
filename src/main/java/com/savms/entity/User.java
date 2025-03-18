@@ -11,6 +11,7 @@ public class User {
     private String username;
     private String email;
     private LocalDateTime createdAt;
+    private String password;
 
     // Constructors
     public User() {
@@ -54,6 +55,16 @@ public class User {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getPassword()
+    {
+        return password;
+    }
+
+    public void setPassword( String password )
+    {
+        this.password = password;
     }
 
     @Override

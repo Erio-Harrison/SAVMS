@@ -1,53 +1,84 @@
 package com.savms.service;
 
-/**
- * function：
- * author：lsr
- * date：2024/3/13 19:33
- */
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.savms.entity.Account;
-import com.savms.mapper.UserMapper;
-import jakarta.annotation.Resource;
+import com.savms.entity.UserRepository;
+import com.savms.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
 
 @Service
-public class UserService extends ServiceImpl<UserMapper, Account> {
+public class UserService
+{
 
-    @Resource
-    UserMapper userMapper;
+    @Autowired
+    private UserRepository userRepository;
 
-    public Account selectByUsername(String account){
-        QueryWrapper<Account> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("account",account);//条件查询器直接查username
-        return  getOne(queryWrapper);
+    /**
+     * Saves a new user.
+     * @param user The user to be saved.
+     */
+    public void saveUser( User user )
+    {
+        userRepository.addUser( user );
     }
 
-    public void insertUser(Account user) {
-        userMapper.insert(user);
+    /**
+     * Deletes a user by their ID.
+     * @param userId The ID of the user to be deleted.
+     */
+    public void deleteUser( String userId )
+    {
+        userRepository.deleteUserById(userId);
     }
 
-    public Account login(Account user) {
-        Account dbUser = selectByUsername(user.getAccount());
-        if(dbUser == null){
-            throw new ServiceException("账号不存在");
-        }
-        if(!user.getPassword().equals(dbUser.getPassword())){
-            throw new ServiceException("用户名或密码错误");
-        }
-        return dbUser;
+    /**
+     * Finds a user by username.
+     * @param username The username to search for.
+     * @return An Optional containing the user if found.
+     */
+    public Optional<User> getUserByUsername( String username )
+    {
+        return userRepository.findByUsername( username );
     }
 
-    public Account register(Account account) {
-        Account dbUser = selectByUsername(account.getAccount());
-        if(dbUser != null){
-            throw new ServiceException("账号已存在");
-        }
-        account.setAccount(account.getAccount());
-        userMapper.insert(account);
-        return account;
+    /**
+     * Finds a user by email.
+     * @param email The email to search for.
+     * @return An Optional containing the user if found.
+     */
+    public Optional<User> getUserByEmail( String email )
+    {
+        return userRepository.findByEmail( email );
+    }
+
+    /**
+     * Updates a user's email.
+     * @param userId The ID of the user.
+     * @param newEmail The new email address.
+     */
+    public void updateUserEmail( String userId, String newEmail )
+    {
+        userRepository.updateEmail( userId, newEmail );
+    }
+
+    /**
+     * Updates a user's password.
+     * @param userId The ID of the user.
+     * @param newPassword The new email address.
+     */
+    public void updateUserPassword( String userId, String newPassword )
+    {
+        userRepository.updateEmail( userId, newPassword );
+    }
+
+    /**
+     * Retrieves all users from the database.
+     * @return A list of all users.
+     */
+    public List<User> getAllUsers()
+    {
+        return userRepository.getAllUsers();
     }
 }
