@@ -48,9 +48,9 @@ public class UserService
      * @param email The email to search for.
      * @return An Optional containing the user if found.
      */
-    public Optional<User> getUserByEmail(String email)
+    public Optional<User> getUserByEmail( String email )
     {
-        return userRepository.findByEmail(email);
+        return userRepository.findByEmail( email );
     }
 
     /**
@@ -60,7 +60,7 @@ public class UserService
      */
     public void updateUserEmail( String userId, String newEmail )
     {
-        userRepository.updateEmail(userId, newEmail);
+        userRepository.updateEmail( userId, newEmail );
     }
 
     /**
@@ -77,7 +77,8 @@ public class UserService
      * Retrieves all users from the database.
      * @return A list of all users.
      */
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers()
+    {
         return userRepository.getAllUsers();
     }
 }
