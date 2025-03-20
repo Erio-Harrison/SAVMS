@@ -16,7 +16,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/vehicles")
 public class VehicleController {
-
     @Autowired
     private VehicleService vehicleService;
 
