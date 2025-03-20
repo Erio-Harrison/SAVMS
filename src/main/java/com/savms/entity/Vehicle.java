@@ -3,6 +3,10 @@ package com.savms.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * Vehicle entity class
+ * @author Yunxuan Shen u6539201
+ */
 @Document(collection = "vehicle")
 public class Vehicle {
 
