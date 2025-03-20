@@ -1,7 +1,7 @@
 package com.savms.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.savms.entity.Vehicle;
+import com.savms.entity.VehicleUnused;
 import com.savms.service.VehicleService;
 import com.savms.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +25,14 @@ public class VehicleController {
 
     @GetMapping("/selectAll")
     public Result selectAll(){
-        List<Vehicle> activityList = vehicleService.list(new QueryWrapper<Vehicle>().orderByAsc("id"));
+        List<VehicleUnused> activityList = vehicleService.list(new QueryWrapper<VehicleUnused>().orderByAsc("id"));
         return Result.success(activityList);
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody Vehicle vehicle){
+    public Result add(@RequestBody VehicleUnused vehicleUnused){
         try {
-            vehicleService.save(vehicle);
+            vehicleService.save(vehicleUnused);
         } catch (Exception e) {
             if(e instanceof DuplicateKeyException) {
                 return Result.error("插入数据库错误");
@@ -44,8 +44,8 @@ public class VehicleController {
     }
 
     @PutMapping("/update")
-    public Result update(@RequestBody Vehicle vehicle){
-        vehicleService.updateById(vehicle);
+    public Result update(@RequestBody VehicleUnused vehicleUnused){
+        vehicleService.updateById(vehicleUnused);
         return Result.success();
     }
 

@@ -1,7 +1,7 @@
 package com.savms.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.savms.entity.Vehicle;
+import com.savms.entity.VehicleUnused;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -11,5 +11,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 
 @Mapper
-public interface VehicleMapper extends BaseMapper<Vehicle> {
+public interface VehicleMapper extends BaseMapper<VehicleUnused> {
 }
