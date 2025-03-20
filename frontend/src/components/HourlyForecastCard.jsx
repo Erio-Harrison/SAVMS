@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 
 import { getWeatherIcon } from "../utils/getWeatherIcons";
 
-export default function HourlyForecastCard({ time, weather, temperature }) {
+export default function HourlyForecastCard({ time, weather, temperature, isDay }) {
     const [weatherIcon, setWeatherIcon] = useState('');
 
     useEffect(() => {
-        setWeatherIcon(getWeatherIcon(weather));
+        setWeatherIcon(getWeatherIcon(weather,isDay));
     }, [weather]);
 
     return (
