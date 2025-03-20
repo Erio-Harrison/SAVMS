@@ -19,68 +19,57 @@ export default function SCUVMS() {
     const [selectedCar, setSelectedCar] = useState(false);
     const [cars, setCars] = useState([]);
 
-    useEffect(() => {
-        const fetchWeather = async () => {
-            // TODO: axios get weather
-            // const currentWeatherData = { weather: 'Sunny', temperature: 19, chanceOfRain: 30 };
-            // const weatherArrayData = [
-            //     { time: '1PM', weather: 'Sunny', temperature: 20 },
-            //     { time: '2PM', weather: 'Cloudy', temperature: 18 },
-            //     { time: '3PM', weather: 'Rainy', temperature: 16 },
-            //     { time: '4PM', weather: 'Sunny', temperature: 17 },
-            //     { time: '5PM', weather: 'Snowy', temperature: 19 },
-            //     { time: '6PM', weather: 'Rainy', temperature: 21 },
-            // ];
-            // setCurrentWeather(currentWeatherData);
-            // setWeatherArray(weatherArrayData);
+    const [weatherError, setWeatherError] = useState(null);// 新增状态来存放错误信息
+    const fetchWeather = async () => {
+        try {
+            const res = await fetch(`http://localhost:8080/api/weather?city=${city}`);
+            const result = await res.json();
+            if (result.code === 1) {
+                const weatherInfo = JSON.parse(result.data);
 
-            try {
-                const res = await fetch(`http://localhost:8080/api/weather?city=${city}`);
-                const result = await res.json();
-                if (result.code === 1) {
-                    const weatherInfo = JSON.parse(result.data);
+                const currentWeatherData = {
+                    weather: weatherInfo.current.condition.code,
+                    temperature: weatherInfo.current.temp_c,
+                    chanceOfRain: weatherInfo.forecast.forecastday[0].day.daily_chance_of_rain,
+                    description: weatherInfo.current.condition.text,
+                    isDay: weatherInfo.current.is_day,
+                };
+                const currentLocalTime = weatherInfo.location.localtime; // "2025-03-17 23:50"
+                const currentHour = parseInt(currentLocalTime.split(' ')[1].split(':')[0]); // 23
+                const todayHours = weatherInfo.forecast.forecastday[0].hour.filter(hourItem => {
+                    const itemHour = parseInt(hourItem.time.split(' ')[1].split(':')[0]);
+                    return itemHour >= currentHour;
+                });
+                const tomorrowHours = weatherInfo.forecast.forecastday.length > 1
+                    ? weatherInfo.forecast.forecastday[1].hour
+                    : [];
+                const nextHours = [...todayHours, ...tomorrowHours];
+                const displayHours = nextHours.slice(0, 6);
 
-                    const currentWeatherData = {
-                        weather: weatherInfo.current.condition.code,
-                        temperature: weatherInfo.current.temp_c,
-                        chanceOfRain: weatherInfo.forecast.forecastday[0].day.daily_chance_of_rain,
-                        description: weatherInfo.current.condition.text,
-                        isDay: weatherInfo.current.is_day,
-                    };
-                    const currentLocalTime = weatherInfo.location.localtime; // "2025-03-17 23:50"
-                    const currentHour = parseInt(currentLocalTime.split(' ')[1].split(':')[0]); // 23
-                    const todayHours = weatherInfo.forecast.forecastday[0].hour.filter(hourItem => {
-                        const itemHour = parseInt(hourItem.time.split(' ')[1].split(':')[0]);
-                        return itemHour >= currentHour;
-                    });
-                    const tomorrowHours = weatherInfo.forecast.forecastday.length > 1
-                        ? weatherInfo.forecast.forecastday[1].hour
-                        : [];
-                    const nextHours = [...todayHours, ...tomorrowHours];
-                    const displayHours = nextHours.slice(0, 6);
-
-                    const weatherArrayData = displayHours.map(hourItem => ({
-                        time: hourItem.time.split(' ')[1], // 只取小时分钟
-                        weather: hourItem.condition.code,
-                        temperature: hourItem.temp_c,
-                        isDay: hourItem.is_day,
-                    }));
+                const weatherArrayData = displayHours.map(hourItem => ({
+                    time: hourItem.time.split(' ')[1], // 只取小时分钟
+                    weather: hourItem.condition.code,
+                    temperature: hourItem.temp_c,
+                    isDay: hourItem.is_day,
+                }));
 
 
-                    setCurrentWeather(currentWeatherData);
-                    setWeatherArray(weatherArrayData);
-
-                } else {
-                    console.error('Backend Error:', result.msg);
-                    alert(`Can't get weather Info: ${result.msg}`);
-                }
-            } catch (error) {
-                console.error('Request error:', error);
-                alert('Request error，Please try again！');
+                setCurrentWeather(currentWeatherData);
+                setWeatherArray(weatherArrayData);
+                // 清除错误状态
+                setWeatherError(null);
+            } else {
+                console.error('Backend Error:', result.msg);
+                setWeatherError(`Can't get weather Info: ${result.msg}`);
             }
-        };
+        } catch (error) {
+            console.error('Request error:', error);
+            setWeatherError('Request error, please try again!');
+        }
+    };
+    useEffect(() => {
         fetchWeather();
-    }, []);
+    }, [city]);
 
     useEffect(() => {
         const fetchMarkers = async () => {
@@ -125,7 +114,28 @@ export default function SCUVMS() {
     };
 
 
+// 监听网络状态变更
+    useEffect(() => {
+        function handleOnline() {
+            console.log("Network is back online, try to fetch weather again.");
+            fetchWeather();
+        }
 
+        function handleOffline() {
+            alert("You are offline now.");
+
+        }
+
+        // 添加事件监听
+        window.addEventListener("online", handleOnline);
+        window.addEventListener("offline", handleOffline);
+
+        // 在组件卸载时移除事件监听，防止内存泄漏
+        return () => {
+            window.removeEventListener("online", handleOnline);
+            window.removeEventListener("offline", handleOffline);
+        };
+    }, [city]);
 
 
     return (
@@ -170,7 +180,17 @@ export default function SCUVMS() {
                             ))}
                         </div>
                     </div>
-                    <CurrentWeatherCard city={city} currentWeather={currentWeather}/>
+                    {/* 条件渲染，若发生错误则显示错误提示，否则显示当前天气卡 */}
+                    {weatherError ? (
+                        <div className="w-1/5 bg-radial-gradient text-white rounded-3xl flex flex-col px-3 py-4 items-center">
+                            <div>{city}</div>
+                            <div className="p-4 text-red-300 break-words">Unable to fetch weather data.</div>
+                            <div className="text-xs p-2 break-words">{weatherError}</div>
+                        </div>
+                    ) : (
+                        <CurrentWeatherCard city={city} currentWeather={currentWeather}/>
+                    )}
+
                 </div>
                 <div className="h-2/3 bg-white rounded-3xl">
                     <Map lat={coordinate.lat} lng={coordinate.lng} markers={markers} onMarkerClick={handleMarkerClick}/>
