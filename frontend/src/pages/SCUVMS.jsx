@@ -6,6 +6,8 @@ import HourlyForecastCard from "../components/HourlyForecastCard";
 import SearchBar from "../components/SearchBar";
 import CurrentWeatherCard from "../components/CurrentWeatherCard";
 import Map from "../components/Map";
+import axiosInstance from '../axiosInstance';
+
 
 export default function SCUVMS() {
     const [carInfo, setCarInfo] = useState({});
@@ -15,6 +17,7 @@ export default function SCUVMS() {
     const [coordinate, setCoordinate] = useState({lat: -35.2809, lng: 149.1300});
     const [markers, setMarkers] = useState([]);
     const [selectedCar, setSelectedCar] = useState(false);
+    const [cars, setCars] = useState([]);
 
     useEffect(() => {
         const fetchWeather = async () => {
@@ -45,6 +48,19 @@ export default function SCUVMS() {
             setMarkers(newMarkersData);
         };
         fetchMarkers();
+
+
+
+        // get car list
+        axiosInstance
+            .get("/vehicles/get/all") // 替换成你的后端 API 路径
+            .then((response) => {
+                setCars(response.data.data); // 假设 response.data.data 是数组
+            })
+            .catch((error) => {
+                console.error("Error fetching cars:", error);
+                setError("Failed to load cars.");
+            });
     }, []);
 
     const handleSearch = (query) => {
@@ -52,7 +68,7 @@ export default function SCUVMS() {
         // TODO: get query cooredinate
         setCoordinate({lat: -35.2809, lng: 149.1300});
     };
-
+    // car
     const handleMarkerClick = (marker) => {
         const fetchCarInfo = async () => {
             // TODO: axios get car info
@@ -63,14 +79,36 @@ export default function SCUVMS() {
         setSelectedCar(true);
     };
 
+
+
+
+
     return (
         <div className="bg-primary h-screen flex p-4 font-sans gap-4">
             <Sidebar />
+{/*             <div className="flex flex-col w-1/4 gap-4 flex-grow"> */}
+{/*                 <div className="text-2xl font-bold">Tracking</div> */}
+{/*                 <div className="bg-accent rounded-3xl p-4 flex flex-col h-screen"> */}
+{/*                     {selectedCar && <CarInfo carInfo={carInfo}/>} */}
+{/*                     {!selectedCar && <></>} */}
+{/*                 </div> */}
+{/*             </div> */}
             <div className="flex flex-col w-1/4 gap-4 flex-grow">
                 <div className="text-2xl font-bold">Tracking</div>
-                <div className="bg-accent rounded-3xl p-4 flex flex-col h-screen">
-                    {selectedCar && <CarInfo carInfo={carInfo}/>}
-                    {!selectedCar && <></>}
+                <div className="bg-accent rounded-3xl p-4 flex flex-col h-screen overflow-auto">
+                    {cars.length > 0 ? (
+                        cars.map((car) => (
+                            <div
+                                key={car.id}
+                                className="p-2 border-b border-gray-200 flex flex-col"
+                            >
+                                <span className="font-semibold text-lg">{car.licensePlate}</span>
+                                <span className="text-sm text-gray-600">{car.carModel}</span>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="text-center text-gray-500">No cars available.</div>
+                    )}
                 </div>
             </div>
             
