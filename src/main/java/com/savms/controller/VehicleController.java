@@ -2,6 +2,7 @@ package com.savms.controller;
 
 import com.savms.entity.Vehicle;
 import com.savms.service.VehicleService;
+import com.savms.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,8 +63,10 @@ public class VehicleController {
      * @return A list of all vehicles.
      */
     @GetMapping("/get/all")
-    public List<Vehicle> getAllVehicles() {
-        return vehicleService.getAllVehicles();
+    public Result getAllVehicles() {
+
+
+        return Result.success( vehicleService.getAllVehicles());
     }
 
     /**
