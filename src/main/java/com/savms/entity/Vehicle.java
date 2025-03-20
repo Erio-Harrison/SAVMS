@@ -1,46 +1,132 @@
 package com.savms.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import java.time.LocalDateTime;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
-import java.util.Date;
-@Data
-@TableName("user")
-public class Vehicle implements Serializable {
+@Document(collection = "vehicle")
+public class Vehicle
+{
+    @Id
+    private String id;
+    private String licensePlate;
+    private String carModel;
+    private int year;
+    private String energyType;
+    private Size size;
+    private Sensor radar;
+    private Sensor camera;
+    private Communication communication;
+    private Location location;
+    private double speed;
+    private int leftoverEnergy;
+    private int connectionStatus;
+    private int taskStatus;
+    private int healthStatus;
+    private int engineRPM;
+    private double lubeOilPressure;
+    private double fuelPressure;
+    private double coolantPressure;
+    private double lubeOilTemp;
+    private double coolantTemp;
+    private int engineCondition;
+    private LocalDateTime createdAt;
 
-    @TableId(type = IdType.AUTO)
-    @TableField(value = "id")
-    private Long id;
+    // Inner classes for nested objects
+    public static class Size
+    {
+        private double length;
+        private double width;
+        private double height;
 
-    @TableField(value = "registration_number")
-    private String registrationNumber;
+        public Size() {}
 
-    @TableField(value = "registration_date")
-    private Date registrationDate;
+        public Size( double length, double width, double height )
+        {
+            this.length = length;
+            this.width = width;
+            this.height = height;
+        }
 
-    @TableField(value = "battery_level")
-    private Float batteryLevel;
+        // Getters and Setters
+    }
 
-    @TableField(value = "current_location")
-    private String currentLocation;
+    public static class Sensor
+    {
+        private String model;
+        private int count;
 
-    @TableField(value = "status")
-    private Integer status;
+        public Sensor() {}
 
-    @TableField(value = "vehicle_damage")
-    private String vehicleDamage;
+        public Sensor( String model, int count )
+        {
+            this.model = model;
+            this.count = count;
+        }
 
-    @TableField(value = "last_update")
-    private Date lastUpdate;
+        // Getters and Setters
+    }
 
-    @TableField(value = "model")
-    private String model;
+    public static class Communication
+    {
+        private String ipAddress;
 
-    @TableField(value = "manufacturer")
-    private String manufacturer;
+        public Communication() {}
 
+        public Communication(String ipAddress)
+        {
+            this.ipAddress = ipAddress;
+        }
+
+        // Getters and Setters
+    }
+
+    public static class Location
+    {
+        private double longitude;
+        private double latitude;
+
+        public Location() {}
+
+        public Location( double longitude, double latitude )
+        {
+            this.longitude = longitude;
+            this.latitude = latitude;
+        }
+
+        // Getters and Setters
+    }
+
+    // Constructors
+    public Vehicle()
+    {
+        this.createdAt = LocalDateTime.now();
+    }
+
+    public Vehicle(String licensePlate, String carModel, int year, String energyType)
+    {
+        this();
+
+        this.licensePlate = licensePlate;
+        this.carModel = carModel;
+        this.year = year;
+        this.energyType = energyType;
+    }
+
+    // Getters and Setters
+
+    @Override
+    public String toString()
+    {
+        return "Vehicle{" +
+                "id='" + id + '\'' +
+                ", licensePlate='" + licensePlate + '\'' +
+                ", carModel='" + carModel + '\'' +
+                ", year=" + year +
+                ", energyType='" + energyType + '\'' +
+                ", speed=" + speed +
+                ", leftoverEnergy=" + leftoverEnergy +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }

@@ -532,24 +532,24 @@ class VehicleSimulator:
                 live_telemetry = {}
                 
                 # 为每个车辆更新状态并生成数据
-                for vehicle_id, vehicle in self.vehicles.items():
+                for vehicle_id, vehicleUnused in self.vehicles.items():
                     # 更新车辆状态
-                    vehicle.update(delta_time)
+                    vehicleUnused.update(delta_time)
                     
                     # 生成并添加遥测数据
-                    telemetry = vehicle.generate_telemetry_json()
+                    telemetry = vehicleUnused.generate_telemetry_json()
                     telemetry_data.append(telemetry)
                     live_telemetry[vehicle_id] = telemetry
                     
                     self.message_count += 1
                     
                     # 如果有异常且满足上报概率，生成并添加异常事件
-                    if vehicle.has_anomaly and random.randint(1, 100) <= self.anomaly_prob:
-                        anomaly = vehicle.generate_anomaly_json()
+                    if vehicleUnused.has_anomaly and random.randint(1, 100) <= self.anomaly_prob:
+                        anomaly = vehicleUnused.generate_anomaly_json()
                         if anomaly:
                             anomaly_data.append(anomaly)
                             
-                            print(f"生成异常数据: 车辆={vehicle_id}, 类型={vehicle.anomaly_type}, 严重度={vehicle.anomaly_severity}")
+                            print(f"生成异常数据: 车辆={vehicle_id}, 类型={vehicleUnused.anomaly_type}, 严重度={vehicleUnused.anomaly_severity}")
                             
                             self.anomaly_count += 1
                 
@@ -585,17 +585,17 @@ class VehicleSimulator:
                     print(f"已生成 {self.batch_id} 个批次数据 (遥测: {self.message_count}, 异常: {self.anomaly_count})")
                     
                     # 打印各车辆状态摘要
-                    for vehicle_id, vehicle in self.vehicles.items():
+                    for vehicle_id, vehicleUnused in self.vehicles.items():
                         mode_str = {
                             VehicleMode.IDLE: "空闲",
                             VehicleMode.ACCELERATING: "加速",
                             VehicleMode.CRUISING: "巡航",
                             VehicleMode.DECELERATING: "减速",
                             VehicleMode.CHARGING: "充电"
-                        }[vehicle.mode]
+                        }[vehicleUnused.mode]
                         
-                        print(f"车辆 {vehicle_id}: 模式={mode_str}, 速度={vehicle.speed:.1f}km/h, "
-                              f"电量={vehicle.battery_soc:.1f}%, 异常={vehicle.anomaly_type if vehicle.has_anomaly else '无'}")
+                        print(f"车辆 {vehicle_id}: 模式={mode_str}, 速度={vehicleUnused.speed:.1f}km/h, "
+                              f"电量={vehicleUnused.battery_soc:.1f}%, 异常={vehicleUnused.anomaly_type if vehicleUnused.has_anomaly else '无'}")
                 
                 # 更新批次ID
                 self.batch_id += 1

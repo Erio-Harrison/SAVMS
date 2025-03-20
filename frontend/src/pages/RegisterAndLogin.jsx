@@ -14,12 +14,13 @@ export default function RegisterAndLogin() {
 
     async function registerOrLogin(e) {
         e.preventDefault();
-        const endpoint = isLoginMode ? '/login' : '/register';
+        const endpoint = isLoginMode ? '/login' : '/users/create';
         const roleId = (role == 'admin') ? 1 : 2;
         const user = {
-            account: username,
+            username: username,
             password: password,
-            role: roleId
+            email: "1234@gmail.com"
+            // role: roleId
         };
 
         try {
