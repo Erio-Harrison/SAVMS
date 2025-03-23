@@ -2,7 +2,7 @@ package com.savms.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.savms.ApplicationSAVMS;
-import com.savms.entity.Vehicle;
+import com.savms.entity.VehicleUnused;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +18,7 @@ import java.util.Date;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ContextConfiguration(classes = ApplicationSAVMS.class)
-public class VehicleMapperTest implements ApplicationContextAware {
+public class VehicleUnusedMapperTest implements ApplicationContextAware {
     private ApplicationContext applicationContext;
 
     @Override
@@ -30,7 +30,7 @@ public class VehicleMapperTest implements ApplicationContextAware {
     public void testCRUD() {
         VehicleMapper mapper = applicationContext.getBean(VehicleMapper.class);
 
-        Vehicle entity = new Vehicle();
+        VehicleUnused entity = new VehicleUnused();
         entity.setRegistrationNumber("123456");
         entity.setRegistrationDate(new Date());
         entity.setBatteryLevel(1.5F);
@@ -40,9 +40,9 @@ public class VehicleMapperTest implements ApplicationContextAware {
 
         mapper.insert(entity);
 
-        QueryWrapper<Vehicle> selQuery = new QueryWrapper<>();
+        QueryWrapper<VehicleUnused> selQuery = new QueryWrapper<>();
         selQuery.eq("registration_number", "123456");
-        Vehicle selected = mapper.selectOne(selQuery);
+        VehicleUnused selected = mapper.selectOne(selQuery);
         Assert.assertEquals("123456", selected.getRegistrationNumber());
 
         mapper.deleteById(selected.getId());

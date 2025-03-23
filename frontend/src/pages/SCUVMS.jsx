@@ -19,17 +19,62 @@ export default function SCUVMS() {
     useEffect(() => {
         const fetchWeather = async () => {
             // TODO: axios get weather
-            const currentWeatherData = { weather: 'Sunny', temperature: 19, chanceOfRain: 30 };
-            const weatherArrayData = [
-                { time: '1PM', weather: 'Sunny', temperature: 20 },
-                { time: '2PM', weather: 'Cloudy', temperature: 18 },
-                { time: '3PM', weather: 'Rainy', temperature: 16 },
-                { time: '4PM', weather: 'Sunny', temperature: 17 },
-                { time: '5PM', weather: 'Snowy', temperature: 19 },
-                { time: '6PM', weather: 'Rainy', temperature: 21 },
-            ];
-            setCurrentWeather(currentWeatherData);
-            setWeatherArray(weatherArrayData);
+            // const currentWeatherData = { weather: 'Sunny', temperature: 19, chanceOfRain: 30 };
+            // const weatherArrayData = [
+            //     { time: '1PM', weather: 'Sunny', temperature: 20 },
+            //     { time: '2PM', weather: 'Cloudy', temperature: 18 },
+            //     { time: '3PM', weather: 'Rainy', temperature: 16 },
+            //     { time: '4PM', weather: 'Sunny', temperature: 17 },
+            //     { time: '5PM', weather: 'Snowy', temperature: 19 },
+            //     { time: '6PM', weather: 'Rainy', temperature: 21 },
+            // ];
+            // setCurrentWeather(currentWeatherData);
+            // setWeatherArray(weatherArrayData);
+
+            try {
+                const res = await fetch(`http://localhost:8080/api/weather?city=${city}`);
+                const result = await res.json();
+                if (result.code === 1) {
+                    const weatherInfo = JSON.parse(result.data);
+
+                    const currentWeatherData = {
+                        weather: weatherInfo.current.condition.code,
+                        temperature: weatherInfo.current.temp_c,
+                        chanceOfRain: weatherInfo.forecast.forecastday[0].day.daily_chance_of_rain,
+                        description: weatherInfo.current.condition.text,
+                        isDay: weatherInfo.current.is_day,
+                    };
+                    const currentLocalTime = weatherInfo.location.localtime; // "2025-03-17 23:50"
+                    const currentHour = parseInt(currentLocalTime.split(' ')[1].split(':')[0]); // 23
+                    const todayHours = weatherInfo.forecast.forecastday[0].hour.filter(hourItem => {
+                        const itemHour = parseInt(hourItem.time.split(' ')[1].split(':')[0]);
+                        return itemHour >= currentHour;
+                    });
+                    const tomorrowHours = weatherInfo.forecast.forecastday.length > 1
+                        ? weatherInfo.forecast.forecastday[1].hour
+                        : [];
+                    const nextHours = [...todayHours, ...tomorrowHours];
+                    const displayHours = nextHours.slice(0, 6);
+
+                    const weatherArrayData = displayHours.map(hourItem => ({
+                        time: hourItem.time.split(' ')[1], // 只取小时分钟
+                        weather: hourItem.condition.code,
+                        temperature: hourItem.temp_c,
+                        isDay: hourItem.is_day,
+                    }));
+
+
+                    setCurrentWeather(currentWeatherData);
+                    setWeatherArray(weatherArrayData);
+
+                } else {
+                    console.error('Backend Error:', result.msg);
+                    alert(`Can't get weather Info: ${result.msg}`);
+                }
+            } catch (error) {
+                console.error('Request error:', error);
+                alert('Request error，Please try again！');
+            }
         };
         fetchWeather();
     }, []);
@@ -82,7 +127,7 @@ export default function SCUVMS() {
                         <div className="px-6 py-4 rounded-3xl flex flex-grow bg-radial-gradient text-white justify-between items-center">
                             {weatherArray.map((weather, index) => (
                                 <HourlyForecastCard
-                                    key={index} time={weather.time} weather={weather.weather} temperature={weather.temperature}
+                                    key={index} time={weather.time} weather={weather.weather} temperature={weather.temperature} isDay={weather.isDay}
                                 />
                             ))}
                         </div>
