@@ -4,13 +4,14 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
-@Document(collection = "users")
+@Document(collection = "user")
 public class User {
     @Id
     private String id;
     private String username;
     private String email;
     private LocalDateTime createdAt;
+    private String password;
 
     // Constructors
     public User() {
@@ -54,6 +55,16 @@ public class User {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getPassword()
+    {
+        return password;
+    }
+
+    public void setPassword( String password )
+    {
+        this.password = password;
     }
 
     @Override

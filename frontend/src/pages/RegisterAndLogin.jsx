@@ -14,21 +14,41 @@ export default function RegisterAndLogin() {
 
     async function registerOrLogin(e) {
         e.preventDefault();
-        const endpoint = isLoginMode ? '/login' : '/register';
-        const roleId = (role == 'admin') ? 1 : 2;
-        const user = {
-            account: username,
-            password: password,
-            role: roleId
-        };
+        if (isLoginMode){
+            const endpoint = isLoginMode ? '/api/auth/login' : '/users/create';
+            var reqlogin = {
+                username: username,
+                password: password
+            };
+            try{
+                const response = await axiosInstance.post(endpoint, reqlogin);
+                const userId = response.data.data.id;
+                setId(userId);
 
-        try {
-            const response = await axiosInstance.post(endpoint, user);
-            const userId = response.data.data.id;
+            } catch (err) {
+                 console.error('Error', err.response ? err.response.data : err.message);
+            }
 
-            setId(userId);
-        } catch (err) {
-            console.error('Error', err.response ? err.response.data : err.message);
+
+
+        }else{
+            const endpoint = '/users/create';
+            const roleId = (role == 'admin') ? 1 : 2;
+            const user = {
+                username: username,
+                password: password,
+                email: "1234@gmail.com"
+                // role: roleId
+            };
+            try {
+                const response = await axiosInstance.post(endpoint, user);
+                const userId = response.data.data.id;
+                alert(userId)
+
+                setId(userId);
+            } catch (err) {
+                console.error('Error', err.response ? err.response.data : err.message);
+            }
         }
     }
 
