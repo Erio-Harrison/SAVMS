@@ -1,4 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
+
+# 设置本地编译器路径
+#set(CMAKE_C_COMPILER "XX/mingw64/bin/gcc.exe")
+#set(CMAKE_CXX_COMPILER "XX/mingw64/bin/g++.exe")
+
 project(SAVMS)
 
 set(CMAKE_CXX_STANDARD 17)

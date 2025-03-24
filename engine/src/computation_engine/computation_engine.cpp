@@ -1,6 +1,7 @@
 #include "computation_engine.h"
 #include <numeric>
 #include <iostream>
+#include <ctime>
 
 ComputationEngine::ComputationEngine() {}
 
