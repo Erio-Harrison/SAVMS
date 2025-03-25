@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 import Sidebar from "../components/Sidebar";
 import MainPage from "./MainPage.jsx";
+import MapPage from "./MapPage.jsx";
 
 
 export default function SCUVMS() {
@@ -13,6 +14,8 @@ export default function SCUVMS() {
         switch (selectedPage) {
             case "MainPage":
                 return <MainPage />;
+            case "MapPage":
+                return <MapPage />;
             default:
                 return <MainPage />;
         }
