@@ -1,9 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
 
-# 设置本地编译器路径
-#set(CMAKE_C_COMPILER "XX/mingw64/bin/gcc.exe")
-#set(CMAKE_CXX_COMPILER "XX/mingw64/bin/g++.exe")
-
 project(SAVMS)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -27,13 +23,25 @@ else()
     message(FATAL_ERROR "Java ${JAVA_VERSION_REQUIRED} or higher not found")
 endif()
 
-# 查找 JNI
-find_package(JNI REQUIRED)
-if(JNI_FOUND)
-    message(STATUS "Found JNI: ${JNI_INCLUDE_DIRS}")
-else()
-    message(FATAL_ERROR "JNI not found")
+# 手动指定 JNI 路径
+set(JNI_INCLUDE_DIRS
+    "C:/Program Files/Java/jdk-17/include"
+    "C:/Program Files/Java/jdk-17/include/win32"
+)
+set(JNI_LIBRARIES "C:/Program Files/Java/jdk-17/lib/jvm.lib")
+set(JNI_FOUND TRUE)
+
+# 检查 JNI 路径是否存在
+foreach(dir ${JNI_INCLUDE_DIRS})
+    if(NOT EXISTS "${dir}")
+        message(FATAL_ERROR "JNI include directory not found: ${dir}")
+    endif()
+endforeach()
+if(NOT EXISTS "${JNI_LIBRARIES}")
+    message(FATAL_ERROR "JNI library not found: ${JNI_LIBRARIES}")
 endif()
+
+message(STATUS "Using manually specified JNI: ${JNI_INCLUDE_DIRS}")
 
 include_directories(${JNI_INCLUDE_DIRS})
 
@@ -65,15 +73,8 @@ set_target_properties(dataprocessing PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib
 )
 
-# 为 macOS 设置特定的 .dylib 输出目录
-if(APPLE)
-    set_target_properties(dataprocessing PROPERTIES
-        LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib
-    )
-endif()
-
 # 打印库文件位置
 add_custom_command(TARGET dataprocessing POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E echo 
+    COMMAND ${CMAKE_COMMAND} -E echo
     "Library built at: $<TARGET_FILE:dataprocessing>"
 )
