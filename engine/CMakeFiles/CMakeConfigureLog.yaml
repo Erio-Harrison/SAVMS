@@ -1,0 +1,296 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineSystem.cmake:205 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The system is: Windows - 10.0.22631 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: D:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.40.33807/bin/Hostx86/x86/cl.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.40.33812 版
+      版权所有(C) Microsoft Corporation。保留所有权利。
+      
+      CMakeCCompilerId.c
+      Microsoft (R) Incremental Linker Version 14.40.33812.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      /out:CMakeCCompilerId.exe 
+      CMakeCCompilerId.obj 
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.exe"
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.obj"
+      
+      The C compiler identification is MSVC, found in:
+        E:/8715/SAVMS/engine/CMakeFiles/3.31.6/CompilerIdC/CMakeCCompilerId.exe
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:1288 (message)"
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:250 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Detecting C compiler /showIncludes prefix:
+        main.c
+        注意: 包含文件:  E:\\8715\\SAVMS\\engine\\CMakeFiles\\ShowIncludes\\foo.h
+        
+      Found prefix "注意: 包含文件:  "
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: D:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.40.33807/bin/Hostx86/x86/cl.exe 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      用于 x86 的 Microsoft (R) C/C++ 优化编译器 19.40.33812 版
+      版权所有(C) Microsoft Corporation。保留所有权利。
+      
+      CMakeCXXCompilerId.cpp
+      Microsoft (R) Incremental Linker Version 14.40.33812.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+      
+      /out:CMakeCXXCompilerId.exe 
+      CMakeCXXCompilerId.obj 
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.exe"
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.obj"
+      
+      The CXX compiler identification is MSVC, found in:
+        E:/8715/SAVMS/engine/CMakeFiles/3.31.6/CompilerIdCXX/CMakeCXXCompilerId.exe
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:1288 (message)"
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:250 (CMAKE_DETERMINE_MSVC_SHOWINCLUDES_PREFIX)"
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Detecting CXX compiler /showIncludes prefix:
+        main.c
+        注意: 包含文件:  E:\\8715\\SAVMS\\engine\\CMakeFiles\\ShowIncludes\\foo.h
+        
+      Found prefix "注意: 包含文件:  "
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "E:/8715/SAVMS/engine/CMakeFiles/CMakeScratch/TryCompile-qlvy1t"
+      binary: "E:/8715/SAVMS/engine/CMakeFiles/CMakeScratch/TryCompile-qlvy1t"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+      CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:X86"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/8715/SAVMS/engine/CMakeFiles/CMakeScratch/TryCompile-qlvy1t'
+        
+        Run Build Command(s): "D:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/ProgramData/mingw64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_798ad/fast
+        C:/ProgramData/mingw64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_798ad.dir\\build.make CMakeFiles/cmTC_798ad.dir/build
+        mingw32-make[1]: Entering directory 'E:/8715/SAVMS/engine/CMakeFiles/CMakeScratch/TryCompile-qlvy1t'
+        Building C object CMakeFiles/cmTC_798ad.dir/CMakeCCompilerABI.c.obj
+        "D:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_cl_compile_depends --dep-file=CMakeFiles\\cmTC_798ad.dir\\CMakeCCompilerABI.c.obj.d --working-dir=E:\\8715\\SAVMS\\engine\\CMakeFiles\\CMakeScratch\\TryCompile-qlvy1t --filter-prefix="娉ㄦ剰: 鍖呭惈鏂囦欢:  " -- "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\Hostx86\\x86\\cl.exe"  /nologo   /DWIN32 /D_WINDOWS /W3  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_798ad.dir\\CMakeCCompilerABI.c.obj /FdCMakeFiles\\cmTC_798ad.dir/ /FS -c "D:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCCompilerABI.c"
+        CMakeCCompilerABI.c
+        娉ㄦ剰: 鍖呭惈鏂囦欢:  D:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCompilerABI.h
+        Linking C executable cmTC_798ad.exe
+        "D:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_798ad.dir\\link.txt --verbose=1
+        "D:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1940 --intdir=CMakeFiles\\cmTC_798ad.dir --rc="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x86\\rc.exe" --mt="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x86\\mt.exe" --manifests -- "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\Hostx86\\x86\\link.exe" /nologo @CMakeFiles\\cmTC_798ad.dir\\objects1.rsp  /out:cmTC_798ad.exe /implib:cmTC_798ad.lib /pdb:E:\\8715\\SAVMS\\engine\\CMakeFiles\\CMakeScratch\\TryCompile-qlvy1t\\cmTC_798ad.pdb /version:0.0 /machine:X86  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+        Visual Studio Incremental Link with embedded manifests
+        Create CMakeFiles\\cmTC_798ad.dir/manifest.rc
+        Create empty: CMakeFiles\\cmTC_798ad.dir/embed.manifest
+        RC Pass 1:
+        D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x86\\rc.exe /fo CMakeFiles\\cmTC_798ad.dir/manifest.res CMakeFiles\\cmTC_798ad.dir/manifest.rc
+        LINK Pass 1:
+        D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\Hostx86\\x86\\link.exe /nologo @CMakeFiles\\cmTC_798ad.dir\\objects1.rsp /out:cmTC_798ad.exe /implib:cmTC_798ad.lib /pdb:E:\\8715\\SAVMS\\engine\\CMakeFiles\\CMakeScratch\\TryCompile-qlvy1t\\cmTC_798ad.pdb /version:0.0 /machine:X86 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_798ad.dir/intermediate.manifest CMakeFiles\\cmTC_798ad.dir/manifest.res
+        MT:
+        D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x86\\mt.exe /nologo /manifest CMakeFiles\\cmTC_798ad.dir/intermediate.manifest /out:CMakeFiles\\cmTC_798ad.dir/embed.manifest /notify_update
+        RC Pass 2:
+        D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x86\\rc.exe /fo CMakeFiles\\cmTC_798ad.dir/manifest.res CMakeFiles\\cmTC_798ad.dir/manifest.rc
+        FINAL LINK:
+        D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\Hostx86\\x86\\link.exe /nologo @CMakeFiles\\cmTC_798ad.dir\\objects1.rsp /out:cmTC_798ad.exe /implib:cmTC_798ad.lib /pdb:E:\\8715\\SAVMS\\engine\\CMakeFiles\\CMakeScratch\\TryCompile-qlvy1t\\cmTC_798ad.pdb /version:0.0 /machine:X86 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_798ad.dir/intermediate.manifest CMakeFiles\\cmTC_798ad.dir/manifest.res
+        mingw32-make[1]: Leaving directory 'E:/8715/SAVMS/engine/CMakeFiles/CMakeScratch/TryCompile-qlvy1t'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'C': D:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.40.33807/bin/Hostx86/x86/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the C compiler's linker: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.40.33807/bin/Hostx86/x86/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.40.33812.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "E:/8715/SAVMS/engine/CMakeFiles/CMakeScratch/TryCompile-kg3nl4"
+      binary: "E:/8715/SAVMS/engine/CMakeFiles/CMakeScratch/TryCompile-kg3nl4"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:X86"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/8715/SAVMS/engine/CMakeFiles/CMakeScratch/TryCompile-kg3nl4'
+        
+        Run Build Command(s): "D:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/ProgramData/mingw64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_1519b/fast
+        C:/ProgramData/mingw64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_1519b.dir\\build.make CMakeFiles/cmTC_1519b.dir/build
+        mingw32-make[1]: Entering directory 'E:/8715/SAVMS/engine/CMakeFiles/CMakeScratch/TryCompile-kg3nl4'
+        Building CXX object CMakeFiles/cmTC_1519b.dir/CMakeCXXCompilerABI.cpp.obj
+        "D:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_cl_compile_depends --dep-file=CMakeFiles\\cmTC_1519b.dir\\CMakeCXXCompilerABI.cpp.obj.d --working-dir=E:\\8715\\SAVMS\\engine\\CMakeFiles\\CMakeScratch\\TryCompile-kg3nl4 --filter-prefix="娉ㄦ剰: 鍖呭惈鏂囦欢:  " -- "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\Hostx86\\x86\\cl.exe"  /nologo /TP   /DWIN32 /D_WINDOWS /W3 /GR /EHsc  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_1519b.dir\\CMakeCXXCompilerABI.cpp.obj /FdCMakeFiles\\cmTC_1519b.dir/ /FS -c "D:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCXXCompilerABI.cpp"
+        CMakeCXXCompilerABI.cpp
+        娉ㄦ剰: 鍖呭惈鏂囦欢:  D:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCompilerABI.h
+        Linking CXX executable cmTC_1519b.exe
+        "D:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_1519b.dir\\link.txt --verbose=1
+        "D:\\Program Files\\CMake\\bin\\cmake.exe" -E vs_link_exe --msvc-ver=1940 --intdir=CMakeFiles\\cmTC_1519b.dir --rc="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x86\\rc.exe" --mt="D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x86\\mt.exe" --manifests -- "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\Hostx86\\x86\\link.exe" /nologo @CMakeFiles\\cmTC_1519b.dir\\objects1.rsp  /out:cmTC_1519b.exe /implib:cmTC_1519b.lib /pdb:E:\\8715\\SAVMS\\engine\\CMakeFiles\\CMakeScratch\\TryCompile-kg3nl4\\cmTC_1519b.pdb /version:0.0 /machine:X86  /debug /INCREMENTAL /subsystem:console  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
+        Visual Studio Incremental Link with embedded manifests
+        Create CMakeFiles\\cmTC_1519b.dir/manifest.rc
+        Create empty: CMakeFiles\\cmTC_1519b.dir/embed.manifest
+        RC Pass 1:
+        D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x86\\rc.exe /fo CMakeFiles\\cmTC_1519b.dir/manifest.res CMakeFiles\\cmTC_1519b.dir/manifest.rc
+        LINK Pass 1:
+        D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\Hostx86\\x86\\link.exe /nologo @CMakeFiles\\cmTC_1519b.dir\\objects1.rsp /out:cmTC_1519b.exe /implib:cmTC_1519b.lib /pdb:E:\\8715\\SAVMS\\engine\\CMakeFiles\\CMakeScratch\\TryCompile-kg3nl4\\cmTC_1519b.pdb /version:0.0 /machine:X86 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_1519b.dir/intermediate.manifest CMakeFiles\\cmTC_1519b.dir/manifest.res
+        MT:
+        D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x86\\mt.exe /nologo /manifest CMakeFiles\\cmTC_1519b.dir/intermediate.manifest /out:CMakeFiles\\cmTC_1519b.dir/embed.manifest /notify_update
+        RC Pass 2:
+        D:\\Windows Kits\\10\\bin\\10.0.22621.0\\x86\\rc.exe /fo CMakeFiles\\cmTC_1519b.dir/manifest.res CMakeFiles\\cmTC_1519b.dir/manifest.rc
+        FINAL LINK:
+        D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\Hostx86\\x86\\link.exe /nologo @CMakeFiles\\cmTC_1519b.dir\\objects1.rsp /out:cmTC_1519b.exe /implib:cmTC_1519b.lib /pdb:E:\\8715\\SAVMS\\engine\\CMakeFiles\\CMakeScratch\\TryCompile-kg3nl4\\cmTC_1519b.pdb /version:0.0 /machine:X86 /debug /INCREMENTAL /subsystem:console kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTFILE:CMakeFiles\\cmTC_1519b.dir/intermediate.manifest CMakeFiles\\cmTC_1519b.dir/manifest.res
+        mingw32-make[1]: Leaving directory 'E:/8715/SAVMS/engine/CMakeFiles/CMakeScratch/TryCompile-kg3nl4'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'CXX': D:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.40.33807/bin/Hostx86/x86/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the CXX compiler's linker: "D:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.40.33807/bin/Hostx86/x86/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.40.33812.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/CheckSourceCompiles.cmake:89 (cmake_check_source_compiles)"
+      - "D:/Program Files/CMake/share/cmake-3.31/Modules/FindJNI.cmake:489 (check_source_compiles)"
+      - "CMakeLists.txt:26 (find_package)"
+    directories:
+      source: "E:/8715/SAVMS/engine/CMakeFiles/CMakeScratch/TryCompile-eg2akv"
+      binary: "E:/8715/SAVMS/engine/CMakeFiles/CMakeScratch/TryCompile-eg2akv"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+      CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:X86"
+    buildResult:
+      variable: "JNI_INCLUDE_PATH2_OPTIONAL"
+      cached: true
+      stdout: |
+        Change Dir: 'E:/8715/SAVMS/engine/CMakeFiles/CMakeScratch/TryCompile-eg2akv'
+        
+        Run Build Command(s): "D:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/ProgramData/mingw64/mingw64/bin/mingw32-make.exe -f Makefile cmTC_5cca4/fast
+        C:/ProgramData/mingw64/mingw64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_5cca4.dir\\build.make CMakeFiles/cmTC_5cca4.dir/build
+        mingw32-make[1]: Entering directory 'E:/8715/SAVMS/engine/CMakeFiles/CMakeScratch/TryCompile-eg2akv'
+        Building C object CMakeFiles/cmTC_5cca4.dir/src.c.obj
+        "D:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_cl_compile_depends --dep-file=CMakeFiles\\cmTC_5cca4.dir\\src.c.obj.d --working-dir=E:\\8715\\SAVMS\\engine\\CMakeFiles\\CMakeScratch\\TryCompile-eg2akv --filter-prefix="娉ㄦ剰: 鍖呭惈鏂囦欢:  " -- "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\bin\\Hostx86\\x86\\cl.exe"  /nologo -DJNI_INCLUDE_PATH2_OPTIONAL -IE:\\JDK17\\jdk-17.0.12\\include /DWIN32 /D_WINDOWS /W3  /MDd /Zi /Ob0 /Od /RTC1 /showIncludes /FoCMakeFiles\\cmTC_5cca4.dir\\src.c.obj /FdCMakeFiles\\cmTC_5cca4.dir/ /FS -c E:\\8715\\SAVMS\\engine\\CMakeFiles\\CMakeScratch\\TryCompile-eg2akv\\src.c
+        src.c
+        娉ㄦ剰: 鍖呭惈鏂囦欢:  E:\\JDK17\\jdk-17.0.12\\include\\jni.h
+        娉ㄦ剰: 鍖呭惈鏂囦欢:   D:\\Windows Kits\\10\\include\\10.0.22621.0\\ucrt\\stdio.h
+        娉ㄦ剰: 鍖呭惈鏂囦欢:    D:\\Windows Kits\\10\\include\\10.0.22621.0\\ucrt\\corecrt.h
+        娉ㄦ剰: 鍖呭惈鏂囦欢:     D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\vcruntime.h
+        娉ㄦ剰: 鍖呭惈鏂囦欢:      D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\sal.h
+        娉ㄦ剰: 鍖呭惈鏂囦欢:       D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\concurrencysal.h
+        娉ㄦ剰: 鍖呭惈鏂囦欢:      D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\vadefs.h
+        娉ㄦ剰: 鍖呭惈鏂囦欢:    D:\\Windows Kits\\10\\include\\10.0.22621.0\\ucrt\\corecrt_wstdio.h
+        娉ㄦ剰: 鍖呭惈鏂囦欢:     D:\\Windows Kits\\10\\include\\10.0.22621.0\\ucrt\\corecrt_stdio_config.h
+        娉ㄦ剰: 鍖呭惈鏂囦欢:   D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.40.33807\\include\\stdarg.h
+        E:\\JDK17\\jdk-17.0.12\\include\\jni.h(45): fatal error C1083: 鏃犳硶鎵撳紑鍖呮嫭鏂囦欢: 鈥渏ni_md.h鈥? No such file or directory
+        mingw32-make[1]: *** [CMakeFiles\\cmTC_5cca4.dir\\build.make:81: CMakeFiles/cmTC_5cca4.dir/src.c.obj] Error 2
+        mingw32-make[1]: Leaving directory 'E:/8715/SAVMS/engine/CMakeFiles/CMakeScratch/TryCompile-eg2akv'
+        mingw32-make: *** [Makefile:133: cmTC_5cca4/fast] Error 2
+        
+      exitCode: 2
+...

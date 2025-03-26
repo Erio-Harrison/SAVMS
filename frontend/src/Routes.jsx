@@ -3,19 +3,22 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-d
 import { UserContext } from "./UserContext";
 import SCUVMS from "./pages/SCUVMS";
 import RegisterAndLogin from "./pages/RegisterAndLogin";
+import ChatPage from "./pages/ChatPage"; // ✅ 引入 ChatPage
 
 export default function AppRoutes() {
-  const { id } = useContext(UserContext);
+    const { id } = useContext(UserContext);
 
-  return (
-    <Router>
-      <Routes>
-        <Route path="/scuvms" element={id ? <SCUVMS /> : <Navigate to="/login" />} />
+    return (
+        <Router>
+            <Routes>
+                <Route path="/scuvms" element={id ? <SCUVMS /> : <Navigate to="/login" />} />
 
-        <Route path="/login" element={id ? <Navigate to="/scuvms" /> : <RegisterAndLogin />} />
+                {/* ✅ 新增 Chat 路由（不需要登录） */}
+                <Route path="/chat" element={<ChatPage />} />
 
-        <Route path="/" element={id ? <Navigate to="/scuvms" /> : <Navigate to="/login" />} />
-      </Routes>
-    </Router>
-  );
+                <Route path="/login" element={id ? <Navigate to="/scuvms" /> : <RegisterAndLogin />} />
+                <Route path="/" element={id ? <Navigate to="/scuvms" /> : <Navigate to="/login" />} />
+            </Routes>
+        </Router>
+    );
 }

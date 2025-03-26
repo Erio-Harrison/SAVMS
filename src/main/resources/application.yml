@@ -1,6 +1,6 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/SAVMS?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Australia/Sydney
+    url: jdbc:mysql://localhost:3306/new_ schema?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Australia/Sydney
     username: root
-    password: huhaoren
+    password: 123456
