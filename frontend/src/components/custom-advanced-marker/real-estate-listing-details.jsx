@@ -2,36 +2,36 @@ import React from 'react';
 import './real-estate-listing-details.css';
 
 const RealEstateListingDetails = ({ details }) => {
-    const {
-        property_address,
-        property_price,
-        listing_title,
-        property_bedrooms,
-        property_bathrooms,
-        property_square_feet,
-        listing_description
-    } = details;
+    const carData = {
+        LicencePlate: details.licensePlate,
+        CarModel: details.carModel,
+        CarType: details.energyType,
+        CarYear: details.year,
+        Length: details.carsize.length,
+        Width: details.carsize.width,
+        Height: details.carsize.height
+    };
 
     return (
         <div className="details-container">
             <div className="listing-content">
-                <h2>{listing_title}</h2>
-                <p>{property_address}</p>
+                <h2>{carData.LicencePlate}</h2>
+                <p>{carData.CarModel}</p>
                 <div className="details">
                     <div className="detail_item">
-                         {property_square_feet.replace('sq ft', 'ft²')}
+                         {carData.Length}
                     </div>
                     <div className="detail_item">
-                         {property_bathrooms}
+                         {carData.Width}
                     </div>
                     <div className="detail_item">
-                         {property_bedrooms}
+                         {carData.Height}
                     </div>
                 </div>
 
-                <p className="description">{listing_description}</p>
+                <p className="description">{carData.CarType}</p>
 
-                <p className="price">{property_price}</p>
+                <p className="price">{carData.CarYear}</p>
             </div>
         </div>
     );

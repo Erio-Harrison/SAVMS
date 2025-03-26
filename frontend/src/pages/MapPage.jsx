@@ -93,8 +93,8 @@ export default function MapPage(){
         <div className="advanced-marker-example">
             <Map
                 mapId={'bf51a910020fa25a'}
-                defaultZoom={5}
-                defaultCenter={{lat: 47.53, lng: -122.34}}
+                defaultZoom={12}
+                defaultCenter={{lat: -33.83, lng: 151.24}}
                 gestureHandling={'greedy'}
                 disableDefaultUI>
                 {realEstateListing && (

@@ -11,8 +11,8 @@ const CustomAdvancedMarker = ({ realEstateListing }) => {
     const [clicked, setClicked] = useState(false);
     const [hovered, setHovered] = useState(false);
     const position = {
-        lat: realEstateListing.details.latitude,
-        lng: realEstateListing.details.longitude
+        lat: realEstateListing.location.latitude,
+        lng: realEstateListing.location.longitude
     };
 
     const renderCustomPin = () => {
@@ -33,7 +33,7 @@ const CustomAdvancedMarker = ({ realEstateListing }) => {
             </span>
                     </div>
 
-                    <RealEstateListingDetails details={realEstateListing.details} />
+                    <RealEstateListingDetails details={realEstateListing} />
                 </div>
 
                 <div className="tip" />
