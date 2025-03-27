@@ -25,10 +25,10 @@ endif()
 
 # 手动指定 JNI 路径
 set(JNI_INCLUDE_DIRS
-    "C:/Program Files/Java/jdk-17/include"
-    "C:/Program Files/Java/jdk-17/include/win32"
+    "${JAVA_HOME}/include"
+    "${JAVA_HOME}/include/win32"
 )
-set(JNI_LIBRARIES "C:/Program Files/Java/jdk-17/lib/jvm.lib")
+set(JNI_LIBRARIES "${JAVA_HOME}/lib/jvm.lib")
 set(JNI_FOUND TRUE)
 
 # 检查 JNI 路径是否存在
