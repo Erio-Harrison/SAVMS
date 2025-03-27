@@ -1,12 +1,12 @@
-#include "data_processor.h"
+#include "handleData.h"
 #include <algorithm>
 #include <iostream>
 
-DataProcessor::DataProcessor() {}
+HandleData::HandleData() {}
 
-DataProcessor::~DataProcessor() {}
+HandleData::~HandleData() {}
 
-std::vector<std::string> DataProcessor::processData(const std::vector<std::string>& rawData) {
+std::vector<std::string> HandleData::processData(const std::vector<std::string>& rawData) {
     std::vector<std::string> processedData;
     std::cout << "\nProcessing vehicle data..." << std::endl;
 

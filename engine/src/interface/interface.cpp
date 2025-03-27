@@ -1,7 +1,7 @@
-#include "dataprocessing_service_DataProcessingService.h"
-#include "../data_collector/data_collector.h"
-#include "../data_processor/data_processor.h"
-#include "../computation_engine/computation_engine.h"
+#include "interface.h"
+#include "../getData/getData.h" 
+#include "../handleData/handleData.h" 
+#include "../resultData/resultData.h" 
 #include <string>
 #include <vector>
 #include <iostream>
@@ -14,16 +14,16 @@ JNIEXPORT jstring JNICALL Java_com_savms_service_DataProcessingService_processDa
 
     std::cout << "\n====== Starting Data Processing Pipeline ======\n" << std::endl;
 
-    DataCollector collector;
-    DataProcessor processor;
-    ComputationEngine engine;
+    GetData collector;      
+    HandleData processor;  
+    ResultData engine;  
 
     try {
         std::cout << "Initializing connection to: " << dataSource << std::endl;
         collector.connect(dataSource);
 
         std::cout << "\nStarting data collection phase..." << std::endl;
-        std::vector<std::string> rawData = collector.collectData(5);  // 采集5辆车的数据
+        std::vector<std::string> rawData = collector.collectData(5); 
         collector.disconnect();
 
         std::vector<std::string> processedData = processor.processData(rawData);

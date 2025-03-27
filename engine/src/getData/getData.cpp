@@ -1,27 +1,25 @@
-#include "data_collector.h"
+#include "getData.h"
 #include <iostream>
 
-DataCollector::DataCollector() : isConnected(false) {}
+GetData::GetData() : isConnected(false) {}
 
-DataCollector::~DataCollector() {
+GetData::~GetData() {
     if (isConnected) {
         disconnect();
     }
 }
 
-bool DataCollector::connect(const std::string& source) {
-    // 实现连接到数据源的逻辑
+bool GetData::connect(const std::string& source) {
     std::cout << "Connecting to data source: " << source << std::endl;
     isConnected = true;
     return isConnected;
 }
 
-std::vector<std::string> DataCollector::collectData(int batchSize) {
+std::vector<std::string> GetData::collectData(int batchSize) {
     if (!isConnected) {
         throw std::runtime_error("Not connected to data source");
     }
 
-    // 模拟车辆数据采集
     std::vector<std::string> collectedData;
     for (int i = 0; i < batchSize; ++i) {
         std::string vehicleData = "Vehicle_" + std::to_string(i) + ": "
@@ -37,9 +35,8 @@ std::vector<std::string> DataCollector::collectData(int batchSize) {
     return collectedData;
 }
 
-void DataCollector::disconnect() {
+void GetData::disconnect() {
     if (isConnected) {
-        // 实现断开连接的逻辑
         std::cout << "Disconnecting from data source" << std::endl;
         isConnected = false;
     }

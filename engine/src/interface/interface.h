@@ -1,5 +1,6 @@
-#ifndef COM_SAVMS_SERVICE_DATAPROCESSINGSERVICE_H
-#define COM_SAVMS_SERVICE_DATAPROCESSINGSERVICE_H
+// 头文件 (interface.h)
+#ifndef COM_SAVMS_SERVICE_INTERFACE_H
+#define COM_SAVMS_SERVICE_INTERFACE_H
 
 #include <jni.h>
 
@@ -14,4 +15,4 @@ JNIEXPORT jstring JNICALL Java_com_savms_service_DataProcessingService_processDa
 }
 #endif
 
-#endif // COM_SAVMS_SERVICE_DATAPROCESSINGSERVICE_H
+#endif

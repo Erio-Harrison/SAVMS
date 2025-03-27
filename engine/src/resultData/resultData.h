@@ -1,18 +1,17 @@
-#ifndef COMPUTATION_ENGINE_H
-#define COMPUTATION_ENGINE_H
+#ifndef RESULT_DATA_H
+#define RESULT_DATA_H
 
 #include <vector>
 #include <string>
 
-class ComputationEngine {
+class ResultData {
 public:
-    ComputationEngine();
-    ~ComputationEngine();
+    ResultData();
+    ~ResultData();
 
     std::string computeResult(const std::vector<std::string>& processedData);
 
 private:
     // 添加任何必要的私有成员
 };
-
-#endif // COMPUTATION_ENGINE_H
+#endif

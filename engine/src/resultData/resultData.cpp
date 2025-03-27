@@ -1,11 +1,13 @@
-#include "computation_engine.h"
+#include "resultData.h"
 #include <numeric>
 #include <iostream>
+#include <ctime>
 
-ComputationEngine::ComputationEngine() {}
+ResultData::ResultData() {}
 
-ComputationEngine::~ComputationEngine() {}
-std::string ComputationEngine::computeResult(const std::vector<std::string>& processedData) {
+ResultData::~ResultData() {}
+
+std::string ResultData::computeResult(const std::vector<std::string>& processedData) {
     std::cout << "\nPerforming final computation..." << std::endl;
 
     // 模拟计算一些统计数据
