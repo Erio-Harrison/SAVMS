@@ -33,3 +33,5 @@ build/
 .vscode/
 
 **/.env
+**/package-lock.json
+**/yarn.lock
