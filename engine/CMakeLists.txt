@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
 project(SAVMS)
-
 set(CMAKE_CXX_STANDARD 17)
 
 # 设置 Java 最低版本要求
@@ -28,7 +27,8 @@ set(JNI_INCLUDE_DIRS
     "${JAVA_HOME}/include"
     "${JAVA_HOME}/include/win32"
 )
-set(JNI_LIBRARIES "${JAVA_HOME}/lib/jvm.lib")
+set(JNI_LIBRARIES "C:/Program Files/Eclipse Adoptium/jdk-17.0.13.11-hotspot/lib/jvm.lib")
+
 set(JNI_FOUND TRUE)
 
 # 检查 JNI 路径是否存在
@@ -43,14 +43,31 @@ endif()
 
 message(STATUS "Using manually specified JNI: ${JNI_INCLUDE_DIRS}")
 
-include_directories(${JNI_INCLUDE_DIRS})
+# JSON: nlohmann via FetchContent
+include(FetchContent)
+FetchContent_Declare(
+  json
+  URL https://github.com/nlohmann/json/releases/download/v3.11.2/json.tar.xz
+)
+FetchContent_MakeAvailable(json)
+
+# 查找 Curl
+find_package(CURL REQUIRED)
+if(CURL_FOUND)
+    include_directories(${CURL_INCLUDE_DIRS})
+else()
+    message(FATAL_ERROR "Could not find CURL!")
+endif()
 
 # 包含头文件目录
-include_directories(include)
-include_directories(src/data_collector)
-include_directories(src/data_processor)
-include_directories(src/computation_engine)
-include_directories(src/jni_interface)
+include_directories(
+    ${JNI_INCLUDE_DIRS}
+    include
+    src/data_collector
+    src/data_processor
+    src/computation_engine
+    src/jni_interface
+)
 
 # 添加源文件
 set(SOURCES
@@ -63,8 +80,13 @@ set(SOURCES
 # 创建共享库
 add_library(dataprocessing SHARED ${SOURCES})
 
-# 链接JNI库
-target_link_libraries(dataprocessing ${JNI_LIBRARIES})
+# 链接所有依赖（一次性）
+target_link_libraries(dataprocessing
+    PRIVATE
+    ${JNI_LIBRARIES}
+    ${CURL_LIBRARIES}
+    nlohmann_json::nlohmann_json
+)
 
 # 设置输出目录
 set_target_properties(dataprocessing PROPERTIES
