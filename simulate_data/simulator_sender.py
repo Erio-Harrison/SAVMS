@@ -626,5 +626,28 @@ def main():
     
     simulator.start()
 
+#if __name__ == "__main__":
+#    main()
+
+
+from flask import Flask, jsonify
+import threading
+
+app = Flask(__name__)
+
+@app.route('/latest-data', methods=['GET'])
+def latest_data():
+    try:
+        with open('savms_data/live/telemetry.json', 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        return jsonify(data)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+def start_flask():
+    app.run(host='0.0.0.0', port=5000, debug=False, use_reloader=False)
+
+# Only add this block at the bottom of the file:
 if __name__ == "__main__":
+    threading.Thread(target=start_flask, daemon=True).start()
     main()

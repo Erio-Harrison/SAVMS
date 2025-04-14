@@ -11,6 +11,8 @@ if(NOT DEFINED ENV{JAVA_HOME})
     message(STATUS "JAVA_HOME not set, attempting to find Java automatically")
 else()
     set(JAVA_HOME $ENV{JAVA_HOME})
+    # Fix path style: replace backslashes with forward slashes for safety
+    file(TO_CMAKE_PATH "${JAVA_HOME}" JAVA_HOME)
     message(STATUS "Using JAVA_HOME: ${JAVA_HOME}")
 endif()
 
