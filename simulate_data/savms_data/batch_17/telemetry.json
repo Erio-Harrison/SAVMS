@@ -1,0 +1,197 @@
+[
+  {
+    "vehicle_id": "V001",
+    "timestamp": 1744633418188,
+    "data_type": "telemetry",
+    "mode": "charging",
+    "battery": {
+      "soc": 79.0,
+      "temperature": 20.6,
+      "cycle_count": 71,
+      "voltage": 381.8,
+      "current": 37.9
+    },
+    "motor": {
+      "temperature": 23.4,
+      "efficiency": 92.2,
+      "load": 0.0,
+      "rpm": 0,
+      "torque": 0.0
+    },
+    "sensors": {
+      "acceleration": {
+        "x": 0.04,
+        "y": -0.03,
+        "z": 9.8
+      },
+      "gps": {
+        "latitude": 39.90087828528486,
+        "longitude": 116.3988360672777,
+        "altitude": 53.279075806714076,
+        "speed": 0.0,
+        "heading": 298.8
+      },
+      "gyroscope": {
+        "x": 0.01,
+        "y": 0.02,
+        "z": 0.01
+      }
+    }
+  },
+  {
+    "vehicle_id": "V002",
+    "timestamp": 1744633418188,
+    "data_type": "telemetry",
+    "mode": "accelerating",
+    "battery": {
+      "soc": 71.8,
+      "temperature": 21.7,
+      "cycle_count": 131,
+      "voltage": 380.4,
+      "current": -83.3
+    },
+    "motor": {
+      "temperature": 30.8,
+      "efficiency": 94.1,
+      "load": 66.7,
+      "rpm": 2666,
+      "torque": 126.7
+    },
+    "sensors": {
+      "acceleration": {
+        "x": 1.37,
+        "y": 0.74,
+        "z": 9.8
+      },
+      "gps": {
+        "latitude": 39.87239675705591,
+        "longitude": 116.40239238151696,
+        "altitude": 53.165302351325195,
+        "speed": 53.3,
+        "heading": 28.3
+      },
+      "gyroscope": {
+        "x": 0.02,
+        "y": -0.04,
+        "z": 0.11
+      }
+    }
+  },
+  {
+    "vehicle_id": "V003",
+    "timestamp": 1744633418188,
+    "data_type": "telemetry",
+    "mode": "accelerating",
+    "battery": {
+      "soc": 86.7,
+      "temperature": 21.9,
+      "cycle_count": 75,
+      "voltage": 383.4,
+      "current": -86.6
+    },
+    "motor": {
+      "temperature": 31.6,
+      "efficiency": 93.7,
+      "load": 73.1,
+      "rpm": 3312,
+      "torque": 133.1
+    },
+    "sensors": {
+      "acceleration": {
+        "x": -0.33,
+        "y": 1.08,
+        "z": 9.8
+      },
+      "gps": {
+        "latitude": 39.888799697290594,
+        "longitude": 116.32149157412155,
+        "altitude": 50.29166963454396,
+        "speed": 66.2,
+        "heading": 107.2
+      },
+      "gyroscope": {
+        "x": -0.09,
+        "y": -0.02,
+        "z": 0.02
+      }
+    }
+  },
+  {
+    "vehicle_id": "V004",
+    "timestamp": 1744633418188,
+    "data_type": "telemetry",
+    "mode": "accelerating",
+    "battery": {
+      "soc": 90.8,
+      "temperature": 21.7,
+      "cycle_count": 29,
+      "voltage": 384.2,
+      "current": -83.3
+    },
+    "motor": {
+      "temperature": 29.6,
+      "efficiency": 94.2,
+      "load": 66.7,
+      "rpm": 2666,
+      "torque": 126.7
+    },
+    "sensors": {
+      "acceleration": {
+        "x": -1.55,
+        "y": -0.17,
+        "z": 9.8
+      },
+      "gps": {
+        "latitude": 39.81871179461491,
+        "longitude": 116.35103767722683,
+        "altitude": 54.00466212809103,
+        "speed": 53.3,
+        "heading": 186.4
+      },
+      "gyroscope": {
+        "x": -0.05,
+        "y": 0.05,
+        "z": -0.04
+      }
+    }
+  },
+  {
+    "vehicle_id": "V005",
+    "timestamp": 1744633418188,
+    "data_type": "telemetry",
+    "mode": "cruising",
+    "battery": {
+      "soc": 70.1,
+      "temperature": 25.6,
+      "cycle_count": 154,
+      "voltage": 380.1,
+      "current": -45.2
+    },
+    "motor": {
+      "temperature": 35.1,
+      "efficiency": 93.5,
+      "load": 50.7,
+      "rpm": 3455,
+      "torque": 70.7
+    },
+    "sensors": {
+      "acceleration": {
+        "x": -0.2,
+        "y": -0.18,
+        "z": 9.8
+      },
+      "gps": {
+        "latitude": 39.978457833862855,
+        "longitude": 116.30204776598613,
+        "altitude": 52.08404388882777,
+        "speed": 69.1,
+        "heading": 49.6
+      },
+      "gyroscope": {
+        "x": -0.07,
+        "y": -0.01,
+        "z": -0.01
+      }
+    }
+  }
+]
