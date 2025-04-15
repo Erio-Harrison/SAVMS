@@ -55,6 +55,7 @@ public class VehicleDataFetcher implements Runnable {
                     }
                 }
 
+
                 // 每秒执行一次
                 Thread.sleep(1000);
             } catch (Exception e) {
