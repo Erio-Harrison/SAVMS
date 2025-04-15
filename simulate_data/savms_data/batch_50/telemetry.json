@@ -1,196 +1,196 @@
 [
   {
     "vehicle_id": "V001",
-    "timestamp": 1744631916371,
+    "timestamp": 1744687494967,
     "data_type": "telemetry",
     "mode": "cruising",
     "battery": {
-      "soc": 89.2,
-      "temperature": 26.3,
-      "cycle_count": 153,
-      "voltage": 384.3,
-      "current": -42.6
+      "soc": 90.1,
+      "temperature": 25.6,
+      "cycle_count": 80,
+      "voltage": 384.5,
+      "current": -43.9
     },
     "motor": {
-      "temperature": 34.3,
-      "efficiency": 93.2,
-      "load": 42.0,
-      "rpm": 2000,
-      "torque": 62.0
+      "temperature": 42.2,
+      "efficiency": 92.6,
+      "load": 46.2,
+      "rpm": 2701,
+      "torque": 66.2
     },
     "sensors": {
       "acceleration": {
-        "x": 0.03,
-        "y": 0.25,
+        "x": -0.28,
+        "y": 0.12,
         "z": 9.8
       },
       "gps": {
-        "latitude": 39.9605945171747,
-        "longitude": 116.43507476858116,
-        "altitude": 51.65721630849805,
-        "speed": 40.0,
-        "heading": 186.9
+        "latitude": 39.8761252926094,
+        "longitude": 116.38879258976897,
+        "altitude": 52.6131222245789,
+        "speed": 54.0,
+        "heading": 5.4
       },
       "gyroscope": {
-        "x": 0.06,
-        "y": -0.09,
-        "z": -0.08
+        "x": 0.08,
+        "y": 0.0,
+        "z": 0.06
       }
     }
   },
   {
     "vehicle_id": "V002",
-    "timestamp": 1744631916371,
+    "timestamp": 1744687494967,
     "data_type": "telemetry",
     "mode": "decelerating",
     "battery": {
-      "soc": 74.4,
-      "temperature": 29.4,
-      "cycle_count": 130,
-      "voltage": 381.1,
+      "soc": 86.6,
+      "temperature": 27.5,
+      "cycle_count": 115,
+      "voltage": 383.8,
       "current": -20.0
     },
     "motor": {
-      "temperature": 36.6,
-      "efficiency": 90.8,
+      "temperature": 41.5,
+      "efficiency": 90.4,
       "load": 0.0,
-      "rpm": 0,
+      "rpm": 243,
       "torque": 0.0
     },
     "sensors": {
       "acceleration": {
-        "x": 3.37,
-        "y": 0.04,
+        "x": 2.03,
+        "y": -2.73,
         "z": 9.8
       },
       "gps": {
-        "latitude": 39.79451127494282,
-        "longitude": 116.31947413007786,
-        "altitude": 43.7547258238995,
-        "speed": 0.0,
-        "heading": 180.6
+        "latitude": 39.79178648210207,
+        "longitude": 116.42715460151878,
+        "altitude": 45.265332160505146,
+        "speed": 4.9,
+        "heading": 126.7
       },
       "gyroscope": {
         "x": 0.02,
-        "y": -0.03,
-        "z": -0.17
+        "y": 0.0,
+        "z": -0.15
       }
     }
   },
   {
     "vehicle_id": "V003",
-    "timestamp": 1744631916371,
+    "timestamp": 1744687494967,
     "data_type": "telemetry",
     "mode": "cruising",
     "battery": {
-      "soc": 84.2,
-      "temperature": 26.5,
-      "cycle_count": 164,
-      "voltage": 383.4,
-      "current": -48.0
+      "soc": 74.7,
+      "temperature": 27.0,
+      "cycle_count": 108,
+      "voltage": 381.5,
+      "current": -46.9
     },
     "motor": {
-      "temperature": 33.5,
-      "efficiency": 94.2,
-      "load": 60.0,
-      "rpm": 5000,
-      "torque": 80.0
+      "temperature": 41.9,
+      "efficiency": 93.1,
+      "load": 56.2,
+      "rpm": 4365,
+      "torque": 76.2
     },
     "sensors": {
       "acceleration": {
-        "x": 0.19,
+        "x": -0.0,
         "y": 0.26,
         "z": 9.8
       },
       "gps": {
-        "latitude": 39.947740864850694,
-        "longitude": 116.37445387638144,
-        "altitude": 48.779186795428195,
-        "speed": 100.0,
-        "heading": 122.2
+        "latitude": 39.94488366420306,
+        "longitude": 116.44707813981556,
+        "altitude": 54.70854184015606,
+        "speed": 87.3,
+        "heading": 90.7
       },
       "gyroscope": {
-        "x": -0.0,
-        "y": 0.04,
-        "z": -0.06
+        "x": 0.04,
+        "y": 0.03,
+        "z": 0.05
       }
     }
   },
   {
     "vehicle_id": "V004",
-    "timestamp": 1744631916371,
+    "timestamp": 1744687494967,
     "data_type": "telemetry",
-    "mode": "decelerating",
+    "mode": "accelerating",
     "battery": {
-      "soc": 89.7,
-      "temperature": 24.7,
-      "cycle_count": 173,
-      "voltage": 384.2,
-      "current": -20.0
+      "soc": 90.4,
+      "temperature": 26.2,
+      "cycle_count": 189,
+      "voltage": 384.6,
+      "current": -89.1
     },
     "motor": {
-      "temperature": 31.4,
-      "efficiency": 91.4,
-      "load": 0.0,
-      "rpm": 0,
-      "torque": 0.0
+      "temperature": 49.5,
+      "efficiency": 91.6,
+      "load": 78.3,
+      "rpm": 3827,
+      "torque": 138.3
     },
     "sensors": {
       "acceleration": {
-        "x": -1.31,
-        "y": 2.89,
+        "x": -0.63,
+        "y": -1.31,
         "z": 9.8
       },
       "gps": {
-        "latitude": 39.99158743172993,
-        "longitude": 116.42004665484212,
-        "altitude": 52.68211212650853,
-        "speed": 0.0,
-        "heading": 294.4
+        "latitude": 39.958440186904646,
+        "longitude": 116.40281978524159,
+        "altitude": 46.1714359744961,
+        "speed": 76.5,
+        "heading": 244.4
       },
       "gyroscope": {
-        "x": 0.08,
-        "y": 0.07,
-        "z": -0.0
+        "x": -0.08,
+        "y": -0.03,
+        "z": 0.14
       }
     }
   },
   {
     "vehicle_id": "V005",
-    "timestamp": 1744631916371,
+    "timestamp": 1744687494967,
     "data_type": "telemetry",
     "mode": "decelerating",
     "battery": {
-      "soc": 83.5,
-      "temperature": 26.0,
-      "cycle_count": 200,
-      "voltage": 382.9,
-      "current": -20.0
+      "soc": 87.7,
+      "temperature": 31.7,
+      "cycle_count": 118,
+      "voltage": 384.1,
+      "current": -21.4
     },
     "motor": {
-      "temperature": 33.6,
-      "efficiency": 91.1,
-      "load": 0.0,
-      "rpm": 0,
+      "temperature": 46.1,
+      "efficiency": 90.2,
+      "load": 6.8,
+      "rpm": 997,
       "torque": 0.0
     },
     "sensors": {
       "acceleration": {
-        "x": -3.57,
-        "y": 0.26,
+        "x": -2.5,
+        "y": -3.55,
         "z": 9.8
       },
       "gps": {
-        "latitude": 39.99059143417801,
-        "longitude": 116.48820726485597,
-        "altitude": 47.01131523266385,
-        "speed": 0.0,
-        "heading": 355.8
+        "latitude": 39.92300507861443,
+        "longitude": 116.51604196195305,
+        "altitude": 52.695750042102176,
+        "speed": 19.9,
+        "heading": 54.8
       },
       "gyroscope": {
-        "x": -0.09,
-        "y": 0.07,
-        "z": -0.18
+        "x": -0.03,
+        "y": 0.08,
+        "z": 0.05
       }
     }
   }
