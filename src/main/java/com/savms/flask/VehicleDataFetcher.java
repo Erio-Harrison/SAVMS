@@ -76,7 +76,7 @@ public class VehicleDataFetcher implements Runnable {
 
         // 基础信息
         String vehicleId = data.path("vehicle_id").asText("UNKNOWN");
-        vehicle.setVehicleId(vehicleId);
+        vehicle.setId(vehicleId);
         vehicle.setLicensePlate(vehicleId); // 如果没有真实车牌号，用 vehicleId 填充
         vehicle.setCarModel("Simulated Model"); // 真实项目可通过规则映射
         vehicle.setYear(2025); // 可配置或动态设定
