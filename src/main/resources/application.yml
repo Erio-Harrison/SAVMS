@@ -4,3 +4,4 @@ spring:
     url: jdbc:mysql://localhost:3306/123?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&serverTimezone=Australia/Sydney
     username: root
     password: 13910854850
+
