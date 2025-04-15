@@ -22,6 +22,11 @@ public class VehicleDataFetcher implements Runnable {
     private final String endpoint = "http://localhost:5000/latest-data";
     private VehicleRepository vehicleRepository;
 
+    @Autowired
+    public VehicleDataFetcher(VehicleRepository vehicleRepository) {
+        this.vehicleRepository = vehicleRepository;
+    }
+
     @Override
     public void run() {
         while (true) {
@@ -55,7 +60,6 @@ public class VehicleDataFetcher implements Runnable {
                         }
                     }
                 }
-
 
                 // 每秒执行一次
                 Thread.sleep(1000);
@@ -122,7 +126,7 @@ public class VehicleDataFetcher implements Runnable {
         return vehicle;
     }
 
-    }
+}
 
 
 
