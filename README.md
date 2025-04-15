@@ -1,6 +1,6 @@
 # Smart Autonomous Vehicle Management System
 
-![Architecture](./asset/architecture.png)
+![Architecture](./arch/architecture.png)
 
 ## Table of Contents
 - [Installation](#installation)

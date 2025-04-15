@@ -1,0 +1,39 @@
+{
+  "_id": "C7A9B3X1",
+  "licensePlate": "ABC-123",
+  "carModel": "Tesla Model 3",
+  "year": 2022,
+  "energyType": "electrical",
+  "carsize": {
+    "length": 4.69,
+    "width": 1.85,
+    "height": 1.44
+  },
+  "radar": {
+    "model": "RadarX",
+    "count": 2
+  },
+  "camera": {
+    "model": "CamPro",
+    "count": 4
+  },
+  "communication": {
+    "ipAddress": "192.168.0.10"
+  },
+  "location": {
+    "longitude": 151.2093,
+    "latitude": -33.8688
+  },
+  "speed": 8.039999962,
+  "leftoverEnergy": 85,
+  "connectionStatus": 1,
+  "taskStatus": 0,
+  "healthStatus": 1,
+  "engineRPM": 700,
+  "lubeOilPressure": 2.493591821,
+  "fuelPressure": 11.79092738,
+  "coolantPressure": 3.178980794,
+  "lubeOilTemp": 84.14416293,
+  "coolantTemp": 81.6321865,
+  "engineCondition": 1
+}
