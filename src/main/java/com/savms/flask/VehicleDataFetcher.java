@@ -22,6 +22,11 @@ public class VehicleDataFetcher implements Runnable {
     private final String endpoint = "http://localhost:5000/latest-data";
     private VehicleRepository vehicleRepository;
 
+    @Autowired
+    public VehicleDataFetcher(VehicleRepository vehicleRepository) {
+        this.vehicleRepository = vehicleRepository;
+    }
+
     @Override
     public void run() {
         while (true) {
