@@ -92,4 +92,18 @@ public class VehicleRepository {
     public List<Vehicle> getAllVehicles() {
         return mongoTemplate.findAll(Vehicle.class);
     }
+
+    /**
+     * 根据地图范围获取车辆信息
+     */
+    public List<Vehicle> findVehiclesWithinRange(double minLat,
+                                                 double maxLat,
+                                                 double minLng,
+                                                 double maxLng) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("location.latitude").gte(minLat).lte(maxLat));
+        query.addCriteria(Criteria.where("location.longitude").gte(minLng).lte(maxLng));
+
+        return mongoTemplate.find(query, Vehicle.class);
+    }
 }

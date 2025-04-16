@@ -78,4 +78,11 @@ public class VehicleService {
     public List<Vehicle> getAllVehicles() {
         return vehicleRepository.getAllVehicles();
     }
+
+    /**
+     * 根据地图范围获取车辆信息
+     */
+    public List<Vehicle> getVehiclesWithinRange(double minLat, double maxLat, double minLng, double maxLng) {
+        return vehicleRepository.findVehiclesWithinRange(minLat, maxLat, minLng, maxLng);
+    }
 }
