@@ -7,12 +7,17 @@ import RealEstateGallery from './real-estate-gallery';
 import './custom-advanced-marker.css';
 import classNames from 'classnames';
 
-const CustomAdvancedMarker = ({ realEstateListing }) => {
+const CustomAdvancedMarker = ({ realEstateListing, onMarkerClick }) => {
     const [clicked, setClicked] = useState(false);
     const [hovered, setHovered] = useState(false);
     const position = {
         lat: realEstateListing.location.latitude,
         lng: realEstateListing.location.longitude
+    };
+
+    const handleClick = () => {
+        setClicked(!clicked);
+        onMarkerClick(position); // 传出坐标
     };
 
     const renderCustomPin = () => {
@@ -49,7 +54,8 @@ const CustomAdvancedMarker = ({ realEstateListing }) => {
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
                 className={classNames('real-estate-marker', { clicked, hovered })}
-                onClick={() => setClicked(!clicked)}>
+                onClick={handleClick}
+            >
                 {renderCustomPin()}
             </AdvancedMarker>
         </>
