@@ -100,10 +100,10 @@ public class VehicleController {
      * @return 指定范围内的车辆列表
      */
     @GetMapping("/withinRange")
-    public List<Vehicle> getVehiclesWithinRange(@RequestParam("minLat") double minLat,
+    public Result<?> getVehiclesWithinRange(@RequestParam("minLat") double minLat,
                                                 @RequestParam("maxLat") double maxLat,
                                                 @RequestParam("minLng") double minLng,
                                                 @RequestParam("maxLng") double maxLng) {
-        return vehicleService.getVehiclesWithinRange(minLat, maxLat, minLng, maxLng);
+        return Result.success(vehicleService.getVehiclesWithinRange(minLat, maxLat, minLng, maxLng));
     }
 }

@@ -37,21 +37,8 @@ export default function MapPage() {
                 sw.lng(),
                 ne.lng()
             )
-                .then((rawData) => {
-                    // 假设后端返回字段为 { lat: ..., lng: ..., plate: ..., model: ... }
-                    const formatted = rawData.map(item => ({
-                        _id: item._id,
-                        licensePlate: item.plate,
-                        carModel: item.model,
-                        energyType: item.energyType, // 如果有其他转换，按需处理
-                        year: item.year,
-                        carsize: item.size,
-                        location: {
-                            latitude: item.lat,
-                            longitude: item.lng
-                        },
-                    }));
-                    setVehicles(formatted);
+                .then((Data) => {
+                    setVehicles(Data);
                 })
                 .catch((err) => {
                     console.error(err);
