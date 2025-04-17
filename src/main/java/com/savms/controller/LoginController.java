@@ -28,6 +28,7 @@ public class LoginController {
     @PostMapping("/login")
     public Result login(@RequestBody LoginRequest loginRequest) {
         try {
+            System.out.println(loginRequest);
             // 1. Query user by username from the database
             User user = userService.getUserByUsername(loginRequest.getUsername())
                     .orElseThrow(() -> new RuntimeException("User not found"));
