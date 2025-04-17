@@ -11,9 +11,10 @@ const CustomAdvancedMarker = ({ realEstateListing, onMarkerClick }) => {
     const [clicked, setClicked] = useState(false);
     const [hovered, setHovered] = useState(false);
     const position = {
-        lat: realEstateListing.location.latitude,
-        lng: realEstateListing.location.longitude
+        lat: realEstateListing.latitude,
+        lng: realEstateListing.longitude
     };
+    console.log(position);
 
     const handleClick = () => {
         setClicked(!clicked);
@@ -29,10 +30,10 @@ const CustomAdvancedMarker = ({ realEstateListing, onMarkerClick }) => {
                     </button>
 
                     <div className="image-container">
-                        <RealEstateGallery
-                            images={realEstateListing.images}
-                            isExtended={clicked}
-                        />
+                        {/*<RealEstateGallery*/}
+                        {/*    images={realEstateListing.images}*/}
+                        {/*    isExtended={clicked}*/}
+                        {/*/>*/}
                         <span className="icon">
 
             </span>
