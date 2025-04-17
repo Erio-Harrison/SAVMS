@@ -14,7 +14,6 @@ public class Vehicle {
     private String id;                  // Internal MongoDB document ID
 
     // Basic Vehicle Info
-    private String vehicleId;           // 8-digit alphanumeric ID
     private String licensePlate;        // e.g. "ABC-123"
     private String carModel;            // e.g. "Tesla Model 3"
     private int year;                   // e.g. 2022
@@ -59,7 +58,7 @@ public class Vehicle {
     }
 
     public Vehicle(String vehicleId, String licensePlate, String carModel) {
-        this.vehicleId = vehicleId;
+        this.id = vehicleId;
         this.licensePlate = licensePlate;
         this.carModel = carModel;
     }
@@ -70,13 +69,6 @@ public class Vehicle {
     }
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getVehicleId() {
-        return vehicleId;
-    }
-    public void setVehicleId(String vehicleId) {
-        this.vehicleId = vehicleId;
     }
 
     public String getLicensePlate() {
@@ -265,12 +257,10 @@ public class Vehicle {
     public String toString() {
         return "Vehicle{" +
                 "id='" + id + '\'' +
-                ", vehicleId='" + vehicleId + '\'' +
                 ", licensePlate='" + licensePlate + '\'' +
                 ", carModel='" + carModel + '\'' +
                 ", year=" + year +
                 ", energyType='" + energyType + '\'' +
-                // ... you can include more fields here ...
                 '}';
     }
 }

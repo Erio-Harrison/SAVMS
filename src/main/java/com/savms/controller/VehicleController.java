@@ -70,16 +70,6 @@ public class VehicleController {
     }
 
     /**
-     * Updates a vehicle's IP address.
-     * @param vehicleId The ID of the vehicle.
-     * @param newIpAddress The new IP address.
-     */
-    @PutMapping("/{vehicleId}/updateIp")
-    public void updateVehicleIpAddress(@PathVariable String vehicleId, @RequestParam String newIpAddress) {
-        vehicleService.updateVehicleIpAddress(vehicleId, newIpAddress);
-    }
-
-    /**
      * Updates a vehicle's connection status.
      * @param vehicleId The ID of the vehicle.
      * @param newStatus The new connection status (0 or 1).

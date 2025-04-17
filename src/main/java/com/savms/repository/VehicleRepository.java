@@ -60,19 +60,6 @@ public class VehicleRepository {
     }
 
     /**
-     * Updates the IP address of a vehicle.
-     * @param vehicleId The ID of the vehicle.
-     * @param newIpAddress The new IP address to set.
-     */
-    public void updateIpAddress(String vehicleId, String newIpAddress) {
-        Vehicle vehicle = mongoTemplate.findById(vehicleId, Vehicle.class);
-        if (vehicle != null) {
-            vehicle.setIpAddress(newIpAddress);
-            mongoTemplate.save(vehicle);
-        }
-    }
-
-    /**
      * Updates the status of a vehicle.
      * @param vehicleId The ID of the vehicle.
      * @param newStatus The new connection status (0 or 1).
