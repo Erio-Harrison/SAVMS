@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import MainPage from "./MainPage.jsx";
 import MapPage from "./MapPage.jsx";
+import CurrentTasksPage from "./CurrentTasksPage.jsx";
 
 
 export default function SCUVMS() {
@@ -16,6 +17,8 @@ export default function SCUVMS() {
                 return <MainPage />;
             case "MapPage":
                 return <MapPage />;
+            case "CurrentTasksPage":
+                return <CurrentTasksPage />;
             default:
                 return <MainPage />;
         }
