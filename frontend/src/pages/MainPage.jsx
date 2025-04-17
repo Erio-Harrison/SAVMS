@@ -7,6 +7,7 @@ import SearchBar from "../components/SearchBar";
 import CurrentWeatherCard from "../components/CurrentWeatherCard";
 import Map from "../components/Map";
 import axiosInstance from '../axiosInstance';
+import { Popover } from '@douyinfe/semi-ui';
 
 export default function MainPage() {
     const [carInfo, setCarInfo] = useState({});
@@ -148,15 +149,29 @@ export default function MainPage() {
                 <div className="text-2xl font-bold">Tracking</div>
                 <div className="bg-accent rounded-3xl p-4 flex flex-col h-screen overflow-auto">
                     {cars.length > 0 ? (
-                        cars.map((car) => (
-                            <div
-                                key={car.id}
-                                className="p-2 border-b border-gray-200 flex flex-col"
-                            >
-                                <span className="font-semibold text-lg">{car.licensePlate}</span>
-                                <span className="text-sm text-gray-600">{car.carModel}</span>
-                            </div>
-                        ))
+                        cars.map((car) => {
+                            const popoverContent = (
+                                <div style={{ width: 280, padding: 12 }}>
+                                    <div style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 8 }}>Vehicle Details</div>
+                                    <div><strong>ID:</strong> {car.id}</div>
+                                    <div><strong>Plate:</strong> {car.licensePlate}</div>
+                                    <div><strong>Model:</strong> {car.carModel}</div>
+                                    <div><strong>Speed:</strong> {car.speed} km/h</div>
+                                    <div><strong>Energy:</strong> {car.leftoverEnergy}%</div>
+                                    <div><strong>Location:</strong> {car.Location}</div>
+                                    <div><strong>Status:</strong> {car.status}</div>
+                                </div>
+                            );
+
+                            return (
+                                <Popover key={car.id} content={popoverContent} trigger="hover" position="right">
+                                    <div className="p-2 border-b border-gray-200 flex flex-col cursor-pointer">
+                                        <span className="font-semibold text-lg">{car.licensePlate}</span>
+                                        <span className="text-sm text-gray-600">{car.carModel}</span>
+                                    </div>
+                                </Popover>
+                            );
+                        })
                     ) : (
                         <div className="text-center text-gray-500">No cars available.</div>
                     )}
