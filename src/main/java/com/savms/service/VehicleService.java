@@ -54,15 +54,6 @@ public class VehicleService {
     }
 
     /**
-     * Updates a vehicle's IP address.
-     * @param vehicleId The ID of the vehicle.
-     * @param newIpAddress The new IP address.
-     */
-    public void updateVehicleIpAddress(String vehicleId, String newIpAddress) {
-        vehicleRepository.updateIpAddress(vehicleId, newIpAddress);
-    }
-
-    /**
      * Updates a vehicle's connection status.
      * @param vehicleId The ID of the vehicle.
      * @param newStatus The new connection status (0 or 1).
