@@ -125,7 +125,6 @@ public class VehicleDataFetcher implements Runnable {
 
         return vehicle;
     }
-
 }
 
 
