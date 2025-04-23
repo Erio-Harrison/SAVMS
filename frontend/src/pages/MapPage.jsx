@@ -161,6 +161,7 @@ export default function MapPage(){
                 <VehicleFetcher
                     onVehiclesFetched={(vehicles) => {
                         console.log('123Fetched vehicles:', vehicles);
+                        setVehicleList(vehicles);
                     }}
                 />
 
