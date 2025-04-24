@@ -1,8 +1,9 @@
-
 import React, { useState } from 'react';
-import {Modal, SplitButtonGroup, Button, Dropdown, Form, Toast  } from '@douyinfe/semi-ui';
-import { IconTreeTriangleDown } from '@douyinfe/semi-icons';
+import { Modal, SplitButtonGroup, Button, Dropdown, Form, Toast } from '@douyinfe/semi-ui';
+import { IconPlus } from '@douyinfe/semi-icons'; // 使用加号图标替换箭头
 import axiosInstance from '../../axiosInstance';
+import './CarOperationButton.css'; // 引入独立的样式文件，仅用于按钮样式美化
+
 export default function CarOperationButton({ onVehicleAdded }) {
     const [btnVisible, setBtnVisible] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
@@ -20,6 +21,7 @@ export default function CarOperationButton({ onVehicleAdded }) {
     const handleAddVehicleClick = () => {
         setModalVisible(true);
     };
+
     const handleCancel = () => {
         setModalVisible(false);
     };
@@ -48,38 +50,34 @@ export default function CarOperationButton({ onVehicleAdded }) {
         }
     };
 
-
     return (
-    <>
-        <SplitButtonGroup style={{ marginRight: 10 }} aria-label="项目操作按钮组">
-            <Dropdown
-                onVisibleChange={handleVisibleChange}
-                menu={menu}
-                trigger="click"
-                position="bottomRight"
-            >
-                <Button
-                    style={btnVisible
-                        ? { background: 'var(--semi-color-primary-hover)', padding: '8px 4px' }
-                        : { padding: '8px 4px' }}
-                    theme="solid"
-                    type="primary"
-                    icon={<IconTreeTriangleDown />}
-                />
-            </Dropdown>
-        </SplitButtonGroup>
+        <>
+            {/* 使用自定义样式类美化按钮，仅影响视觉，不改动逻辑 */}
+            <SplitButtonGroup style={{ marginRight: 10 }} aria-label="项目操作按钮组">
+                <Dropdown
+                    onVisibleChange={handleVisibleChange}
+                    menu={menu}
+                    trigger="click"
+                    position="bottomRight"
+                    contentClassName="custom-dropdown-menu"
+                >
+                    <Button
+                        className="vehicle-action-button"
+                        icon={<IconPlus style={{ color: '#000' }}/>} // 加号图标
+                    />
+                </Dropdown>
+            </SplitButtonGroup>
 
             <Modal
                 title="New Vehicle"
                 visible={modalVisible}
                 //TODO: implement handle OK
                 //onOk={this.handleOk}
-                 onCancel={handleCancel}
+                onCancel={handleCancel}
                 centered
                 bodyStyle={{ overflow: 'auto', height: 700 }}
                 footer={null}
             >
-
                 <Form onSubmit={handleSubmit} labelPosition="left" labelAlign="right" labelWidth={120}>
                     <Form.Input field="carModel" label="Model" placeholder="e.g. Tesla Model 3" required />
                     <Form.Input field="licensePlate" label="Plate" placeholder="e.g. ABC-123" required />
@@ -102,6 +100,6 @@ export default function CarOperationButton({ onVehicleAdded }) {
                     </div>
                 </Form>
             </Modal>
-            </>
+        </>
     );
 }

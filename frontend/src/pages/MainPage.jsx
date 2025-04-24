@@ -145,8 +145,11 @@ export default function MainPage() {
         <div className="bg-primary h-screen flex p-4 font-sans gap-4">
             {/* 左侧侧边栏：车辆列表 + 添加按钮 */}
             <div className="flex flex-col w-1/4 gap-4 flex-grow">
-                <div className="text-2xl font-bold">Tracking
-                    <CarOperationButton onVehicleAdded={(newCar) => setCars(prev => [...prev, newCar])} />
+                <div style={{position: 'relative', display: 'inline-block'}}>
+                    <div className="text-2xl font-bold">Tracking</div>
+                    <div style={{position: 'absolute', right: -4, top: 0}}>
+                        <CarOperationButton onVehicleAdded={(newCar) => setCars(prev => [...prev, newCar])}/>
+                    </div>
                 </div>
                 <div className="bg-accent rounded-3xl p-4 flex flex-col h-screen overflow-auto">
                     {cars.length > 0 ? (
