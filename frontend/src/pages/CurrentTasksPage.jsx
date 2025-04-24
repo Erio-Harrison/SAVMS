@@ -2,14 +2,17 @@ import { useState, useEffect } from "react";
 import Map from "../components/Map";
 import { Tabs, TabPane } from "@douyinfe/semi-ui";
 import { IconFile, IconGlobe } from "@douyinfe/semi-icons";
+import { Modal, Form, Button, Toast } from "@douyinfe/semi-ui";
 import TaskDetailCard from "../components/TaskDetailCard.jsx";
 import CreateTaskCard from "../components/CreateTaskCard.jsx";
+
 
 export default function CurrentTasksPage() {
     const [tasks, setTasks] = useState([]);
     const [markers, setMarkers] = useState([]);
     const [selectedTask, setSelectedTask] = useState(null);
     const [coordinate, setCoordinate] = useState({ lat: -35.2809, lng: 149.1300 });
+    const [createModalVisible, setCreateModalVisible] = useState(false);
 
     useEffect(() => {
         // 模拟静态任务数据
@@ -45,6 +48,20 @@ export default function CurrentTasksPage() {
     const handleTaskClick = (task) => {
         // 选中任务时更新 selectedTask
         setSelectedTask(task);
+    };
+
+    const handleCreateTask = (values) => {
+        const newTask = {
+            id: values.id,
+            title: `Task #${values.id}`,
+            description: `From ${values.startAddress} to ${values.endAddress}`,
+            lat: coordinate.lat,
+            lng: coordinate.lng,
+        };
+        setTasks(prev => [...prev, newTask]);
+        setMarkers(prev => [...prev, { lat: newTask.lat, lng: newTask.lng }]);
+        Toast.success("Task created!");
+        setCreateModalVisible(false);
     };
 
     return (
@@ -106,7 +123,7 @@ export default function CurrentTasksPage() {
                         <TaskDetailCard task={selectedTask} />
                     </div>
                     <div className="w-1/3">
-                        <CreateTaskCard onCreate={() => console.log("Create new task")} />
+                        <CreateTaskCard onCreate={() => setCreateModalVisible(true)} />
                     </div>
                 </div>
 
@@ -119,6 +136,31 @@ export default function CurrentTasksPage() {
                         onMarkerClick={handleMarkerClick}
                     />
                 </div>
+                {/* Create Task Modal */}
+                <Modal
+                    title="Create New Task"
+                    visible={createModalVisible}
+                    onCancel={() => setCreateModalVisible(false)}
+                    footer={null}
+                >
+                    <Form onSubmit={handleCreateTask}>
+                        <Form.Input field="id" label="Task ID" placeholder="e.g., 101" required />
+                        <Form.Input field="startTime" label="Start Time" placeholder="e.g., 2025-04-17 09:00" required />
+                        <Form.Input field="endTime" label="End Time" placeholder="e.g., 2025-04-17 10:30" required />
+                        <Form.Input field="startAddress" label="Start Address" placeholder="e.g., Civic Square" required />
+                        <Form.Input field="endAddress" label="End Address" placeholder="e.g., Gungahlin Station" required />
+                        <Form.Input field="license" label="Car License" placeholder="e.g., XYZ-123" required />
+
+                        <div className="flex justify-end pt-4">
+                            <Button onClick={() => setCreateModalVisible(false)} style={{ marginRight: 8 }}>
+                                Cancel
+                            </Button>
+                            <Button theme="solid" type="primary" htmlType="submit">
+                                Submit
+                            </Button>
+                        </div>
+                    </Form>
+                </Modal>
             </div>
         </div>
     );
