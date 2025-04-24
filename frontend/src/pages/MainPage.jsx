@@ -8,8 +8,11 @@ import CurrentWeatherCard from "../components/CurrentWeatherCard";
 import Map from "../components/Map";
 import axiosInstance from '../axiosInstance';
 import { Popover } from '@douyinfe/semi-ui';
-import { Button, SplitButtonGroup,Dropdown } from '@douyinfe/semi-ui';
+import {Modal, Button, SplitButtonGroup,Dropdown } from '@douyinfe/semi-ui';
 import { IconTreeTriangleDown } from '@douyinfe/semi-icons';
+
+// cars import
+import CarOperationButton from '../components/Cars/CarOperationButton';
 
 export default function MainPage() {
     const [carInfo, setCarInfo] = useState({});
@@ -169,12 +172,13 @@ export default function MainPage() {
 
             <div className="flex flex-col w-1/4 gap-4 flex-grow">
                 <div className="text-2xl font-bold">Tracking
-                <SplitButtonGroup style={{ marginRight: 10 }} aria-label="项目操作按钮组">
+{/*                 <SplitButtonGroup style={{ marginRight: 10 }} aria-label="项目操作按钮组"> */}
 {/*                     <Button theme="solid" type="primary">分裂按钮</Button> */}
-                    <Dropdown onVisibleChange={(v)=>handleVisibleChange(1, v)} menu={menu} trigger="click" position="bottomRight">
-                        <Button style={btnVisible[1] ? { background: 'var(--semi-color-primary-hover)', padding: '8px 4px' } : { padding: '8px 4px' }} theme="solid" type="primary" icon={<IconTreeTriangleDown />}></Button>
-                    </Dropdown>
-                </SplitButtonGroup>
+{/*                     <Dropdown onVisibleChange={(v)=>handleVisibleChange(1, v)} menu={menu} trigger="click" position="bottomRight"> */}
+{/*                         <Button style={btnVisible[1] ? { background: 'var(--semi-color-primary-hover)', padding: '8px 4px' } : { padding: '8px 4px' }} theme="solid" type="primary" icon={<IconTreeTriangleDown />}></Button> */}
+{/*                     </Dropdown> */}
+{/*                 </SplitButtonGroup> */}
+                    <CarOperationButton />
 
 
 
