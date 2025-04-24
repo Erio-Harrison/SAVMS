@@ -4,6 +4,23 @@ project(SAVMS)
 
 set(CMAKE_CXX_STANDARD 17)
 
+
+# —— 添加 nlohmann-json —— #
+# 1. 确保你已经 brew install nlohmann-json
+find_package(nlohmann_json REQUIRED)
+if (NOT nlohmann_json_FOUND)
+  message(FATAL_ERROR "nlohmann_json not found, please install via Homebrew: brew install nlohmann-json")
+endif()
+message(STATUS "Found nlohmann_json: ${nlohmann_json_VERSION}")
+# —— end nlohmann-json —— #
+
+
+find_package(CURL REQUIRED)
+if(NOT CURL_FOUND)
+  message(FATAL_ERROR "libcurl not found. On macOS you can install it via Homebrew: brew install curl")
+endif()
+message(STATUS "Found CURL: ${CURL_VERSION_STRING}")
+
 # 设置 Java 最低版本要求
 set(JAVA_VERSION_REQUIRED "17")
 
@@ -12,8 +29,6 @@ if(NOT DEFINED ENV{JAVA_HOME})
     message(STATUS "JAVA_HOME not set, attempting to find Java automatically")
 else()
     set(JAVA_HOME $ENV{JAVA_HOME})
-    # Fix path style: replace backslashes with forward slashes for safety
-    file(TO_CMAKE_PATH "${JAVA_HOME}" JAVA_HOME)
     message(STATUS "Using JAVA_HOME: ${JAVA_HOME}")
 endif()
 
@@ -28,10 +43,11 @@ endif()
 # 手动指定 JNI 路径
 set(JNI_INCLUDE_DIRS
     "${JAVA_HOME}/include"
-    "${JAVA_HOME}/include/win32"
+    "${JAVA_HOME}/include/darwin"
 )
-set(JNI_LIBRARIES "${JAVA_HOME}/lib/jvm.lib")
+set(JNI_LIBRARIES "${JAVA_HOME}/lib/server/libjvm.dylib")
 set(JNI_FOUND TRUE)
+
 
 # 检查 JNI 路径是否存在
 foreach(dir ${JNI_INCLUDE_DIRS})
@@ -65,8 +81,15 @@ set(SOURCES
 # 创建共享库
 add_library(dataprocessing SHARED ${SOURCES})
 
+
+
 # 链接JNI库
-target_link_libraries(dataprocessing ${JNI_LIBRARIES})
+target_link_libraries(dataprocessing
+  ${JNI_LIBRARIES}
+  nlohmann_json::nlohmann_json
+  CURL::libcurl
+
+)
 
 # 设置输出目录
 set_target_properties(dataprocessing PROPERTIES
