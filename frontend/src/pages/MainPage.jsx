@@ -150,7 +150,6 @@ export default function MainPage() {
 
     return (
         <div className="bg-primary h-screen flex p-4 font-sans gap-4">
-
             <div className="flex flex-col w-1/4 gap-4 flex-grow">
                 <div className="text-2xl font-bold">Tracking</div>
                 <div className="bg-accent rounded-3xl p-4 flex flex-col h-screen overflow-auto">
@@ -178,12 +177,13 @@ export default function MainPage() {
                                 </Popover>
                             );
                         })
-                    ) : (
+
+                        ) : (
+
                         <div className="text-center text-gray-500">No cars available.</div>
-                    )}
+                        )}
                 </div>
             </div>
-
             {/* Weather and Map Section */}
             <div className="flex flex-col w-3/4 gap-4">
                 <div className="h-1/3 flex gap-4">
@@ -207,12 +207,12 @@ export default function MainPage() {
                     ) : (
                         <CurrentWeatherCard city={city} currentWeather={currentWeather}/>
                     )}
-
                 </div>
                 <div className="h-2/3 bg-white rounded-3xl">
                     <Map lat={coordinate.lat} lng={coordinate.lng} markers={markers} onMarkerClick={handleMarkerClick}/>
                 </div>
             </div>
         </div>
+
     );
 }
