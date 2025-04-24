@@ -166,7 +166,8 @@ export default function MainPage() {
 {/*                         <Button style={btnVisible[1] ? { background: 'var(--semi-color-primary-hover)', padding: '8px 4px' } : { padding: '8px 4px' }} theme="solid" type="primary" icon={<IconTreeTriangleDown />}></Button> */}
 {/*                     </Dropdown> */}
 {/*                 </SplitButtonGroup> */}
-                    <CarOperationButton />
+                    <CarOperationButton onVehicleAdded={(newCar) => setCars(prev => [...prev, newCar])} />
+
 
 
 
@@ -181,7 +182,7 @@ export default function MainPage() {
                 </div>
                 <div className="bg-accent rounded-3xl p-4 flex flex-col h-screen overflow-auto">
                     {cars.length > 0 ? (
-                        cars.map((car) => {
+                        cars.filter(Boolean).map((car) => {
                             const popoverContent = (
                                 <div style={{ width: 280, padding: 12 }}>
                                     <div style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 8 }}>Vehicle Details</div>

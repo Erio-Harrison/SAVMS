@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import {Modal, SplitButtonGroup, Button, Dropdown, Form, Toast  } from '@douyinfe/semi-ui';
 import { IconTreeTriangleDown } from '@douyinfe/semi-icons';
 import axiosInstance from '../../axiosInstance';
-export default function CarOperationButton() {
+export default function CarOperationButton({ onVehicleAdded }) {
     const [btnVisible, setBtnVisible] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -36,9 +36,12 @@ export default function CarOperationButton() {
         };
 
         try {
-            const res = await axiosInstance.post('/vehicles/add', values);
+            const res = await axiosInstance.post('/vehicles/create', values);
             Toast.success('Vehicle added successfully!');
             setModalVisible(false);
+            if (onVehicleAdded) {
+                onVehicleAdded(res.data.data); // 假设后端返回新添加的车辆对象
+            }
         } catch (error) {
             console.error('Error adding vehicle:', error);
             Toast.error('Failed to add vehicle');
