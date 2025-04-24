@@ -1,0 +1,25 @@
+/* 确保 task-card 背景颜色和其他样式不会被覆盖 */
+.task-card {
+    background-color: #C3B649;  /* 浅灰色背景 */
+    color: #333;  /* 字体颜色 */
+    border-radius: 1rem;  /* 圆角 */
+    padding: 1rem;  /* 内边距 */
+    width: 100%;  /* 占满宽度 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  /* 阴影 */
+}
+
+.task-card .font-semibold {
+    font-weight: 600;  /* 字体加粗 */
+}
+
+.task-card .text-sm {
+    font-size: 0.875rem;  /* 小字号 */
+}
+
+.task-card .text-gray-500 {
+    color: #6b7280;  /* 灰色 */
+}
+
+.task-card .text-gray-800 {
+    color: #2d3748;  /* 深灰色 */
+}
