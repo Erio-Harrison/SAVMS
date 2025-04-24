@@ -54,15 +54,6 @@ public class VehicleService {
     }
 
     /**
-     * Updates a vehicle's IP address.
-     * @param vehicleId The ID of the vehicle.
-     * @param newIpAddress The new IP address.
-     */
-    public void updateVehicleIpAddress(String vehicleId, String newIpAddress) {
-        vehicleRepository.updateIpAddress(vehicleId, newIpAddress);
-    }
-
-    /**
      * Updates a vehicle's connection status.
      * @param vehicleId The ID of the vehicle.
      * @param newStatus The new connection status (0 or 1).
@@ -78,4 +69,10 @@ public class VehicleService {
     public List<Vehicle> getAllVehicles() {
         return vehicleRepository.getAllVehicles();
     }
+
+    /**
+     * 根据地图范围获取车辆信息
+     */
+    public List<Vehicle> getVehiclesWithinRange(double minLat, double maxLat, double minLng, double maxLng) {
+        return vehicleRepository.findVehiclesWithinRange(minLat, maxLat, minLng, maxLng);}
 }

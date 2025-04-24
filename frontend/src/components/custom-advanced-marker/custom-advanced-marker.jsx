@@ -7,15 +7,28 @@ import RealEstateGallery from './real-estate-gallery';
 import './custom-advanced-marker.css';
 import classNames from 'classnames';
 
-const CustomAdvancedMarker = ({ realEstateListing }) => {
+import frontImage from './data/images/model3-4.png';
+import sideImage from './data/images/model3-5.jpg';
+import backImage from './data/images/model3-3.jpg';
+
+const CustomAdvancedMarker = ({ realEstateListing, onMarkerClick }) => {
     const [clicked, setClicked] = useState(false);
     const [hovered, setHovered] = useState(false);
     const position = {
-        lat: realEstateListing.location.latitude,
-        lng: realEstateListing.location.longitude
+        lat: realEstateListing.latitude,
+        lng: realEstateListing.longitude
+    };
+    console.log("position");
+
+    const handleClick = () => {
+        setClicked(!clicked);
+        onMarkerClick(position); // 传出坐标
     };
 
+    const staticImages = [sideImage, frontImage, backImage];
+
     const renderCustomPin = () => {
+        console.log("position");
         return (
             <>
                 <div className="custom-pin">
@@ -25,7 +38,7 @@ const CustomAdvancedMarker = ({ realEstateListing }) => {
 
                     <div className="image-container">
                         <RealEstateGallery
-                            images={realEstateListing.images}
+                            images={staticImages}
                             isExtended={clicked}
                         />
                         <span className="icon">
@@ -49,7 +62,8 @@ const CustomAdvancedMarker = ({ realEstateListing }) => {
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
                 className={classNames('real-estate-marker', { clicked, hovered })}
-                onClick={() => setClicked(!clicked)}>
+                onClick={handleClick}
+            >
                 {renderCustomPin()}
             </AdvancedMarker>
         </>

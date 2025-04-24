@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
-
-import Sidebar from "../components/Sidebar";
-import CarInfo from "../components/CarInfo";
 import HourlyForecastCard from "../components/HourlyForecastCard";
 import SearchBar from "../components/SearchBar";
 import CurrentWeatherCard from "../components/CurrentWeatherCard";
 import Map from "../components/Map";
 import axiosInstance from '../axiosInstance';
+import { Popover } from '@douyinfe/semi-ui';
 
 export default function MainPage() {
     const [carInfo, setCarInfo] = useState({});
@@ -22,10 +20,19 @@ export default function MainPage() {
     const [cars, setCars] = useState([]);
 
     const [weatherError, setWeatherError] = useState(null);// 新增状态来存放错误信息
+
+    const savedToken = localStorage.getItem("JWTtoken");
+    if (savedToken) {
+        axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${savedToken}`;
+    }
+
     const fetchWeather = async () => {
         try {
-            const res = await fetch(`http://localhost:8080/api/weather?city=${city}`);
-            const result = await res.json();
+            // const res = await fetch(`http://localhost:8080/api/weather?city=${city}`);
+            const res = await axiosInstance.get(`/api/weather`, {
+                params: { city }
+            });
+            const result = await res.data;
             if (result.code === 1) {
                 const weatherInfo = JSON.parse(result.data);
 
@@ -143,26 +150,40 @@ export default function MainPage() {
 
     return (
         <div className="bg-primary h-screen flex p-4 font-sans gap-4">
-
             <div className="flex flex-col w-1/4 gap-4 flex-grow">
                 <div className="text-2xl font-bold">Tracking</div>
                 <div className="bg-accent rounded-3xl p-4 flex flex-col h-screen overflow-auto">
                     {cars.length > 0 ? (
-                        cars.map((car) => (
-                            <div
-                                key={car.id}
-                                className="p-2 border-b border-gray-200 flex flex-col"
-                            >
-                                <span className="font-semibold text-lg">{car.licensePlate}</span>
-                                <span className="text-sm text-gray-600">{car.carModel}</span>
-                            </div>
-                        ))
-                    ) : (
+                        cars.map((car) => {
+                            const popoverContent = (
+                                <div style={{ width: 280, padding: 12 }}>
+                                    <div style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 8 }}>Vehicle Details</div>
+                                    <div><strong>ID:</strong> {car.id}</div>
+                                    <div><strong>Plate:</strong> {car.licensePlate}</div>
+                                    <div><strong>Model:</strong> {car.carModel}</div>
+                                    <div><strong>Speed:</strong> {car.speed} km/h</div>
+                                    <div><strong>Energy:</strong> {car.leftoverEnergy}%</div>
+                                    <div><strong>Location:</strong> {car.Location}</div>
+                                    <div><strong>Status:</strong> {car.status}</div>
+                                </div>
+                            );
+
+                            return (
+                                <Popover key={car.id} content={popoverContent} trigger="hover" position="right">
+                                    <div className="p-2 border-b border-gray-200 flex flex-col cursor-pointer">
+                                        <span className="font-semibold text-lg">{car.licensePlate}</span>
+                                        <span className="text-sm text-gray-600">{car.carModel}</span>
+                                    </div>
+                                </Popover>
+                            );
+                        })
+
+                        ) : (
+
                         <div className="text-center text-gray-500">No cars available.</div>
-                    )}
+                        )}
                 </div>
             </div>
-
             {/* Weather and Map Section */}
             <div className="flex flex-col w-3/4 gap-4">
                 <div className="h-1/3 flex gap-4">
@@ -186,12 +207,12 @@ export default function MainPage() {
                     ) : (
                         <CurrentWeatherCard city={city} currentWeather={currentWeather}/>
                     )}
-
                 </div>
                 <div className="h-2/3 bg-white rounded-3xl">
                     <Map lat={coordinate.lat} lng={coordinate.lng} markers={markers} onMarkerClick={handleMarkerClick}/>
                 </div>
             </div>
         </div>
+
     );
 }

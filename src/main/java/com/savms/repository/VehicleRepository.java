@@ -60,19 +60,6 @@ public class VehicleRepository {
     }
 
     /**
-     * Updates the IP address of a vehicle.
-     * @param vehicleId The ID of the vehicle.
-     * @param newIpAddress The new IP address to set.
-     */
-    public void updateIpAddress(String vehicleId, String newIpAddress) {
-        Vehicle vehicle = mongoTemplate.findById(vehicleId, Vehicle.class);
-        if (vehicle != null) {
-            vehicle.setIpAddress(newIpAddress);
-            mongoTemplate.save(vehicle);
-        }
-    }
-
-    /**
      * Updates the status of a vehicle.
      * @param vehicleId The ID of the vehicle.
      * @param newStatus The new connection status (0 or 1).
@@ -91,5 +78,19 @@ public class VehicleRepository {
      */
     public List<Vehicle> getAllVehicles() {
         return mongoTemplate.findAll(Vehicle.class);
+    }
+
+    /**
+     * 根据地图范围获取车辆信息
+     */
+    public List<Vehicle> findVehiclesWithinRange(double minLat,
+                                                 double maxLat,
+                                                 double minLng,
+                                                 double maxLng) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("latitude").gte(minLat).lte(maxLat));
+        query.addCriteria(Criteria.where("longitude").gte(minLng).lte(maxLng));
+
+        return mongoTemplate.find(query, Vehicle.class);
     }
 }

@@ -2,6 +2,8 @@ package com.savms.controller;
 
 import com.savms.dto.LoginRequest;
 import com.savms.dto.LoginResponse;
+import com.savms.security.JwtUtil;
+import com.savms.dto.LoginResponse;
 import com.savms.entity.User;
 import com.savms.service.UserService;
 import com.savms.utils.Result;
@@ -20,9 +22,13 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private JwtUtil jwtUtil;
+
     @PostMapping("/login")
     public Result login(@RequestBody LoginRequest loginRequest) {
         try {
+            System.out.println(loginRequest);
             // 1. Query user by username from the database
             User user = userService.getUserByUsername(loginRequest.getUsername())
                     .orElseThrow(() -> new RuntimeException("User not found"));
@@ -40,7 +46,19 @@ public class LoginController {
 //                    user.getEmail()
 //            ));
 
-            return Result.success(user);
+            // 3. Create a JWT token
+            String token = jwtUtil.generateToken(user.getId(), user.getUsername());
+
+
+            // 4. Build LoginResponse and return
+            LoginResponse loginResponse = new LoginResponse(
+                    token,
+                    user.getId(),
+                    user.getUsername(),
+                    user.getEmail()
+            );
+
+            return Result.success(loginResponse);
 
         } catch (Exception e) {
 //            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
