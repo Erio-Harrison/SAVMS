@@ -17,7 +17,10 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:5173") // Frontend URL
-                .allowedMethods("GET", "POST", "PUT", "DELETE");
+                .allowedMethods("*")
+                .allowedHeaders("*")
+                .allowCredentials(true)
+                .exposedHeaders("Authorization");
     }
     @Override
     public void addInterceptors(InterceptorRegistry registry){

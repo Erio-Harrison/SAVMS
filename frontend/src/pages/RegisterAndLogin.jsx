@@ -23,6 +23,9 @@ export default function RegisterAndLogin() {
             try{
                 const response = await axiosInstance.post(endpoint, reqlogin);
                 const userId = response.data.data.id;
+                const token = response.data.data.token;
+                axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                localStorage.setItem('JWTtoken', token);
                 setId(userId);
 
             } catch (err) {

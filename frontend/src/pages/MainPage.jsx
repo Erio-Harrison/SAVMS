@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
-
-import Sidebar from "../components/Sidebar";
-import CarInfo from "../components/CarInfo";
+import { useState, useEffect } from "react";
 import HourlyForecastCard from "../components/HourlyForecastCard";
 import SearchBar from "../components/SearchBar";
 import CurrentWeatherCard from "../components/CurrentWeatherCard";
 import Map from "../components/Map";
 import axiosInstance from '../axiosInstance';
 import { Popover } from '@douyinfe/semi-ui';
-import { Button, SplitButtonGroup,Dropdown } from '@douyinfe/semi-ui';
+
+import {Modal, Button, SplitButtonGroup,Dropdown } from '@douyinfe/semi-ui';
 import { IconTreeTriangleDown } from '@douyinfe/semi-icons';
+
+// cars import
+import CarOperationButton from '../components/Cars/CarOperationButton';
 
 export default function MainPage() {
     const [carInfo, setCarInfo] = useState({});
@@ -25,10 +26,19 @@ export default function MainPage() {
     const [cars, setCars] = useState([]);
 
     const [weatherError, setWeatherError] = useState(null);// 新增状态来存放错误信息
+
+    const savedToken = localStorage.getItem("JWTtoken");
+    if (savedToken) {
+        axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${savedToken}`;
+    }
+
     const fetchWeather = async () => {
         try {
-            const res = await fetch(`http://localhost:8080/api/weather?city=${city}`);
-            const result = await res.json();
+            // const res = await fetch(`http://localhost:8080/api/weather?city=${city}`);
+            const res = await axiosInstance.get(`/api/weather`, {
+                params: { city }
+            });
+            const result = await res.data;
             if (result.code === 1) {
                 const weatherInfo = JSON.parse(result.data);
 
@@ -144,37 +154,19 @@ export default function MainPage() {
     }, [city]);
 
 
-    const menu = [
-        { node: 'item', name: 'Add Vehicle', onClick: () => console.log('编辑项目点击') },
-        { node: 'divider' },
-        { node: 'item', name: 'Delete Vehicle', type: 'danger' },
-    ];
-
-    const [btnVisible, setBtnVisible] = useState({
-        1: false,
-        2: false,
-        3: false
-    });
-
-    const handleVisibleChange = (key, visible)=>{
-        const newBtnVisible = { ...btnVisible };
-        newBtnVisible[key] = visible;
-        setBtnVisible(newBtnVisible);
-    };
-
-
-
     return (
         <div className="bg-primary h-screen flex p-4 font-sans gap-4">
 
             <div className="flex flex-col w-1/4 gap-4 flex-grow">
+
                 <div className="text-2xl font-bold">Tracking
-                <SplitButtonGroup style={{ marginRight: 10 }} aria-label="项目操作按钮组">
+{/*                 <SplitButtonGroup style={{ marginRight: 10 }} aria-label="项目操作按钮组"> */}
 {/*                     <Button theme="solid" type="primary">分裂按钮</Button> */}
-                    <Dropdown onVisibleChange={(v)=>handleVisibleChange(1, v)} menu={menu} trigger="click" position="bottomRight">
-                        <Button style={btnVisible[1] ? { background: 'var(--semi-color-primary-hover)', padding: '8px 4px' } : { padding: '8px 4px' }} theme="solid" type="primary" icon={<IconTreeTriangleDown />}></Button>
-                    </Dropdown>
-                </SplitButtonGroup>
+{/*                     <Dropdown onVisibleChange={(v)=>handleVisibleChange(1, v)} menu={menu} trigger="click" position="bottomRight"> */}
+{/*                         <Button style={btnVisible[1] ? { background: 'var(--semi-color-primary-hover)', padding: '8px 4px' } : { padding: '8px 4px' }} theme="solid" type="primary" icon={<IconTreeTriangleDown />}></Button> */}
+{/*                     </Dropdown> */}
+{/*                 </SplitButtonGroup> */}
+                    <CarOperationButton />
 
 
 
