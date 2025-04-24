@@ -1,7 +1,4 @@
 import { useState, useEffect } from "react";
-
-import Sidebar from "../components/Sidebar";
-import CarInfo from "../components/CarInfo";
 import HourlyForecastCard from "../components/HourlyForecastCard";
 import SearchBar from "../components/SearchBar";
 import CurrentWeatherCard from "../components/CurrentWeatherCard";
@@ -23,10 +20,19 @@ export default function MainPage() {
     const [cars, setCars] = useState([]);
 
     const [weatherError, setWeatherError] = useState(null);// 新增状态来存放错误信息
+
+    const savedToken = localStorage.getItem("JWTtoken");
+    if (savedToken) {
+        axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${savedToken}`;
+    }
+
     const fetchWeather = async () => {
         try {
-            const res = await fetch(`http://localhost:8080/api/weather?city=${city}`);
-            const result = await res.json();
+            // const res = await fetch(`http://localhost:8080/api/weather?city=${city}`);
+            const res = await axiosInstance.get(`/api/weather`, {
+                params: { city }
+            });
+            const result = await res.data;
             if (result.code === 1) {
                 const weatherInfo = JSON.parse(result.data);
 
