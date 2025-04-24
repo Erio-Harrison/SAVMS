@@ -8,7 +8,7 @@ export default function CarOperationButton() {
     const [modalVisible, setModalVisible] = useState(false);
 
     const menu = [
-        { node: 'item', name: 'Add Vehicle', onClick: () => handleAddVehicleClick },
+        { node: 'item', name: 'Add Vehicle', onClick: () => handleAddVehicleClick() },
         { node: 'divider' },
         { node: 'item', name: 'Delete Vehicle', type: 'danger' },
     ];
@@ -20,7 +20,10 @@ export default function CarOperationButton() {
     const handleAddVehicleClick = () => {
         setModalVisible(true);
     };
-    
+    const handleCancel = () => {
+        setModalVisible(false);
+    };
+
     const handleSubmit = async (values) => {
         try {
             const res = await axiosInstance.post('/vehicles/add', values);
@@ -53,30 +56,39 @@ export default function CarOperationButton() {
             </Dropdown>
         </SplitButtonGroup>
 
-         <Modal
-            title="Add New Vehicle"
-            visible={modalVisible}
-            onCancel={() => setModalVisible(false)}
-            footer={null}
+            <Modal
+                title="自定义样式"
+                visible={modalVisible}
+                //TODO: implement handle OK
+                //onOk={this.handleOk}
+                 onCancel={handleCancel}
+                centered
+                bodyStyle={{ overflow: 'auto', height: 200 }}
             >
-            <Form onSubmit={handleSubmit}>
-                <Form.Input field="licensePlate" label="Plate Number" placeholder="e.g. ABC-123" required />
-                <Form.Input field="carModel" label="Car Model" placeholder="e.g. Tesla Model 3" required />
-                <Form.Input field="speed" label="Speed (km/h)" type="number" required />
-                <Form.Input field="leftoverEnergy" label="Energy (%)" type="number" required />
-                <Form.Input field="Location" label="Location" placeholder="e.g. ANU Parking Lot" required />
-                <Form.Select field="status" label="Status" placeholder="Choose status" required>
-                    <Form.Select.Option value="Idle">Idle</Form.Select.Option>
-                    <Form.Select.Option value="Running">Running</Form.Select.Option>
-                    <Form.Select.Option value="Charging">Charging</Form.Select.Option>
-                </Form.Select>
-
-                <div style={{ marginTop: 16, textAlign: 'right' }}>
-                    <Button onClick={() => setModalVisible(false)} style={{ marginRight: 12 }}>Cancel</Button>
-                    <Button htmlType="submit" theme="solid" type="primary">Submit</Button>
-                </div>
-            </Form>
-        </Modal>
-        </>
+{/*                 TODO: change to real submit   */}
+                <p style={{ lineHeight: 1.8 }}>
+                    Semi Design 是由抖音前端团队与 UED
+                    团队共同设计开发并维护的设计系统。设计系统包含设计语言以及一整套可复用的前端组件，帮助设计师与开发者更容易地打造高质量的、用户体验一致的、符合设计规范的
+                    Web 应用。
+                </p>
+                <p style={{ lineHeight: 1.8 }}>
+                    区别于其他的设计系统而言，Semi Design 以用户中心、内容优先、设计人性化为设计理念，具有以下优势：
+                </p>
+                <ul>
+                    <li>
+                        <p>Semi Design 以内容优先进行设计。</p>
+                    </li>
+                    <li>
+                        <p>更容易地自定义主题。</p>
+                    </li>
+                    <li>
+                        <p>适用国际化场景。</p>
+                    </li>
+                    <li>
+                        <p>效率场景加入人性化关怀</p>
+                    </li>
+                </ul>
+            </Modal>
+            </>
     );
 }
