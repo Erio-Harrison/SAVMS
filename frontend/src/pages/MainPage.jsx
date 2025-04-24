@@ -12,21 +12,24 @@ import CarOperationButton from '../components/Cars/CarOperationButton';
 import '../styles/PopoverStyles.css';
 
 export default function MainPage() {
-    const [carInfo, setCarInfo] = useState({});
-    const [city, setCity] = useState('Canberra');
-    const [currentWeather, setCurrentWeather] = useState({});
-    const [weatherArray, setWeatherArray] = useState([]);
-    const [coordinate, setCoordinate] = useState({ lat: -35.2809, lng: 149.1300 });
-    const [markers, setMarkers] = useState([]);
-    const [selectedCar, setSelectedCar] = useState(false);
-    const [cars, setCars] = useState([]);
-    const [weatherError, setWeatherError] = useState(null);
+    // 车辆相关和界面状态
+    const [carInfo, setCarInfo] = useState({}); // 当前选中车辆信息
+    const [city, setCity] = useState('Canberra'); // 当前城市名
+    const [currentWeather, setCurrentWeather] = useState({}); // 当前天气概况
+    const [weatherArray, setWeatherArray] = useState([]); // 小时天气列表
+    const [coordinate, setCoordinate] = useState({ lat: -35.2809, lng: 149.1300 }); // 地图中心坐标
+    const [markers, setMarkers] = useState([]); // 地图标记点
+    const [selectedCar, setSelectedCar] = useState(false); // 是否选中车辆
+    const [cars, setCars] = useState([]); // 所有车辆数据
+    const [weatherError, setWeatherError] = useState(null); // 天气请求错误信息
 
+    // 设置 JWT 请求头（登录后保存的 token）
     const savedToken = localStorage.getItem("JWTtoken");
     if (savedToken) {
         axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${savedToken}`;
     }
 
+    // 渲染每辆车的 Popover 内容
     const renderPopoverContent = (car) => (
         <div className="custom-popover">
             <Title heading={6} className="popover-title">Vehicle Details</Title>
@@ -54,6 +57,7 @@ export default function MainPage() {
         </div>
     );
 
+    // 获取天气数据
     const fetchWeather = async () => {
         try {
             const res = await axiosInstance.get(`/api/weather`, { params: { city } });
@@ -96,7 +100,7 @@ export default function MainPage() {
     };
 
     useEffect(() => {
-        fetchWeather();
+        fetchWeather(); // 页面加载或城市变化时获取天气数据
     }, [city]);
 
     useEffect(() => {
@@ -108,10 +112,10 @@ export default function MainPage() {
             ];
             setMarkers(newMarkersData);
         };
-        fetchMarkers();
+        fetchMarkers(); // 设置地图标记点（模拟数据）
 
         axiosInstance
-            .get("/vehicles/get/all")
+            .get("/vehicles/get/all") // 获取车辆列表
             .then((response) => {
                 setCars(response.data.data);
             })
@@ -120,14 +124,16 @@ export default function MainPage() {
             });
     }, []);
 
+    // 搜索栏搜索城市后更新状态
     const handleSearch = (query) => {
         setCity(query);
         setCoordinate({ lat: -35.2809, lng: 149.1300 });
     };
 
+    // 点击地图标记后的操作
     const handleMarkerClick = (marker) => {
         const fetchCarInfo = async () => {
-            const carInfoData = { vehicleId: '#12345678', plateNum: 'XYZ-123' };
+            const carInfoData = { vehicleId: '#12345678', plateNum: 'XYZ-123' }; // 模拟数据
             alert(carInfoData);
             setCarInfo(carInfoData);
         };
@@ -137,9 +143,8 @@ export default function MainPage() {
 
     return (
         <div className="bg-primary h-screen flex p-4 font-sans gap-4">
-
+            {/* 左侧侧边栏：车辆列表 + 添加按钮 */}
             <div className="flex flex-col w-1/4 gap-4 flex-grow">
-
                 <div className="text-2xl font-bold">Tracking
                     <CarOperationButton onVehicleAdded={(newCar) => setCars(prev => [...prev, newCar])} />
                 </div>
@@ -159,7 +164,7 @@ export default function MainPage() {
                 </div>
             </div>
 
-            {/* Weather and Map Section */}
+            {/* 右侧区域：天气和地图 */}
             <div className="flex flex-col w-3/4 gap-4">
                 <div className="h-1/3 flex gap-4">
                     <div className="w-4/5 flex flex-col gap-4">
@@ -185,7 +190,6 @@ export default function MainPage() {
                     ) : (
                         <CurrentWeatherCard city={city} currentWeather={currentWeather} />
                     )}
-
                 </div>
                 <div className="h-2/3 bg-white rounded-3xl">
                     <Map lat={coordinate.lat} lng={coordinate.lng} markers={markers} onMarkerClick={handleMarkerClick} />

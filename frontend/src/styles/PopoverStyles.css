@@ -1,15 +1,18 @@
+/*
+   Popover 外层整体样式美化
+*/
 .custom-popover {
-    background-color: rgba(17, 17, 17, 0.95);
+    background-color: rgba(17, 17, 17, 0.95); /* 黑色半透明背景 */
     padding: 12px 12px;
     width: 270px;
     height: auto;
     max-height: 300px;
-    border-radius: 12px;
-    font-family: 'Segoe UI', sans-serif;
-    box-shadow: 0 0 12px rgba(193, 179, 76, 0.6);
+    border-radius: 12px; /* 圆角 */
+    font-family: 'Segoe UI', sans-serif; /* 统一字体 */
+    box-shadow: 0 0 12px rgba(193, 179, 76, 0.6); /* 土黄色柔光边框 */
 }
 
-
+/* 每一行项目对齐（标签 + 内容） */
 .custom-popover .row {
     display: flex;
     align-items: center;
@@ -17,32 +20,34 @@
     margin-bottom: 4px;
 }
 
+/* 标题样式（如 Vehicle Details） */
 .custom-popover .popover-title,
 .custom-popover .semi-typography-title {
-    color: #C1B34C !important;
+    color: #C1B34C !important; /* 土黄色 */
     margin-bottom: 6px;
 }
 
+/* 分隔线缩小内边距 */
 .custom-popover .semi-divider {
-    margin: 4px 0;          /* 原来是12px，可以改成8px */
+    margin: 4px 0;
 }
 
-/* 左侧标签固定宽度，文字土黄色 */
+/* 左侧标签（如 Plate、Model）的样式 */
 .custom-popover .label {
-    flex: 0 0 70px;     /* 根据最长标签微调 */
+    flex: 0 0 70px;
     color: #C1B34C !important;
     font-weight: 500;
-    text-align: left;  /* 靠右对齐，更紧凑 */
+    text-align: left;
 }
 
-/* 右侧数值左对齐，同样土黄色 */
+/* 右侧的值（如 ABC-123）样式 */
 .custom-popover .value {
     flex: 1;
     color: #C1B34C !important;
     text-align: left;
 }
 
-/* 霓虹发光的车牌 */
+/* 特别风格：霓虹灯发光感的车牌样式 */
 .plate-style {
     display: inline-block;
     background-color: #fff;
@@ -54,15 +59,16 @@
     box-shadow: 0 0 6px rgba(193, 179, 76, 0.8);
 }
 
-/* 速度 & 电量 颜色优先级不变 */
+/* 不同速度的颜色分类：红 = 快，黄 = 中，绿 = 慢 */
 .speed-text.fast   { color: #e53935 !important; }
 .speed-text.medium { color: #fbc02d !important; }
 .speed-text.slow   { color: #43a047 !important; }
 
+/* 电量状态颜色分类 */
 .battery.low  { color: #f44336 !important; }
 .battery.high { color: #4caf50 !important; }
 
-/* Status 用 Semi UI 的 light 主题，文字也变黄 */
+/* 车辆状态 Tag 的样式美化（比如 online/offline） */
 .custom-popover .tag-status {
     background-color: rgba(193, 179, 76, 0.1) !important;
     border-color: #C1B34C !important;
@@ -71,6 +77,7 @@
     border-radius: 8px;
 }
 
+/* 页脚显示更新时间 */
 .custom-popover .footer {
     margin-top: 2px;
     margin-bottom: 0;
@@ -79,10 +86,12 @@
     text-align: center;
 }
 
+/* 电池行整体布局 */
 .battery-row {
     align-items: center;
 }
 
+/* 电池数值 + 条样式布局容器 */
 .battery-wrapper {
     display: flex;
     align-items: center;
@@ -90,6 +99,7 @@
     flex: 1;
 }
 
+/* 电池条本体（灰底） */
 .battery-bar {
     width: 100%;
     height: 8px;
@@ -100,16 +110,19 @@
     position: relative;
 }
 
+/* 电池条填充动画（绿色为正常） */
 .battery-fill {
     height: 100%;
     background-color: #4caf50;
     transition: width 0.3s ease;
 }
 
+/* 电量过低时改为红色填充 */
 .battery-fill.low {
     background-color: #f44336;
 }
 
+/* 电量百分比文本样式 */
 .battery-percent {
     font-size: 12px;
     color: #C1B34C;
@@ -117,15 +130,18 @@
     text-align: right;
 }
 
+/* 电量低时，数字也变红 */
 .battery-percent.low {
     color: #f44336 !important;
 }
 
+/*
+   操作按钮样式（例如添加按钮）
+ */
 .vehicle-action-button {
     background-color: #C1B34C;
     border-color: #C1B34C;
-    border-radius: 1.5rem;
+    border-radius: 1.5rem; /* 胶囊按钮 */
     box-shadow: 0 2px 8px rgba(193, 179, 76, 0.4);
     color: black;
 }
-
