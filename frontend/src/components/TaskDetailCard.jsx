@@ -18,22 +18,26 @@ export default function TaskDetailCard({ task, onEndTask }) {
                 <div className="text-sm text-gray-800 mb-2">
                     <div><strong>Task ID:</strong> {task.id}</div>
                     <div><strong>Start Time:</strong> {task.startTime}</div>
-                    <div><strong>End Time:</strong> {task.endTime}</div>
-                    <div><strong>Start Address:</strong> {task.startAddress}</div>
-                    <div><strong>End Address:</strong> {task.endAddress}</div>
-                    <div><strong>Car License:</strong> {task.carLicense}</div>
+                    <div><strong>Start Address:</strong> {task.startLocation?.address}</div>
+                    <div><strong>End Address:</strong> {task.endLocation?.address}</div>
+                    {/* 如果任务已分配车辆（假设 status ≠ 0），才显示车牌 */}
+                    {task.status !== 0 && task.vehicle?.plateNumber && (
+                        <div><strong>Car License:</strong> {task.vehicle.plateNumber}</div>
+                    )}
                 </div>
             </div>
 
-            {/* 右侧结束任务按钮 */}
-            <div className="flex items-center justify-center w-1/3">
-                <button
-                    onClick={() => onEndTask(task.id)}
-                    className="bg-red-600 text-white px-4 py-2 rounded-xl hover:bg-red-700 transition"
-                >
-                    End Task
-                </button>
-            </div>
+            {/* 如果任务已分配车辆（假设 status ≠ 0），才显示结束按钮 */}
+            {task.status !== 0 && (
+                <div className="flex items-center justify-center w-1/3">
+                    <button
+                        onClick={() => onEndTask(task.id)}
+                        className="bg-red-600 text-white px-4 py-2 rounded-xl hover:bg-red-700 transition"
+                    >
+                        End Task
+                    </button>
+                </div>
+            )}
         </div>
     );
 }

@@ -5,7 +5,7 @@ import { IconFile, IconGlobe } from "@douyinfe/semi-icons";
 import { Modal, Form, Button, Toast } from "@douyinfe/semi-ui";
 import TaskDetailCard from "../components/TaskDetailCard.jsx";
 import CreateTaskCard from "../components/CreateTaskCard.jsx";
-
+import axiosInstance from "../axiosInstance";
 
 export default function CurrentTasksPage() {
     const [tasks, setTasks] = useState([]);
@@ -13,30 +13,39 @@ export default function CurrentTasksPage() {
     const [selectedTask, setSelectedTask] = useState(null);
     const [coordinate, setCoordinate] = useState({ lat: -35.2809, lng: 149.1300 });
     const [createModalVisible, setCreateModalVisible] = useState(false);
+    const [assignedTasks, setAssignedTasks] = useState([]);
+    const [unAssignedTasks, setUnAssignedTasks] = useState([]);
+
 
     useEffect(() => {
-        // 模拟静态任务数据
-        const dummyTasks = [
-            { id: 1, title: "Delivery #1", description: "Deliver to Civic", lat: -35.2600, lng: 149.1300 },
-            { id: 2, title: "Pickup #2", description: "Pickup from Fyshwick", lat: -35.2800, lng: 149.1500 },
-            { id: 3, title: "Delivery #3", description: "Deliver to Gungahlin", lat: -35.2900, lng: 149.1400 },
-            { id: 1, title: "Delivery #1", description: "Deliver to Civic", lat: -35.2600, lng: 149.1300 },
-            { id: 2, title: "Pickup #2", description: "Pickup from Fyshwick", lat: -35.2800, lng: 149.1500 },
-            { id: 3, title: "Delivery #3", description: "Deliver to Gungahlin", lat: -35.2900, lng: 149.1400 },
-            { id: 1, title: "Delivery #1", description: "Deliver to Civic", lat: -35.2600, lng: 149.1300 },
-            { id: 2, title: "Pickup #2", description: "Pickup from Fyshwick", lat: -35.2800, lng: 149.1500 },
-            { id: 3, title: "Delivery #3", description: "Deliver to Gungahlin", lat: -35.2900, lng: 149.1400 },
-            { id: 1, title: "Delivery #1", description: "Deliver to Civic", lat: -35.2600, lng: 149.1300 },
-            { id: 2, title: "Pickup #2", description: "Pickup from Fyshwick", lat: -35.2800, lng: 149.1500 },
-            { id: 3, title: "Delivery #3", description: "Deliver to Gungahlin", lat: -35.2900, lng: 149.1400 },
-            { id: 1, title: "Delivery #1", description: "Deliver to Civic", lat: -35.2600, lng: 149.1300 },
-            { id: 2, title: "Pickup #2", description: "Pickup from Fyshwick", lat: -35.2800, lng: 149.1500 },
-            { id: 3, title: "Delivery #3", description: "Deliver to Gungahlin", lat: -35.2900, lng: 149.1400 },
-        ];
+        const fetchAssignedTasks = async () => {
+            try {
+                const res = await axiosInstance.get("/api/tasks/status/1"); // 你的后端实际路径
+                const fetchedAssignTasks = res.data;
 
-        // 设置任务列表和标记
-        setTasks(dummyTasks);
-        setMarkers(dummyTasks.map(task => ({ lat: task.lat, lng: task.lng })));
+                setAssignedTasks(fetchedAssignTasks);
+
+            } catch (err) {
+                console.error("Error fetching tasks:", err);
+            }
+        };
+
+        fetchAssignedTasks();
+
+        const fetchUnAssignedTasks = async () => {
+            try {
+                const res = await axiosInstance.get("/api/tasks/status/0"); // 你的后端实际路径
+                const fetchedUnAssignTasks = res.data;
+
+                setUnAssignedTasks(fetchedUnAssignTasks);
+
+            } catch (err) {
+                console.error("Error fetching tasks:", err);
+            }
+        };
+
+        fetchUnAssignedTasks();
+
     }, []);
 
     const handleMarkerClick = (marker) => {
@@ -81,8 +90,8 @@ export default function CurrentTasksPage() {
                     >
                         <div className="bg-accent rounded-3xl p-4 flex flex-col max-h-[calc(100vh-10rem)] overflow-auto">
                             <div className="overflow-y-auto">
-                                {tasks.length > 0 ? (
-                                    tasks.map((task) => (
+                                {assignedTasks.length > 0 ? (
+                                    assignedTasks.map((task) => (
                                         <div
                                             key={task.id}
                                             className="p-2 border-b border-gray-200 flex flex-col cursor-pointer"
@@ -109,7 +118,22 @@ export default function CurrentTasksPage() {
                         itemKey="2"
                     >
                         <div className="bg-accent rounded-3xl p-4 flex flex-col max-h-[calc(100vh-10rem)] overflow-auto">
-                            <div className="text-center text-gray-500">No unassigned tasks.</div>
+                            <div className="overflow-y-auto">
+                                {unAssignedTasks.length > 0 ? (
+                                    unAssignedTasks.map((task) => (
+                                        <div
+                                            key={task.id}
+                                            className="p-2 border-b border-gray-200 flex flex-col cursor-pointer"
+                                            onClick={() => handleTaskClick(task)} // 点击任务时更新选中的任务
+                                        >
+                                            <span className="font-semibold text-lg">{task.title}</span>
+                                            <span className="text-sm text-gray-600">{task.description}</span>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="text-center text-gray-500">No current tasks.</div>
+                                )}
+                            </div>
                         </div>
                     </TabPane>
                 </Tabs>
@@ -136,6 +160,9 @@ export default function CurrentTasksPage() {
                         onMarkerClick={handleMarkerClick}
                     />
                 </div>
+
+
+
                 {/* Create Task Modal */}
                 <Modal
                     title="Create New Task"
