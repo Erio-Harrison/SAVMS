@@ -25,6 +25,16 @@ export default function CarOperationButton() {
     };
 
     const handleSubmit = async (values) => {
+        const payload = {
+            ...values,
+            year: parseInt(values.year),
+            length: parseFloat(values.length),
+            width: parseFloat(values.width),
+            height: parseFloat(values.height),
+            radarCount: parseInt(values.radarCount),
+            cameraCount: parseInt(values.cameraCount),
+        };
+
         try {
             const res = await axiosInstance.post('/vehicles/add', values);
             Toast.success('Vehicle added successfully!');
@@ -57,37 +67,37 @@ export default function CarOperationButton() {
         </SplitButtonGroup>
 
             <Modal
-                title="自定义样式"
+                title="New Vehicle"
                 visible={modalVisible}
                 //TODO: implement handle OK
                 //onOk={this.handleOk}
                  onCancel={handleCancel}
                 centered
-                bodyStyle={{ overflow: 'auto', height: 200 }}
+                bodyStyle={{ overflow: 'auto', height: 700 }}
+                footer={null}
             >
-{/*                 TODO: change to real submit   */}
-                <p style={{ lineHeight: 1.8 }}>
-                    Semi Design 是由抖音前端团队与 UED
-                    团队共同设计开发并维护的设计系统。设计系统包含设计语言以及一整套可复用的前端组件，帮助设计师与开发者更容易地打造高质量的、用户体验一致的、符合设计规范的
-                    Web 应用。
-                </p>
-                <p style={{ lineHeight: 1.8 }}>
-                    区别于其他的设计系统而言，Semi Design 以用户中心、内容优先、设计人性化为设计理念，具有以下优势：
-                </p>
-                <ul>
-                    <li>
-                        <p>Semi Design 以内容优先进行设计。</p>
-                    </li>
-                    <li>
-                        <p>更容易地自定义主题。</p>
-                    </li>
-                    <li>
-                        <p>适用国际化场景。</p>
-                    </li>
-                    <li>
-                        <p>效率场景加入人性化关怀</p>
-                    </li>
-                </ul>
+
+                <Form onSubmit={handleSubmit} labelPosition="left" labelAlign="right" labelWidth={120}>
+                    <Form.Input field="carModel" label="Model" placeholder="e.g. Tesla Model 3" required />
+                    <Form.Input field="licensePlate" label="Plate" placeholder="e.g. ABC-123" required />
+                    <Form.Input field="year" label="Year" type="number" placeholder="e.g. 2022" required />
+                    <Form.Input field="energyType" label="Energy Type" placeholder="e.g. Electric" required />
+
+                    <Form.Input field="length" label="Length" type="number" placeholder="meters" />
+                    <Form.Input field="width" label="Width" type="number" placeholder="meters" />
+                    <Form.Input field="height" label="Height" type="number" placeholder="meters" />
+
+                    <Form.Input field="radarModel" label="Radar Model" placeholder="RadarX 2000" />
+                    <Form.Input field="radarCount" label="Radar Number" type="number" placeholder="e.g. 2" />
+
+                    <Form.Input field="cameraModel" label="Camera Model" placeholder="CamY HD" />
+                    <Form.Input field="cameraCount" label="Camera Number" type="number" placeholder="e.g. 4" />
+
+                    <div style={{ textAlign: 'right', marginTop: 24 }}>
+                        <Button onClick={handleCancel} style={{ marginRight: 12 }}>Cancel</Button>
+                        <Button htmlType="submit" theme="solid" type="primary">Submit</Button>
+                    </div>
+                </Form>
             </Modal>
             </>
     );
