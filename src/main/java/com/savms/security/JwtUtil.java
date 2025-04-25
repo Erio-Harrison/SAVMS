@@ -14,7 +14,7 @@ public class JwtUtil {
     // Secret Key for signing
     private static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
-    public static String generateToken(String userId, String username) {
+    public String generateToken(String userId, String username) {
         long nowMillis = System.currentTimeMillis();
         long expMillis = nowMillis + 3600_000; // 1 hour token validity
         Date exp = new Date(expMillis);
