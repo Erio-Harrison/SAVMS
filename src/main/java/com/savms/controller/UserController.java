@@ -47,10 +47,10 @@ public class UserController
      * @param username The username to search for.
      * @return The user if found.
      */
-    @GetMapping("/get/{username}")
+    @GetMapping( "/getByUsername/{username}" )
     public Optional<User> getUserByUsername( @PathVariable String username )
     {
-        return userService.getUserByUsername(username);
+        return userService.getUserByUsername( username );
     }
 
     /**
@@ -58,10 +58,10 @@ public class UserController
      * @param email The email to search for.
      * @return The user if found.
      */
-    @GetMapping("/get/{email}")
+    @GetMapping( "/getByEmail/{email}" )
     public Optional<User> getUserByEmail( @PathVariable String email )
     {
-        return userService.getUserByEmail(email);
+        return userService.getUserByEmail( email );
     }
 
     /**
