@@ -111,6 +111,54 @@
 			<version>4.12.0</version>
 		</dependency>
 
+<<<<<<< HEAD
+=======
+
+			<!-- 1) 核心 API -->
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt-api</artifactId>
+				<version>0.11.5</version>
+			</dependency>
+
+			<!-- 2) 实现（runtime）-->
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt-impl</artifactId>
+				<version>0.11.5</version>
+				<scope>runtime</scope>
+			</dependency>
+
+			<!-- 3) JSON 解析（Jackson）-->
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt-jackson</artifactId>
+				<version>0.11.5</version>
+				<scope>runtime</scope>
+			</dependency>
+
+
+		<!-- JWT (JSON Web Token) library -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>0.11.5</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>0.11.5</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if you use Gson -->
+			<version>0.11.5</version>
+			<scope>runtime</scope>
+		</dependency>
+
+
+>>>>>>> 36f0f54fe0126caf030a96652704ac6ac6f71db0
 	</dependencies>
 
 	<build>

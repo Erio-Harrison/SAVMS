@@ -15,7 +15,7 @@ public class ParseResponseDemo {
         final String prompt = "generate 3 english names in this format: <name1> | <name2> | <name3>. your response should only contain the answer.";
 
         OkHttpClient client = new OkHttpClient().newBuilder()
-                .readTimeout(1, TimeUnit.MINUTES)
+                .readTimeout(2, TimeUnit.MINUTES)
                 .build();
 
         MediaType mediaType = MediaType.parse("application/json");
