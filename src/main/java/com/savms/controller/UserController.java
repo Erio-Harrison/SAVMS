@@ -28,6 +28,7 @@ public class UserController
     @PostMapping("/create")
     public void createUser( @RequestBody User user )
     {
+        System.out.println("in /create");
         userService.saveUser(user);
     }
 
