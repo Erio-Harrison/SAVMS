@@ -1,27 +1,15 @@
-import React, {useRef, useState} from 'react';
-import {APIProvider, Map} from '@vis.gl/react-google-maps';
+import React, { useState, useEffect, useRef } from 'react';
+import { APIProvider, Map } from '@vis.gl/react-google-maps';
 import CustomAdvancedMarker from '../components/custom-advanced-marker/custom-advanced-marker';
-
-import '../components/custom-advanced-marker/style.css';
-import {loadRealEstateListing} from "../components/custom-advanced-marker/load-real-estate-listing.jsx";
-
-
-// 封装一个调用后端接口的方法
-async function fetchVehiclesWithinRange(swLat, neLat, swLng, neLng) {
-    const response = await fetch(
-        `/vehicles/withinRange?minLat=${swLat}&maxLat=${neLat}&minLng=${swLng}&maxLng=${neLng}`
-    );
-    if (!response.ok) {
-        throw new Error('获取车辆数据失败');
-    }
-    return await response.json();
-}
+import axiosInstance from '../axiosInstance';
 
 export default function MapPage() {
+    // 存储后端返回的车辆列表
     const [vehicles, setVehicles] = useState([]);
+    // 存储地图实例，用来取 bounds
     const mapRef = useRef(null);
 
-    // 地图加载完毕后，获取地图实例并监听地图空闲（idle）事件
+    // 当地图加载完成时，注册 idle 事件，触发范围查询
     const handleMapLoad = (map) => {
         mapRef.current = map;
         map.addListener('idle', () => {
@@ -36,36 +24,56 @@ export default function MapPage() {
                 ne.lat(),
                 sw.lng(),
                 ne.lng()
-            )
-                .then((Data) => {
-                    setVehicles(Data);
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
+            );
         });
     };
 
+    // 从后端拉取指定范围内的车辆
+    const fetchVehiclesWithinRange = async (minLat, maxLat, minLng, maxLng) => {
+        try {
+            const response = await axiosInstance.get('/vehicles/withinRange', {
+                params: { minLat, maxLat, minLng, maxLng }
+            });
+            // 如果你的后端包装在 { code, data } 里，就取 .data
+            const list = response.data.data || response.data;
+            setVehicles(list);
+        } catch (err) {
+            console.error('加载车辆失败', err);
+            setVehicles([]);
+        }
+    };
+
     return (
-        <div className="advanced-marker-example">
-            <Map
-                mapId={'bf51a910020fa25a'}
-                defaultZoom={12}
-                defaultCenter={{ lat: -33.83, lng: 151.24 }}
-                gestureHandling="greedy"
-                disableDefaultUI
-                onLoad={handleMapLoad}
-            >
-                {vehicles.map((vehicle) => (
-                    <CustomAdvancedMarker
-                        key={vehicle._id}
-                        realEstateListing={vehicle}
-                    />
-                ))}
-            </Map>
+        <div className="h-full w-full">
+            {/* 用你的 Google Maps API Key 替换下面字符串 */}
+            <APIProvider apiKey="YOUR_GOOGLE_MAPS_API_KEY">
+                <Map
+                    mapId="bf51a910020fa25a"
+                    defaultZoom={12}
+                    defaultCenter={{ lat: -35.2809, lng: 149.1300 }}
+                    gestureHandling="greedy"
+                    disableDefaultUI
+                    onLoad={handleMapLoad}
+                >
+                    {/*
+            vehicles 是从后端拿到的数组，
+            每个元素都传给 CustomAdvancedMarker 来渲染一个标记
+          */}
+                    {vehicles.map(vehicle => (
+                        <CustomAdvancedMarker
+                            key={vehicle._id}
+                            realEstateListing={vehicle}
+                        />
+                    ))}
+                </Map>
+            </APIProvider>
         </div>
     );
 }
+
+
+
+
 //
 // // const MapPage = () => {
 // //     const [realEstateListing, setRealEstateListing] = useState(null);
