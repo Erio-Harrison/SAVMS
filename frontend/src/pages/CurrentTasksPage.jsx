@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Map from "../components/Map";
+import TaskRouteMap from "../components/TaskRouteMap";
 import { Tabs, TabPane } from "@douyinfe/semi-ui";
 import { IconFile, IconGlobe } from "@douyinfe/semi-icons";
 import { Modal, Form, Button, Toast } from "@douyinfe/semi-ui";
@@ -21,10 +22,10 @@ export default function CurrentTasksPage() {
         const fetchAssignedTasks = async () => {
             try {
                 const res = await axiosInstance.get("/api/tasks/status/1"); // 你的后端实际路径
-                const fetchedAssignTasks = res.data;
+                const fetchedAssignTasks = res.data.data;
 
                 setAssignedTasks(fetchedAssignTasks);
-
+                console.log("Fetched assigned tasks:", fetchedAssignTasks);
             } catch (err) {
                 console.error("Error fetching tasks:", err);
             }
@@ -35,7 +36,7 @@ export default function CurrentTasksPage() {
         const fetchUnAssignedTasks = async () => {
             try {
                 const res = await axiosInstance.get("/api/tasks/status/0"); // 你的后端实际路径
-                const fetchedUnAssignTasks = res.data;
+                const fetchedUnAssignTasks = res.data.data;
 
                 setUnAssignedTasks(fetchedUnAssignTasks);
 
@@ -152,13 +153,29 @@ export default function CurrentTasksPage() {
                 </div>
 
                 {/* 地图区域，占3/4高度 */}
+                {/*<div className="h-3/4 bg-white rounded-3xl overflow-hidden">*/}
+                {/*    <Map*/}
+                {/*        lat={coordinate.lat}*/}
+                {/*        lng={coordinate.lng}*/}
+                {/*        markers={markers}*/}
+                {/*        onMarkerClick={handleMarkerClick}*/}
+                {/*    />*/}
+                {/*</div>*/}
+
                 <div className="h-3/4 bg-white rounded-3xl overflow-hidden">
-                    <Map
-                        lat={coordinate.lat}
-                        lng={coordinate.lng}
-                        markers={markers}
-                        onMarkerClick={handleMarkerClick}
-                    />
+                    {selectedTask ? (
+                        <TaskRouteMap
+                            origin={{ lat: parseFloat(selectedTask.startLocation.lat), lng: parseFloat(selectedTask.startLocation.lng) }}
+                            destination={{ lat: parseFloat(selectedTask.endLocation.lat), lng: parseFloat(selectedTask.endLocation.lng) }}
+                        />
+                    ) : (
+                        <Map
+                            lat={coordinate.lat}
+                            lng={coordinate.lng}
+                            markers={markers}
+                            onMarkerClick={handleMarkerClick}
+                        />
+                    )}
                 </div>
 
 
