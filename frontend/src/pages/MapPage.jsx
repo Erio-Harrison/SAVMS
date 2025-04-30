@@ -135,16 +135,16 @@ export default function MapPage(){
     };
 
     return (
-        <div className="advanced-marker-example" style={{ position: 'relative', height: '100vh' }}>
+        <div className="advanced-marker-example" style={{position: 'relative', height: '100vh'}}>
             <div style={controlStyles}>
                 <input
                     type="text"
                     placeholder="Address"
                     value={destination}
                     onChange={(e) => setDestination(e.target.value)}
-                    style={{ padding: '6px', borderRadius: '4px', border: '1px solid #ccc', width: '250px' }}
+                    style={{padding: '6px', borderRadius: '4px', border: '1px solid #ccc', width: '250px'}}
                 />
-                <button onClick={handleGeocodeAddressAndRoute} style={{ padding: '6px 12px' }}>
+                <button onClick={handleGeocodeAddressAndRoute} style={{padding: '6px 12px'}}>
                     Search
                 </button>
             </div>
@@ -176,14 +176,6 @@ export default function MapPage(){
                         }}
                     />
                 ))}
-
-                {/*<CustomAdvancedMarker*/}
-                {/*    realEstateListing={realEstateListing}*/}
-                {/*    onMarkerClick={(latLng) => {*/}
-                {/*        console.log('Marker set as origin:', latLng);*/}
-                {/*        setOriginLatLng(latLng); // 设置起点为 marker 的位置*/}
-                {/*    }}*/}
-                {/*/>*/}
             </Map>
         </div>
     );

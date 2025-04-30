@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@vis.gl/react-google-maps": "^1.5.2",
+    "classnames": "^2.5.1"
+  }
+}
