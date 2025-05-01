@@ -1,61 +1,87 @@
 import React, { useState } from 'react';
-import { Modal, SplitButtonGroup, Button, Dropdown, Form, Toast } from '@douyinfe/semi-ui';
-import { IconPlus } from '@douyinfe/semi-icons'; // 使用加号图标替换箭头
+import {
+    Modal,
+    SplitButtonGroup,
+    Button,
+    Dropdown,
+    Form,
+    Toast,
+} from '@douyinfe/semi-ui';
+import { IconPlus } from '@douyinfe/semi-icons';
 import axiosInstance from '../../axiosInstance';
-import './CarOperationButton.css'; // 引入独立的样式文件，仅用于按钮样式美化
+import VehicleDeleteModal from './VehicleDeleteModal';
+import './CarOperationButton.css';
+import './VehicleDeleteModal.css';
 
-export default function CarOperationButton({ onVehicleAdded }) {
+export default function CarOperationButton({
+                                               vehicles,
+                                               onVehicleAdded,
+                                               onVehiclesDeleted,
+                                           }) {
     const [btnVisible, setBtnVisible] = useState(false);
-    const [modalVisible, setModalVisible] = useState(false);
+    const [addModalVisible, setAddModalVisible] = useState(false);
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false);
 
     const menu = [
-        { node: 'item', name: 'Add Vehicle', onClick: () => handleAddVehicleClick() },
+        {
+            node: 'item',
+            name: 'Add Vehicle',
+            onClick: () => setAddModalVisible(true),
+        },
         { node: 'divider' },
-        { node: 'item', name: 'Delete Vehicle', type: 'danger' },
+        {
+            node: 'item',
+            name: 'Delete Vehicle',
+            type: 'danger',
+            onClick: () => setDeleteModalVisible(true),
+        },
     ];
 
-    const handleVisibleChange = (visible) => {
-        setBtnVisible(visible);
-    };
-
-    const handleAddVehicleClick = () => {
-        setModalVisible(true);
-    };
-
-    const handleCancel = () => {
-        setModalVisible(false);
-    };
-
-    const handleSubmit = async (values) => {
+    /** Handles the "Add Vehicle" form submission **/
+    const handleAddSubmit = async values => {
         const payload = {
-            ...values,
-            year: parseInt(values.year),
+            carModel: values.carModel,
+            licensePlate: values.licensePlate,
+            year: parseInt(values.year, 10),
+            energyType: values.energyType,
             length: parseFloat(values.length),
             width: parseFloat(values.width),
             height: parseFloat(values.height),
-            radarCount: parseInt(values.radarCount),
-            cameraCount: parseInt(values.cameraCount),
+            radarModel: values.radarModel,
+            radarCount: parseInt(values.radarCount, 10),
+            cameraModel: values.cameraModel,
+            cameraCount: parseInt(values.cameraCount, 10),
         };
 
         try {
-            const res = await axiosInstance.post('/vehicles/create', values);
+            const res = await axiosInstance.post('/vehicles/create', payload);
             Toast.success('Vehicle added successfully!');
-            setModalVisible(false);
-            if (onVehicleAdded) {
-                onVehicleAdded(res.data.data); // 假设后端返回新添加的车辆对象
-            }
-        } catch (error) {
-            console.error('Error adding vehicle:', error);
+            setAddModalVisible(false);
+            onVehicleAdded?.(res.data.data);
+        } catch (err) {
+            console.error(err);
             Toast.error('Failed to add vehicle');
+        }
+    };
+
+    /** Sends the delete request for selected plates **/
+    const handleDelete = async plates => {
+        try {
+            await axiosInstance.post('/vehicles/delete', { plates });
+            Toast.success(`Deleted ${plates.length} vehicle(s)`);
+            setDeleteModalVisible(false);
+            onVehiclesDeleted?.(plates);
+        } catch (err) {
+            console.error(err);
+            Toast.error('Delete failed');
         }
     };
 
     return (
         <>
-            {/* 使用自定义样式类美化按钮，仅影响视觉，不改动逻辑 */}
-            <SplitButtonGroup style={{ marginRight: 10 }} aria-label="项目操作按钮组">
+            <SplitButtonGroup style={{ marginRight: 10 }}>
                 <Dropdown
-                    onVisibleChange={handleVisibleChange}
+                    onVisibleChange={setBtnVisible}
                     menu={menu}
                     trigger="click"
                     position="bottomRight"
@@ -63,26 +89,51 @@ export default function CarOperationButton({ onVehicleAdded }) {
                 >
                     <Button
                         className="vehicle-action-button"
-                        icon={<IconPlus style={{ color: '#000' }}/>} // 加号图标
+                        icon={<IconPlus style={{ color: '#000' }} />}
                     />
                 </Dropdown>
             </SplitButtonGroup>
 
+            {/* ─── Add Vehicle Modal ────────────────────── */}
             <Modal
                 title="New Vehicle"
-                visible={modalVisible}
-                //TODO: implement handle OK
-                //onOk={this.handleOk}
-                onCancel={handleCancel}
+                visible={addModalVisible}
+                onCancel={() => setAddModalVisible(false)}
                 centered
                 bodyStyle={{ overflow: 'auto', height: 700 }}
                 footer={null}
             >
-                <Form onSubmit={handleSubmit} labelPosition="left" labelAlign="right" labelWidth={120}>
-                    <Form.Input field="carModel" label="Model" placeholder="e.g. Tesla Model 3" required />
-                    <Form.Input field="licensePlate" label="Plate" placeholder="e.g. ABC-123" required />
-                    <Form.Input field="year" label="Year" type="number" placeholder="e.g. 2022" required />
-                    <Form.Input field="energyType" label="Energy Type" placeholder="e.g. Electric" required />
+                <Form
+                    onSubmit={handleAddSubmit}
+                    labelPosition="left"
+                    labelAlign="right"
+                    labelWidth={120}
+                >
+                    <Form.Input
+                        field="carModel"
+                        label="Model"
+                        placeholder="e.g. Tesla Model 3"
+                        required
+                    />
+                    <Form.Input
+                        field="licensePlate"
+                        label="Plate"
+                        placeholder="e.g. ABC-123"
+                        required
+                    />
+                    <Form.Input
+                        field="year"
+                        label="Year"
+                        type="number"
+                        placeholder="e.g. 2022"
+                        required
+                    />
+                    <Form.Input
+                        field="energyType"
+                        label="Energy Type"
+                        placeholder="e.g. Electric"
+                        required
+                    />
 
                     <Form.Input field="length" label="Length" type="number" placeholder="meters" />
                     <Form.Input field="width" label="Width" type="number" placeholder="meters" />
@@ -95,10 +146,33 @@ export default function CarOperationButton({ onVehicleAdded }) {
                     <Form.Input field="cameraCount" label="Camera Number" type="number" placeholder="e.g. 4" />
 
                     <div style={{ textAlign: 'right', marginTop: 24 }}>
-                        <Button onClick={handleCancel} style={{ marginRight: 12 }}>Cancel</Button>
-                        <Button htmlType="submit" theme="solid" type="primary">Submit</Button>
+                        <Button
+                            onClick={() => setAddModalVisible(false)}
+                            style={{ marginRight: 12 }}
+                        >
+                            Cancel
+                        </Button>
+                        <Button htmlType="submit" theme="solid" type="primary">
+                            Submit
+                        </Button>
                     </div>
                 </Form>
+            </Modal>
+
+            {/* ─── Delete Vehicle Modal ─────────────────── */}
+            <Modal
+                title="Delete Vehicle"
+                visible={deleteModalVisible}
+                footer={null}
+                onCancel={() => setDeleteModalVisible(false)}
+                centered
+                size="small"
+            >
+                <VehicleDeleteModal
+                    vehicles={vehicles}
+                    onCancel={() => setDeleteModalVisible(false)}
+                    onDelete={handleDelete}
+                />
             </Modal>
         </>
     );
