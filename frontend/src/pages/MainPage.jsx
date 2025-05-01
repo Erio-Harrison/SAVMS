@@ -104,6 +104,17 @@ export default function MainPage() {
     }, [city]);
 
     useEffect(() => {
+        const fetchCars = () => {
+            axiosInstance
+                .get("/vehicles/get/all")
+                .then((response) => {
+                    setCars(response.data.data);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        };
+
         const fetchMarkers = async () => {
             const newMarkersData = [
                 { lat: -35.2600, lng: 149.1300 },
@@ -112,17 +123,14 @@ export default function MainPage() {
             ];
             setMarkers(newMarkersData);
         };
-        fetchMarkers(); // 设置地图标记点（模拟数据）
 
-        axiosInstance
-            .get("/vehicles/get/all") // 获取车辆列表
-            .then((response) => {
-                setCars(response.data.data);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        fetchMarkers();     // 初始化地图标记点
+        fetchCars();        // 初次加载车辆列表
+        const intervalId = setInterval(fetchCars, 10000); // 每10秒刷新一次车辆列表
+
+        return () => clearInterval(intervalId); // 卸载组件时清除定时器
     }, []);
+
 
     // 搜索栏搜索城市后更新状态
     const handleSearch = (query) => {
@@ -143,6 +151,7 @@ export default function MainPage() {
 
     return (
         <div className="bg-primary h-screen flex p-4 font-sans gap-4">
+            {/* 左侧侧边栏：车辆列表 + 添加按钮 */}
             <div className="flex flex-col w-1/4 gap-4 flex-grow">
                 <div style={{position: 'relative', display: 'inline-block'}}>
                     <div className="text-2xl font-bold">Tracking</div>
@@ -158,23 +167,15 @@ export default function MainPage() {
                                     <span className="font-semibold text-lg">{car.licensePlate}</span>
                                     <span className="text-sm text-gray-600">{car.carModel}</span>
                                 </div>
-                            );
-
-                            return (
-                                <Popover key={car.id} content={popoverContent} trigger="hover" position="right">
-                                    <div className="p-2 border-b border-gray-200 flex flex-col cursor-pointer">
-                                        <span className="font-semibold text-lg">{car.licensePlate}</span>
-                                        <span className="text-sm text-gray-600">{car.carModel}</span>
-                                    </div>
-                                </Popover>
-                            );
-                        })
-
-                        ) : (
+                            </Popover>
+                        ))
+                    ) : (
                         <div className="text-center text-gray-500">No cars available.</div>
-                        )}
+                    )}
                 </div>
             </div>
+
+            {/* 右侧区域：天气和地图 */}
             <div className="flex flex-col w-3/4 gap-4">
                 <div className="h-1/3 flex gap-4">
                     <div className="w-4/5 flex flex-col gap-4">
@@ -206,6 +207,5 @@ export default function MainPage() {
                 </div>
             </div>
         </div>
-
     );
 }

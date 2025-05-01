@@ -64,7 +64,7 @@ public class VehicleDataFetcher implements Runnable {
                 // 每秒执行一次
                 Thread.sleep(1000);
             } catch (Exception e) {
-                System.err.println("请求或解析失败：" + e.getMessage());
+//                System.err.println("请求或解析失败：" + e.getMessage());
                 try { Thread.sleep(2000); } catch (InterruptedException ignored) {}
             }
         }
