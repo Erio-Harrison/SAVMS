@@ -7,9 +7,9 @@ const RealEstateListingDetails = ({ details }) => {
         CarModel: details.carModel,
         CarType: details.energyType,
         CarYear: details.year,
-        Length: details.carsize.length,
-        Width: details.carsize.width,
-        Height: details.carsize.height
+        Length: details.length,
+        Width: details.width,
+        Height: details.height
     };
 
     return (

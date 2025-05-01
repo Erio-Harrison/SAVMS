@@ -12,6 +12,7 @@ export default function MapPage(){
     const [destination, setDestination] = useState('');
     const [destinationLatLng, setDestinationLatLng] = useState(null);
     const [originLatLng, setOriginLatLng] = useState(null);
+    const [vehicleList, setVehicleList] = useState([]);
     useEffect(() => {
         loadRealEstateListing().then((data) => {
             setRealEstateListing(data);
@@ -70,6 +71,25 @@ export default function MapPage(){
         );
     };
 
+    const fetchVehiclesInBounds = async (bounds) => {
+        const southWest = bounds.getSouthWest();
+        const northEast = bounds.getNorthEast();
+
+        const minLat = southWest.lat();
+        const minLng = southWest.lng();
+        const maxLat = northEast.lat();
+        const maxLng = northEast.lng();
+
+        try {
+            const res = await fetch(`http://localhost:8080/vehicles/withinRange?minLat=${minLat}&maxLat=${maxLat}&minLng=${minLng}&maxLng=${maxLng}`);
+            const data = await res.json();
+            return data.data; // 这里根据你的后端返回结构
+        } catch (err) {
+            console.error('Error fetching vehicles:', err);
+            return [];
+        }
+    };
+
     const controlStyles = {
         position: 'absolute',
         top: '20px',
@@ -88,17 +108,43 @@ export default function MapPage(){
         return <div>Loading...</div>; // 如果数据未加载，显示加载提示
     }
 
+    const VehicleFetcher = ({ onVehiclesFetched }) => {
+        const map = useMap();
+
+        useEffect(() => {
+            if (!map) return;
+
+            const listener = () => {
+                const bounds = map.getBounds();
+                if (bounds) {
+                    fetchVehiclesInBounds(bounds).then((vehicles) => {
+                        onVehiclesFetched(vehicles);
+                    });
+                }
+            };
+
+            map.addListener('idle', listener);
+
+            // 清理
+            return () => {
+                window.google.maps.event.clearListeners(map, 'idle');
+            };
+        }, [map, onVehiclesFetched]);
+
+        return null;
+    };
+
     return (
-        <div className="advanced-marker-example" style={{ position: 'relative', height: '100vh' }}>
+        <div className="advanced-marker-example" style={{position: 'relative', height: '100vh'}}>
             <div style={controlStyles}>
                 <input
                     type="text"
                     placeholder="Address"
                     value={destination}
                     onChange={(e) => setDestination(e.target.value)}
-                    style={{ padding: '6px', borderRadius: '4px', border: '1px solid #ccc', width: '250px' }}
+                    style={{padding: '6px', borderRadius: '4px', border: '1px solid #ccc', width: '250px'}}
                 />
-                <button onClick={handleGeocodeAddressAndRoute} style={{ padding: '6px 12px' }}>
+                <button onClick={handleGeocodeAddressAndRoute} style={{padding: '6px 12px'}}>
                     Search
                 </button>
             </div>
@@ -111,18 +157,30 @@ export default function MapPage(){
                 <MapWithRoute
                     onMapReady={handleMapReady}
                 />
-                <CustomAdvancedMarker
-                    realEstateListing={realEstateListing}
-                    onMarkerClick={(latLng) => {
-                        console.log('Marker set as origin:', latLng);
-                        setOriginLatLng(latLng); // 设置起点为 marker 的位置
+
+                <VehicleFetcher
+                    onVehiclesFetched={(vehicles) => {
+                        console.log('123Fetched vehicles:', vehicles);
+                        setVehicleList(vehicles);
                     }}
                 />
+
+                {/* 渲染车辆 marker */}
+                {vehicleList.map((vehicle) => (
+                    <CustomAdvancedMarker
+                        key={vehicle.id}
+                        realEstateListing={vehicle}
+                        onMarkerClick={(latLng) => {
+                            console.log('Marker set as origin:', latLng);
+                            setOriginLatLng(latLng);
+                        }}
+                    />
+                ))}
             </Map>
         </div>
     );
 }
-function MapWithRoute({ realEstateListing, onMapReady }) {
+function MapWithRoute({ realEstateListing, onMapReady, onMarkerClick  }) {
     const map = useMap();
 
     useEffect(() => {
@@ -130,13 +188,6 @@ function MapWithRoute({ realEstateListing, onMapReady }) {
             onMapReady(map);
         }
     }, [map, onMapReady]);
-
-    return (
-        <>
-            {realEstateListing && (
-                <CustomAdvancedMarker realEstateListing={realEstateListing} />
-            )}
-        </>
-    );
 }
+
 

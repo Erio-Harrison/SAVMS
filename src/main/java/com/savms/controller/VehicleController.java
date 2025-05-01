@@ -64,6 +64,7 @@ public class VehicleController {
      */
     @GetMapping("/get/all")
     public Result getAllVehicles() {
+        System.out.println("3333");
 
 
         return Result.success( vehicleService.getAllVehicles());
@@ -77,5 +78,23 @@ public class VehicleController {
     @PutMapping("/{vehicleId}/updateConnectionStatus")
     public void updateVehicleConnectionStatus(@PathVariable String vehicleId, @RequestParam int newStatus) {
         vehicleService.updateVehicleConnectionStatus(vehicleId, newStatus);
+    }
+
+    /**
+     * 根据地图可视区域查询车辆
+     * 接口路径：/vehicles/withinRange
+     *
+     * @param minLat 南侧纬度
+     * @param maxLat 北侧纬度
+     * @param minLng 西侧经度
+     * @param maxLng 东侧经度
+     * @return 指定范围内的车辆列表
+     */
+    @GetMapping("/withinRange")
+    public Result<?> getVehiclesWithinRange(@RequestParam("minLat") double minLat,
+                                            @RequestParam("maxLat") double maxLat,
+                                            @RequestParam("minLng") double minLng,
+                                            @RequestParam("maxLng") double maxLng) {
+        return Result.success(vehicleService.getVehiclesWithinRange(minLat, maxLat, minLng, maxLng));
     }
 }

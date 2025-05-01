@@ -143,7 +143,6 @@ export default function MainPage() {
 
     return (
         <div className="bg-primary h-screen flex p-4 font-sans gap-4">
-            {/* 左侧侧边栏：车辆列表 + 添加按钮 */}
             <div className="flex flex-col w-1/4 gap-4 flex-grow">
                 <div style={{position: 'relative', display: 'inline-block'}}>
                     <div className="text-2xl font-bold">Tracking</div>
@@ -159,15 +158,23 @@ export default function MainPage() {
                                     <span className="font-semibold text-lg">{car.licensePlate}</span>
                                     <span className="text-sm text-gray-600">{car.carModel}</span>
                                 </div>
-                            </Popover>
-                        ))
-                    ) : (
+                            );
+
+                            return (
+                                <Popover key={car.id} content={popoverContent} trigger="hover" position="right">
+                                    <div className="p-2 border-b border-gray-200 flex flex-col cursor-pointer">
+                                        <span className="font-semibold text-lg">{car.licensePlate}</span>
+                                        <span className="text-sm text-gray-600">{car.carModel}</span>
+                                    </div>
+                                </Popover>
+                            );
+                        })
+
+                        ) : (
                         <div className="text-center text-gray-500">No cars available.</div>
-                    )}
+                        )}
                 </div>
             </div>
-
-            {/* 右侧区域：天气和地图 */}
             <div className="flex flex-col w-3/4 gap-4">
                 <div className="h-1/3 flex gap-4">
                     <div className="w-4/5 flex flex-col gap-4">
@@ -199,5 +206,6 @@ export default function MainPage() {
                 </div>
             </div>
         </div>
+
     );
 }
