@@ -48,10 +48,16 @@ export default function RegisterAndLogin() {
                 // Success case
                 const userId = data.id;
                 const token = data.token;
-                axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-                localStorage.setItem('JWTtoken', token);
+                const userData = {
+                    id: userId,
+                    username: username,
+                    email: data.email,
+                    token: token,
+                    role: data.role
+                };
+
+                localStorage.setItem("user", JSON.stringify(userData));
                 setId(userId);
-                alert(data.role);
                 setRole(data.role);
             }
             catch (err) {
