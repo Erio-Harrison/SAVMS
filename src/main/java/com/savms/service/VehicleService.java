@@ -78,7 +78,14 @@ public class VehicleService {
 
     public int deleteVehiclesByPlates(List<String> plates) {
         int deleteCount = 0;
-        return 0;
+        for (String plate : plates) {
+            if (vehicleRepository.deleteVehicleByPlate(plate)) {
+                deleteCount++;
+            }
+        }
+        return deleteCount;
+
+
     }
 
     public void save(Vehicle vehicle) {

@@ -97,4 +97,14 @@ public class VehicleRepository {
     public void saveVehicle(Vehicle vehicle) {
         mongoTemplate.save(vehicle);
     }
+
+    public boolean deleteVehicleByPlate(String plate) {
+        Optional<Vehicle> vehicle = findByLicensePlate(plate);
+        if (vehicle.isPresent()) {
+            Query query = new Query(Criteria.where("licensePlate").is(plate));
+            mongoTemplate.remove(query, Vehicle.class);
+            return true;
+        }
+        return false;
+    }
 }

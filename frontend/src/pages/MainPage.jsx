@@ -103,17 +103,17 @@ export default function MainPage() {
         fetchWeather(); // 页面加载或城市变化时获取天气数据
     }, [city]);
 
+    const fetchCars = () => {
+        axiosInstance
+            .get("/vehicles/get/all")
+            .then((response) => {
+                setCars(response.data.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
     useEffect(() => {
-        const fetchCars = () => {
-            axiosInstance
-                .get("/vehicles/get/all")
-                .then((response) => {
-                    setCars(response.data.data);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        };
 
         const fetchMarkers = async () => {
             const newMarkersData = [
@@ -161,7 +161,7 @@ export default function MainPage() {
                         onVehiclesDeleted={(deletedPlates) => {
                             setCars((prev) => prev.filter((car) => !deletedPlates.includes(car.licensePlate)));
                         }}
-
+                        fetchCars={fetchCars}
                         onVehicleAdded={(newCar) => setCars(prev => [...prev, newCar])}/>
                     </div>
                 </div>
