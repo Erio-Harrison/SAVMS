@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect, useContext} from "react";
 
 // Admin components
 import Sidebar from "../components/Sidebar";
@@ -10,6 +10,7 @@ import TestPage from "./testPage.jsx";
 import ClientTasksPage from "./ClientTasksPage.jsx";
 import ClientSidebar from "../components/ClientSidebar";
 import SCUVMS_Client from "./SCUVMS_Client.jsx";
+import {UserContext} from "../UserContext.jsx";
 
 
 export default function SCUVMS() {
@@ -17,7 +18,11 @@ export default function SCUVMS() {
     const [selectedPage, setSelectedPage] = useState("MainPage");
     const user = JSON.parse(localStorage.getItem("user"));
 
-    if (user?.role === 1) {
+    const { role } = useContext(UserContext);
+    //
+    // alert(role);
+
+    if (role === 1) {
         return <SCUVMS_Client />;
     }
 
