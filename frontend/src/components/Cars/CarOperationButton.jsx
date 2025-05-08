@@ -21,12 +21,25 @@ export default function CarOperationButton({
     const [btnVisible, setBtnVisible] = useState(false);
     const [addModalVisible, setAddModalVisible] = useState(false);
     const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+    const [addImagesVisible,setAddImagesVisible] = useState(false);
+
+    const [selectedPlate, setSelectedPlate] = useState('');
+    const [selectedVehicleId, setSelectedVehicleId] = useState('');
+    const [existingImages, setExistingImages] = useState([]);
+    const [selectedFiles, setSelectedFiles] = useState([]);
+    const [uploadedUrls, setUploadedUrls] = useState([]);
+
 
     const menu = [
         {
             node: 'item',
             name: 'Add Vehicle',
             onClick: () => setAddModalVisible(true),
+        },
+        {
+            node: 'item',
+            name: 'Add Images',
+            onClick: () => setAddImagesVisible(true),
         },
         { node: 'divider' },
         {
@@ -74,6 +87,31 @@ export default function CarOperationButton({
         } catch (err) {
             console.error(err);
             Toast.error('Delete failed');
+        }
+    };
+
+    const handleUpload = async () => {
+        if (!selectedPlate || selectedFiles.length === 0) {
+            Toast.warning('请选择车牌并选择图片');
+            return;
+        }
+
+        const formData = new FormData();
+        selectedFiles.forEach(file => {
+            formData.append('photos', file);
+        });
+
+        try {
+            const res = await axiosInstance.post(`/vehicles/${selectedVehicleId}/upload`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            Toast.success('111上传成功！');
+            setUploadedUrls(res.data.data); // 假设后端返回的 URL 数组
+        } catch (err) {
+            console.error(err);
+            Toast.error('上传失败');
         }
     };
 
@@ -159,6 +197,85 @@ export default function CarOperationButton({
                 </Form>
             </Modal>
 
+            {/* ─── Add Vehicle Images ─────────────────── */}
+            <Modal
+                title="Add Vehicle Images"
+                visible={addImagesVisible}
+                width={800}
+                footer={null}
+                onCancel={() => {
+                    setAddImagesVisible(false);
+                    setSelectedPlate(null);
+                    setExistingImages([]);
+                    setSelectedVehicleId(null);
+                    setSelectedFiles([]);
+                }}
+                centered
+            >
+                <Form labelPosition="top">
+                    {/* 选择车牌 */}
+                    <Form.Select
+                        field="selectedPlate"
+                        label="Select Vehicle Plate"
+                        placeholder="Select a vehicle"
+                        onChange={async (plate) => {
+                            setSelectedPlate(plate);
+                            // 加载图片（发请求获取该车已有图片）
+                            try {
+                                const res = await axiosInstance.get(`/vehicles/get/license/${plate}`);
+                                const vehicle = res.data;
+                                setExistingImages(vehicle.images || []);
+                                setSelectedVehicleId(vehicle.id);
+                            } catch (err) {
+                                console.error(err);
+                                setExistingImages([]);
+                            }
+                        }}
+                    >
+                        {vehicles.map((v) => (
+                            <Form.Select.Option key={v.licensePlate} value={v.licensePlate}>
+                                {v.licensePlate}
+                            </Form.Select.Option>
+                        ))}
+                    </Form.Select>
+
+                    {/* 图片预览 */}
+                    <div style={{ marginTop: 16 }}>
+                        <p>Existing Images:</p>
+                        {existingImages.length === 0 ? (
+                            <p style={{ color: '#aaa' }}>No images available</p>
+                        ) : (
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                                {existingImages.map((url, index) => (
+                                    <img key={index} src={url} alt="Vehicle" style={{ width: 100, height: 100, objectFit: 'cover', borderRadius: 4 }} />
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                    {/* 上传图片 */}
+                    <div style={{ marginBottom: 16, marginTop: 16 }}>
+                        <label>Upload Images</label>
+                        <input
+                            type="file"
+                            multiple
+                            accept="image/*"
+                            onChange={(e) => setSelectedFiles(Array.from(e.target.files))}
+                            style={{ display: 'block', marginTop: 8 }}
+                        />
+                    </div>
+
+                    {/* 上传按钮 */}
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', paddingBottom: 16 }}>
+                        <Button onClick={handleUpload} type="primary" theme="solid">
+                            上传图片
+                        </Button>
+                    </div>
+
+                </Form>
+
+
+            </Modal>
+
             {/* ─── Delete Vehicle Modal ─────────────────── */}
             <Modal
                 title="Delete Vehicle"
@@ -167,7 +284,6 @@ export default function CarOperationButton({
                 footer={null}
                 onCancel={() => setDeleteModalVisible(false)}
                 centered
-
             >
                 <VehicleDeleteModal
                     vehicles={vehicles}
@@ -175,6 +291,7 @@ export default function CarOperationButton({
                     onDelete={handleDelete}
                 />
             </Modal>
+
         </>
     );
 }
