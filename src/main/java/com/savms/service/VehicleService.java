@@ -3,6 +3,7 @@ package com.savms.service;
 import com.savms.repository.VehicleRepository;
 import com.savms.entity.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.geo.GeoResults;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -71,8 +72,17 @@ public class VehicleService {
     }
 
     /**
-     * 根据地图范围获取车辆信息
+     * Get vehicle information based on map range
      */
     public List<Vehicle> getVehiclesWithinRange(double minLat, double maxLat, double minLng, double maxLng) {
         return vehicleRepository.findVehiclesWithinRange(minLat, maxLat, minLng, maxLng);}
+
+    /**
+     * Query the vehicles within a radius of a specified point and return the results sorted by distance
+     */
+    public GeoResults<Vehicle> getNearbyVehicles(double centerLng,
+                                                 double centerLat,
+                                                 double radiusMeters) {
+        return vehicleRepository.findNearbyVehicles(centerLng, centerLat, radiusMeters);
+    }
 }

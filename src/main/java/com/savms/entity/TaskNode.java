@@ -1,9 +1,15 @@
 package com.savms.entity;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
+
 
 @Document(collection = "task") // MongoDB集合名为 task
 public class TaskNode {
@@ -17,6 +23,14 @@ public class TaskNode {
     private int status;
     private Location startLocation;
     private Location endLocation;
+
+    @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
+    private GeoJsonPoint startPoint;
+
+    @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
+    private GeoJsonPoint endPoint;
+
+    private String assignedVehicleId;
     private VehicleInfo vehicle;
 
     // Getters and Setters
@@ -74,6 +88,9 @@ public class TaskNode {
 
     public void setStartLocation(Location startLocation) {
         this.startLocation = startLocation;
+        if (startLocation != null) {
+            this.startPoint = new GeoJsonPoint(startLocation.getLng(), startLocation.getLat());
+        }
     }
 
     public Location getEndLocation() {
@@ -82,6 +99,17 @@ public class TaskNode {
 
     public void setEndLocation(Location endLocation) {
         this.endLocation = endLocation;
+        if (endLocation != null) {
+            this.endPoint = new GeoJsonPoint(endLocation.getLng(), endLocation.getLat());
+        }
+    }
+
+    public String getAssignedVehicleId() {
+        return assignedVehicleId;
+    }
+
+    public void setAssignedVehicleId(String assignedVehicleId) {
+        this.assignedVehicleId = assignedVehicleId;
     }
 
     public VehicleInfo getVehicle() {
@@ -92,56 +120,30 @@ public class TaskNode {
         this.vehicle = vehicle;
     }
 
+    public GeoJsonPoint getStartPoint() {
+        return startPoint;
+    }
+
+    public GeoJsonPoint getEndPoint() {
+        return endPoint;
+    }
+
     // Inner classes
+    @Setter
+    @Getter
     public static class Location {
         private String address;
         private double lat;
         private double lng;
 
-        public String getAddress() {
-            return address;
-        }
-
-        public void setAddress(String address) {
-            this.address = address;
-        }
-
-        public double getLat() {
-            return lat;
-        }
-
-        public void setLat(double lat) {
-            this.lat = lat;
-        }
-
-        public double getLng() {
-            return lng;
-        }
-
-        public void setLng(double lng) {
-            this.lng = lng;
-        }
     }
 
+    @Setter
+    @Getter
     public static class VehicleInfo {
         private String vehicleNumber;
         private String plateNumber;
 
-        public String getVehicleNumber() {
-            return vehicleNumber;
-        }
-
-        public void setvehicleNumber(String id) {
-            this.vehicleNumber = id;
-        }
-
-        public String getPlateNumber() {
-            return plateNumber;
-        }
-
-        public void setPlateNumber(String plateNumber) {
-            this.plateNumber = plateNumber;
-        }
     }
 }
 
