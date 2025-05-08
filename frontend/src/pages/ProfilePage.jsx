@@ -4,13 +4,18 @@ import { Form, Button, Input, Toast } from "@douyinfe/semi-ui";
 
 export default function ProfilePage() {
     const storedUser = JSON.parse(localStorage.getItem("user"));
+
     const [user, setUser] = useState({
         id: "",
         username: "",
         email: ""
     });
+
     const [editing, setEditing] = useState(false);
-    const [formValues, setFormValues] = useState({});
+    const [formValues, setFormValues] = useState({
+        username: "",
+        email: ""
+    });
 
     useEffect(() => {
         if (storedUser) {
@@ -42,7 +47,14 @@ export default function ProfilePage() {
 
             const updatedUser = { ...user, ...formValues };
             setUser(updatedUser);
-            localStorage.setItem("user", JSON.stringify(updatedUser));
+
+            // Update localStorage
+            const localUser = JSON.parse(localStorage.getItem("user"));
+            localStorage.setItem("user", JSON.stringify({
+                ...localUser,
+                username: updatedUser.username,
+                email: updatedUser.email
+            }));
 
             Toast.success("Profile updated successfully!");
             setEditing(false);
