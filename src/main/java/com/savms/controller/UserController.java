@@ -29,6 +29,7 @@ public class UserController
     public void createUser( @RequestBody User user )
     {
         System.out.println("in /create");
+        user.setRole(1);
         userService.saveUser(user);
     }
 

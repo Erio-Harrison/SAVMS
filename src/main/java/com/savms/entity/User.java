@@ -12,7 +12,7 @@ public class User {
     private String email;
     private LocalDateTime createdAt;
     private String password;
-    private int role; // 0 for admin, 1 for client
+    private Integer role;; // 0 for admin, 1 for client
 
     // Constructors
     public User() {
@@ -68,12 +68,12 @@ public class User {
         this.password = password;
     }
 
-    public int getRole()
+    public Integer getRole()
     {
         return role;
     }
 
-    public void setRole(int role)
+    public void setRole( Integer role )
     {
         this.role = role;
     }
