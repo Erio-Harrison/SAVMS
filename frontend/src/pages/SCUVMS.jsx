@@ -10,6 +10,7 @@ import TestPage from "./testPage.jsx";
 import ClientTasksPage from "./ClientTasksPage.jsx";
 import ClientSidebar from "../components/ClientSidebar";
 import SCUVMS_Client from "./SCUVMS_Client.jsx";
+import ProfilePage from "./ProfilePage.jsx";
 
 
 export default function SCUVMS() {
@@ -32,6 +33,8 @@ export default function SCUVMS() {
                 return <CurrentTasksPage />;
             case "testPage":
                 return <TestPage />;
+            case "ProfilePage":
+                return <ProfilePage />;
             default:
                 return <MainPage />;
         }
