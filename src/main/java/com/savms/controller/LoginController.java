@@ -38,6 +38,11 @@ public class LoginController {
                 throw new RuntimeException("Wrong password");
             }
 
+            // 3. Validate role
+            if (user.getRole() != loginRequest.getRole()) {
+                throw new RuntimeException("User role mismatch");
+            }
+
             // 3.  Build login response (token is a placeholder for future JWT implementation)
 //            return ResponseEntity.ok(new LoginResponse(
 //                    "dummy-token", //
@@ -46,11 +51,11 @@ public class LoginController {
 //                    user.getEmail()
 //            ));
 
-            // 3. Create a JWT token
+            // 4. Create a JWT token
             String token = jwtUtil.generateToken(user.getId(), user.getUsername());
 
 
-            // 4. Build LoginResponse and return
+            // 5. Build LoginResponse and return
             LoginResponse loginResponse = new LoginResponse(
                     token,
                     user.getId(),

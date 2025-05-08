@@ -20,7 +20,8 @@ export default function RegisterAndLogin() {
             const endpoint = isLoginMode ? '/api/auth/login' : '/users/create';
             var reqlogin = {
                 username: username,
-                password: password
+                password: password,
+                role: role === 'admin' ? 0 : 1
             };
             try{
                 const response = await axiosInstance.post(endpoint, reqlogin);
@@ -38,7 +39,7 @@ export default function RegisterAndLogin() {
 
         }else{
             const endpoint = '/users/create';
-            const roleId = (role == 'admin') ? 1 : 2;
+            const roleId = (role == 'admin') ? 0 : 1;
             const user = {
                 username: username,
                 password: password,
@@ -97,23 +98,23 @@ export default function RegisterAndLogin() {
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     )}
-                    {/*{isLoginMode && (*/}
-                    {/*    <div className="relative mb-6">*/}
-                    {/*        <select*/}
-                    {/*            className="block w-full rounded-full px-4 py-2 pr-10 focus:outline-none bg-secondary appearance-none"*/}
-                    {/*            value={role}*/}
-                    {/*            onChange={(e) => setRole(e.target.value)}*/}
-                    {/*        >*/}
-                    {/*            <option value="client">Client</option>*/}
-                    {/*            <option value="admin">Admin</option>*/}
-                    {/*        </select>*/}
-                    {/*        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">*/}
-                    {/*            <svg className="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">*/}
-                    {/*                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>*/}
-                    {/*            </svg>*/}
-                    {/*        </div>*/}
-                    {/*    </div>*/}
-                    {/*)}*/}
+                    {isLoginMode && (
+                        <div className="relative mb-6">
+                            <select
+                                className="block w-full rounded-full px-4 py-2 pr-10 focus:outline-none bg-secondary appearance-none"
+                                value={role}
+                                onChange={(e) => setRole(e.target.value)}
+                            >
+                                <option value="client">Client</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                <svg className="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    )}
                     <button
                         type="submit"
                         className="bg-accent block w-full rounded-full p-2 mb-6 text-gray-darkest font-semibold"
