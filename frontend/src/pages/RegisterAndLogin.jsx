@@ -9,6 +9,8 @@ export default function RegisterAndLogin() {
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('client');
     const [isLoginMode, setIsLoginMode] = useState(true);
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
 
     const { setId } = useContext(UserContext);
 
@@ -40,17 +42,19 @@ export default function RegisterAndLogin() {
             const user = {
                 username: username,
                 password: password,
-                email: "1234@gmail.com"
-                // role: roleId
+                email: email,
+                role: 1
             };
             try {
-                const response = await axiosInstance.post(endpoint, user);
-                const userId = response.data.data.id;
-                alert(userId)
-
-                setId(userId);
+                await axiosInstance.post(endpoint, user);
+                setMessage('Registration successful. You can now log in.');
+                setIsLoginMode(true); // Switch to login mode
+                setUsername('');
+                setPassword('');
+                setEmail('');
             } catch (err) {
                 console.error('Error', err.response ? err.response.data : err.message);
+                setMessage('Registration failed. Please try again.');
             }
         }
     }
@@ -64,6 +68,11 @@ export default function RegisterAndLogin() {
             <div className="w-96 mx-auto text-center mb-20">
                 <h1 className="text-3xl font-sans font-semibold text-black mb-3">SCUVMS</h1>
                 <Logo />
+                {message && (
+                    <div className="mb-4 text-sm text-green-600 bg-green-100 p-2 rounded-full">
+                        {message}
+                    </div>
+                )}
                 <form onSubmit={registerOrLogin}>
                     <input
                         type="text"
@@ -79,23 +88,32 @@ export default function RegisterAndLogin() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    {isLoginMode && (
-                        <div className="relative mb-6">
-                            <select
-                                className="block w-full rounded-full px-4 py-2 pr-10 focus:outline-none bg-secondary appearance-none"
-                                value={role}
-                                onChange={(e) => setRole(e.target.value)}
-                            >
-                                <option value="client">Client</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                                <svg className="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                                </svg>
-                            </div>
-                        </div>
+                    {!isLoginMode && (
+                        <input
+                            type="email"
+                            placeholder="email"
+                            className="block w-full rounded-full px-4 py-2 mb-6 focus:outline-none bg-secondary"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
                     )}
+                    {/*{isLoginMode && (*/}
+                    {/*    <div className="relative mb-6">*/}
+                    {/*        <select*/}
+                    {/*            className="block w-full rounded-full px-4 py-2 pr-10 focus:outline-none bg-secondary appearance-none"*/}
+                    {/*            value={role}*/}
+                    {/*            onChange={(e) => setRole(e.target.value)}*/}
+                    {/*        >*/}
+                    {/*            <option value="client">Client</option>*/}
+                    {/*            <option value="admin">Admin</option>*/}
+                    {/*        </select>*/}
+                    {/*        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">*/}
+                    {/*            <svg className="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">*/}
+                    {/*                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>*/}
+                    {/*            </svg>*/}
+                    {/*        </div>*/}
+                    {/*    </div>*/}
+                    {/*)}*/}
                     <button
                         type="submit"
                         className="bg-accent block w-full rounded-full p-2 mb-6 text-gray-darkest font-semibold"
