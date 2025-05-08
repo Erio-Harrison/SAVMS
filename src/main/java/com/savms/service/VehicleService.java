@@ -80,4 +80,8 @@ public class VehicleService {
         int deleteCount = 0;
         return 0;
     }
+
+    public void save(Vehicle vehicle) {
+        vehicleRepository.saveVehicle(vehicle);
+    }
 }

@@ -68,6 +68,7 @@ public class VehicleController {
      */
     @GetMapping("/get/id/{vehicleId}")
     public Optional<Vehicle> getVehicleByVehicleId(@PathVariable String vehicleId) {
+        System.out.println(vehicleId);
         return vehicleService.getVehicleByVehicleId(vehicleId);
     }
 
@@ -77,10 +78,7 @@ public class VehicleController {
      */
     @GetMapping("/get/all")
     public Result getAllVehicles() {
-        System.out.println("3333");
-
-
-        return Result.success( vehicleService.getAllVehicles());
+        return Result.success(vehicleService.getAllVehicles());
     }
 
     /**
