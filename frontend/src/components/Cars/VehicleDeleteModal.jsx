@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Transfer, Checkbox, Avatar, Button, Toast } from '@douyinfe/semi-ui';
+import { Transfer, Checkbox, Avatar, Button, Toast, LocaleProvider } from '@douyinfe/semi-ui';
 import { IconHandle, IconClose } from '@douyinfe/semi-icons';
 import axiosInstance from '../../axiosInstance';
+import en_GB from '@douyinfe/semi-ui/lib/es/locale/source/en_GB';  // ← 英文包
+
 
 export default function VehicleDeleteModal({ vehicles, onCancel, onDelete, fetchCars }) {
   const [selectedVehicles, setSelectedVehicles] = useState([]);
@@ -71,7 +73,7 @@ export default function VehicleDeleteModal({ vehicles, onCancel, onDelete, fetch
   // 真正执行删除
   const handleConfirmDelete = async () => {
     if (!selectedVehicles.length) {
-      Toast.warning('请先选择要删除的车辆');
+      Toast.warning('Please choose a vehicle');
       return;
     }
     try {
@@ -84,27 +86,53 @@ export default function VehicleDeleteModal({ vehicles, onCancel, onDelete, fetch
       onDelete && onDelete();  // 如果父组件需要回调
     } catch (err) {
       console.error(err);
-      Toast.error('删除车辆失败，请重试');
+      Toast.error('Failed to delete Vehicle');
     }
   };
 
   return (
     <>
+        <LocaleProvider locale={en_GB}>
       <Transfer
         draggable
         style={{ width: 600 }}
         dataSource={dataSource}
         filter={customFilter}
-        inputProps={{ placeholder: '搜索车型或车牌' }}
+        inputProps={{ placeholder: 'Search Plate or Modal' }}
         renderSourceItem={renderSourceItem}
         renderSelectedItem={renderSelectedItem}
         value={selectedVehicles}
         onChange={handleChange}
+
+          // 左侧头部：显示“Select all / Unselect all”
+//           renderSourceHeader={({ num, allChecked, showButton, onAllClick }) => (
+//             <div style={{ display: 'flex', justifyContent: 'space-between', padding: 8 }}>
+//               <span>{num} items</span>
+//               {showButton && (
+//                 <a onClick={onAllClick}>
+//                   {allChecked ? 'Unselect all' : 'Select all'}
+//                 </a>
+//               )}
+//             </div>
+//           )}
+//           // 右侧头部：显示“X selected / Clear”
+//           renderSelectedHeader={({ length, showButton, onClear }) => (
+//             <div style={{ display: 'flex', justifyContent: 'space-between', padding: 8 }}>
+//               <span>{length} selected</span>
+//               {showButton && <a onClick={onClear}>Clear</a>}
+//             </div>
+//           )}
       />
+          </LocaleProvider>
+
+
+
+
+
 
       <div style={{ textAlign: 'right', marginTop: 12 }}>
         <Button onClick={onCancel} style={{ marginRight: 12 }}>
-          取消
+          Cancel
         </Button>
         <Button
           type="primary"
@@ -112,9 +140,11 @@ export default function VehicleDeleteModal({ vehicles, onCancel, onDelete, fetch
           onClick={handleConfirmDelete}
           disabled={!selectedVehicles.length}
         >
-          删除 {selectedVehicles.length ? `(${selectedVehicles.length})` : ''}
+          Delete {selectedVehicles.length ? `(${selectedVehicles.length})` : ''}
         </Button>
       </div>
+
+
     </>
   );
 }
