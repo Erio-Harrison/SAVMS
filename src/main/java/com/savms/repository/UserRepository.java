@@ -93,6 +93,45 @@ public class UserRepository {
     }
 
     /**
+     * Updates the role of a user.
+     * @param userId The ID of the user.
+     * @param role The new role to set.
+     */
+    public void setUserRole( String userId, int role )
+    {
+        User user = mongoTemplate.findById( userId, User.class );
+        if( user != null )
+        {
+            user.setRole( role );
+            mongoTemplate.save( user );
+        }
+    }
+
+    /**
+     * Gets the role of a user by ID.
+     * @param userId The ID of the user.
+     * @return The role if user exists, otherwise -1.
+     */
+    public int getUserRoleById( String userId )
+    {
+        User user = mongoTemplate.findById( userId, User.class );
+        return user != null ? user.getRole() : -1;
+    }
+
+    /**
+     * Gets the role of a user by username.
+     * @param username The username of the user.
+     * @return The role if user exists, otherwise -1.
+     */
+    public int getUserRoleByUsername( String username )
+    {
+        Query query = new Query( Criteria.where( "username" ).is( username ) );
+        User user = mongoTemplate.findOne( query, User.class );
+        return user != null ? user.getRole() : -1;
+    }
+
+
+    /**
      * Retrieves all users from the database.
      * @return A list of all users.
      */

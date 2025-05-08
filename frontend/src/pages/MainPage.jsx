@@ -103,17 +103,17 @@ export default function MainPage() {
         fetchWeather(); // 页面加载或城市变化时获取天气数据
     }, [city]);
 
+    const fetchCars = () => {
+        axiosInstance
+            .get("/vehicles/get/all")
+            .then((response) => {
+                setCars(response.data.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
     useEffect(() => {
-        const fetchCars = () => {
-            axiosInstance
-                .get("/vehicles/get/all")
-                .then((response) => {
-                    setCars(response.data.data);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        };
 
         const fetchMarkers = async () => {
             const newMarkersData = [
@@ -156,7 +156,13 @@ export default function MainPage() {
                 <div style={{position: 'relative', display: 'inline-block'}}>
                     <div className="text-2xl font-bold">Tracking</div>
                     <div style={{position: 'absolute', right: -4, top: 0}}>
-                        <CarOperationButton onVehicleAdded={(newCar) => setCars(prev => [...prev, newCar])}/>
+                        <CarOperationButton
+                        vehicles={cars}
+                        onVehiclesDeleted={(deletedPlates) => {
+                            setCars((prev) => prev.filter((car) => !deletedPlates.includes(car.licensePlate)));
+                        }}
+                        fetchCars={fetchCars}
+                        onVehicleAdded={(newCar) => setCars(prev => [...prev, newCar])}/>
                     </div>
                 </div>
                 <div className="bg-accent rounded-3xl p-4 flex flex-col h-screen overflow-auto">

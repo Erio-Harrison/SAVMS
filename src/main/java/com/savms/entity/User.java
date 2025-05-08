@@ -12,6 +12,7 @@ public class User {
     private String email;
     private LocalDateTime createdAt;
     private String password;
+    private Integer role;; // 0 for admin, 1 for client
 
     // Constructors
     public User() {
@@ -65,6 +66,16 @@ public class User {
     public void setPassword( String password )
     {
         this.password = password;
+    }
+
+    public Integer getRole()
+    {
+        return role;
+    }
+
+    public void setRole( Integer role )
+    {
+        this.role = role;
     }
 
     @Override
