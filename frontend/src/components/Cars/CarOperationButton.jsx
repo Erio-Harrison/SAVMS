@@ -17,6 +17,7 @@ export default function CarOperationButton({
                                                vehicles,
                                                onVehicleAdded,
                                                onVehiclesDeleted,
+                                               fetchCars
                                            }) {
     const [btnVisible, setBtnVisible] = useState(false);
     const [addModalVisible, setAddModalVisible] = useState(false);
@@ -287,6 +288,10 @@ export default function CarOperationButton({
             >
                 <VehicleDeleteModal
                     vehicles={vehicles}
+                    visible={deleteModalVisible}
+                    fetchCars={fetchCars}
+
+
                     onCancel={() => setDeleteModalVisible(false)}
                     onDelete={handleDelete}
                 />

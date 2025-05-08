@@ -11,19 +11,24 @@ public class LoginResponse {
     private String username;
     private String email;
     private String error;
+    private Integer role;
 
     /**
      * Constructor for successful login responses.
-     * @param token  Placeholder authentication token (to be replaced with JWT)
-     * @param id     User's unique ID
+     *
+     * @param token    Placeholder authentication token (to be replaced with JWT)
+     * @param id       User's unique ID
      * @param username Authenticated username
-     * @param email  User's registered email
+     * @param email    User's registered email
+     * @param role     User's role (0 for admin, 1 for client)
      */
-    public LoginResponse(String token, String id, String username, String email) {
+    public LoginResponse(String token, String id, String username, String email, Integer role)
+    {
         this.token = token;
         this.id = id;
         this.username = username;
         this.email = email;
+        this.role = role;
     }
 
     /**
@@ -40,4 +45,9 @@ public class LoginResponse {
     public String getUsername() { return username; }
     public String getEmail() { return email; }
     public String getError() { return error; }
+
+    public Integer getRole()
+    {
+        return role;
+    }
 }

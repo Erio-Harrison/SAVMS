@@ -38,6 +38,19 @@ public class VehicleController {
         vehicleService.deleteVehicle(vehicleId);
     }
 
+    @DeleteMapping("/delete/byPlate")
+    public Result deleteVehicleByPlate(@RequestBody List<String> plates) {
+
+        if (plates == null || plates.isEmpty()) {
+            return Result.error("plates == null or empty");
+        }
+        System.out.println(plates);
+        int deletedCount = vehicleService.deleteVehiclesByPlates(plates);
+
+        Result result = Result.success();
+        result.setMsg("Successfully deleted " + deletedCount + " vehicles.");
+        return result;
+    }
     /**
      * Retrieves a vehicle by license plate.
      * @param licensePlate The license plate to search for.
