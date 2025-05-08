@@ -97,7 +97,8 @@ public Result login(@RequestBody LoginRequest loginRequest) {
             token,
             user.getId(),
             user.getUsername(),
-            user.getEmail()
+            user.getEmail(),
+            user.getRole()
     );
 
     return Result.success(loginResponse);

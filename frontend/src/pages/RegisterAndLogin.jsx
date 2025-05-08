@@ -51,6 +51,8 @@ export default function RegisterAndLogin() {
                 axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                 localStorage.setItem('JWTtoken', token);
                 setId(userId);
+                alert(data.role);
+                setRole(data.role);
             }
             catch (err) {
                 const errMsg = 'Login failed.';
