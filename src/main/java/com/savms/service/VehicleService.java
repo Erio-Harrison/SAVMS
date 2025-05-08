@@ -75,4 +75,8 @@ public class VehicleService {
      */
     public List<Vehicle> getVehiclesWithinRange(double minLat, double maxLat, double minLng, double maxLng) {
         return vehicleRepository.findVehiclesWithinRange(minLat, maxLat, minLng, maxLng);}
+
+    public void save(Vehicle vehicle) {
+        vehicleRepository.saveVehicle(vehicle);
+    }
 }

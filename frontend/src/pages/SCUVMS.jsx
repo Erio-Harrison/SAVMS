@@ -4,6 +4,7 @@ import Sidebar from "../components/Sidebar";
 import MainPage from "./MainPage.jsx";
 import MapPage from "./MapPage.jsx";
 import CurrentTasksPage from "./CurrentTasksPage.jsx";
+import TestPage from "./testPage.jsx";
 
 
 export default function SCUVMS() {
@@ -19,6 +20,8 @@ export default function SCUVMS() {
                 return <MapPage />;
             case "CurrentTasksPage":
                 return <CurrentTasksPage />;
+            case "testPage":
+                return <TestPage />;
             default:
                 return <MainPage />;
         }
