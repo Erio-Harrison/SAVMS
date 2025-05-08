@@ -3,6 +3,7 @@ import axiosInstance from "../axiosInstance";
 import { Form, Button, Input, Toast } from "@douyinfe/semi-ui";
 
 export default function ProfilePage() {
+    console.log(localStorage);
     const storedUser = JSON.parse(localStorage.getItem("user"));
     const [user, setUser] = useState({
         id: "",
