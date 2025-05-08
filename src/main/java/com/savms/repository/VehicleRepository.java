@@ -55,7 +55,7 @@ public class VehicleRepository {
      * @return An Optional containing the vehicle if found, otherwise empty.
      */
     public Optional<Vehicle> findByVehicleId(String vehicleId) {
-        Query query = new Query(Criteria.where("vehicleId").is(vehicleId));
+        Query query = new Query(Criteria.where("_id").is(vehicleId));
         return Optional.ofNullable(mongoTemplate.findOne(query, Vehicle.class));
     }
 
@@ -92,5 +92,9 @@ public class VehicleRepository {
         query.addCriteria(Criteria.where("longitude").gte(minLng).lte(maxLng));
 
         return mongoTemplate.find(query, Vehicle.class);
+    }
+
+    public void saveVehicle(Vehicle vehicle) {
+        mongoTemplate.save(vehicle);
     }
 }
