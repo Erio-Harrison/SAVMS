@@ -93,6 +93,21 @@ public class UserRepository {
     }
 
     /**
+     * Updates the role of a user.
+     * @param userId The ID of the user.
+     * @param role The new role to set.
+     */
+    public void setUserRole( String userId, int role )
+    {
+        User user = mongoTemplate.findById( userId, User.class );
+        if( user != null )
+        {
+            user.setRole( role );
+            mongoTemplate.save( user );
+        }
+    }
+
+    /**
      * Retrieves all users from the database.
      * @return A list of all users.
      */

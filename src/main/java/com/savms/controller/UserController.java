@@ -95,4 +95,15 @@ public class UserController
     {
         userService.updateUserEmail( userId, newPassword );
     }
+
+    /**
+     * Sets a user's role.
+     * @param userId The ID of the user.
+     * @param role The new role (0 = admin, 1 = client).
+     */
+    @PutMapping("/{userId}/setRole")
+    public void setUserRole(@PathVariable String userId, @RequestParam int role)
+    {
+        userService.setUserRole(userId, role);
+    }
 }

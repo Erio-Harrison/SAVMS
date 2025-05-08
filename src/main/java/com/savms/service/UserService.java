@@ -79,6 +79,16 @@ public class UserService
     }
 
     /**
+     * Set a user's role.
+     * @param userId The ID of the user.
+     * @param role The new role.
+     */
+    public void setUserRole( String userId, int role )
+    {
+        userRepository.setUserRole( userId, role) ;
+    }
+
+    /**
      * Retrieves all users from the database.
      * @return A list of all users.
      */
@@ -86,4 +96,6 @@ public class UserService
     {
         return userRepository.getAllUsers();
     }
+
+
 }
