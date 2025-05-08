@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Checkbox, Avatar, Button, Toast } from '@douyinfe/semi-ui';
 import { IconHandle, IconClose } from '@douyinfe/semi-icons';
 import axiosInstance from '../../axiosInstance';
 
-export default function VehicleDeleteModal({ vehicles, onCancel, onDelete }) {
+export default function VehicleDeleteModal({ vehicles, onCancel, onDelete, fetchCars }) {
     const [selectedVehicles, setSelectedVehicles] = useState([]);
+
+    useEffect(() => {
+        if (fetchCars) {
+            fetchCars(); // Ensure the function is executed correctly
+        }
+    }, [fetchCars]);
 
     // 渲染单个车辆项
     const renderSourceItem = (item) => (
@@ -44,8 +50,8 @@ export default function VehicleDeleteModal({ vehicles, onCancel, onDelete }) {
                 data: selectedVehicles
             });
             Toast.success(res.data.msg);
-            onDelete(selectedVehicles);
             setSelectedVehicles([]);
+            //fetchCars(); // 更新车辆
         } catch (error) {
             console.error(error);
             Toast.error('删除车辆失败，请重试');
