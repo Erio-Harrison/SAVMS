@@ -7,6 +7,7 @@ import { Modal, Form, Button, Toast } from "@douyinfe/semi-ui";
 import TaskDetailCard from "../components/TaskDetailCard.jsx";
 import CreateTaskCard from "../components/CreateTaskCard.jsx";
 import axiosInstance from "../axiosInstance";
+import {Autocomplete} from "@react-google-maps/api";
 
 export default function CurrentTasksPage() {
     const [tasks, setTasks] = useState([]);
@@ -198,8 +199,26 @@ export default function CurrentTasksPage() {
                             required
                             placeholder="Select start date and time"
                         />
-                        <Form.Input field="startAddress" label="Start Address" placeholder="e.g., Civic Square" required />
-                        <Form.Input field="endAddress" label="End Address" placeholder="e.g., Gungahlin Station" required />
+                        <Form.Slot label="Start Address" required>
+                            <Autocomplete
+                                onPlaceSelect={(place) => {
+                                    const address = place.formatted_address;
+                                    formApi.setValue('startAddress', address);
+                                }}
+                            >
+                                <Form.Input field="startAddress" placeholder="Search Start Address" />
+                            </Autocomplete>
+                        </Form.Slot>
+                        <Form.Slot label="End Address" required>
+                            <Autocomplete
+                                onPlaceSelect={(place) => {
+                                    const address = place.formatted_address;
+                                    formApi.setValue('endAddress', address);
+                                }}
+                            >
+                                <Form.Input field="endAddress" placeholder="Search End Address" />
+                            </Autocomplete>
+                        </Form.Slot>
 
                         <div className="flex justify-end pt-4">
                             <Button onClick={() => setCreateModalVisible(false)} style={{ marginRight: 8 }}>
