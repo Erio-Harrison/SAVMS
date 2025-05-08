@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,7 +84,7 @@ public class TaskRepository {
      * @param end The end time of the range.
      * @return A list of tasks that fall within the given time range.
      */
-    public List<TaskNode> findTasksInTimeRange(String start, String end) {
+    public List<TaskNode> findTasksInTimeRange(LocalDateTime start, LocalDateTime end) {
         Query query = new Query();
         query.addCriteria(Criteria.where("startTime").gte(start).lte(end));
         return mongoTemplate.find(query, TaskNode.class);

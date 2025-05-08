@@ -4,6 +4,7 @@ import com.savms.entity.Vehicle;
 import com.savms.service.VehicleService;
 import com.savms.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.geo.GeoResults;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -92,14 +93,14 @@ public class VehicleController {
     }
 
     /**
-     * 根据地图可视区域查询车辆
-     * 接口路径：/vehicles/withinRange
+     * Query vehicles based on the visible area of the map
+     * Interface path: /vehicles/withinRange
      *
-     * @param minLat 南侧纬度
-     * @param maxLat 北侧纬度
-     * @param minLng 西侧经度
-     * @param maxLng 东侧经度
-     * @return 指定范围内的车辆列表
+     * @param minLat south latitude
+     * @param maxLat north latitude
+     * @param minLng west longitude
+     * @param maxLng east longitude
+     * @return a list of vehicles within the specified range
      */
     @GetMapping("/withinRange")
     public Result<?> getVehiclesWithinRange(@RequestParam("minLat") double minLat,
@@ -107,5 +108,18 @@ public class VehicleController {
                                             @RequestParam("minLng") double minLng,
                                             @RequestParam("maxLng") double maxLng) {
         return Result.success(vehicleService.getVehiclesWithinRange(minLat, maxLat, minLng, maxLng));
+    }
+
+    /**
+     * Get vehicles within radius meters near a specified point
+     * Example: GET /vehicles/nearby?lng=116.39&lat=39.91&radius=5000
+     */
+    @GetMapping("/nearby")
+    public GeoResults<Vehicle> getNearbyVehicles(
+            @RequestParam double lng,
+            @RequestParam double lat,
+            @RequestParam(defaultValue="5000") double radius
+    ) {
+        return vehicleService.getNearbyVehicles(lng, lat, radius);
     }
 }
