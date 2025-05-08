@@ -156,7 +156,13 @@ export default function MainPage() {
                 <div style={{position: 'relative', display: 'inline-block'}}>
                     <div className="text-2xl font-bold">Tracking</div>
                     <div style={{position: 'absolute', right: -4, top: 0}}>
-                        <CarOperationButton onVehicleAdded={(newCar) => setCars(prev => [...prev, newCar])}/>
+                        <CarOperationButton
+                        vehicles={cars}
+                        onVehiclesDeleted={(deletedPlates) => {
+                            setCars((prev) => prev.filter((car) => !deletedPlates.includes(car.licensePlate)));
+                        }}
+
+                        onVehicleAdded={(newCar) => setCars(prev => [...prev, newCar])}/>
                     </div>
                 </div>
                 <div className="bg-accent rounded-3xl p-4 flex flex-col h-screen overflow-auto">
