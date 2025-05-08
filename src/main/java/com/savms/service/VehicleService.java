@@ -75,4 +75,9 @@ public class VehicleService {
      */
     public List<Vehicle> getVehiclesWithinRange(double minLat, double maxLat, double minLng, double maxLng) {
         return vehicleRepository.findVehiclesWithinRange(minLat, maxLat, minLng, maxLng);}
+
+    public int deleteVehiclesByPlates(List<String> plates) {
+        int deleteCount = 0;
+        return 0;
+    }
 }
