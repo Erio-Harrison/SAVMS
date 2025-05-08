@@ -171,6 +171,8 @@ export default function CarOperationButton({
             >
                 <VehicleDeleteModal
                     vehicles={vehicles}
+                    visible={deleteModalVisible}
+
                     onCancel={() => setDeleteModalVisible(false)}
                     onDelete={handleDelete}
                 />

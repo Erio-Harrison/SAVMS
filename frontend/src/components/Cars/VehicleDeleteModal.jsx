@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Transfer, Checkbox, Avatar, Button, Modal, Toast } from '@douyinfe/semi-ui';
+import { Checkbox, Avatar, Button, Toast } from '@douyinfe/semi-ui';
 import { IconHandle, IconClose } from '@douyinfe/semi-icons';
+import axiosInstance from '../../axiosInstance';
 
 export default function VehicleDeleteModal({ vehicles, onCancel, onDelete }) {
     const [selectedVehicles, setSelectedVehicles] = useState([]);
 
-    // 渲染源列表项（车辆选择）
+    // 渲染单个车辆项
     const renderSourceItem = (item) => (
         <div className="components-transfer-demo-source-item" key={item.licensePlate}>
             <Checkbox
@@ -24,54 +25,55 @@ export default function VehicleDeleteModal({ vehicles, onCancel, onDelete }) {
         </div>
     );
 
-    // 处理选择车辆
+    // 选择/取消选择车辆
     const handleSelectVehicle = (plate) => {
         setSelectedVehicles((prev) =>
-            prev.includes(plate)
-                ? prev.filter((p) => p !== plate)
-                : [...prev, plate]
+            prev.includes(plate) ? prev.filter((p) => p !== plate) : [...prev, plate]
         );
     };
 
-    // 确认删除
-    const handleConfirmDelete = () => {
+    // 确认删除操作
+    const handleConfirmDelete = async () => {
         if (selectedVehicles.length === 0) {
-            Toast.warning("请先选择要删除的车辆");
+            Toast.warning('请先选择要删除的车辆');
             return;
         }
-        onDelete(selectedVehicles);
-        setSelectedVehicles([]); // 清空选择
+
+        try {
+            const res = await axiosInstance.delete('/vehicles/delete/byPlate', {
+                data: selectedVehicles
+            });
+            Toast.success(res.data.msg);
+            onDelete(selectedVehicles);
+            setSelectedVehicles([]);
+        } catch (error) {
+            console.error(error);
+            Toast.error('删除车辆失败，请重试');
+        }
     };
 
     return (
-        <Modal
-            title="删除车辆"
-            visible
-            width={600}
-            onCancel={onCancel}
-            footer={
-                <div style={{ textAlign: 'right' }}>
-                    <Button onClick={onCancel} style={{ marginRight: 12 }}>
-                        取消
-                    </Button>
-                    <Button
-                        type="primary"
-                        theme="solid"
-                        onClick={handleConfirmDelete}
-                        disabled={selectedVehicles.length === 0}
-                    >
-                        删除 {selectedVehicles.length > 0 ? `(${selectedVehicles.length})` : ""}
-                    </Button>
-                </div>
-            }
-        >
+        <>
             <div style={{ maxHeight: 400, overflowY: 'auto' }}>
-                {vehicles.length > 0 ? (
+                {vehicles && vehicles.length > 0 ? (
                     vehicles.map((vehicle) => renderSourceItem(vehicle))
                 ) : (
                     <div style={{ textAlign: 'center', padding: '20px 0' }}>没有可删除的车辆</div>
                 )}
             </div>
-        </Modal>
+            <div style={{ textAlign: 'right', marginTop: 12 }}>
+                <Button onClick={onCancel} style={{ marginRight: 12 }}>
+                    取消
+                </Button>
+                <Button
+                    type="primary"
+                    theme="solid"
+                    onClick={handleConfirmDelete}
+                    disabled={selectedVehicles.length === 0}
+                >
+                    删除 {selectedVehicles.length > 0 ? `(${selectedVehicles.length})` : ''}
+                </Button>
+            </div>
+        </>
     );
 }
