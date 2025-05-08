@@ -108,8 +108,16 @@ export default function CarOperationButton({
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            Toast.success('111上传成功！');
+            Toast.success('上传成功！');
             setUploadedUrls(res.data.data); // 假设后端返回的 URL 数组
+            const newImageUrls = res.data.data || [];
+
+            setExistingImages(prev => [...prev, ...newImageUrls]);
+
+            // 清空选中的文件
+            setSelectedFiles([]);
+
+
         } catch (err) {
             console.error(err);
             Toast.error('上传失败');
