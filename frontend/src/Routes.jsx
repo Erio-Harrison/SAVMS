@@ -14,6 +14,7 @@ export default function AppRoutes() {
         <Route path="/scuvms" element={id ? <SCUVMS /> : <Navigate to="/login" />} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/login" element={id ? <Navigate to="/scuvms" /> : <RegisterAndLogin />} />
+      {/*<Route path="/client" element={id ? <Navigate to="/scuvms" /> : <SCUVMS_Client />} />*/}
 
         <Route path="/" element={id ? <Navigate to="/scuvms" /> : <Navigate to="/login" />} />
       </Routes>
