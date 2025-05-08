@@ -1,6 +1,9 @@
 package com.savms.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -38,6 +41,8 @@ public class Vehicle {
     // Running Info
     private double longitude;
     private double latitude;
+    @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
+    private GeoJsonPoint location;      //GeoJSON points for geographic queries
     private double speed;               // e.g. 7.869999886
     private int leftoverEnergy;         // 0-100
     private int connectionStatus;       // 0/1
@@ -160,6 +165,7 @@ public class Vehicle {
     }
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+        updateLocation();
     }
 
     public double getLatitude() {
@@ -167,7 +173,22 @@ public class Vehicle {
     }
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+        updateLocation();
     }
+
+    private void updateLocation() {
+        if (this.longitude != 0 && this.latitude != 0) {
+            this.location = new GeoJsonPoint(this.longitude, this.latitude);
+        }
+    }
+
+    public GeoJsonPoint getLocation() {
+        return this.location;
+    }
+    public void setLocation(GeoJsonPoint location) {
+        this.location = location;
+    }
+
 
     public double getSpeed() {
         return speed;

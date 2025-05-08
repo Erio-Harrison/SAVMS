@@ -6,6 +6,11 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.geo.Point;
+import org.springframework.data.geo.Distance;
+import org.springframework.data.geo.Metrics;
+import org.springframework.data.geo.GeoResults;
+import org.springframework.data.mongodb.core.query.NearQuery;
 
 import java.util.List;
 import java.util.Optional;
@@ -81,7 +86,7 @@ public class VehicleRepository {
     }
 
     /**
-     * 根据地图范围获取车辆信息
+     * Get vehicle information based on map range
      */
     public List<Vehicle> findVehiclesWithinRange(double minLat,
                                                  double maxLat,
@@ -92,5 +97,17 @@ public class VehicleRepository {
         query.addCriteria(Criteria.where("longitude").gte(minLng).lte(maxLng));
 
         return mongoTemplate.find(query, Vehicle.class);
+    }
+
+    /**
+     * Query the vehicles within a radius of a specified point and return the results sorted by distance
+     */
+    public GeoResults<Vehicle> findNearbyVehicles(double centerLng,
+                                                  double centerLat,
+                                                  double radiusMeters) {
+        Point location = new Point(centerLng, centerLat);
+        Distance distance = new Distance(radiusMeters / 1000.0, Metrics.KILOMETERS);
+        NearQuery nearQuery = NearQuery.near(location).maxDistance(distance);
+        return mongoTemplate.geoNear(nearQuery, Vehicle.class);
     }
 }
