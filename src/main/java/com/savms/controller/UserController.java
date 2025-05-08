@@ -106,4 +106,26 @@ public class UserController
     {
         userService.setUserRole(userId, role);
     }
+
+    /**
+     * Gets a user's role by ID.
+     * @param userId The ID of the user.
+     * @return The user's role (0 = admin, 1 = client).
+     */
+    @GetMapping("/{userId}/getRole")
+    public int getUserRoleById( @PathVariable String userId )
+    {
+        return userService.getUserRoleById( userId );
+    }
+
+    /**
+     * Gets a user's role by username.
+     * @param username The username of the user.
+     * @return The user's role (0 = admin, 1 = client).
+     */
+    @GetMapping("/getRoleByUsername")
+    public int getUserRoleByUsername( @RequestParam String username )
+    {
+        return userService.getUserRoleByUsername( username );
+    }
 }
