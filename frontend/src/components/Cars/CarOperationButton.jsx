@@ -11,7 +11,7 @@ import { IconPlus } from '@douyinfe/semi-icons';
 import axiosInstance from '../../axiosInstance';
 import VehicleDeleteModal from './VehicleDeleteModal';
 import './CarOperationButton.css';
-//import './VehicleDeleteModal.css';
+import './operation-modals.css';
 
 export default function CarOperationButton({
                                                vehicles,
@@ -143,6 +143,7 @@ export default function CarOperationButton({
 
             {/* ─── Add Vehicle Modal ────────────────────── */}
             <Modal
+                className="car-op-modal"
                 title="New Vehicle"
                 visible={addModalVisible}
                 onCancel={() => setAddModalVisible(false)}
@@ -208,6 +209,7 @@ export default function CarOperationButton({
 
             {/* ─── Add Vehicle Images ─────────────────── */}
             <Modal
+                className="car-op-modal"
                 title="Add Vehicle Images"
                 visible={addImagesVisible}
                 width={800}
@@ -287,6 +289,7 @@ export default function CarOperationButton({
 
             {/* ─── Delete Vehicle Modal ─────────────────── */}
             <Modal
+                className="car-op-modal"
                 title="Delete Vehicle"
                 visible={deleteModalVisible}
                 width={800}
