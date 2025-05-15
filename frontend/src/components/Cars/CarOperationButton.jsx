@@ -278,7 +278,7 @@ export default function CarOperationButton({
                     {/* 上传按钮 */}
                     <div style={{ display: 'flex', justifyContent: 'flex-end', paddingBottom: 16 }}>
                         <Button onClick={handleUpload} type="primary" theme="solid">
-                            上传图片
+                            Upload Images
                         </Button>
                     </div>
 
