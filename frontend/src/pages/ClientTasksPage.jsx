@@ -122,6 +122,7 @@ export default function ClientTasksPage() {
                         <TaskRouteMap
                             origin={{ lat: parseFloat(selectedTask.startLocation.lat), lng: parseFloat(selectedTask.startLocation.lng) }}
                             destination={{ lat: parseFloat(selectedTask.endLocation.lat), lng: parseFloat(selectedTask.endLocation.lng) }}
+                            vehiclePosition={{ lat: -35.2900173, lng: 149.1396061 }}
                         />
                     ) : (
                         <Map
