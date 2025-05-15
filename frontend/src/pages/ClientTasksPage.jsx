@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Map from "../components/Map";
 import TaskRouteMap from "../components/TaskRouteMap";
 import { Tabs, TabPane } from "@douyinfe/semi-ui";
@@ -15,23 +15,30 @@ export default function ClientTasksPage() {
     const [coordinate, setCoordinate] = useState({ lat: -35.2809, lng: 149.1300 });
     const [createModalVisible, setCreateModalVisible] = useState(false);
     const [assignedTasks, setAssignedTasks] = useState([]);
+    const [alertVisible, setAlertVisible] = useState(false);
+    const alertTimerRef = useRef(null);
 
 
     useEffect(() => {
         const fetchAssignedTasks = async () => {
             try {
-                const res = await axiosInstance.get("/api/tasks/status/1"); // 你的后端实际路径
+                const res = await axiosInstance.get("/api/tasks/status/1");
                 const fetchedAssignTasks = res.data.data;
-
                 setAssignedTasks(fetchedAssignTasks);
                 console.log("Fetched assigned tasks:", fetchedAssignTasks);
             } catch (err) {
                 console.error("Error fetching tasks:", err);
             }
         };
+
         fetchAssignedTasks();
 
+        return () => {
+            if (alertTimerRef.current) clearTimeout(alertTimerRef.current);
+        };
     }, []);
+
+
 
     const handleMarkerClick = (marker) => {
         console.log("Task marker clicked:", marker);
@@ -40,9 +47,23 @@ export default function ClientTasksPage() {
     };
 
     const handleTaskClick = (task) => {
-        // 选中任务时更新 selectedTask
         setSelectedTask(task);
+
+        if (alertTimerRef.current) {
+            clearTimeout(alertTimerRef.current);
+            alertTimerRef.current = null;
+        }
+
+        // only trigger alert for id === 204
+        if (task.id === 204 || task.id === "204") {
+            alertTimerRef.current = setTimeout(() => {
+                setAlertVisible(true);
+            }, 5000);
+        } else {
+            setAlertVisible(false);
+        }
     };
+
 
     const handleCreateTask = (values) => {
         const newTask = {
@@ -161,6 +182,20 @@ export default function ClientTasksPage() {
                         </div>
                     </Form>
                 </Modal>
+
+                <Modal
+                    title="Vehicle Off Track Alert"
+                    visible={alertVisible}
+                    onCancel={() => setAlertVisible(false)}
+                    footer={
+                        <Button theme="solid" type="primary" onClick={() => setAlertVisible(false)}>
+                            Report
+                        </Button>
+                    }
+                >
+                    <p>The system found the vehicle is off track, please report the issue!</p>
+                </Modal>
+
             </div>
         </div>
     );
