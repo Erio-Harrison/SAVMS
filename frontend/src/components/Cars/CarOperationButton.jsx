@@ -12,6 +12,7 @@ import axiosInstance from '../../axiosInstance';
 import VehicleDeleteModal from './VehicleDeleteModal';
 import './CarOperationButton.css';
 import './operation-modals.css';
+import { IconDelete } from '@douyinfe/semi-icons';
 
 export default function CarOperationButton({
                                                vehicles,
@@ -29,6 +30,7 @@ export default function CarOperationButton({
     const [existingImages, setExistingImages] = useState([]);
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [uploadedUrls, setUploadedUrls] = useState([]);
+    const [selectedImageForDelete, setSelectedImageForDelete] = useState(null);
 
 
     const menu = [
@@ -251,32 +253,87 @@ export default function CarOperationButton({
                     </Form.Select>
 
                     {/* 图片预览 */}
-                    <div style={{ marginTop: 16 }}>
+                    <div style={{marginTop: 16}}>
                         <p>Existing Images:</p>
                         {existingImages.length === 0 ? (
-                            <p style={{ color: '#aaa' }}>No images available</p>
+                            <p style={{color: '#aaa'}}>No images available</p>
                         ) : (
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-                                {existingImages.map((url, index) => (
-                                    <img key={index} src={url} alt="Vehicle" style={{ width: 100, height: 100, objectFit: 'cover', borderRadius: 4 }} />
-                                ))}
+                            <div style={{display: 'flex', flexWrap: 'wrap', gap: 8}}>
+                                {existingImages.map((url, index) => {
+                                    const imageId = url.split('/').pop();
+                                    return (
+                                        <div
+                                            key={index}
+                                            style={{
+                                                position: 'relative',
+                                                display: 'inline-block',
+                                                cursor: 'pointer',
+                                                border: selectedImageForDelete === url ? '2px solid #f00' : 'none',
+                                                borderRadius: 4,
+                                            }}
+                                            onClick={() => {
+                                                setSelectedImageForDelete(url === selectedImageForDelete ? null : url);
+                                            }}
+                                        >
+                                            <img
+                                                src={url}
+                                                alt="Vehicle"
+                                                style={{
+                                                    width: 100,
+                                                    height: 100,
+                                                    objectFit: 'cover',
+                                                    borderRadius: 4,
+                                                }}
+                                            />
+                                            {selectedImageForDelete === url && (
+                                                <Button
+                                                    size="small"
+                                                    type="danger"
+                                                    theme="solid"
+                                                    icon={<IconDelete/>}
+                                                    style={{
+                                                        position: 'absolute',
+                                                        top: 4,
+                                                        right: 4,
+                                                        padding: '2px 4px',
+                                                        fontSize: 12,
+                                                        zIndex: 10,
+                                                    }}
+                                                    onClick={async (e) => {
+                                                        e.stopPropagation();
+                                                        try {
+                                                            await axiosInstance.delete(`/vehicles/${selectedVehicleId}/image/${imageId}`);
+                                                            Toast.success('Delete successfully');
+                                                            setExistingImages((prev) => prev.filter((img) => img !== url));
+                                                            setSelectedImageForDelete(null);
+                                                        } catch (err) {
+                                                            console.error(err);
+                                                            Toast.error('Delete failed');
+                                                        }
+                                                    }}
+                                                />
+                                            )}
+                                        </div>
+                                    );
+                                })}
                             </div>
                         )}
                     </div>
+
                     {/* 上传图片 */}
-                    <div style={{ marginBottom: 16, marginTop: 16 }}>
+                    <div style={{marginBottom: 16, marginTop: 16}}>
                         <label>Upload Images</label>
                         <input
                             type="file"
                             multiple
                             accept="image/*"
                             onChange={(e) => setSelectedFiles(Array.from(e.target.files))}
-                            style={{ display: 'block', marginTop: 8 }}
+                            style={{display: 'block', marginTop: 8}}
                         />
                     </div>
 
                     {/* 上传按钮 */}
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', paddingBottom: 16 }}>
+                    <div style={{display: 'flex', justifyContent: 'flex-end', paddingBottom: 16}}>
                         <Button onClick={handleUpload} type="primary" theme="solid">
                             Upload Images
                         </Button>
