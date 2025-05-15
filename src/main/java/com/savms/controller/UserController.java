@@ -94,7 +94,10 @@ public class UserController
     @PutMapping("/{userId}/updatePassword")
     public void updateUserPassword( @PathVariable String userId, @RequestParam String newPassword )
     {
-        userService.updateUserEmail( userId, newPassword );
+        System.out.println(userId);
+        System.out.println(newPassword);
+
+        userService.updateUserPassword( userId, newPassword );
     }
 
     /**
