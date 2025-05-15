@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ClientTasksPage from "./ClientTasksPage.jsx";
+import ClientProfilePage from "./ClientProfilePage.jsx";
 import ClientSidebar from "../components/ClientSidebar";
 
 export default function SCUVMS() {
@@ -11,7 +12,7 @@ export default function SCUVMS() {
             case "ClientTasksPage":
                 return <ClientTasksPage />;
             case "ProfilePage":
-                return <div className="text-white text-xl">Profile Page (Coming Soon)</div>;
+                return <ClientProfilePage />;
             default:
                 return <ClientTasksPage />;
         }

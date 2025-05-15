@@ -75,7 +75,7 @@ public class UserService
      */
     public void updateUserPassword( String userId, String newPassword )
     {
-        userRepository.updateEmail( userId, newPassword );
+        userRepository.updatePassword( userId, newPassword );
     }
 
     /**
