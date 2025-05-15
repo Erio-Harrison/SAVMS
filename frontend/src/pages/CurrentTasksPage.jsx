@@ -7,6 +7,7 @@ import { Modal, Form, Button, Toast } from "@douyinfe/semi-ui";
 import TaskDetailCard from "../components/TaskDetailCard.jsx";
 import CreateTaskCard from "../components/CreateTaskCard.jsx";
 import axiosInstance from "../axiosInstance";
+import {Autocomplete} from "@react-google-maps/api";
 
 export default function CurrentTasksPage() {
     const [tasks, setTasks] = useState([]);
@@ -188,12 +189,36 @@ export default function CurrentTasksPage() {
                     footer={null}
                 >
                     <Form onSubmit={handleCreateTask}>
-                        <Form.Input field="id" label="Task ID" placeholder="e.g., 101" required />
-                        <Form.Input field="startTime" label="Start Time" placeholder="e.g., 2025-04-17 09:00" required />
-                        <Form.Input field="endTime" label="End Time" placeholder="e.g., 2025-04-17 10:30" required />
-                        <Form.Input field="startAddress" label="Start Address" placeholder="e.g., Civic Square" required />
-                        <Form.Input field="endAddress" label="End Address" placeholder="e.g., Gungahlin Station" required />
-                        <Form.Input field="license" label="Car License" placeholder="e.g., XYZ-123" required />
+                        <Form.Input field="title" label="Title" placeholder="The title of this task" required />
+                        <Form.Input field="description" label="Description" placeholder="The detail for this task" required />
+                        <Form.DatePicker
+                            field="startTime"
+                            label="Start Time"
+                            type="dateTime"           // Enables both date & time
+                            format="yyyy-MM-dd HH:mm" // Optional: Display format
+                            required
+                            placeholder="Select start date and time"
+                        />
+                        <Form.Slot label="Start Address" required>
+                            <Autocomplete
+                                onPlaceSelect={(place) => {
+                                    const address = place.formatted_address;
+                                    formApi.setValue('startAddress', address);
+                                }}
+                            >
+                                <Form.Input field="startAddress" placeholder="Search Start Address" />
+                            </Autocomplete>
+                        </Form.Slot>
+                        <Form.Slot label="End Address" required>
+                            <Autocomplete
+                                onPlaceSelect={(place) => {
+                                    const address = place.formatted_address;
+                                    formApi.setValue('endAddress', address);
+                                }}
+                            >
+                                <Form.Input field="endAddress" placeholder="Search End Address" />
+                            </Autocomplete>
+                        </Form.Slot>
 
                         <div className="flex justify-end pt-4">
                             <Button onClick={() => setCreateModalVisible(false)} style={{ marginRight: 8 }}>
