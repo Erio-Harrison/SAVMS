@@ -16,6 +16,17 @@ export default function CurrentTasksPage() {
     const [createModalVisible, setCreateModalVisible] = useState(false);
     const [assignedTasks, setAssignedTasks] = useState([]);
     const [unAssignedTasks, setUnAssignedTasks] = useState([]);
+    const [alertVisible, setAlertVisible] = useState(false);
+
+    useEffect(() => {
+        if (selectedTask) {
+            const timer = setTimeout(() => {
+                setAlertVisible(true);
+            }, 5000);
+
+            return () => clearTimeout(timer);  // cleanup if task changes
+        }
+    }, [selectedTask]);
 
 
     useEffect(() => {
@@ -206,6 +217,20 @@ export default function CurrentTasksPage() {
                         </div>
                     </Form>
                 </Modal>
+
+                <Modal
+                    title="Vehicle Off Track Alert"
+                    visible={alertVisible}
+                    onCancel={() => setAlertVisible(false)}
+                    footer={
+                        <Button theme="solid" type="primary" onClick={() => setAlertVisible(false)}>
+                            Confirm
+                        </Button>
+                    }
+                >
+                    <p>The system found the vehicle is off track, please report the issue!</p>
+                </Modal>
+
             </div>
         </div>
     );
