@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Map from "../components/Map";
 import TaskRouteMap from "../components/TaskRouteMap";
 import { Tabs, TabPane } from "@douyinfe/semi-ui";
@@ -17,16 +17,14 @@ export default function CurrentTasksPage() {
     const [assignedTasks, setAssignedTasks] = useState([]);
     const [unAssignedTasks, setUnAssignedTasks] = useState([]);
     const [alertVisible, setAlertVisible] = useState(false);
+    const alertTimerRef = useRef(null);
 
     useEffect(() => {
-        if (selectedTask) {
-            const timer = setTimeout(() => {
-                setAlertVisible(true);
-            }, 5000);
-
-            return () => clearTimeout(timer);  // cleanup if task changes
-        }
-    }, [selectedTask]);
+        // clear timer when unmounting component
+        return () => {
+            if (alertTimerRef.current) clearTimeout(alertTimerRef.current);
+        };
+    }, []);
 
 
     useEffect(() => {
@@ -67,8 +65,21 @@ export default function CurrentTasksPage() {
     };
 
     const handleTaskClick = (task) => {
-        // 选中任务时更新 selectedTask
         setSelectedTask(task);
+
+        if (alertTimerRef.current) {
+            clearTimeout(alertTimerRef.current);
+            alertTimerRef.current = null;
+        }
+
+        // if task.id === 204
+        if (task.id === 204 || task.id === "204") {
+            alertTimerRef.current = setTimeout(() => {
+                setAlertVisible(true);
+            }, 3000);
+        } else {
+            setAlertVisible(false);
+        }
     };
 
     const handleCreateTask = (values) => {
