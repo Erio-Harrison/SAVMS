@@ -1,0 +1,80 @@
+/* src/styles/modals.css */
+
+/* —— 全局色值 —— */
+:root {
+    --gold:       #D6B619;
+    --gold-dark:  #C9A800;
+    --cream:      #FFFBE6;
+    --gray-text:  #333;
+}
+
+/* —— Modal 容器 —— */
+.car-op-modal .semi-modal {
+    background: var(--cream) !important;
+    border-radius: 16px !important;
+    overflow: hidden;
+}
+
+/* —— Modal 头部 —— */
+.car-op-modal .semi-modal-header {
+    background: var(--gold) !important;
+    color: #fff                 !important;
+    border-bottom: none         !important;
+    padding: 16px 24px          !important;
+    font-size: 16px             !important;
+    font-weight: 600            !important;
+}
+
+/* —— Modal 内容区 —— */
+.car-op-modal .semi-modal-body {
+    background: var(--cream)    !important;
+    padding: 24px 32px          !important;
+    max-height: 600px;           /* 根据需要调整 */
+    overflow-y: auto;            /* 内容过长时滚动 */
+}
+
+/* —— Modal 底部 & 按钮区 —— */
+.car-op-modal .semi-modal-footer {
+    background: var(--cream)    !important;
+    border-top: none            !important;
+    padding: 16px 32px          !important;
+}
+.car-op-modal .semi-btn-primary {
+    background-color: var(--gold)     !important;
+    border-color:     var(--gold)     !important;
+}
+.car-op-modal .semi-btn-primary:hover {
+    background-color: var(--gold-dark)!important;
+    border-color:     var(--gold-dark)!important;
+}
+
+/* 按钮容器：右对齐 + 间距 */
+.add-vehicle-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+/* 统一按键尺寸、圆角、文字 */
+.add-vehicle-footer .semi-button {
+    height: 40px;
+    padding: 0 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* 取消按钮：浅色背景 + 主色文字 */
+.add-vehicle-footer .cancel-btn {
+    background-color: var(--semi-color-bg-1);
+    color: var(--semi-color-primary);
+    border: none;
+}
+
+/* 提交按钮：主色背景 + 白字 */
+.add-vehicle-footer .submit-btn {
+    background-color: var(--semi-color-primary);
+    color: #fff;
+    border: none;
+}
