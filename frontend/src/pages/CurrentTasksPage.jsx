@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, {useState, useEffect, useRef} from "react";
 import Map from "../components/Map";
 import TaskRouteMap from "../components/TaskRouteMap";
 import { Tabs, TabPane } from "@douyinfe/semi-ui";
@@ -17,7 +17,6 @@ export default function CurrentTasksPage() {
     const [createModalVisible, setCreateModalVisible] = useState(false);
     const [assignedTasks, setAssignedTasks] = useState([]);
     const [unAssignedTasks, setUnAssignedTasks] = useState([]);
-
 
     useEffect(() => {
         const fetchAssignedTasks = async () => {
@@ -153,16 +152,6 @@ export default function CurrentTasksPage() {
                     </div>
                 </div>
 
-                {/* 地图区域，占3/4高度 */}
-                {/*<div className="h-3/4 bg-white rounded-3xl overflow-hidden">*/}
-                {/*    <Map*/}
-                {/*        lat={coordinate.lat}*/}
-                {/*        lng={coordinate.lng}*/}
-                {/*        markers={markers}*/}
-                {/*        onMarkerClick={handleMarkerClick}*/}
-                {/*    />*/}
-                {/*</div>*/}
-
                 <div className="h-3/4 bg-white rounded-3xl overflow-hidden">
                     {selectedTask ? (
                         <TaskRouteMap
@@ -200,24 +189,10 @@ export default function CurrentTasksPage() {
                             placeholder="Select start date and time"
                         />
                         <Form.Slot label="Start Address" required>
-                            <Autocomplete
-                                onPlaceSelect={(place) => {
-                                    const address = place.formatted_address;
-                                    formApi.setValue('startAddress', address);
-                                }}
-                            >
-                                <Form.Input field="startAddress" placeholder="Search Start Address" />
-                            </Autocomplete>
+
                         </Form.Slot>
                         <Form.Slot label="End Address" required>
-                            <Autocomplete
-                                onPlaceSelect={(place) => {
-                                    const address = place.formatted_address;
-                                    formApi.setValue('endAddress', address);
-                                }}
-                            >
-                                <Form.Input field="endAddress" placeholder="Search End Address" />
-                            </Autocomplete>
+
                         </Form.Slot>
 
                         <div className="flex justify-end pt-4">
