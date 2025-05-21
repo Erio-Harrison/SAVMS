@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export default function TaskRouteMap({ origin, destination }) {
+export default function TaskRouteMap({ origin, destination, vehiclePosition }) {
     const mapRef = useRef(null);
     const directionsRendererRef = useRef(null);
 
@@ -26,6 +26,17 @@ export default function TaskRouteMap({ origin, destination }) {
             (result, status) => {
                 if (status === "OK") {
                     directionsRenderer.setDirections(result);
+                    if (vehiclePosition) {
+                                              new window.google.maps.Marker({
+                                                    position: vehiclePosition,
+                                                    map,
+                                                    title: "Vehicle Location",
+                                                    icon: {
+                                                      url: "https://maps.google.com/mapfiles/kml/shapes/cabs.png",
+                                                          scaledSize: new window.google.maps.Size(32, 32),
+                                                        },
+                                              });
+                                           }
                 } else {
                     console.error("Directions request failed:", status);
                 }

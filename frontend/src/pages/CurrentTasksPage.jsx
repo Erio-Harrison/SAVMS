@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Map from "../components/Map";
 import TaskRouteMap from "../components/TaskRouteMap";
 import { Tabs, TabPane } from "@douyinfe/semi-ui";
@@ -16,6 +16,15 @@ export default function CurrentTasksPage() {
     const [createModalVisible, setCreateModalVisible] = useState(false);
     const [assignedTasks, setAssignedTasks] = useState([]);
     const [unAssignedTasks, setUnAssignedTasks] = useState([]);
+    const [alertVisible, setAlertVisible] = useState(false);
+    const alertTimerRef = useRef(null);
+
+    useEffect(() => {
+        // clear timer when unmounting component
+        return () => {
+            if (alertTimerRef.current) clearTimeout(alertTimerRef.current);
+        };
+    }, []);
 
 
     useEffect(() => {
@@ -56,8 +65,21 @@ export default function CurrentTasksPage() {
     };
 
     const handleTaskClick = (task) => {
-        // 选中任务时更新 selectedTask
         setSelectedTask(task);
+
+        if (alertTimerRef.current) {
+            clearTimeout(alertTimerRef.current);
+            alertTimerRef.current = null;
+        }
+
+        // if task.id === 204
+        if (task.id === 204 || task.id === "204") {
+            alertTimerRef.current = setTimeout(() => {
+                setAlertVisible(true);
+            }, 3000);
+        } else {
+            setAlertVisible(false);
+        }
     };
 
     const handleCreateTask = (values) => {
@@ -167,6 +189,7 @@ export default function CurrentTasksPage() {
                         <TaskRouteMap
                             origin={{ lat: parseFloat(selectedTask.startLocation.lat), lng: parseFloat(selectedTask.startLocation.lng) }}
                             destination={{ lat: parseFloat(selectedTask.endLocation.lat), lng: parseFloat(selectedTask.endLocation.lng) }}
+                            vehiclePosition={{ lat: parseFloat(selectedTask.vehicleLocation.lat), lng: parseFloat(selectedTask.vehicleLocation.lng) }}
                         />
                     ) : (
                         <Map
@@ -205,6 +228,20 @@ export default function CurrentTasksPage() {
                         </div>
                     </Form>
                 </Modal>
+
+                <Modal
+                    title="Vehicle Off Track Alert"
+                    visible={alertVisible}
+                    onCancel={() => setAlertVisible(false)}
+                    footer={
+                        <Button theme="solid" type="primary" onClick={() => setAlertVisible(false)}>
+                            Confirm
+                        </Button>
+                    }
+                >
+                    <p>The system found the vehicle is off track, please report the issue!</p>
+                </Modal>
+
             </div>
         </div>
     );

@@ -4,6 +4,7 @@ import SearchBar from "../components/SearchBar";
 import CurrentWeatherCard from "../components/CurrentWeatherCard";
 import Map from "../components/Map";
 import axiosInstance from '../axiosInstance';
+import DragChat from '../components/ChatPage';
 
 import { Popover, Typography, Divider, Tag } from '@douyinfe/semi-ui';
 const { Title, Text } = Typography;
@@ -165,6 +166,7 @@ export default function MainPage() {
                         onVehicleAdded={(newCar) => setCars(prev => [...prev, newCar])}/>
                     </div>
                 </div>
+                <DragChat />
                 <div className="bg-accent rounded-3xl p-4 flex flex-col h-screen overflow-auto">
                     {cars.length > 0 ? (
                         cars.filter(Boolean).map((car) => (

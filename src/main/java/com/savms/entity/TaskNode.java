@@ -23,6 +23,7 @@ public class TaskNode {
     private int status;
     private Location startLocation;
     private Location endLocation;
+    private Location vehicleLocation;
 
     @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
     private GeoJsonPoint startPoint;
@@ -84,6 +85,16 @@ public class TaskNode {
 
     public Location getStartLocation() {
         return startLocation;
+    }
+
+    public Location getVehicleLocation()
+    {
+        return vehicleLocation;
+    }
+
+    public void setVehicleLocation(Location vehicleLocation)
+    {
+        this.vehicleLocation = vehicleLocation;
     }
 
     public void setStartLocation(Location startLocation) {
