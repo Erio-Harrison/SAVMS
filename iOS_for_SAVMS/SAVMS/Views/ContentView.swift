@@ -21,6 +21,18 @@ struct ContentView: View {
                 .font(.system(size: 60, weight: .bold))
                 .padding(.bottom, 20)
             
+            Image("wifi")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 80, height: 80)
+                .padding(.bottom, 10)
+            
+            Image("car")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 80, height: 80)
+                .padding(.bottom, 20)
+            
             TextField("username", text: $username)
                 .padding()
                 .background(Color(red: 239/255, green: 233/255, blue: 199/255))
