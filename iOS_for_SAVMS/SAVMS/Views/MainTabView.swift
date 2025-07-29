@@ -17,5 +17,5 @@ struct MainTabView: View {
   }
 }
 #Preview {
-    ContentView()
+    MainTabView()
 }
