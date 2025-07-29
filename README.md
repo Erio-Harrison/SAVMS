@@ -10,6 +10,7 @@
     - [Windows](#windows)
     - [Ubuntu](#ubuntu)
   - [Setting up the Backend](#setting-up-the-backend)
+  - [Setting up the iOS App](#setting-up-the-ios-app)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
@@ -125,6 +126,45 @@ This will generate a shared library named:
    cmake -G "MinGW Makefiles" ..
    mingw32-make
    ```
+
+### Setting up the iOS App
+
+The iOS app provides a native mobile interface for the SAVMS system.
+
+#### Prerequisites for iOS Development
+
+1. **macOS with Xcode**
+   - Xcode 15.0 or later
+   - iOS 15.0+ deployment target
+   - Swift 5.0+
+
+#### Setup Instructions
+
+1. Open the iOS project:
+   ```bash
+   cd ios
+   open SAVMS.xcodeproj
+   ```
+
+2. Configure the backend URL in `SAVMS/Services/NetworkService.swift`:
+   ```swift
+   private let baseURL = "http://your-backend-server:8080"
+   ```
+
+3. Build and run the project in Xcode or from command line:
+   ```bash
+   xcodebuild -project SAVMS.xcodeproj -scheme SAVMS -destination 'platform=iOS Simulator,name=iPhone 15' build
+   ```
+
+#### Features
+
+- **Vehicle Management**: View all vehicles in the fleet with real-time status
+- **Live Monitoring**: Monitor vehicle health, energy levels, and location
+- **Status Indicators**: Visual indicators for online/offline status and health
+- **Vehicle Details**: Detailed information including diagnostics and sensor data
+- **Pull-to-Refresh**: Easy data refresh functionality
+
+For more detailed iOS setup instructions, see [ios/README.md](ios/README.md).
 
 ## Usage
 

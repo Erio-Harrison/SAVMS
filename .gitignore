@@ -39,3 +39,95 @@ build/
 package-lock.json
 yarn.lock
 frontend/package.json
+
+### iOS ###
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+## User settings
+ios/**/xcuserdata/
+
+## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
+ios/**/project.xcworkspace/
+ios/**/xcuserdata/
+
+## compatibility with Xcode 3 and earlier (ignoring not required starting Xcode 4)
+ios/build/
+ios/DerivedData/
+ios/*.moved-aside
+ios/*.pbxuser
+ios/!default.pbxuser
+ios/*.mode1v3
+ios/!default.mode1v3
+ios/*.mode2v3
+ios/!default.mode2v3
+ios/*.perspectivev3
+ios/!default.perspectivev3
+
+## Obj-C/Swift specific
+ios/*.hmap
+
+## App packaging
+ios/*.ipa
+ios/*.dSYM.zip
+ios/*.dSYM
+
+## Playgrounds
+ios/timeline.xctimeline
+ios/playground.xcworkspace
+
+# Swift Package Manager
+#
+# Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
+# Packages/
+# Package.pins
+# Package.resolved
+# *.xcodeproj
+#
+# Xcode automatically generates this directory with a .xcworkspacedata file and xcuserdata
+# hence it is not needed unless you have added a package configuration file to your project
+ios/.swiftpm/
+
+ios/.build/
+
+# CocoaPods
+#
+# We recommend against adding the Pods directory to your .gitignore. However
+# you should judge for yourself, the pros and cons are mentioned at:
+# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
+#
+ios/Pods/
+#
+# Add this line if you want to avoid checking in source code from the Xcode workspace
+ios/*.xcworkspace
+
+# Carthage
+#
+# Add this line if you want to avoid checking in source code from Carthage dependencies.
+ios/Carthage/Checkouts
+
+ios/Carthage/Build/
+
+# Accio dependency management
+ios/Dependencies/
+ios/.accio/
+
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo.
+# Instead, use fastlane to re-generate the screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/#source-control
+
+ios/fastlane/report.xml
+ios/fastlane/Preview.html
+ios/fastlane/screenshots/**/*.png
+ios/fastlane/test_output
+
+# Code Injection
+#
+# After new code Injection tools there's a generated folder /iOSInjectionProject
+# https://github.com/johnno1962/injectionforxcode
+
+ios/iOSInjectionProject/
