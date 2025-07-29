@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct SAVMSApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     var body: some Scene {
         WindowGroup {
             ContentView()
