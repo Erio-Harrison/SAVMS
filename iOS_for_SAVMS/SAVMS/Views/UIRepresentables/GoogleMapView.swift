@@ -3,6 +3,7 @@
 //  SAVMS
 //
 //  Created by Renken G on 30/7/2025.
+//  Defines a SwiftUI wrapper around the UIKit GMSMapView
 //
 
 import SwiftUI
