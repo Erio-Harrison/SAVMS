@@ -11,7 +11,7 @@ import GoogleMaps
 
 struct GoogleMapView: UIViewRepresentable {
   func makeUIView(context: Context) -> GMSMapView {
-    var options = GMSMapViewOptions()
+    let options = GMSMapViewOptions()
     options.camera = GMSCameraPosition.camera(
       withLatitude: -33.86,
       longitude: 151.20,
