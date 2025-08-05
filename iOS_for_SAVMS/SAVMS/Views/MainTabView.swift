@@ -6,25 +6,51 @@
 //
 import SwiftUI
 
+import SwiftUI
+
 struct MainTabView: View {
-  @State private var selectedTab = 0
+    @State private var selectedTab = 0
 
-  var body: some View {
-      TabView(selection: $selectedTab) {
-        GoogleMapView()
-          .tabItem { Label("Map", systemImage: "map") }
-          .tag(0)
+    // track menu open state
+    @State private var menuOpened = false
 
-        Text("Other Feature")
-          .tabItem { Label("Other", systemImage: "gear") }
-          .tag(1)
-      }
-//      TabView(selection: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Selection@*/.constant(1)/*@END_MENU_TOKEN@*/) {
-//          Text("Tab Content 1").tabItem { /*@START_MENU_TOKEN@*/Text("Tab Label 1")/*@END_MENU_TOKEN@*/ }.tag(1)
-//          Text("Tab Content 2").tabItem { /*@START_MENU_TOKEN@*/Text("Tab Label 2")/*@END_MENU_TOKEN@*/ }.tag(2)
-//      }
-  }
+    var body: some View {
+        TabView(selection: $selectedTab) {
+            GoogleMapView()
+                .tag(0)
+                .tabItem { Label("Map", systemImage: "map") }
+
+            Text("Other Feature")
+                .tag(1)
+                .tabItem { Label("Other", systemImage: "gear") }
+        }
+        .overlay(alignment: .topLeading) {
+            Menu {
+                Button("Option 1") { }
+                Button("Option 2") { }
+                Button("Option 3") { }
+                Button("Option 4") { }
+                Button("Option 5") { }
+            } label: {
+                Image(systemName: "line.horizontal.3")
+                  .font(.title2)
+                  .foregroundColor(menuOpened ? .white : .gray)
+                  .padding()
+                  .background(
+                    Circle()
+                      .fill(menuOpened ? Color.blue : Color.white)
+                  )
+                  .onTapGesture {
+                    menuOpened.toggle()
+                  }
+              }
+              .contentShape(Circle())  // Make full circle tappable
+              .padding(16)
+        }
+    }
 }
+
+
 #Preview {
     MainTabView()
 }

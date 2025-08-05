@@ -37,7 +37,11 @@
 		7B502D442E394959007BA223 /* Exceptions for "SAVMS" folder in "SAVMS" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Constants/.gitkeep,
+				Extensions/.gitkeep,
 				Info.plist,
+				Models/.gitkeep,
+				Services/.gitkeep,
 				ViewModels/.gitkeep,
 			);
 			target = 2FC1EB7A2E37BB1A004DB972 /* SAVMS */;
