@@ -1,6 +1,6 @@
 # MVVM Architecture Layers Explained
 
-![iOS Demo.pdf](./images/iOS_Demo.pdf)
+![iOS Demo.jpg](./images/iOS_Demo.jpg)
 
 ## 1. Model
 
