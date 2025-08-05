@@ -1,6 +1,144 @@
-import React, { useState, useCallback, useRef } from 'react';
-import { Button, Modal, Chat, DragMove } from '@douyinfe/semi-ui';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
+import { Button, Modal, Chat, DragMove, Input, Space } from '@douyinfe/semi-ui';
+import { IconMicrophone, IconStop } from '@douyinfe/semi-icons';
 import './DragChat.css';
+
+// 语音输入自定义Hook
+function useVoiceInput() {
+    const [isListening, setIsListening] = useState(false);
+    const [transcript, setTranscript] = useState('');
+    const recognitionRef = useRef(null);
+
+    useEffect(() => {
+        // 检查浏览器支持
+        if ('webkitSpeechRecognition' in window) {
+            const recognition = new window.webkitSpeechRecognition();
+            
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.lang = 'zh-CN';
+            
+            recognition.onresult = (event) => {
+                let finalTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    if (event.results[i].isFinal) {
+                        finalTranscript += event.results[i][0].transcript;
+                    }
+                }
+                if (finalTranscript) {
+                    setTranscript(prev => prev + finalTranscript);
+                }
+            };
+            
+            recognition.onerror = (event) => {
+                console.error('语音识别错误:', event.error);
+                setIsListening(false);
+            };
+            
+            recognition.onend = () => {
+                setIsListening(false);
+            };
+            
+            recognitionRef.current = recognition;
+        }
+    }, []);
+
+    const toggleListening = useCallback(() => {
+        if (isListening) {
+            recognitionRef.current?.stop();
+        } else {
+            if (recognitionRef.current) {
+                recognitionRef.current.start();
+                setIsListening(true);
+            }
+        }
+    }, [isListening]);
+
+    const clearTranscript = useCallback(() => {
+        setTranscript('');
+    }, []);
+
+    return {
+        isListening,
+        transcript,
+        toggleListening,
+        clearTranscript,
+        isSupported: 'webkitSpeechRecognition' in window
+    };
+}
+
+// 自定义输入组件
+function CustomChatInput({ onSend }) {
+    const [inputValue, setInputValue] = useState('');
+    const { isListening, transcript, toggleListening, clearTranscript, isSupported } = useVoiceInput();
+
+    // 当语音转换的文本发生变化时，更新输入框
+    useEffect(() => {
+        if (transcript) {
+            setInputValue(prev => prev + transcript);
+            clearTranscript();
+        }
+    }, [transcript, clearTranscript]);
+
+    const handleSend = useCallback(() => {
+        if (inputValue.trim()) {
+            onSend(inputValue.trim());
+            setInputValue('');
+        }
+    }, [inputValue, onSend]);
+
+    const handleKeyPress = useCallback((e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSend();
+        }
+    }, [handleSend]);
+
+    return (
+        <div style={{ padding: '16px', borderTop: '1px solid #e4e6e8' }}>
+            <Space style={{ width: '100%' }} align="end">
+                <Input
+                    style={{ flex: 1 }}
+                    value={inputValue}
+                    onChange={setInputValue}
+                    onKeyPress={handleKeyPress}
+                    placeholder="输入消息..."
+                    autoSize={{ minRows: 1, maxRows: 4 }}
+                />
+                {isSupported && (
+                    <Button
+                        type={isListening ? "danger" : "tertiary"}
+                        icon={isListening ? <IconStop /> : <IconMicrophone />}
+                        onClick={toggleListening}
+                        style={{
+                            backgroundColor: isListening ? '#ff4d4f' : undefined,
+                            color: isListening ? '#fff' : undefined
+                        }}
+                    />
+                )}
+                <Button
+                    type="primary"
+                    onClick={handleSend}
+                    disabled={!inputValue.trim()}
+                >
+                    发送
+                </Button>
+            </Space>
+            {isListening && (
+                <div style={{ 
+                    marginTop: '8px', 
+                    padding: '8px', 
+                    backgroundColor: '#f0f0f0', 
+                    borderRadius: '4px',
+                    fontSize: '12px',
+                    color: '#666'
+                }}>
+                    🎤 正在监听中...
+                </div>
+            )}
+        </div>
+    );
+}
 
 // Semi UI Chat 的角色配置
 const roleInfo = {
@@ -146,16 +284,21 @@ export default function DragChat() {
                 visible={visible}
                 footer={null}
                 onCancel={() => setVisible(false)}
-                width={360}
+                width={400}
                 bodyStyle={{ padding: 0 }}
                 closable
             >
-                <Chat
-                    chats={messages}
-                    onMessageSend={onMessageSend}
-                    roleConfig={roleInfo}
-                    height={800}
-                />
+                <div style={{ height: '600px', display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ flex: 1, overflow: 'hidden' }}>
+                        <Chat
+                            chats={messages}
+                            roleConfig={roleInfo}
+                            showClearContext={true}
+                            renderInputArea={() => null} // 隐藏默认输入区域
+                        />
+                    </div>
+                    <CustomChatInput onSend={onMessageSend} />
+                </div>
             </Modal>
         </>
     );
