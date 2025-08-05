@@ -87,4 +87,32 @@ public class VehicleImageController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("读取失败");
         }
     }
+
+    @DeleteMapping("/vehicles/{vehicleId}/image/{imageId}")
+    public Result<?> deleteVehicleImage(@PathVariable String vehicleId,
+                                        @PathVariable String imageId) {
+        try {
+            Optional<Vehicle> optionalVehicle = vehicleService.getVehicleByVehicleId(vehicleId);
+            if (optionalVehicle.isEmpty()) {
+                return Result.error("车辆未找到");
+            }
+
+            Vehicle vehicle = optionalVehicle.get();
+            List<String> images = vehicle.getImages();
+            String fileUrl = "http://localhost:8080/image/" + imageId;
+            if (images == null || !images.remove(fileUrl)) {
+                return Result.error("图片在车辆记录中未找到");
+            }
+
+            // Remove from MongoDB GridFS
+            gridFsTemplate.delete(new Query(Criteria.where("_id").is(new ObjectId(imageId))));
+
+            // Update vehicle record
+            vehicleService.save(vehicle);
+
+            return Result.success("图片删除成功");
+        } catch (Exception e) {
+            return Result.error("删除失败: " + e.getMessage());
+        }
+    }
 }
