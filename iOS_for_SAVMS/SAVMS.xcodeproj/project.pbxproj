@@ -38,16 +38,28 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				ViewModels/.gitkeep,
 			);
 			target = 2FC1EB7A2E37BB1A004DB972 /* SAVMS */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		7B93A27B2E41C32C00119D3B /* Exceptions for "SAVMS" folder in "Compile Sources" phase from "SAVMS" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 2FC1EB772E37BB1A004DB972 /* Sources */;
+			membershipExceptions = (
+				ViewModels/.gitkeep,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2FC1EB7D2E37BB1A004DB972 /* SAVMS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				7B502D442E394959007BA223 /* Exceptions for "SAVMS" folder in "SAVMS" target */,
+				7B93A27B2E41C32C00119D3B /* Exceptions for "SAVMS" folder in "Compile Sources" phase from "SAVMS" target */,
 			);
 			path = SAVMS;
 			sourceTree = "<group>";
