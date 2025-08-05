@@ -4,12 +4,12 @@
 //
 //  Created by Renken G on 29/7/2025.
 //
-import SwiftUI
 
 import SwiftUI
 
 struct MainTabView: View {
     @State private var selectedTab = 0
+    @State private var showPanel = false
 
     // track menu open state
     @State private var menuOpened = false
@@ -17,12 +17,15 @@ struct MainTabView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             GoogleMapView()
-                .tag(0)
-                .tabItem { Label("Map", systemImage: "map") }
-
-            Text("Other Feature")
-                .tag(1)
-                .tabItem { Label("Other", systemImage: "gear") }
+        }
+        .sheet(isPresented: $showPanel) {
+            BottomPanelView()
+                .presentationDetents([.fraction(0.1), .medium, .large])
+                .presentationDragIndicator(.visible)
+        }
+        .onAppear {
+            // Optionally open panel to minimal state
+            showPanel = true
         }
         .overlay(alignment: .topLeading) {
             Menu {
