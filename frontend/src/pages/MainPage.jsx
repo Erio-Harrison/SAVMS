@@ -10,6 +10,7 @@ const { Title, Text } = Typography;
 
 import CarOperationButton from '../components/Cars/CarOperationButton';
 import '../styles/PopoverStyles.css';
+import axios from "axios";
 
 export default function MainPage() {
     // 车辆相关和界面状态
@@ -105,10 +106,10 @@ export default function MainPage() {
 
     useEffect(() => {
         const fetchCars = () => {
-            axiosInstance
-                .get("/vehicles/get/all")
+            axios
+                .get("http://34.151.113.63:8080/api/vehicle-status/all")
                 .then((response) => {
-                    setCars(response.data.data);
+                    setCars(response.data);
                 })
                 .catch((error) => {
                     console.error(error);
