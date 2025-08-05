@@ -20,6 +20,7 @@ struct MainTabView: View {
         }
         .sheet(isPresented: $showPanel) {
             BottomPanelView()
+                .interactiveDismissDisabled() // disable swipe-down dismissal
                 .presentationDetents([.fraction(0.1), .medium, .large])
                 .presentationDragIndicator(.visible)
         }
