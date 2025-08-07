@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F4D62D92E448DDC007F9AF3 /* API_Usage_Guide.md in Resources */ = {isa = PBXBuildFile; fileRef = 2F4D62D72E448DDC007F9AF3 /* API_Usage_Guide.md */; };
+		2F4D62DB2E448E78007F9AF3 /* SAVMS_API_Guide_EN.md in Resources */ = {isa = PBXBuildFile; fileRef = 2F4D62DA2E448E78007F9AF3 /* SAVMS_API_Guide_EN.md */; };
 		2FDA7ECE2E42012800DB0571 /* FirebaseAI in Frameworks */ = {isa = PBXBuildFile; productRef = 2FDA7ECD2E42012800DB0571 /* FirebaseAI */; };
 		2FDA7ED02E42012800DB0571 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2FDA7ECF2E42012800DB0571 /* FirebaseAnalytics */; };
 		2FDA7ED22E42012800DB0571 /* FirebaseAnalyticsCore in Frameworks */ = {isa = PBXBuildFile; productRef = 2FDA7ED12E42012800DB0571 /* FirebaseAnalyticsCore */; };
@@ -51,6 +53,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2F4D62D72E448DDC007F9AF3 /* API_Usage_Guide.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = API_Usage_Guide.md; sourceTree = "<group>"; };
+		2F4D62DA2E448E78007F9AF3 /* SAVMS_API_Guide_EN.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = SAVMS_API_Guide_EN.md; sourceTree = "<group>"; };
 		2FC1EB7B2E37BB1A004DB972 /* SAVMS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SAVMS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC1EB882E37BB1C004DB972 /* SAVMSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SAVMSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FC1EB922E37BB1C004DB972 /* SAVMSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SAVMSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +156,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F4D62D82E448DDC007F9AF3 /* Guidance */ = {
+			isa = PBXGroup;
+			children = (
+				2F4D62DA2E448E78007F9AF3 /* SAVMS_API_Guide_EN.md */,
+				2F4D62D72E448DDC007F9AF3 /* API_Usage_Guide.md */,
+			);
+			path = Guidance;
+			sourceTree = "<group>";
+		};
 		2FC1EB722E37BB1A004DB972 = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +172,7 @@
 				2FC1EB8B2E37BB1C004DB972 /* SAVMSTests */,
 				2FC1EB952E37BB1D004DB972 /* SAVMSUITests */,
 				2FC1EB7C2E37BB1A004DB972 /* Products */,
+				2F4D62D82E448DDC007F9AF3 /* Guidance */,
 			);
 			sourceTree = "<group>";
 		};
@@ -320,6 +334,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F4D62D92E448DDC007F9AF3 /* API_Usage_Guide.md in Resources */,
+				2F4D62DB2E448E78007F9AF3 /* SAVMS_API_Guide_EN.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
