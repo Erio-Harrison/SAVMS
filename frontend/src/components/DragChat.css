@@ -1,0 +1,23 @@
+.drag-chat-button {
+    position: fixed !important;
+    bottom: 24px !important;
+    right: 24px !important;
+    width: 56px !important;
+    height: 56px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    background-color: #000 !important;
+    color: #fff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+    cursor: move !important;
+    z-index: 1000 !important;
+    font-size: 14px !important;
+}
+
+/* 覆盖 Semi Button 内部的文字色 */
+.drag-chat-button .semi-button-content {
+    color: #fff !important;
+}

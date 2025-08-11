@@ -4,6 +4,7 @@ import SearchBar from "../components/SearchBar";
 import CurrentWeatherCard from "../components/CurrentWeatherCard";
 import Map from "../components/Map";
 import axiosInstance from '../axiosInstance';
+import DragChat from '../components/ChatPage';
 
 import { Popover, Typography, Divider, Tag } from '@douyinfe/semi-ui';
 const { Title, Text } = Typography;
@@ -104,17 +105,17 @@ export default function MainPage() {
         fetchWeather(); // 页面加载或城市变化时获取天气数据
     }, [city]);
 
+    const fetchCars = () => {
+        axios
+            .get("http://34.151.113.63:8080/api/vehicle-status/all")
+            .then((response) => {
+                setCars(response.data);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
     useEffect(() => {
-        const fetchCars = () => {
-            axios
-                .get("http://34.151.113.63:8080/api/vehicle-status/all")
-                .then((response) => {
-                    setCars(response.data);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        };
 
         const fetchMarkers = async () => {
             const newMarkersData = [
@@ -157,9 +158,16 @@ export default function MainPage() {
                 <div style={{position: 'relative', display: 'inline-block'}}>
                     <div className="text-2xl font-bold">Tracking</div>
                     <div style={{position: 'absolute', right: -4, top: 0}}>
-                        <CarOperationButton onVehicleAdded={(newCar) => setCars(prev => [...prev, newCar])}/>
+                        <CarOperationButton
+                        vehicles={cars}
+                        onVehiclesDeleted={(deletedPlates) => {
+                            setCars((prev) => prev.filter((car) => !deletedPlates.includes(car.licensePlate)));
+                        }}
+                        fetchCars={fetchCars}
+                        onVehicleAdded={(newCar) => setCars(prev => [...prev, newCar])}/>
                     </div>
                 </div>
+                <DragChat />
                 <div className="bg-accent rounded-3xl p-4 flex flex-col h-screen overflow-auto">
                     {cars.length > 0 ? (
                         cars.filter(Boolean).map((car) => (

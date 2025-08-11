@@ -60,7 +60,7 @@ public class VehicleRepository {
      * @return An Optional containing the vehicle if found, otherwise empty.
      */
     public Optional<Vehicle> findByVehicleId(String vehicleId) {
-        Query query = new Query(Criteria.where("vehicleId").is(vehicleId));
+        Query query = new Query(Criteria.where("_id").is(vehicleId));
         return Optional.ofNullable(mongoTemplate.findOne(query, Vehicle.class));
     }
 
@@ -99,6 +99,20 @@ public class VehicleRepository {
         return mongoTemplate.find(query, Vehicle.class);
     }
 
+    public void saveVehicle(Vehicle vehicle) {
+        mongoTemplate.save(vehicle);
+    }
+
+    public boolean deleteVehicleByPlate(String plate) {
+        Optional<Vehicle> vehicle = findByLicensePlate(plate);
+        if (vehicle.isPresent()) {
+            Query query = new Query(Criteria.where("licensePlate").is(plate));
+            mongoTemplate.remove(query, Vehicle.class);
+            return true;
+        }
+        return false;
+    }
+  
     /**
      * Query the vehicles within a radius of a specified point and return the results sorted by distance
      */

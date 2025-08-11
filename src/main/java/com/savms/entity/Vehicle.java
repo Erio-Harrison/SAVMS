@@ -6,6 +6,9 @@ import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
 import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Vehicle entity class
  * @author Yunxuan Shen u6539201
@@ -58,6 +61,17 @@ public class Vehicle {
     private double coolantTemp;
     private int engineCondition;       // 0/1
 
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
+
+    //image
+    private List<String> images;
+
     // Constructors
     public Vehicle() {
     }
@@ -66,6 +80,7 @@ public class Vehicle {
         this.id = vehicleId;
         this.licensePlate = licensePlate;
         this.carModel = carModel;
+        images = new ArrayList<>();
     }
 
     // Getters and Setters

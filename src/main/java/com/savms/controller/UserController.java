@@ -29,6 +29,7 @@ public class UserController
     public void createUser( @RequestBody User user )
     {
         System.out.println("in /create");
+        user.setRole(1);
         userService.saveUser(user);
     }
 
@@ -93,6 +94,42 @@ public class UserController
     @PutMapping("/{userId}/updatePassword")
     public void updateUserPassword( @PathVariable String userId, @RequestParam String newPassword )
     {
-        userService.updateUserEmail( userId, newPassword );
+        System.out.println(userId);
+        System.out.println(newPassword);
+
+        userService.updateUserPassword( userId, newPassword );
+    }
+
+    /**
+     * Sets a user's role.
+     * @param userId The ID of the user.
+     * @param role The new role (0 = admin, 1 = client).
+     */
+    @PutMapping("/{userId}/setRole")
+    public void setUserRole(@PathVariable String userId, @RequestParam int role)
+    {
+        userService.setUserRole(userId, role);
+    }
+
+    /**
+     * Gets a user's role by ID.
+     * @param userId The ID of the user.
+     * @return The user's role (0 = admin, 1 = client).
+     */
+    @GetMapping("/{userId}/getRole")
+    public int getUserRoleById( @PathVariable String userId )
+    {
+        return userService.getUserRoleById( userId );
+    }
+
+    /**
+     * Gets a user's role by username.
+     * @param username The username of the user.
+     * @return The user's role (0 = admin, 1 = client).
+     */
+    @GetMapping("/getRoleByUsername")
+    public int getUserRoleByUsername( @RequestParam String username )
+    {
+        return userService.getUserRoleByUsername( username );
     }
 }
