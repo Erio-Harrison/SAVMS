@@ -8,50 +8,24 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @State private var selectedTab = 0
-    @State private var showPanel = false
-
-    // track menu open state
-    @State private var menuOpened = false
-
     var body: some View {
-        TabView(selection: $selectedTab) {
-            GoogleMapView()
-        }
-        .sheet(isPresented: $showPanel) {
-            BottomPanelView()
-                .interactiveDismissDisabled() // disable swipe-down dismissal
-                .presentationDetents([.fraction(0.1), .medium, .large])
-                .presentationDragIndicator(.visible)
-                .presentationBackgroundInteraction(.enabled(upThrough: .medium))
-            
-        }
-        .onAppear {
-            // Optionally open panel to minimal state
-            showPanel = true
-        }
-        .overlay(alignment: .topLeading) {
-            Menu {
-                Button("Home") { }
-                Button("Location") { }
-                Button("Tasks") { }
-                Button("Profile") { }
-                Button("Setting") { }
-            } label: {
-                Image(systemName: "line.horizontal.3")
-                  .font(.title2)
-                  .foregroundColor(menuOpened ? .white : .gray)
-                  .padding()
-                  .background(
-                    Circle()
-                      .fill(menuOpened ? Color.blue : Color.white)
-                  )
-                  .onTapGesture {
-                    menuOpened.toggle()
-                  }
-              }
-              .contentShape(Circle())  // Make full circle tappable
-              .padding(16)
+        GeometryReader { geo in
+            let h = geo.size.height
+            let panelH = h * 0.8
+
+            ZStack(alignment: .bottom) {
+                // Your full-screen content (e.g., Google map)
+                GoogleMapView()
+                    .ignoresSafeArea()
+
+                BottomPanelView(panelHeight: panelH) {
+                    Text("Panel content goes here")
+                        .font(.headline)
+                        .padding(.horizontal)
+                    // Add your list, buttons, etc.
+                }
+                .padding(.horizontal)
+            }
         }
     }
 }
