@@ -23,6 +23,8 @@ struct MainTabView: View {
                 .interactiveDismissDisabled() // disable swipe-down dismissal
                 .presentationDetents([.fraction(0.1), .medium, .large])
                 .presentationDragIndicator(.visible)
+                .presentationBackgroundInteraction(.enabled(upThrough: .medium))
+            
         }
         .onAppear {
             // Optionally open panel to minimal state
