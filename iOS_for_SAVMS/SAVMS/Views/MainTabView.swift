@@ -1,5 +1,5 @@
 //
-//  MapView.swift
+//  MainTabView.swift
 //  SAVMS
 //
 //  Created by Renken G on 29/7/2025.
@@ -32,11 +32,11 @@ struct MainTabView: View {
         }
         .overlay(alignment: .topLeading) {
             Menu {
-                Button("Option 1") { }
-                Button("Option 2") { }
-                Button("Option 3") { }
-                Button("Option 4") { }
-                Button("Option 5") { }
+                Button("Home") { }
+                Button("Location") { }
+                Button("Tasks") { }
+                Button("Profile") { }
+                Button("Setting") { }
             } label: {
                 Image(systemName: "line.horizontal.3")
                   .font(.title2)
