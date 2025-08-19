@@ -14,6 +14,14 @@ class AuthService {
     static let shared = AuthService()
     private let db = Firestore.firestore()
     
+    struct User: Identifiable {
+        var id: String        // Firestore doc ID
+        var userID: String
+        var name: String
+        var email: String
+        var role: String
+    }
+    
     /// 直接用 Firestore 验证 name + password + role
     func signInWithUsername(username: String, password: String, role: String, completion: @escaping (Result<Void, Error>) -> Void) {
         
@@ -64,6 +72,13 @@ class AuthService {
                     
                     if passwordMatch {
                         print("✅ 密码验证成功！")
+                        let user = User(
+                            id: document.documentID,
+                            userID: data["userID"] as? String ?? "",
+                            name: data["name"] as? String ?? "",
+                            email: data["email"] as? String ?? "",
+                            role: data["role"] as? String ?? ""
+                        )
                         completion(.success(()))
                         return
                     }
