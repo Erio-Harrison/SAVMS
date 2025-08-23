@@ -39,3 +39,4 @@ build/
 package-lock.json
 yarn.lock
 frontend/package.json
+.DS_Store
