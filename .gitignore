@@ -39,3 +39,5 @@ build/
 package-lock.json
 yarn.lock
 frontend/package.json
+
+application.properties
