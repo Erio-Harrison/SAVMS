@@ -5,6 +5,8 @@
 //  Created by Renken G on 19/8/2025.
 //
 
+import Foundation
+
 struct Task: Identifiable, Codable {
     var id: String
     var title: String

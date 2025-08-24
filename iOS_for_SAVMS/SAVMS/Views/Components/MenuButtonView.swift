@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct MenuButtonView: View {
+    @State private var showSpeechTest = false
+    
     var body: some View {
         Menu {
+            Button("语音转文字测试") { 
+                showSpeechTest = true 
+            }
             Button("Home") { /* action */ }
             Button("Location") { /* action */ }
             Button("Tasks") { /* action */ }
@@ -30,6 +35,9 @@ struct MenuButtonView: View {
         .padding(.leading, 16)
         .padding(.top, 16)
         .zIndex(2)                 // keep above bottom panel
+        .sheet(isPresented: $showSpeechTest) {
+            SpeechToTextTestView()
+        }
     }
 }
 
