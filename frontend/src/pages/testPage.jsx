@@ -10,13 +10,13 @@ const TestPage = () => {
 
     const handleUpload = async () => {
         if (files.length === 0) {
-            alert("请先选择文件");
+            alert("Please select files first");
             return;
         }
 
         const formData = new FormData();
         files.forEach((file) => {
-            formData.append("photos", file); // 注意字段名是 photos
+            formData.append("photos", file); // Note: field name is photos
         });
 
         try {
@@ -28,16 +28,16 @@ const TestPage = () => {
             const result = await res.json();
             setResponse(JSON.stringify(result, null, 2));
         } catch (err) {
-            setResponse("上传失败: " + err.message);
+            setResponse("Upload failed: " + err.message);
         }
     };
 
     return (
         <div style={{ padding: "20px" }}>
-            <h2>上传多张车辆图片测试</h2>
+            <h2>Upload Multiple Vehicle Images Test</h2>
             <input type="file" onChange={handleFileChange} multiple />
             <button onClick={handleUpload} style={{ marginLeft: "10px" }}>
-                上传
+                Upload
             </button>
             <pre style={{ marginTop: "20px", background: "#f0f0f0", padding: "10px" }}>
                 {response}

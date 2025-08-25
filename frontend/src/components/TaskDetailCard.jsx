@@ -11,23 +11,23 @@ export default function TaskDetailCard({ task, onEndTask }) {
 
     return (
         <div className="task-card shadow-md rounded-2xl p-4 w-full flex justify-between items-center">
-            {/* 左侧任务信息 */}
+            {/* Left side task information */}
             <div className="w-2/3">
                 <div className="font-semibold text-lg mb-2">Task Details</div>
-                {/* 任务信息 */}
+                {/* Task information */}
                 <div className="text-sm text-gray-800 mb-2">
                     <div><strong>Task ID:</strong> {task.id}</div>
                     <div><strong>Start Time:</strong> {task.startTime}</div>
                     <div><strong>Start Address:</strong> {task.startLocation?.address}</div>
                     <div><strong>End Address:</strong> {task.endLocation?.address}</div>
-                    {/* 如果任务已分配车辆（假设 status ≠ 0），才显示车牌 */}
+                    {/* Show license plate only if task has been assigned to vehicle (assuming status ≠ 0) */}
                     {task.status !== 0 && task.vehicle?.plateNumber && (
                         <div><strong>Car License:</strong> {task.vehicle.plateNumber}</div>
                     )}
                 </div>
             </div>
 
-            {/* 如果任务已分配车辆（假设 status ≠ 0），才显示结束按钮 */}
+            {/* Show finish button only if task has been assigned to vehicle (assuming status ≠ 0) */}
             {task.status !== 0 && (
                 <div className="flex items-center justify-center w-1/3">
                     <button

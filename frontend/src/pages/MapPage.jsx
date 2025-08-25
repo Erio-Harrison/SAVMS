@@ -23,7 +23,7 @@ export default function MapPage(){
         setMapInstance(map);
     }, []);
 
-    // 地理编码：将地址转换为经纬度
+    // Geocoding: convert address to latitude and longitude
     const handleGeocodeAddressAndRoute = async () => {
         if (!window.google || !destination) return;
 
@@ -33,7 +33,7 @@ export default function MapPage(){
                 const latLng = results[0].geometry.location;
                 setDestinationLatLng(latLng);
                 console.log('Geocoded LatLng:', latLng);
-                // 路线计算
+                // Route calculation
                 calculateRoute(latLng);
             } else {
                 alert('Geocoding failed: ' + status);
@@ -41,7 +41,7 @@ export default function MapPage(){
         });
     };
 
-    // 计算路径
+    // Calculate route
     const calculateRoute = (destinationLatLng) => {
         if (!window.google || !mapInstance) return;
 
@@ -83,7 +83,7 @@ export default function MapPage(){
         try {
             const res = await fetch(`http://localhost:8080/vehicles/withinRange?minLat=${minLat}&maxLat=${maxLat}&minLng=${minLng}&maxLng=${maxLng}`);
             const data = await res.json();
-            return data.data; // 这里根据你的后端返回结构
+            return data.data; // Based on your backend return structure
         } catch (err) {
             console.error('Error fetching vehicles:', err);
             return [];
@@ -105,7 +105,7 @@ export default function MapPage(){
     };
 
     if (!realEstateListing) {
-        return <div>Loading...</div>; // 如果数据未加载，显示加载提示
+        return <div>Loading...</div>; // Show loading prompt if data is not loaded
     }
 
     const VehicleFetcher = ({ onVehiclesFetched }) => {
@@ -125,7 +125,7 @@ export default function MapPage(){
 
             map.addListener('idle', listener);
 
-            // 清理
+            // Cleanup
             return () => {
                 window.google.maps.event.clearListeners(map, 'idle');
             };
@@ -165,7 +165,7 @@ export default function MapPage(){
                     }}
                 />
 
-                {/* 渲染车辆 marker */}
+                {/* Render vehicle markers */}
                 {vehicleList.map((vehicle) => (
                     <CustomAdvancedMarker
                         key={vehicle.id}
