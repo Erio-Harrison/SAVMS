@@ -130,6 +130,16 @@ export default function VehicleStatusPage() {
             const vehiclesResponse = await axios.get("http://34.151.113.63:8080/api/vehicle-status/all");
             const vehiclesList = vehiclesResponse.data || [];
             
+            // First, check and generate new alerts for each vehicle
+            for (const vehicle of vehiclesList) {
+                try {
+                    console.log(`Checking alerts for vehicle: ${vehicle.licensePlate} with speed: ${vehicle.speed}`);
+                    await axios.post(`http://34.151.113.63:8080/api/alert/${vehicle.licensePlate}/check`);
+                } catch (error) {
+                    console.error(`Failed to check alerts for vehicle ${vehicle.licensePlate}:`, error);
+                }
+            }
+            
             // Then fetch active alerts for each vehicle
             const allAlerts = [];
             for (const vehicle of vehiclesList) {
@@ -141,6 +151,8 @@ export default function VehicleStatusPage() {
                     console.error(`Failed to fetch alerts for vehicle ${vehicle.licensePlate}:`, error);
                 }
             }
+            
+            console.log('All active alerts:', allAlerts);
             
             // Check for new critical alerts
             const criticalAlerts = allAlerts.filter(alert => alert.severity === 'CRITICAL');
@@ -253,6 +265,14 @@ export default function VehicleStatusPage() {
                             Alerts {totalAlertCount > 0 && `(${totalAlertCount})`}
                         </Button>
                     </Badge>
+                    
+                    <Button 
+                        theme="solid" 
+                        type="warning"
+                        onClick={fetchAlerts}
+                    >
+                        Check Alerts
+                    </Button>
                     
                     <Button 
                         theme="solid" 
