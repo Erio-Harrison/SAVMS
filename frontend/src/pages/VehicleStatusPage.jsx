@@ -4,6 +4,7 @@ import { Tag, Table, Typography, Button, LocaleProvider, Toast, Badge } from '@d
 import { IconAlertTriangle, IconBell } from '@douyinfe/semi-icons';
 import en_US from '@douyinfe/semi-ui/lib/es/locale/source/en_US';
 import AlertModal from '../components/AlertModal';
+import '../styles/AlertStyles.css';
 
 const { Title, Text } = Typography;
 
@@ -92,6 +93,44 @@ export default function VehicleStatusPage() {
                     {status || 'Unknown'}
                 </Tag>
             )
+        },
+        {
+            title: 'Alert Status',
+            key: 'alertStatus',
+            width: 120,
+            render: (_, vehicle) => {
+                const vehicleAlerts = alerts.filter(alert => alert.licensePlate === vehicle.licensePlate);
+                const criticalAlerts = vehicleAlerts.filter(alert => alert.severity === 'CRITICAL');
+                const highAlerts = vehicleAlerts.filter(alert => alert.severity === 'HIGH');
+                
+                if (criticalAlerts.length > 0) {
+                    return (
+                        <Tag size="small" type="danger" className="font-medium">
+                            CRITICAL ({criticalAlerts.length})
+                        </Tag>
+                    );
+                }
+                if (highAlerts.length > 0) {
+                    return (
+                        <Tag size="small" type="warning" className="font-medium">
+                            HIGH ({highAlerts.length})
+                        </Tag>
+                    );
+                }
+                const otherAlerts = vehicleAlerts.filter(alert => alert.severity === 'MEDIUM' || alert.severity === 'LOW');
+                if (otherAlerts.length > 0) {
+                    return (
+                        <Tag size="small" type="secondary" className="font-medium">
+                            {otherAlerts[0].severity} ({otherAlerts.length})
+                        </Tag>
+                    );
+                }
+                return (
+                    <Tag size="small" type="success" className="font-medium">
+                        OK
+                    </Tag>
+                );
+            }
         },
         {
             title: 'Last Updated',
@@ -238,6 +277,21 @@ export default function VehicleStatusPage() {
     const criticalAlertCount = alerts.filter(alert => alert.severity === 'CRITICAL').length;
     const totalAlertCount = alerts.length;
 
+    // Function to get row class based on alert severity
+    const getRowClassName = (record) => {
+        const vehicleAlerts = alerts.filter(alert => alert.licensePlate === record.licensePlate);
+        const criticalAlerts = vehicleAlerts.filter(alert => alert.severity === 'CRITICAL');
+        const highAlerts = vehicleAlerts.filter(alert => alert.severity === 'HIGH');
+        
+        if (criticalAlerts.length > 0) {
+            return 'critical-alert-row';
+        }
+        if (highAlerts.length > 0) {
+            return 'high-alert-row';
+        }
+        return '';
+    };
+
     return (
         <LocaleProvider locale={en_US}>
             <div className="bg-white rounded-3xl p-6 h-full flex flex-col">
@@ -297,6 +351,7 @@ export default function VehicleStatusPage() {
                     dataSource={vehicles}
                     rowKey="id"
                     loading={loading}
+                    rowClassName={getRowClassName}
                     pagination={{
                         pageSize: 10,
                         showSizeChanger: true,
