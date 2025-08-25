@@ -39,8 +39,8 @@ export default function VehicleStatusPage() {
             width: 100,
             render: (speed) => (
                 <span className={`font-medium ${
-                    speed > 80 ? 'text-red-500' : 
-                    speed > 40 ? 'text-orange-500' : 
+                    speed > 150 ? 'text-red-500' : 
+                    speed > 120 ? 'text-orange-500' : 
                     'text-green-500'
                 }`}>
                     {typeof speed === 'number' ? speed.toFixed(2) : '0.00'} km/h
@@ -172,7 +172,6 @@ export default function VehicleStatusPage() {
             // First, check and generate new alerts for each vehicle
             for (const vehicle of vehiclesList) {
                 try {
-                    console.log(`Checking alerts for vehicle: ${vehicle.licensePlate} with speed: ${vehicle.speed}`);
                     await axios.post(`http://34.151.113.63:8080/api/alert/${vehicle.licensePlate}/check`);
                 } catch (error) {
                     console.error(`Failed to check alerts for vehicle ${vehicle.licensePlate}:`, error);
@@ -191,7 +190,6 @@ export default function VehicleStatusPage() {
                 }
             }
             
-            console.log('All active alerts:', allAlerts);
             
             // Check for new critical alerts
             const criticalAlerts = allAlerts.filter(alert => alert.severity === 'CRITICAL');
@@ -260,6 +258,28 @@ export default function VehicleStatusPage() {
         fetchAlerts();
     };
 
+    const handleClearAndCheckAlerts = async () => {
+        try {
+            // First resolve all existing alerts to clear them
+            for (const alert of alerts) {
+                try {
+                    await axios.put(`http://34.151.113.63:8080/api/alert/${alert.id}/resolve`);
+                } catch (error) {
+                    console.error(`Failed to resolve alert ${alert.id}:`, error);
+                }
+            }
+            
+            Toast.info('Cleared existing alerts, generating fresh alerts...');
+            
+            // Wait a moment then fetch fresh alerts
+            setTimeout(() => {
+                fetchAlerts();
+            }, 1000);
+        } catch (error) {
+            console.error('Error clearing alerts:', error);
+        }
+    };
+
     const handleOpenAlerts = () => {
         setAlertModalVisible(true);
         setHasNewAlerts(false);
@@ -282,6 +302,7 @@ export default function VehicleStatusPage() {
         const vehicleAlerts = alerts.filter(alert => alert.licensePlate === record.licensePlate);
         const criticalAlerts = vehicleAlerts.filter(alert => alert.severity === 'CRITICAL');
         const highAlerts = vehicleAlerts.filter(alert => alert.severity === 'HIGH');
+        
         
         if (criticalAlerts.length > 0) {
             return 'critical-alert-row';
