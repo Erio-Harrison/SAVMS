@@ -3,14 +3,14 @@ import { Button, Modal, Chat, DragMove, Input, Space } from '@douyinfe/semi-ui';
 import { IconMicrophone, IconStop } from '@douyinfe/semi-icons';
 import './DragChat.css';
 
-// 语音输入自定义Hook
+// Custom Voice Input Hook
 function useVoiceInput() {
     const [isListening, setIsListening] = useState(false);
     const [transcript, setTranscript] = useState('');
     const recognitionRef = useRef(null);
 
     useEffect(() => {
-        // 检查浏览器支持
+        // Check browser support
         if ('webkitSpeechRecognition' in window) {
             const recognition = new window.webkitSpeechRecognition();
             
@@ -31,7 +31,7 @@ function useVoiceInput() {
             };
             
             recognition.onerror = (event) => {
-                console.error('语音识别错误:', event.error);
+                console.error('Voice recognition error:', event.error);
                 setIsListening(false);
             };
             
@@ -67,12 +67,12 @@ function useVoiceInput() {
     };
 }
 
-// 自定义输入组件
+// Custom Input Component
 function CustomChatInput({ onSend }) {
     const [inputValue, setInputValue] = useState('');
     const { isListening, transcript, toggleListening, clearTranscript, isSupported } = useVoiceInput();
 
-    // 当语音转换的文本发生变化时，更新输入框
+    // Update input field when voice-to-text changes
     useEffect(() => {
         if (transcript) {
             setInputValue(prev => prev + transcript);
@@ -102,7 +102,7 @@ function CustomChatInput({ onSend }) {
                     value={inputValue}
                     onChange={setInputValue}
                     onKeyPress={handleKeyPress}
-                    placeholder="输入消息..."
+                    placeholder="Enter message..."
                     autoSize={{ minRows: 1, maxRows: 4 }}
                 />
                 {isSupported && (
@@ -121,7 +121,7 @@ function CustomChatInput({ onSend }) {
                     onClick={handleSend}
                     disabled={!inputValue.trim()}
                 >
-                    发送
+                    Send
                 </Button>
             </Space>
             {isListening && (
@@ -133,14 +133,14 @@ function CustomChatInput({ onSend }) {
                     fontSize: '12px',
                     color: '#666'
                 }}>
-                    🎤 正在监听中...
+                    🎤 Listening...
                 </div>
             )}
         </div>
     );
 }
 
-// Semi UI Chat 的角色配置
+// Semi UI Chat role configuration
 const roleInfo = {
     user: {
         name: 'User',
@@ -168,12 +168,12 @@ export default function DragChat() {
         },
     ]);
 
-    // 存储按下时的鼠标位置
+    // Store mouse position when pressed
     const startPos = useRef({ x: 0, y: 0 });
 
-    // 聊天发送回调
+    // Chat send callback
     const onMessageSend = useCallback(async (userInput) => {
-        // 1. 添加用户消息
+        // 1. Add user message
         const userMessage = {
             role: 'user',
             id: getId(),
@@ -183,7 +183,7 @@ export default function DragChat() {
         setMessages(prev => [...prev, userMessage]);
 
         try {
-            // 2. 调用 Ollama 流式接口
+            // 2. Call Ollama streaming interface
             const response = await fetch('http://localhost:11434/api/generate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -197,7 +197,7 @@ export default function DragChat() {
                 throw new Error('No streaming data received; the Ollama API may not support stream.');
             }
 
-            // 3. 占位 AI 消息
+            // 3. Placeholder AI message
             const assistantMessage = {
                 role: 'assistant',
                 id: getId(),
@@ -206,7 +206,7 @@ export default function DragChat() {
             };
             setMessages(prev => [...prev, assistantMessage]);
 
-            // 4. 解析 ND-JSON 数据流
+            // 4. Parse ND-JSON data stream
             const reader = response.body.getReader();
             const decoder = new TextDecoder();
 
@@ -237,7 +237,7 @@ export default function DragChat() {
                             });
                         }
                     } catch {
-                        // 忽略解析错误
+                        // Ignore parsing errors
                     }
                 }
             }
@@ -261,11 +261,11 @@ export default function DragChat() {
             <DragMove>
                 <Button
                     className="drag-chat-button"
-                    // 记录按下坐标
+                    // Record pressed coordinates
                     onMouseDown={e => {
                         startPos.current = { x: e.clientX, y: e.clientY };
                     }}
-                    // 松开时如果位移小于阈值，则视为点击
+                    // If movement is less than threshold when released, treat as click
                     onMouseUp={e => {
                         const dx = Math.abs(e.clientX - startPos.current.x);
                         const dy = Math.abs(e.clientY - startPos.current.y);
@@ -294,7 +294,7 @@ export default function DragChat() {
                             chats={messages}
                             roleConfig={roleInfo}
                             showClearContext={true}
-                            renderInputArea={() => null} // 隐藏默认输入区域
+                            renderInputArea={() => null} // Hide default input area
                         />
                     </div>
                     <CustomChatInput onSend={onMessageSend} />

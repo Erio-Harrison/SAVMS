@@ -95,7 +95,7 @@ export default function CarOperationButton({
 
     const handleUpload = async () => {
         if (!selectedPlate || selectedFiles.length === 0) {
-            Toast.warning('请选择车牌并选择图片');
+            Toast.warning('Please select a license plate and choose images');
             return;
         }
 
@@ -110,19 +110,19 @@ export default function CarOperationButton({
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            Toast.success('上传成功！');
-            setUploadedUrls(res.data.data); // 假设后端返回的 URL 数组
+            Toast.success('Upload successful!');
+            setUploadedUrls(res.data.data); // Assuming backend returns URL array
             const newImageUrls = res.data.data || [];
 
             setExistingImages(prev => [...prev, ...newImageUrls]);
 
-            // 清空选中的文件
+            // Clear selected files
             setSelectedFiles([]);
 
 
         } catch (err) {
             console.error(err);
-            Toast.error('上传失败');
+            Toast.error('Upload failed');
         }
     };
 
@@ -226,14 +226,14 @@ export default function CarOperationButton({
                 centered
             >
                 <Form labelPosition="top">
-                    {/* 选择车牌 */}
+                    {/* Select License Plate */}
                     <Form.Select
                         field="selectedPlate"
                         label="Select Vehicle Plate"
                         placeholder="Select a vehicle"
                         onChange={async (plate) => {
                             setSelectedPlate(plate);
-                            // 加载图片（发请求获取该车已有图片）
+                            // Load images (send request to get existing images for this vehicle)
                             try {
                                 const res = await axiosInstance.get(`/vehicles/get/license/${plate}`);
                                 const vehicle = res.data;
@@ -252,7 +252,7 @@ export default function CarOperationButton({
                         ))}
                     </Form.Select>
 
-                    {/* 图片预览 */}
+                    {/* Image Preview */}
                     <div style={{marginTop: 16}}>
                         <p>Existing Images:</p>
                         {existingImages.length === 0 ? (
@@ -320,7 +320,7 @@ export default function CarOperationButton({
                         )}
                     </div>
 
-                    {/* 上传图片 */}
+                    {/* Upload Images */}
                     <div style={{marginBottom: 16, marginTop: 16}}>
                         <label>Upload Images</label>
                         <input
@@ -332,7 +332,7 @@ export default function CarOperationButton({
                         />
                     </div>
 
-                    {/* 上传按钮 */}
+                    {/* Upload Button */}
                     <div style={{display: 'flex', justifyContent: 'flex-end', paddingBottom: 16}}>
                         <Button onClick={handleUpload} type="primary" theme="solid">
                             Upload Images

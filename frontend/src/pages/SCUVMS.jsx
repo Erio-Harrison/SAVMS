@@ -23,7 +23,7 @@ export default function SCUVMS() {
         return <SCUVMS_Client />;
     }
 
-    // 通过 selectedPage 渲染不同组件
+    // Render different components based on selectedPage
     const renderPage = () => {
         switch (selectedPage) {
             case "MainPage":

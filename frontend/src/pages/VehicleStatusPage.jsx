@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import axiosInstance from '../axiosInstance';
-import { Tag, Table, Typography, Button } from '@douyinfe/semi-ui';
+import axios from 'axios';
+import { Tag, Table, Typography, Button, LocaleProvider } from '@douyinfe/semi-ui';
+import en_US from '@douyinfe/semi-ui/lib/es/locale/source/en_US';
 
 const { Title, Text } = Typography;
 
@@ -102,9 +103,9 @@ export default function VehicleStatusPage() {
     const fetchVehicles = async () => {
         try {
             setLoading(true);
-            const response = await axiosInstance.get("/vehicles/get/all");
-            if (response.data && response.data.data) {
-                setVehicles(response.data.data);
+            const response = await axios.get("http://34.151.113.63:8080/api/vehicle-status/all");
+            if (response.data) {
+                setVehicles(response.data);
                 setError(null);
             } else {
                 setVehicles([]);
@@ -129,7 +130,8 @@ export default function VehicleStatusPage() {
     };
 
     return (
-        <div className="bg-white rounded-3xl p-6 h-full flex flex-col">
+        <LocaleProvider locale={en_US}>
+            <div className="bg-white rounded-3xl p-6 h-full flex flex-col">
             <div className="flex justify-between items-center mb-6">
                 <div>
                     <Title heading={3} className="mb-2">Vehicle Status Monitor</Title>
@@ -190,5 +192,6 @@ export default function VehicleStatusPage() {
                 </div>
             </div>
         </div>
+        </LocaleProvider>
     );
 }
