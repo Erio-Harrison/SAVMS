@@ -31,7 +31,7 @@ export default function CurrentTasksPage() {
     useEffect(() => {
         const fetchAssignedTasks = async () => {
             try {
-                const res = await axiosInstance.get("/api/tasks/status/1"); // 你的后端实际路径
+                const res = await axiosInstance.get("/api/tasks/status/1"); // Your actual backend path
                 const fetchedAssignTasks = res.data.data;
 
                 setAssignedTasks(fetchedAssignTasks);
@@ -45,7 +45,7 @@ export default function CurrentTasksPage() {
 
         const fetchUnAssignedTasks = async () => {
             try {
-                const res = await axiosInstance.get("/api/tasks/status/0"); // 你的后端实际路径
+                const res = await axiosInstance.get("/api/tasks/status/0"); // Your actual backend path
                 const fetchedUnAssignTasks = res.data.data;
 
                 setUnAssignedTasks(fetchedUnAssignTasks);
@@ -61,7 +61,7 @@ export default function CurrentTasksPage() {
 
     const handleMarkerClick = (marker) => {
         console.log("Task marker clicked:", marker);
-        // 根据点击的marker更新坐标
+        // Update coordinates based on clicked marker
         setCoordinate({ lat: marker.lat, lng: marker.lng });
     };
 
@@ -119,7 +119,7 @@ export default function CurrentTasksPage() {
                                         <div
                                             key={task.id}
                                             className="p-2 border-b border-gray-200 flex flex-col cursor-pointer"
-                                            onClick={() => handleTaskClick(task)} // 点击任务时更新选中的任务
+                                            onClick={() => handleTaskClick(task)} // Update selected task when clicking on task
                                         >
                                             <span className="font-semibold text-lg">{task.title}</span>
                                             <span className="text-sm text-gray-600">{task.description}</span>
@@ -148,7 +148,7 @@ export default function CurrentTasksPage() {
                                         <div
                                             key={task.id}
                                             className="p-2 border-b border-gray-200 flex flex-col cursor-pointer"
-                                            onClick={() => handleTaskClick(task)} // 点击任务时更新选中的任务
+                                            onClick={() => handleTaskClick(task)} // Update selected task when clicking on task
                                         >
                                             <span className="font-semibold text-lg">{task.title}</span>
                                             <span className="text-sm text-gray-600">{task.description}</span>
@@ -167,7 +167,7 @@ export default function CurrentTasksPage() {
             <div className="flex flex-col w-3/4 gap-4">
                 <div className="flex justify-between items-center h-1/4 gap-4 px-2">
                     <div className="w-2/3">
-                        {/* 显示选中的任务详情 */}
+                        {/* Display selected task details */}
                         <TaskDetailCard task={selectedTask} />
                     </div>
                     <div className="w-1/3">
@@ -175,7 +175,7 @@ export default function CurrentTasksPage() {
                     </div>
                 </div>
 
-                {/* 地图区域，占3/4高度 */}
+                {/* Map area, occupies 3/4 height */}
                 {/*<div className="h-3/4 bg-white rounded-3xl overflow-hidden">*/}
                 {/*    <Map*/}
                 {/*        lat={coordinate.lat}*/}
