@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
-import axiosInstance from '../axiosInstance';
-import { Tag, Table, Typography, Button } from '@douyinfe/semi-ui';
+import axios from 'axios';
+import { Tag, Table, Typography, Button, LocaleProvider, Toast, Badge } from '@douyinfe/semi-ui';
+import { IconAlertTriangle, IconBell } from '@douyinfe/semi-icons';
+import en_US from '@douyinfe/semi-ui/lib/es/locale/source/en_US';
+import AlertModal from '../components/AlertModal';
 
 const { Title, Text } = Typography;
 
@@ -8,6 +11,9 @@ export default function VehicleStatusPage() {
     const [vehicles, setVehicles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [alerts, setAlerts] = useState([]);
+    const [alertModalVisible, setAlertModalVisible] = useState(false);
+    const [hasNewAlerts, setHasNewAlerts] = useState(false);
 
     const columns = [
         {
@@ -102,9 +108,9 @@ export default function VehicleStatusPage() {
     const fetchVehicles = async () => {
         try {
             setLoading(true);
-            const response = await axiosInstance.get("/vehicles/get/all");
-            if (response.data && response.data.data) {
-                setVehicles(response.data.data);
+            const response = await axios.get("http://34.151.113.63:8080/api/vehicle-status/all");
+            if (response.data) {
+                setVehicles(response.data);
                 setError(null);
             } else {
                 setVehicles([]);
@@ -118,18 +124,111 @@ export default function VehicleStatusPage() {
         }
     };
 
+    const fetchAlerts = async () => {
+        try {
+            // Fetch all vehicles first to get their license plates
+            const vehiclesResponse = await axios.get("http://34.151.113.63:8080/api/vehicle-status/all");
+            const vehiclesList = vehiclesResponse.data || [];
+            
+            // Then fetch active alerts for each vehicle
+            const allAlerts = [];
+            for (const vehicle of vehiclesList) {
+                try {
+                    const alertsResponse = await axios.get(`http://34.151.113.63:8080/api/alert/${vehicle.licensePlate}/active`);
+                    const vehicleAlerts = alertsResponse.data || [];
+                    allAlerts.push(...vehicleAlerts);
+                } catch (error) {
+                    console.error(`Failed to fetch alerts for vehicle ${vehicle.licensePlate}:`, error);
+                }
+            }
+            
+            // Check for new critical alerts
+            const criticalAlerts = allAlerts.filter(alert => alert.severity === 'CRITICAL');
+            const previousCriticalCount = alerts.filter(alert => alert.severity === 'CRITICAL').length;
+            
+            if (criticalAlerts.length > previousCriticalCount && alerts.length > 0) {
+                // New critical alert detected
+                setHasNewAlerts(true);
+                playAlertSound();
+                Toast.error({
+                    content: `New critical alert: ${criticalAlerts[criticalAlerts.length - 1]?.description}`,
+                    duration: 5,
+                    showClose: true
+                });
+                
+                // Auto-show modal for critical alerts
+                setAlertModalVisible(true);
+            }
+            
+            setAlerts(allAlerts);
+        } catch (error) {
+            console.error('Error fetching alerts:', error);
+        }
+    };
+
+    const playAlertSound = () => {
+        // Create audio beep for critical alerts
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+
+        oscillator.frequency.value = 800;
+        oscillator.type = 'sine';
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+
+        oscillator.start();
+        oscillator.stop(audioContext.currentTime + 0.5);
+    };
+
     useEffect(() => {
         fetchVehicles();
-        const intervalId = setInterval(fetchVehicles, 30000); // Refresh every 30 seconds
-        return () => clearInterval(intervalId);
+        fetchAlerts();
+        
+        const vehicleInterval = setInterval(fetchVehicles, 30000); // Refresh every 30 seconds
+        const alertInterval = setInterval(fetchAlerts, 10000); // Check alerts every 10 seconds
+        
+        return () => {
+            clearInterval(vehicleInterval);
+            clearInterval(alertInterval);
+        };
     }, []);
+
+    // Monitor alerts for changes
+    useEffect(() => {
+        const criticalAlerts = alerts.filter(alert => alert.severity === 'CRITICAL');
+        if (criticalAlerts.length > 0 && !alertModalVisible) {
+            setHasNewAlerts(true);
+        }
+    }, [alerts, alertModalVisible]);
 
     const handleRefresh = () => {
         fetchVehicles();
+        fetchAlerts();
     };
 
+    const handleOpenAlerts = () => {
+        setAlertModalVisible(true);
+        setHasNewAlerts(false);
+    };
+
+    const handleCloseAlerts = () => {
+        setAlertModalVisible(false);
+        setHasNewAlerts(false);
+    };
+
+    const handleResolveAlert = (alertId) => {
+        setAlerts(prev => prev.filter(alert => alert.id !== alertId));
+    };
+
+    const criticalAlertCount = alerts.filter(alert => alert.severity === 'CRITICAL').length;
+    const totalAlertCount = alerts.length;
+
     return (
-        <div className="bg-white rounded-3xl p-6 h-full flex flex-col">
+        <LocaleProvider locale={en_US}>
+            <div className="bg-white rounded-3xl p-6 h-full flex flex-col">
             <div className="flex justify-between items-center mb-6">
                 <div>
                     <Title heading={3} className="mb-2">Vehicle Status Monitor</Title>
@@ -137,14 +236,33 @@ export default function VehicleStatusPage() {
                         Real-time monitoring of all vehicles in the system
                     </Text>
                 </div>
-                <Button 
-                    theme="solid" 
-                    type="primary"
-                    loading={loading}
-                    onClick={handleRefresh}
-                >
-                    Refresh
-                </Button>
+                <div className="flex gap-2">
+                    {/* Alert Button */}
+                    <Badge 
+                        count={criticalAlertCount} 
+                        overflowCount={99}
+                        dot={hasNewAlerts && criticalAlertCount === 0}
+                    >
+                        <Button
+                            theme="solid"
+                            type={criticalAlertCount > 0 ? "danger" : "secondary"}
+                            icon={<IconAlertTriangle />}
+                            onClick={handleOpenAlerts}
+                            className={criticalAlertCount > 0 ? "animate-pulse" : ""}
+                        >
+                            Alerts {totalAlertCount > 0 && `(${totalAlertCount})`}
+                        </Button>
+                    </Badge>
+                    
+                    <Button 
+                        theme="solid" 
+                        type="primary"
+                        loading={loading}
+                        onClick={handleRefresh}
+                    >
+                        Refresh
+                    </Button>
+                </div>
             </div>
 
             {error && (
@@ -189,6 +307,14 @@ export default function VehicleStatusPage() {
                     </span>
                 </div>
             </div>
+
+            {/* Alert Modal */}
+            <AlertModal
+                visible={alertModalVisible}
+                onClose={handleCloseAlerts}
+                onResolve={handleResolveAlert}
+            />
         </div>
+        </LocaleProvider>
     );
 }
