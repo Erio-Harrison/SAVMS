@@ -12,7 +12,7 @@ class Config:
     
     # 模拟器配置
     UPDATE_INTERVAL = 5  # 更新间隔（秒）
-    VEHICLE_COUNT = 2    # 模拟车辆数量
+    VEHICLE_COUNT = 6    # 模拟车辆数量
     
     # 车辆模拟范围配置
     SPEED_RANGE = (0, 200)          # 速度范围 km/h
