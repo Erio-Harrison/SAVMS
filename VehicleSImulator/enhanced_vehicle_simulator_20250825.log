@@ -1,0 +1,786 @@
+2025-08-25 15:03:42 - database_manager - INFO - 正在连接到MongoDB: mongodb+srv://kong:d13910854850@cluster0.kqakr.mongodb.net/123?retryWrites=true&w=majority&appName=Cluster0
+2025-08-25 15:03:42 - database_manager - INFO - 成功连接到数据库: 123.vehicle
+2025-08-25 15:03:42 - vehicle_config_loader - INFO - 加载车辆配置: YRN·03V (Tesla Model S)
+2025-08-25 15:03:42 - vehicle_config_loader - INFO - 加载车辆配置: ABC-696 (BYD Han EV)
+2025-08-25 15:03:42 - vehicle_config_loader - INFO - 成功加载 2 个车辆配置
+2025-08-25 15:03:42 - enhanced_simulator_manager - INFO - 创建增强车辆模拟器: YRN·03V (Tesla Model S)
+2025-08-25 15:03:42 - enhanced_simulator_manager - INFO - 创建增强车辆模拟器: ABC-696 (BYD Han EV)
+2025-08-25 15:03:42 - enhanced_simulator_manager - INFO - 增强模拟器管理器初始化完成，共创建 2 个车辆模拟器
+2025-08-25 15:03:42 - enhanced_simulator_manager - INFO - 启动所有增强车辆模拟...
+2025-08-25 15:03:42 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 已存在于数据库中，将更新现有记录
+2025-08-25 15:03:42 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 开始增强模拟循环
+2025-08-25 15:03:42 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 增强模拟已启动
+2025-08-25 15:03:42 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:03:42 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(0.1km/h) | 电量85.0% | 位置: (149.130000, -35.280900)
+2025-08-25 15:03:42 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆 ABC-696 已存在于数据库中，将更新现有记录
+2025-08-25 15:03:42 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆 ABC-696 开始增强模拟循环
+2025-08-25 15:03:42 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆 ABC-696 增强模拟已启动
+2025-08-25 15:03:42 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:03:42 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(1.0km/h) | 电量92.0% | 位置: (149.126700, -35.293099)
+2025-08-25 15:03:42 - enhanced_simulator_manager - INFO - 已启动 2 个增强车辆模拟器
+2025-08-25 15:03:47 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:03:47 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(22.9km/h) | 电量85.0% | 位置: (149.129650, -35.280860)
+2025-08-25 15:03:47 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:03:47 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(22.0km/h) | 电量92.0% | 位置: (149.126616, -35.292832)
+2025-08-25 15:03:52 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:03:52 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(45.8km/h) | 电量85.0% | 位置: (149.128951, -35.280780)
+2025-08-25 15:03:52 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:03:52 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(43.1km/h) | 电量92.0% | 位置: (149.126451, -35.292306)
+2025-08-25 15:03:57 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:03:57 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(60.0km/h) | 电量85.0% | 位置: (149.128035, -35.280674)
+2025-08-25 15:03:57 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:03:57 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(45.0km/h) | 电量92.0% | 位置: (149.126279, -35.291758)
+2025-08-25 15:04:02 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:04:02 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(48.4km/h) | 电量84.9% | 位置: (149.127297, -35.280590)
+2025-08-25 15:04:02 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:04:02 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(45.0km/h) | 电量92.0% | 位置: (149.126102, -35.291211)
+2025-08-25 15:04:07 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:04:07 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(48.4km/h) | 电量84.9% | 位置: (149.126558, -35.280505)
+2025-08-25 15:04:07 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:04:07 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(45.0km/h) | 电量92.0% | 位置: (149.125926, -35.290664)
+2025-08-25 15:04:12 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:04:12 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(48.4km/h) | 电量84.9% | 位置: (149.125810, -35.280419) | 方向: 278.0° | 目标速度: 48.5 km/h | 更新次数: 7
+2025-08-25 15:04:12 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:04:12 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(45.0km/h) | 电量91.9% | 位置: (149.125749, -35.290117) | 方向: 345.2° | 目标速度: 45.0 km/h | 更新次数: 7
+2025-08-25 15:04:17 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:04:17 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(48.4km/h) | 电量84.9% | 位置: (149.125068, -35.280483)
+2025-08-25 15:04:17 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:04:17 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(45.0km/h) | 电量91.9% | 位置: (149.125522, -35.289582)
+2025-08-25 15:04:22 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:04:22 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(48.4km/h) | 电量84.9% | 位置: (149.124324, -35.280547)
+2025-08-25 15:04:22 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:04:22 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(46.3km/h) | 电量91.9% | 位置: (149.125289, -35.289033)
+2025-08-25 15:04:27 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:04:27 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(48.4km/h) | 电量84.8% | 位置: (149.123585, -35.280626)
+2025-08-25 15:04:27 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:04:27 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(46.3km/h) | 电量91.9% | 位置: (149.125056, -35.288483)
+2025-08-25 15:04:32 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:04:32 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(48.4km/h) | 电量84.8% | 位置: (149.122843, -35.280705)
+2025-08-25 15:04:32 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:04:32 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(46.3km/h) | 电量91.9% | 位置: (149.124890, -35.287917)
+2025-08-25 15:04:37 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:04:37 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(48.4km/h) | 电量84.8% | 位置: (149.122101, -35.280785)
+2025-08-25 15:04:37 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:04:37 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(47.1km/h) | 电量91.9% | 位置: (149.124736, -35.287337)
+2025-08-25 15:04:42 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:04:42 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(48.4km/h) | 电量84.8% | 位置: (149.121360, -35.280864) | 方向: 262.5° | 目标速度: 48.5 km/h | 更新次数: 13
+2025-08-25 15:04:43 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:04:43 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(47.1km/h) | 电量91.8% | 位置: (149.124582, -35.286757) | 方向: 347.8° | 目标速度: 47.1 km/h | 更新次数: 13
+2025-08-25 15:04:47 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:04:47 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(48.4km/h) | 电量84.7% | 位置: (149.120616, -35.280905)
+2025-08-25 15:04:48 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:04:48 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(47.1km/h) | 电量91.8% | 位置: (149.124428, -35.286178)
+2025-08-25 15:04:52 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:04:52 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(48.4km/h) | 电量84.7% | 位置: (149.120616, -35.280905)
+2025-08-25 15:04:53 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:04:53 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(47.1km/h) | 电量91.8% | 位置: (149.124275, -35.285599)
+2025-08-25 15:04:57 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:04:57 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(48.4km/h) | 电量84.7% | 位置: (149.121360, -35.280958)
+2025-08-25 15:04:58 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:04:58 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(47.1km/h) | 电量91.8% | 位置: (149.124275, -35.285599)
+2025-08-25 15:05:03 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:05:03 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(48.4km/h) | 电量84.7% | 位置: (149.122104, -35.281010)
+2025-08-25 15:05:03 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:05:03 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(47.1km/h) | 电量91.8% | 位置: (149.124531, -35.286153)
+2025-08-25 15:05:07 - enhanced_simulator_manager - INFO - 收到信号 2，正在关闭增强模拟器...
+2025-08-25 15:05:07 - enhanced_simulator_manager - INFO - 停止所有增强车辆模拟...
+2025-08-25 15:05:07 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 模拟循环结束
+2025-08-25 15:05:07 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 模拟已停止 (总更新次数: 17)
+2025-08-25 15:05:07 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆 ABC-696 模拟循环结束
+2025-08-25 15:05:07 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆 ABC-696 模拟已停止 (总更新次数: 17)
+2025-08-25 15:05:07 - database_manager - INFO - 数据库连接已断开
+2025-08-25 15:05:07 - enhanced_simulator_manager - INFO - 所有增强车辆模拟已停止
+2025-08-25 15:05:15 - database_manager - INFO - 正在连接到MongoDB: mongodb+srv://kong:d13910854850@cluster0.kqakr.mongodb.net/123?retryWrites=true&w=majority&appName=Cluster0
+2025-08-25 15:05:16 - database_manager - INFO - 成功连接到数据库: 123.vehicle
+2025-08-25 15:05:16 - vehicle_config_loader - INFO - 加载车辆配置: YRN·03V (Tesla Model S)
+2025-08-25 15:05:16 - vehicle_config_loader - INFO - 加载车辆配置: ABC-696 (BYD Han EV)
+2025-08-25 15:05:16 - vehicle_config_loader - INFO - 成功加载 2 个车辆配置
+2025-08-25 15:05:16 - enhanced_simulator_manager - INFO - 创建增强车辆模拟器: YRN·03V (Tesla Model S)
+2025-08-25 15:05:16 - enhanced_simulator_manager - INFO - 创建增强车辆模拟器: ABC-696 (BYD Han EV)
+2025-08-25 15:05:16 - enhanced_simulator_manager - INFO - 增强模拟器管理器初始化完成，共创建 2 个车辆模拟器
+2025-08-25 15:07:18 - enhanced_simulator_manager - INFO - 启动所有增强车辆模拟...
+2025-08-25 15:07:18 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 已存在于数据库中，将更新现有记录
+2025-08-25 15:07:18 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 开始增强模拟循环
+2025-08-25 15:07:18 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 增强模拟已启动
+2025-08-25 15:07:18 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:07:18 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 休息中 | 电量85.0% | 位置: (149.130000, -35.280900) | 方向: 256.7° | 目标速度: 60.0 km/h | 更新次数: 1
+2025-08-25 15:07:18 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆 ABC-696 已存在于数据库中，将更新现有记录
+2025-08-25 15:07:18 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆 ABC-696 开始增强模拟循环
+2025-08-25 15:07:18 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆 ABC-696 增强模拟已启动
+2025-08-25 15:07:18 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:07:18 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(45.0km/h) | 电量92.0% | 位置: (149.126700, -35.293100) | 方向: 0.0° | 目标速度: 45.0 km/h | 更新次数: 1
+2025-08-25 15:07:19 - enhanced_simulator_manager - INFO - 已启动 2 个增强车辆模拟器
+2025-08-25 15:07:23 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:07:23 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 休息中 | 电量85.0% | 位置: (149.130000, -35.280900)
+2025-08-25 15:07:23 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:07:23 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(45.0km/h) | 电量92.0% | 位置: (149.126461, -35.292569)
+2025-08-25 15:07:28 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:07:28 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 休息中 | 电量85.0% | 位置: (149.130000, -35.280900)
+2025-08-25 15:07:28 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:07:28 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(45.0km/h) | 电量92.0% | 位置: (149.126271, -35.292025)
+2025-08-25 15:07:33 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:07:33 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 休息中 | 电量85.0% | 位置: (149.130000, -35.280900)
+2025-08-25 15:07:33 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:07:33 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(45.0km/h) | 电量92.0% | 位置: (149.126082, -35.291481)
+2025-08-25 15:07:38 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:07:38 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 休息中 | 电量85.0% | 位置: (149.130000, -35.280900)
+2025-08-25 15:07:38 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:07:38 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(45.0km/h) | 电量91.9% | 位置: (149.125892, -35.290937)
+2025-08-25 15:07:43 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:07:43 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(22.8km/h) | 电量85.0% | 位置: (149.129658, -35.280966)
+2025-08-25 15:07:43 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:07:43 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(45.0km/h) | 电量91.9% | 位置: (149.125702, -35.290393)
+2025-08-25 15:07:48 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:07:48 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(45.7km/h) | 电量85.0% | 位置: (149.128973, -35.281099) | 方向: 256.7° | 目标速度: 52.3 km/h | 更新次数: 7
+2025-08-25 15:07:48 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:07:48 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(45.0km/h) | 电量91.9% | 位置: (149.125513, -35.289849) | 方向: 344.1° | 目标速度: 45.0 km/h | 更新次数: 7
+2025-08-25 15:07:53 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:07:53 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(52.3km/h) | 电量85.0% | 位置: (149.128201, -35.281294)
+2025-08-25 15:07:53 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:07:53 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(45.0km/h) | 电量91.9% | 位置: (149.125323, -35.289304)
+2025-08-25 15:07:54 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 目标速度设置为 120 km/h
+2025-08-25 15:07:58 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:07:58 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(75.2km/h) | 电量84.9% | 位置: (149.127082, -35.281542)
+2025-08-25 15:07:59 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:07:59 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(35.0km/h) | 电量91.9% | 位置: (149.125175, -35.288880)
+2025-08-25 15:08:03 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:08:03 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(98.1km/h) | 电量84.9% | 位置: (149.125622, -35.281865)
+2025-08-25 15:08:04 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:08:04 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(35.0km/h) | 电量91.9% | 位置: (149.124990, -35.288466)
+2025-08-25 15:08:08 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:08:08 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(120.0km/h) | 电量84.8% | 位置: (149.123839, -35.282260)
+2025-08-25 15:08:09 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:08:09 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(35.0km/h) | 电量91.9% | 位置: (149.124554, -35.288206)
+2025-08-25 15:08:13 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:08:13 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(93.8km/h) | 电量84.7% | 位置: (149.122446, -35.281936)
+2025-08-25 15:08:14 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:08:14 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(35.0km/h) | 电量91.8% | 位置: (149.124116, -35.287944)
+2025-08-25 15:08:18 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:08:18 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(67.7km/h) | 电量84.7% | 位置: (149.121442, -35.281702) | 方向: 285.9° | 目标速度: 62.3 km/h | 更新次数: 13
+2025-08-25 15:08:19 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:08:19 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(35.0km/h) | 电量91.8% | 位置: (149.123707, -35.287657) | 方向: 310.8° | 目标速度: 35.0 km/h | 更新次数: 13
+2025-08-25 15:08:23 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:08:23 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(62.3km/h) | 电量84.7% | 位置: (149.120501, -35.281554)
+2025-08-25 15:08:24 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:08:24 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(35.0km/h) | 电量91.8% | 位置: (149.123318, -35.287352)
+2025-08-25 15:08:27 - enhanced_simulator_manager - INFO - 收到信号 2，正在关闭增强模拟器...
+2025-08-25 15:08:27 - enhanced_simulator_manager - INFO - 停止所有增强车辆模拟...
+2025-08-25 15:08:27 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 模拟循环结束
+2025-08-25 15:08:27 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 模拟已停止 (总更新次数: 14)
+2025-08-25 15:08:27 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆 ABC-696 模拟循环结束
+2025-08-25 15:08:27 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆 ABC-696 模拟已停止 (总更新次数: 14)
+2025-08-25 15:08:27 - database_manager - INFO - 数据库连接已断开
+2025-08-25 15:08:27 - enhanced_simulator_manager - INFO - 所有增强车辆模拟已停止
+2025-08-25 15:13:06 - database_manager - INFO - 正在连接到MongoDB: mongodb+srv://kong:d13910854850@cluster0.kqakr.mongodb.net/123?retryWrites=true&w=majority&appName=Cluster0
+2025-08-25 15:13:06 - database_manager - INFO - 成功连接到数据库: 123.vehicle
+2025-08-25 15:13:06 - vehicle_config_loader - INFO - 加载车辆配置: YRN·03V (Tesla Model S)
+2025-08-25 15:13:06 - vehicle_config_loader - INFO - 加载车辆配置: ABC-696 (BYD Han EV)
+2025-08-25 15:13:06 - vehicle_config_loader - INFO - 成功加载 2 个车辆配置
+2025-08-25 15:13:06 - enhanced_simulator_manager - INFO - 创建增强车辆模拟器: YRN·03V (Tesla Model S)
+2025-08-25 15:13:06 - enhanced_simulator_manager - INFO - 创建增强车辆模拟器: ABC-696 (BYD Han EV)
+2025-08-25 15:13:06 - enhanced_simulator_manager - INFO - 增强模拟器管理器初始化完成，共创建 2 个车辆模拟器
+2025-08-25 15:13:10 - enhanced_simulator_manager - INFO - 启动所有增强车辆模拟...
+2025-08-25 15:13:10 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 已存在于数据库中，将更新现有记录
+2025-08-25 15:13:10 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 开始增强模拟循环
+2025-08-25 15:13:10 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 增强模拟已启动
+2025-08-25 15:13:10 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:13:10 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(15.6km/h) | 电量85.0% | 位置: (149.129935, -35.281023)
+2025-08-25 15:13:10 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆 ABC-696 已存在于数据库中，将更新现有记录
+2025-08-25 15:13:10 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆 ABC-696 开始增强模拟循环
+2025-08-25 15:13:10 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆 ABC-696 增强模拟已启动
+2025-08-25 15:13:10 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:13:10 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(15.3km/h) | 电量92.0% | 位置: (149.126818, -35.293201)
+2025-08-25 15:13:10 - enhanced_simulator_manager - INFO - 已启动 2 个增强车辆模拟器
+2025-08-25 15:13:15 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:13:15 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(38.5km/h) | 电量85.0% | 位置: (149.129699, -35.281466)
+2025-08-25 15:13:15 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:13:15 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(36.4km/h) | 电量92.0% | 位置: (149.127206, -35.293531)
+2025-08-25 15:13:20 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:13:20 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(60.0km/h) | 电量85.0% | 位置: (149.129332, -35.282158)
+2025-08-25 15:13:20 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:13:20 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(35.0km/h) | 电量92.0% | 位置: (149.127579, -35.293851)
+2025-08-25 15:13:25 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:13:25 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(60.0km/h) | 电量84.9% | 位置: (149.128963, -35.282852)
+2025-08-25 15:13:25 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:13:25 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(45.0km/h) | 电量92.0% | 位置: (149.128058, -35.294261)
+2025-08-25 15:13:30 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:13:30 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(64.8km/h) | 电量84.9% | 位置: (149.128643, -35.283624)
+2025-08-25 15:13:30 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:13:30 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(45.0km/h) | 电量92.0% | 位置: (149.128501, -35.294697)
+2025-08-25 15:13:35 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:13:35 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(56.4km/h) | 电量84.9% | 位置: (149.128364, -35.284298)
+2025-08-25 15:13:35 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 用户目标速度设置为 120 km/h
+2025-08-25 15:13:35 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:13:35 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(45.0km/h) | 电量91.9% | 位置: (149.128933, -35.295142)
+2025-08-25 15:13:40 - EnhancedVehicleSimulator-YRN·03V - ERROR - 车辆 YRN·03V 模拟循环异常: cannot access local variable 'aggressiveness' where it is not associated with a value
+2025-08-25 15:13:40 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:13:40 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(55.3km/h) | 电量91.9% | 位置: (149.129462, -35.295687) | 方向: 141.6° | 目标速度: 55.3 km/h | 更新次数: 7
+2025-08-25 15:13:45 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:13:45 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(70.9km/h) | 电量84.8% | 位置: (149.127664, -35.285988) | 方向: 198.7° | 目标速度: 71.0 km/h | 更新次数: 7
+2025-08-25 15:13:45 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:13:45 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(44.0km/h) | 电量91.9% | 位置: (149.129886, -35.296124)
+2025-08-25 15:13:50 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:13:50 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(67.2km/h) | 电量84.8% | 位置: (149.127094, -35.286697)
+2025-08-25 15:13:50 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:13:50 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(50.5km/h) | 电量91.9% | 位置: (149.130421, -35.296587)
+2025-08-25 15:13:55 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:13:55 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(65.7km/h) | 电量84.7% | 位置: (149.126539, -35.287387)
+2025-08-25 15:13:55 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:13:55 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(50.5km/h) | 电量91.9% | 位置: (149.130956, -35.297049)
+2025-08-25 15:14:00 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:14:00 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(71.1km/h) | 电量84.7% | 位置: (149.125868, -35.288096)
+2025-08-25 15:14:00 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:14:00 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(50.5km/h) | 电量91.9% | 位置: (149.131674, -35.297301)
+2025-08-25 15:14:05 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:14:05 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(62.5km/h) | 电量84.6% | 位置: (149.125279, -35.288718)
+2025-08-25 15:14:05 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:14:05 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(55.3km/h) | 电量91.8% | 位置: (149.132458, -35.297576)
+2025-08-25 15:14:10 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:14:10 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(62.5km/h) | 电量84.6% | 位置: (149.124700, -35.289347)
+2025-08-25 15:14:10 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:14:10 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(43.3km/h) | 电量91.8% | 位置: (149.133070, -35.297791) | 方向: 113.3° | 目标速度: 43.3 km/h | 更新次数: 13
+2025-08-25 15:14:15 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:14:15 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(62.5km/h) | 电量84.6% | 位置: (149.124700, -35.289347) | 方向: 32.1° | 目标速度: 62.5 km/h | 更新次数: 13
+2025-08-25 15:14:15 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:14:15 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(43.3km/h) | 电量91.8% | 位置: (149.133070, -35.297791)
+2025-08-25 15:14:20 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:14:20 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(62.5km/h) | 电量84.5% | 位置: (149.125116, -35.288637)
+2025-08-25 15:14:20 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:14:20 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(43.3km/h) | 电量91.8% | 位置: (149.132533, -35.297468)
+2025-08-25 15:14:25 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:14:25 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(62.5km/h) | 电量84.5% | 位置: (149.125588, -35.287951)
+2025-08-25 15:14:25 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:14:25 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(35.3km/h) | 电量91.8% | 位置: (149.132091, -35.297211)
+2025-08-25 15:14:30 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:14:30 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(62.5km/h) | 电量84.5% | 位置: (149.126038, -35.287257)
+2025-08-25 15:14:30 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:14:30 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(46.8km/h) | 电量91.8% | 位置: (149.131505, -35.296868)
+2025-08-25 15:14:35 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:14:35 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(65.5km/h) | 电量84.4% | 位置: (149.126511, -35.286526)
+2025-08-25 15:14:35 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:14:35 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(46.8km/h) | 电量91.7% | 位置: (149.130916, -35.296525)
+2025-08-25 15:14:40 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:14:40 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(71.0km/h) | 电量84.4% | 位置: (149.127022, -35.285737)
+2025-08-25 15:14:40 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:14:40 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(46.8km/h) | 电量91.7% | 位置: (149.130330, -35.296182) | 方向: 305.6° | 目标速度: 46.8 km/h | 更新次数: 19
+2025-08-25 15:14:45 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:14:45 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(71.0km/h) | 电量84.4% | 位置: (149.127533, -35.284947) | 方向: 27.9° | 目标速度: 71.0 km/h | 更新次数: 19
+2025-08-25 15:14:46 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:14:46 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(46.8km/h) | 电量91.7% | 位置: (149.129946, -35.295684)
+2025-08-25 15:14:50 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:14:50 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(67.3km/h) | 电量84.3% | 位置: (149.128464, -35.284575)
+2025-08-25 15:14:51 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:14:51 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(46.8km/h) | 电量91.7% | 位置: (149.129561, -35.295184)
+2025-08-25 15:14:55 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:14:55 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(67.3km/h) | 电量84.3% | 位置: (149.129397, -35.284202)
+2025-08-25 15:14:56 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:14:56 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(46.8km/h) | 电量91.7% | 位置: (149.129184, -35.294676)
+2025-08-25 15:15:00 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:15:00 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(67.3km/h) | 电量84.3% | 位置: (149.130329, -35.283829)
+2025-08-25 15:15:01 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:15:01 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(55.1km/h) | 电量91.7% | 位置: (149.128741, -35.294079)
+2025-08-25 15:15:05 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:15:05 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(67.3km/h) | 电量84.2% | 位置: (149.131261, -35.283457)
+2025-08-25 15:15:06 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:15:06 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(55.1km/h) | 电量91.6% | 位置: (149.128301, -35.293485)
+2025-08-25 15:15:10 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:15:10 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(65.4km/h) | 电量84.2% | 位置: (149.132165, -35.283095)
+2025-08-25 15:15:11 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:15:11 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(55.1km/h) | 电量91.6% | 位置: (149.127861, -35.292891) | 方向: 328.8° | 目标速度: 55.1 km/h | 更新次数: 25
+2025-08-25 15:15:15 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:15:15 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(47.0km/h) | 电量84.1% | 位置: (149.132821, -35.282833) | 方向: 63.9° | 目标速度: 47.0 km/h | 更新次数: 25
+2025-08-25 15:15:16 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:15:16 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(55.1km/h) | 电量91.6% | 位置: (149.127419, -35.292295)
+2025-08-25 15:15:21 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:15:21 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(47.0km/h) | 电量84.1% | 位置: (149.133519, -35.282999)
+2025-08-25 15:15:21 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:15:21 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(37.4km/h) | 电量91.6% | 位置: (149.127124, -35.291890)
+2025-08-25 15:15:26 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:15:26 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(55.1km/h) | 电量84.1% | 位置: (149.134341, -35.283194)
+2025-08-25 15:15:26 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:15:26 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(52.5km/h) | 电量91.6% | 位置: (149.126762, -35.291300)
+2025-08-25 15:15:31 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:15:31 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(55.1km/h) | 电量84.1% | 位置: (149.135161, -35.283388)
+2025-08-25 15:15:31 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:15:31 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(52.5km/h) | 电量91.6% | 位置: (149.126652, -35.290645)
+2025-08-25 15:15:36 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:15:36 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(53.5km/h) | 电量84.0% | 位置: (149.135975, -35.283576)
+2025-08-25 15:15:36 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:15:36 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(52.5km/h) | 电量91.5% | 位置: (149.126494, -35.289944)
+2025-08-25 15:15:41 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:15:41 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(53.5km/h) | 电量84.0% | 位置: (149.136770, -35.283760)
+2025-08-25 15:15:41 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:15:41 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(33.7km/h) | 电量91.5% | 位置: (149.126399, -35.289527) | 方向: 349.5° | 目标速度: 33.7 km/h | 更新次数: 31
+2025-08-25 15:15:46 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:15:46 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(73.9km/h) | 电量84.0% | 位置: (149.137865, -35.284013) | 方向: 105.8° | 目标速度: 73.8 km/h | 更新次数: 31
+2025-08-25 15:15:46 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:15:46 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(36.2km/h) | 电量91.5% | 位置: (149.126308, -35.289078)
+2025-08-25 15:15:51 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:15:51 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(68.7km/h) | 电量84.0% | 位置: (149.138853, -35.284337)
+2025-08-25 15:15:51 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:15:51 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(35.5km/h) | 电量91.5% | 位置: (149.126219, -35.288637)
+2025-08-25 15:15:56 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:15:56 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(68.7km/h) | 电量83.9% | 位置: (149.138853, -35.284337)
+2025-08-25 15:15:56 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:15:56 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(46.9km/h) | 电量91.5% | 位置: (149.126046, -35.288064)
+2025-08-25 15:16:01 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:16:01 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(72.9km/h) | 电量83.9% | 位置: (149.137805, -35.284005)
+2025-08-25 15:16:01 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:16:01 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(33.5km/h) | 电量91.5% | 位置: (149.125923, -35.287655)
+2025-08-25 15:16:06 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:16:06 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(72.9km/h) | 电量83.8% | 位置: (149.136717, -35.283743)
+2025-08-25 15:16:07 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:16:07 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(33.5km/h) | 电量91.5% | 位置: (149.125840, -35.287239)
+2025-08-25 15:16:11 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:16:11 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(72.9km/h) | 电量83.8% | 位置: (149.135662, -35.283432)
+2025-08-25 15:16:12 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:16:12 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(33.5km/h) | 电量91.4% | 位置: (149.125756, -35.286821) | 方向: 350.7° | 目标速度: 33.5 km/h | 更新次数: 37
+2025-08-25 15:16:16 - enhanced_simulator_manager - INFO - 收到信号 2，正在关闭增强模拟器...
+2025-08-25 15:16:16 - enhanced_simulator_manager - INFO - 停止所有增强车辆模拟...
+2025-08-25 15:16:16 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 模拟循环结束
+2025-08-25 15:16:16 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 模拟已停止 (总更新次数: 36)
+2025-08-25 15:16:16 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆 ABC-696 模拟循环结束
+2025-08-25 15:16:16 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆 ABC-696 模拟已停止 (总更新次数: 37)
+2025-08-25 15:16:16 - database_manager - INFO - 数据库连接已断开
+2025-08-25 15:16:16 - enhanced_simulator_manager - INFO - 所有增强车辆模拟已停止
+2025-08-25 15:16:20 - database_manager - INFO - 正在连接到MongoDB: mongodb+srv://kong:d13910854850@cluster0.kqakr.mongodb.net/123?retryWrites=true&w=majority&appName=Cluster0
+2025-08-25 15:16:20 - database_manager - INFO - 成功连接到数据库: 123.vehicle
+2025-08-25 15:16:20 - vehicle_config_loader - INFO - 加载车辆配置: YRN·03V (Tesla Model S)
+2025-08-25 15:16:20 - vehicle_config_loader - INFO - 加载车辆配置: ABC-696 (BYD Han EV)
+2025-08-25 15:16:20 - vehicle_config_loader - INFO - 成功加载 2 个车辆配置
+2025-08-25 15:16:20 - enhanced_simulator_manager - INFO - 创建增强车辆模拟器: YRN·03V (Tesla Model S)
+2025-08-25 15:16:20 - enhanced_simulator_manager - INFO - 创建增强车辆模拟器: ABC-696 (BYD Han EV)
+2025-08-25 15:16:20 - enhanced_simulator_manager - INFO - 增强模拟器管理器初始化完成，共创建 2 个车辆模拟器
+2025-08-25 15:19:48 - enhanced_simulator_manager - INFO - 启动所有增强车辆模拟...
+2025-08-25 15:19:48 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 已存在于数据库中，将更新现有记录
+2025-08-25 15:19:48 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 开始增强模拟循环
+2025-08-25 15:19:48 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 增强模拟已启动
+2025-08-25 15:19:48 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:19:48 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(68.7km/h) | 电量85.0% | 位置: (149.130000, -35.280900) | 方向: 0.0° | 目标速度: 68.7 km/h | 更新次数: 1
+2025-08-25 15:19:49 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆 ABC-696 已存在于数据库中，将更新现有记录
+2025-08-25 15:19:49 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆 ABC-696 开始增强模拟循环
+2025-08-25 15:19:49 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆 ABC-696 增强模拟已启动
+2025-08-25 15:19:49 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:19:49 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 休息中 | 电量92.0% | 位置: (149.126700, -35.293100) | 方向: 346.8° | 目标速度: 45.0 km/h | 更新次数: 1
+2025-08-25 15:19:49 - enhanced_simulator_manager - INFO - 已启动 2 个增强车辆模拟器
+2025-08-25 15:19:53 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:19:53 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(68.7km/h) | 电量85.0% | 位置: (149.129702, -35.280070)
+2025-08-25 15:19:54 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:19:54 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 休息中 | 电量92.0% | 位置: (149.126700, -35.293100)
+2025-08-25 15:19:58 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:19:58 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(68.7km/h) | 电量84.9% | 位置: (149.129402, -35.279237)
+2025-08-25 15:19:59 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:19:59 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 休息中 | 电量92.0% | 位置: (149.126700, -35.293100)
+2025-08-25 15:20:03 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:20:03 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(68.7km/h) | 电量84.9% | 位置: (149.129104, -35.278406)
+2025-08-25 15:20:04 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:20:04 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 休息中 | 电量92.0% | 位置: (149.126700, -35.293100)
+2025-08-25 15:20:09 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:20:09 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(68.7km/h) | 电量84.8% | 位置: (149.128806, -35.277576)
+2025-08-25 15:20:09 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:20:09 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 休息中 | 电量92.0% | 位置: (149.126700, -35.293100)
+2025-08-25 15:20:14 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:20:14 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(68.7km/h) | 电量84.8% | 位置: (149.128504, -35.276738)
+2025-08-25 15:20:14 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:20:14 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 休息中 | 电量92.0% | 位置: (149.126700, -35.293100)
+2025-08-25 15:20:19 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:20:19 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(68.7km/h) | 电量84.8% | 位置: (149.128203, -35.275900) | 方向: 343.7° | 目标速度: 68.7 km/h | 更新次数: 7
+2025-08-25 15:20:19 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:20:19 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 休息中 | 电量92.0% | 位置: (149.126700, -35.293100) | 方向: 346.8° | 目标速度: 45.0 km/h | 更新次数: 7
+2025-08-25 15:20:24 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:20:24 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(68.2km/h) | 电量84.7% | 位置: (149.128540, -35.275061)
+2025-08-25 15:20:24 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:20:24 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 休息中 | 电量92.0% | 位置: (149.126700, -35.293100)
+2025-08-25 15:20:29 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:20:29 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(68.2km/h) | 电量84.7% | 位置: (149.128867, -35.274244)
+2025-08-25 15:20:29 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:20:29 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(21.1km/h) | 电量92.0% | 位置: (149.126626, -35.292842)
+2025-08-25 15:20:34 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:20:34 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(56.9km/h) | 电量84.7% | 位置: (149.129140, -35.273563)
+2025-08-25 15:20:34 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:20:34 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(42.2km/h) | 电量92.0% | 位置: (149.126477, -35.292325)
+2025-08-25 15:20:39 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:20:39 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(45.7km/h) | 电量84.6% | 位置: (149.129360, -35.273014)
+2025-08-25 15:20:39 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:20:39 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(55.1km/h) | 电量92.0% | 位置: (149.126281, -35.291645)
+2025-08-25 15:20:44 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:20:44 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(60.4km/h) | 电量84.6% | 位置: (149.129677, -35.272294)
+2025-08-25 15:20:44 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:20:44 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(55.1km/h) | 电量92.0% | 位置: (149.126086, -35.290967)
+2025-08-25 15:20:49 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:20:49 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(60.4km/h) | 电量84.6% | 位置: (149.129992, -35.271579) | 方向: 19.8° | 目标速度: 60.3 km/h | 更新次数: 13
+2025-08-25 15:20:49 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:20:49 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(55.1km/h) | 电量91.9% | 位置: (149.125892, -35.290291) | 方向: 346.8° | 目标速度: 55.1 km/h | 更新次数: 13
+2025-08-25 15:20:54 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:20:54 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(58.3km/h) | 电量84.5% | 位置: (149.129992, -35.271579)
+2025-08-25 15:20:54 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:20:54 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(55.1km/h) | 电量91.9% | 位置: (149.125698, -35.289616)
+2025-08-25 15:20:59 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:20:59 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(58.3km/h) | 电量84.5% | 位置: (149.129992, -35.272316)
+2025-08-25 15:20:59 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:20:59 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(35.1km/h) | 电量91.9% | 位置: (149.125582, -35.289180)
+2025-08-25 15:20:59 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆 YRN·03V 用户目标速度设置为 120 km/h
+2025-08-25 15:21:04 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:21:04 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(81.2km/h) | 电量84.5% | 位置: (149.129994, -35.273335)
+2025-08-25 15:21:04 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:21:04 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(35.1km/h) | 电量91.9% | 位置: (149.125422, -35.288759)
+2025-08-25 15:21:09 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:21:09 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(65.7km/h) | 电量84.4% | 位置: (149.129994, -35.274162)
+2025-08-25 15:21:09 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:21:09 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(43.7km/h) | 电量91.9% | 位置: (149.125224, -35.288235)
+2025-08-25 15:21:14 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:21:14 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(65.7km/h) | 电量84.4% | 位置: (149.129929, -35.274987)
+2025-08-25 15:21:14 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:21:14 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(51.1km/h) | 电量91.9% | 位置: (149.125553, -35.287650)
+2025-08-25 15:21:19 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:21:19 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(58.3km/h) | 电量84.4% | 位置: (149.129897, -35.275719) | 方向: 182.0° | 目标速度: 58.3 km/h | 更新次数: 19
+2025-08-25 15:21:19 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:21:19 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(45.0km/h) | 电量91.8% | 位置: (149.125843, -35.287137) | 方向: 24.7° | 目标速度: 45.0 km/h | 更新次数: 19
+2025-08-25 15:21:24 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:21:24 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(58.3km/h) | 电量84.3% | 位置: (149.129639, -35.276421)
+2025-08-25 15:21:24 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:21:24 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(40.6km/h) | 电量91.8% | 位置: (149.126104, -35.286673)
+2025-08-25 15:21:29 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:21:29 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(58.3km/h) | 电量84.3% | 位置: (149.129381, -35.277126)
+2025-08-25 15:21:29 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:21:29 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(45.0km/h) | 电量91.8% | 位置: (149.126395, -35.286157)
+2025-08-25 15:21:34 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:21:34 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(51.4km/h) | 电量84.3% | 位置: (149.129153, -35.277746)
+2025-08-25 15:21:34 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:21:34 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(53.1km/h) | 电量91.8% | 位置: (149.126737, -35.285550)
+2025-08-25 15:21:39 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:21:39 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(62.3km/h) | 电量84.2% | 位置: (149.128918, -35.278511)
+2025-08-25 15:21:39 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:21:39 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(53.1km/h) | 电量91.8% | 位置: (149.126737, -35.285550)
+2025-08-25 15:21:44 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:21:44 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(69.0km/h) | 电量84.2% | 位置: (149.128574, -35.279332)
+2025-08-25 15:21:45 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:21:45 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(53.1km/h) | 电量91.8% | 位置: (149.126672, -35.286217)
+2025-08-25 15:21:49 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:21:49 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(69.0km/h) | 电量84.2% | 位置: (149.128230, -35.280152) | 方向: 198.9° | 目标速度: 69.0 km/h | 更新次数: 25
+2025-08-25 15:21:50 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:21:50 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(34.5km/h) | 电量91.7% | 位置: (149.126631, -35.286650) | 方向: 184.5° | 目标速度: 34.5 km/h | 更新次数: 25
+2025-08-25 15:21:54 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:21:54 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(69.0km/h) | 电量84.1% | 位置: (149.127445, -35.280738)
+2025-08-25 15:21:55 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:21:55 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(34.5km/h) | 电量91.7% | 位置: (149.126589, -35.287082)
+2025-08-25 15:21:59 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:21:59 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(51.1km/h) | 电量84.1% | 位置: (149.126864, -35.281172)
+2025-08-25 15:22:00 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:22:00 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(34.5km/h) | 电量91.7% | 位置: (149.126898, -35.287436)
+2025-08-25 15:22:05 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:22:05 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(69.6km/h) | 电量84.1% | 位置: (149.126120, -35.281808)
+2025-08-25 15:22:05 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:22:05 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(43.6km/h) | 电量91.7% | 位置: (149.127287, -35.287882)
+2025-08-25 15:22:10 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:22:10 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(66.1km/h) | 电量84.0% | 位置: (149.125415, -35.282410)
+2025-08-25 15:22:10 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:22:10 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(47.1km/h) | 电量91.7% | 位置: (149.127710, -35.288365)
+2025-08-25 15:22:15 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:22:15 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(66.1km/h) | 电量84.0% | 位置: (149.124723, -35.283020)
+2025-08-25 15:22:15 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:22:15 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(37.2km/h) | 电量91.7% | 位置: (149.128043, -35.288746)
+2025-08-25 15:22:20 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:22:20 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(63.7km/h) | 电量84.0% | 位置: (149.124056, -35.283606) | 方向: 222.9° | 目标速度: 63.6 km/h | 更新次数: 31
+2025-08-25 15:22:20 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:22:20 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(37.2km/h) | 电量91.7% | 位置: (149.128376, -35.289127) | 方向: 144.5° | 目标速度: 37.2 km/h | 更新次数: 31
+2025-08-25 15:22:25 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:22:25 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(73.8km/h) | 电量83.9% | 位置: (149.123843, -35.284518)
+2025-08-25 15:22:25 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:22:25 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(41.6km/h) | 电量91.7% | 位置: (149.128748, -35.289553)
+2025-08-25 15:22:30 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:22:30 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(74.8km/h) | 电量83.9% | 位置: (149.123628, -35.285443)
+2025-08-25 15:22:30 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:22:30 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(41.6km/h) | 电量91.6% | 位置: (149.129120, -35.289980)
+2025-08-25 15:22:35 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:22:35 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(67.1km/h) | 电量83.8% | 位置: (149.123434, -35.286275)
+2025-08-25 15:22:35 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:22:35 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(52.9km/h) | 电量91.6% | 位置: (149.129594, -35.290522)
+2025-08-25 15:22:40 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:22:40 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:22:40 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(36.9km/h) | 电量91.6% | 位置: (149.129925, -35.290900)
+2025-08-25 15:22:40 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(67.1km/h) | 电量83.8% | 位置: (149.123238, -35.287116)
+2025-08-25 15:22:45 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:22:45 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(74.6km/h) | 电量83.8% | 位置: (149.123022, -35.288044)
+2025-08-25 15:22:45 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:22:45 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(47.4km/h) | 电量91.6% | 位置: (149.129980, -35.291497)
+2025-08-25 15:22:50 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:22:50 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(57.5km/h) | 电量83.7% | 位置: (149.123022, -35.288044) | 方向: 44.3° | 目标速度: 57.5 km/h | 更新次数: 37
+2025-08-25 15:22:50 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:22:50 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(46.5km/h) | 电量91.6% | 位置: (149.130034, -35.292081) | 方向: 175.7° | 目标速度: 46.5 km/h | 更新次数: 37
+2025-08-25 15:22:55 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:22:55 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(47.4km/h) | 电量83.7% | 位置: (149.123073, -35.287450)
+2025-08-25 15:22:55 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:22:55 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(36.4km/h) | 电量91.6% | 位置: (149.130077, -35.292537)
+2025-08-25 15:23:00 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:23:00 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(70.3km/h) | 电量83.7% | 位置: (149.123149, -35.286567)
+2025-08-25 15:23:00 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:23:00 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(36.4km/h) | 电量91.6% | 位置: (149.130119, -35.292993)
+2025-08-25 15:23:05 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:23:05 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(70.9km/h) | 电量83.6% | 位置: (149.123226, -35.285678)
+2025-08-25 15:23:05 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:23:05 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(43.7km/h) | 电量91.5% | 位置: (149.130175, -35.293542)
+2025-08-25 15:23:10 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:23:10 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(61.4km/h) | 电量83.6% | 位置: (149.123292, -35.284905)
+2025-08-25 15:23:10 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:23:10 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(50.8km/h) | 电量91.5% | 位置: (149.130239, -35.294178)
+2025-08-25 15:23:15 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:23:15 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:23:15 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(50.8km/h) | 电量91.5% | 位置: (149.130304, -35.294814)
+2025-08-25 15:23:15 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(61.4km/h) | 电量83.6% | 位置: (149.123359, -35.284134)
+2025-08-25 15:23:20 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:23:20 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:23:20 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 休息中 | 电量91.5% | 位置: (149.130304, -35.294814) | 方向: 175.3° | 目标速度: 50.8 km/h | 更新次数: 43
+2025-08-25 15:23:20 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(61.4km/h) | 电量83.5% | 位置: (149.123494, -35.283369) | 方向: 8.2° | 目标速度: 61.4 km/h | 更新次数: 43
+2025-08-25 15:23:25 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:23:25 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:23:25 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 休息中 | 电量91.5% | 位置: (149.130304, -35.294814)
+2025-08-25 15:23:25 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(56.1km/h) | 电量83.5% | 位置: (149.124108, -35.282869)
+2025-08-25 15:23:30 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:23:30 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:23:30 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 休息中 | 电量91.5% | 位置: (149.130304, -35.294814)
+2025-08-25 15:23:30 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(49.4km/h) | 电量83.5% | 位置: (149.124620, -35.282409)
+2025-08-25 15:23:35 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:23:35 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:23:35 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 休息中 | 电量91.5% | 位置: (149.130304, -35.294814)
+2025-08-25 15:23:35 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(58.8km/h) | 电量83.4% | 位置: (149.125231, -35.281859)
+2025-08-25 15:23:40 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:23:40 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:23:40 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(67.6km/h) | 电量83.4% | 位置: (149.125932, -35.281227)
+2025-08-25 15:23:40 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 休息中 | 电量91.5% | 位置: (149.130304, -35.294814)
+2025-08-25 15:23:45 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:23:45 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:23:45 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 休息中 | 电量91.5% | 位置: (149.130304, -35.294814)
+2025-08-25 15:23:45 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(67.6km/h) | 电量83.4% | 位置: (149.126629, -35.280590)
+2025-08-25 15:23:50 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:23:50 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(57.0km/h) | 电量83.3% | 位置: (149.127255, -35.280086) | 方向: 45.4° | 目标速度: 57.0 km/h | 更新次数: 49
+2025-08-25 15:23:50 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:23:50 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 休息中 | 电量91.5% | 位置: (149.130304, -35.294814) | 方向: 175.3° | 目标速度: 50.8 km/h | 更新次数: 49
+2025-08-25 15:23:55 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:23:55 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(57.0km/h) | 电量83.3% | 位置: (149.128114, -35.279935)
+2025-08-25 15:23:55 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:23:55 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(21.2km/h) | 电量91.5% | 位置: (149.130331, -35.295080)
+2025-08-25 15:24:00 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:24:00 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(70.0km/h) | 电量83.3% | 位置: (149.129158, -35.279715)
+2025-08-25 15:24:00 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:24:00 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(42.3km/h) | 电量91.5% | 位置: (149.130385, -35.295609)
+2025-08-25 15:24:05 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:24:05 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:24:05 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(56.4km/h) | 电量91.5% | 位置: (149.130949, -35.296149)
+2025-08-25 15:24:05 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(70.0km/h) | 电量83.2% | 位置: (149.130201, -35.279495)
+2025-08-25 15:24:10 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:24:10 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:24:10 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(70.0km/h) | 电量83.2% | 位置: (149.131238, -35.279248)
+2025-08-25 15:24:10 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(39.3km/h) | 电量91.5% | 位置: (149.131342, -35.296525)
+2025-08-25 15:24:15 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:24:15 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:24:15 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(39.3km/h) | 电量91.4% | 位置: (149.131735, -35.296902)
+2025-08-25 15:24:15 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(70.0km/h) | 电量83.2% | 位置: (149.132274, -35.279001)
+2025-08-25 15:24:20 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:24:20 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:24:20 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(55.4km/h) | 电量83.1% | 位置: (149.133079, -35.278775) | 方向: 71.0° | 目标速度: 55.4 km/h | 更新次数: 55
+2025-08-25 15:24:20 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(39.3km/h) | 电量91.4% | 位置: (149.132128, -35.297277) | 方向: 139.5° | 目标速度: 39.3 km/h | 更新次数: 55
+2025-08-25 15:24:25 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:24:25 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(55.4km/h) | 电量83.1% | 位置: (149.133758, -35.278354)
+2025-08-25 15:24:25 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:24:25 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(49.9km/h) | 电量91.4% | 位置: (149.132627, -35.297754)
+2025-08-25 15:24:30 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:24:30 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:24:30 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(50.2km/h) | 电量91.4% | 位置: (149.132627, -35.297754)
+2025-08-25 15:24:30 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(55.4km/h) | 电量83.1% | 位置: (149.134438, -35.277932)
+2025-08-25 15:24:36 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:24:36 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:24:36 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(50.2km/h) | 电量91.4% | 位置: (149.132017, -35.297364)
+2025-08-25 15:24:36 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(67.0km/h) | 电量83.0% | 位置: (149.135205, -35.277366)
+2025-08-25 15:24:41 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:24:41 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:24:41 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(64.5km/h) | 电量83.0% | 位置: (149.135942, -35.276822)
+2025-08-25 15:24:41 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(49.1km/h) | 电量91.4% | 位置: (149.131423, -35.296983)
+2025-08-25 15:24:46 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:24:46 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:24:46 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(49.1km/h) | 电量91.3% | 位置: (149.130828, -35.296602)
+2025-08-25 15:24:46 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(57.1km/h) | 电量83.0% | 位置: (149.136594, -35.276340)
+2025-08-25 15:24:51 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:24:51 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:24:51 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(57.1km/h) | 电量82.9% | 位置: (149.137247, -35.275858) | 方向: 47.9° | 目标速度: 57.1 km/h | 更新次数: 61
+2025-08-25 15:24:51 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(50.7km/h) | 电量91.3% | 位置: (149.130066, -35.296457) | 方向: 283.1° | 目标速度: 50.7 km/h | 更新次数: 61
+2025-08-25 15:24:56 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:24:56 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(60.0km/h) | 电量82.9% | 位置: (149.138154, -35.275714)
+2025-08-25 15:24:56 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:24:56 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(49.1km/h) | 电量91.3% | 位置: (149.129331, -35.296311)
+2025-08-25 15:25:01 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:25:01 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:25:01 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(49.1km/h) | 电量91.3% | 位置: (149.128595, -35.296165)
+2025-08-25 15:25:01 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(67.9km/h) | 电量82.9% | 位置: (149.138154, -35.275714)
+2025-08-25 15:25:06 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:25:06 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:25:06 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(54.4km/h) | 电量91.3% | 位置: (149.127781, -35.296003)
+2025-08-25 15:25:06 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(63.9km/h) | 电量82.8% | 位置: (149.137322, -35.276146)
+2025-08-25 15:25:11 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:25:11 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(48.4km/h) | 电量82.8% | 位置: (149.136688, -35.276475)
+2025-08-25 15:25:11 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:25:11 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(38.7km/h) | 电量91.3% | 位置: (149.127197, -35.295887)
+2025-08-25 15:25:16 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:25:16 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:25:16 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(35.0km/h) | 电量91.2% | 位置: (149.126676, -35.295767)
+2025-08-25 15:25:16 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(48.4km/h) | 电量82.8% | 位置: (149.136057, -35.276803)
+2025-08-25 15:25:21 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:25:21 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:25:21 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(35.0km/h) | 电量91.2% | 位置: (149.126158, -35.295642) | 方向: 286.4° | 目标速度: 35.0 km/h | 更新次数: 67
+2025-08-25 15:25:21 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(48.4km/h) | 电量82.8% | 位置: (149.135447, -35.277154) | 方向: 234.8° | 目标速度: 48.4 km/h | 更新次数: 67
+2025-08-25 15:25:26 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:25:26 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:25:26 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(35.0km/h) | 电量91.2% | 位置: (149.125637, -35.295529)
+2025-08-25 15:25:26 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(71.2km/h) | 电量82.7% | 位置: (149.134374, -35.277337)
+2025-08-25 15:25:31 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:25:31 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(35.0km/h) | 电量91.2% | 位置: (149.125116, -35.295419)
+2025-08-25 15:25:31 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:25:31 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(59.8km/h) | 电量82.7% | 位置: (149.133473, -35.277491)
+2025-08-25 15:25:36 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:25:36 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:25:36 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(41.1km/h) | 电量91.2% | 位置: (149.124469, -35.295382)
+2025-08-25 15:25:36 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(64.4km/h) | 电量82.7% | 位置: (149.132479, -35.277661)
+2025-08-25 15:25:41 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:25:41 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:25:41 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(64.4km/h) | 电量82.6% | 位置: (149.131511, -35.277843)
+2025-08-25 15:25:41 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(33.3km/h) | 电量91.2% | 位置: (149.123956, -35.295352)
+2025-08-25 15:25:46 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:25:46 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:25:46 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(33.3km/h) | 电量91.2% | 位置: (149.123442, -35.295323)
+2025-08-25 15:25:46 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(64.4km/h) | 电量82.6% | 位置: (149.130532, -35.277983)
+2025-08-25 15:25:51 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:25:51 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(59.5km/h) | 电量82.6% | 位置: (149.129636, -35.278147) | 方向: 257.3° | 目标速度: 59.5 km/h | 更新次数: 73
+2025-08-25 15:25:51 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:25:51 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(33.3km/h) | 电量91.2% | 位置: (149.122927, -35.295327) | 方向: 269.5° | 目标速度: 33.4 km/h | 更新次数: 73
+2025-08-25 15:25:56 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:25:56 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(59.5km/h) | 电量82.5% | 位置: (149.128741, -35.277982)
+2025-08-25 15:25:56 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:25:56 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(33.3km/h) | 电量91.2% | 位置: (149.122413, -35.295331)
+2025-08-25 15:26:01 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:26:01 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(55.4km/h) | 电量82.5% | 位置: (149.127915, -35.277808)
+2025-08-25 15:26:01 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:26:01 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(33.3km/h) | 电量91.2% | 位置: (149.121900, -35.295362)
+2025-08-25 15:26:06 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:26:06 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:26:06 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(33.3km/h) | 电量91.1% | 位置: (149.121388, -35.295393)
+2025-08-25 15:26:06 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(65.9km/h) | 电量82.5% | 位置: (149.126932, -35.277602)
+2025-08-25 15:26:11 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:26:11 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:26:11 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(54.5km/h) | 电量91.1% | 位置: (149.120551, -35.295444)
+2025-08-25 15:26:11 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(61.1km/h) | 电量82.4% | 位置: (149.126019, -35.277410)
+2025-08-25 15:26:16 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:26:16 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(53.4km/h) | 电量91.1% | 位置: (149.119730, -35.295494)
+2025-08-25 15:26:16 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:26:16 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(61.0km/h) | 电量82.4% | 位置: (149.125100, -35.277253)
+2025-08-25 15:26:21 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:26:21 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(33.1km/h) | 电量91.1% | 位置: (149.119225, -35.295433) | 方向: 278.4° | 目标速度: 33.1 km/h | 更新次数: 79
+2025-08-25 15:26:21 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:26:21 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(74.1km/h) | 电量82.4% | 位置: (149.123969, -35.277098) | 方向: 279.5° | 目标速度: 74.1 km/h | 更新次数: 79
+2025-08-25 15:26:26 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:26:26 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(33.1km/h) | 电量91.1% | 位置: (149.119225, -35.295433)
+2025-08-25 15:26:26 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:26:26 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(69.5km/h) | 电量82.3% | 位置: (149.122910, -35.277244)
+2025-08-25 15:26:31 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:26:31 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(37.9km/h) | 电量91.1% | 位置: (149.119783, -35.295291)
+2025-08-25 15:26:31 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:26:31 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(59.4km/h) | 电量82.3% | 位置: (149.122007, -35.277369)
+2025-08-25 15:26:36 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:26:36 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(37.9km/h) | 电量91.1% | 位置: (149.120340, -35.295149)
+2025-08-25 15:26:36 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:26:36 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(59.4km/h) | 电量82.3% | 位置: (149.121104, -35.277494)
+2025-08-25 15:26:41 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:26:41 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:26:41 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(37.9km/h) | 电量91.0% | 位置: (149.120899, -35.295007)
+2025-08-25 15:26:41 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(52.4km/h) | 电量82.2% | 位置: (149.121104, -35.277494)
+2025-08-25 15:26:46 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:26:46 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:26:46 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(37.9km/h) | 电量91.0% | 位置: (149.121458, -35.294864)
+2025-08-25 15:26:46 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(52.4km/h) | 电量82.2% | 位置: (149.121859, -35.277730)
+2025-08-25 15:26:52 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:26:52 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(37.9km/h) | 电量91.0% | 位置: (149.122016, -35.294722) | 方向: 72.7° | 目标速度: 37.9 km/h | 更新次数: 85
+2025-08-25 15:26:52 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:26:52 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(52.4km/h) | 电量82.2% | 位置: (149.122613, -35.277965) | 方向: 111.0° | 目标速度: 52.4 km/h | 更新次数: 85
+2025-08-25 15:26:57 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:26:57 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(33.9km/h) | 电量91.0% | 位置: (149.122519, -35.294594)
+2025-08-25 15:26:57 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:26:57 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(60.3km/h) | 电量82.2% | 位置: (149.123305, -35.278485)
+2025-08-25 15:27:02 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:27:02 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(33.9km/h) | 电量91.0% | 位置: (149.123018, -35.294467)
+2025-08-25 15:27:02 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:27:02 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(60.3km/h) | 电量82.1% | 位置: (149.123989, -35.278999)
+2025-08-25 15:27:07 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:27:07 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(34.2km/h) | 电量91.0% | 位置: (149.123284, -35.294096)
+2025-08-25 15:27:07 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:27:07 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(60.3km/h) | 电量82.1% | 位置: (149.124672, -35.279512)
+2025-08-25 15:27:12 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:27:12 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(73.4km/h) | 电量82.1% | 位置: (149.125510, -35.280141)
+2025-08-25 15:27:12 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:27:12 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(34.2km/h) | 电量91.0% | 位置: (149.123552, -35.293722)
+2025-08-25 15:27:17 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:27:17 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(73.4km/h) | 电量82.0% | 位置: (149.126342, -35.280766)
+2025-08-25 15:27:17 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:27:17 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(34.2km/h) | 电量91.0% | 位置: (149.123818, -35.293351)
+2025-08-25 15:27:22 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:27:22 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(73.4km/h) | 电量82.0% | 位置: (149.127174, -35.281391) | 方向: 132.6° | 目标速度: 73.4 km/h | 更新次数: 91
+2025-08-25 15:27:22 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:27:22 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(34.2km/h) | 电量91.0% | 位置: (149.124085, -35.292980) | 方向: 30.4° | 目标速度: 34.2 km/h | 更新次数: 91
+2025-08-25 15:27:27 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:27:27 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:27:27 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(48.8km/h) | 电量91.0% | 位置: (149.124465, -35.292450)
+2025-08-25 15:27:27 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(70.5km/h) | 电量81.9% | 位置: (149.128254, -35.281486)
+2025-08-25 15:27:32 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:27:32 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:27:32 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(70.5km/h) | 电量81.9% | 位置: (149.129342, -35.281566)
+2025-08-25 15:27:32 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(48.8km/h) | 电量90.9% | 位置: (149.124851, -35.291919)
+2025-08-25 15:27:37 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:27:37 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:27:37 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(39.9km/h) | 电量90.9% | 位置: (149.125165, -35.291487)
+2025-08-25 15:27:37 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(70.5km/h) | 电量81.9% | 位置: (149.130426, -35.281645)
+2025-08-25 15:27:42 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:27:42 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(56.3km/h) | 电量81.8% | 位置: (149.131291, -35.281709)
+2025-08-25 15:27:42 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:27:42 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(50.7km/h) | 电量90.9% | 位置: (149.125620, -35.290969)
+2025-08-25 15:27:47 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:27:47 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(50.7km/h) | 电量90.9% | 位置: (149.126083, -35.290447)
+2025-08-25 15:27:47 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:27:47 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(56.3km/h) | 电量81.8% | 位置: (149.132160, -35.281799)
+2025-08-25 15:27:52 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:27:52 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(50.7km/h) | 电量90.9% | 位置: (149.126832, -35.290249) | 方向: 72.1° | 目标速度: 50.7 km/h | 更新次数: 97
+2025-08-25 15:27:52 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:27:52 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(55.3km/h) | 电量81.8% | 位置: (149.133018, -35.281888) | 方向: 97.2° | 目标速度: 55.3 km/h | 更新次数: 97
+2025-08-25 15:27:57 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:27:57 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(50.7km/h) | 电量90.9% | 位置: (149.127579, -35.290053)
+2025-08-25 15:27:57 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:27:57 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(55.3km/h) | 电量81.7% | 位置: (149.133805, -35.282154)
+2025-08-25 15:28:02 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:28:02 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(43.5km/h) | 电量90.8% | 位置: (149.128217, -35.289884)
+2025-08-25 15:28:02 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:28:02 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(55.3km/h) | 电量81.7% | 位置: (149.134591, -35.282419)
+2025-08-25 15:28:07 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:28:07 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(54.5km/h) | 电量90.8% | 位置: (149.129028, -35.289709)
+2025-08-25 15:28:07 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:28:07 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(55.3km/h) | 电量81.7% | 位置: (149.135377, -35.282685)
+2025-08-25 15:28:12 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:28:12 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(54.5km/h) | 电量90.8% | 位置: (149.129841, -35.289533)
+2025-08-25 15:28:12 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:28:12 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(55.3km/h) | 电量81.7% | 位置: (149.136185, -35.282904)
+2025-08-25 15:28:17 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:28:17 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(46.9km/h) | 电量90.8% | 位置: (149.130540, -35.289382)
+2025-08-25 15:28:17 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:28:17 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(55.3km/h) | 电量81.6% | 位置: (149.136995, -35.283121)
+2025-08-25 15:28:22 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:28:22 - EnhancedVehicleSimulator-ABC-696 - INFO - 车辆: ABC-696 (BYD Han EV) | 状态: 行驶中(55.2km/h) | 电量90.8% | 位置: (149.131361, -35.289204) | 方向: 75.2° | 目标速度: 55.2 km/h | 更新次数: 103
+2025-08-25 15:28:22 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:28:22 - EnhancedVehicleSimulator-YRN·03V - INFO - 车辆: YRN·03V (Tesla Model S) | 状态: 行驶中(52.0km/h) | 电量81.6% | 位置: (149.137757, -35.283325) | 方向: 108.2° | 目标速度: 52.0 km/h | 更新次数: 103
+2025-08-25 15:28:27 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:28:27 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:28:27 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(50.6km/h) | 电量81.6% | 位置: (149.138535, -35.283313)
+2025-08-25 15:28:27 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(56.3km/h) | 电量90.7% | 位置: (149.132213, -35.289077)
+2025-08-25 15:28:32 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:28:32 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(56.3km/h) | 电量90.7% | 位置: (149.133076, -35.288948)
+2025-08-25 15:28:32 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:28:32 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(50.6km/h) | 电量81.5% | 位置: (149.139321, -35.283302)
+2025-08-25 15:28:37 - database_manager - DEBUG - 成功更新车辆数据: ABC-696
+2025-08-25 15:28:37 - database_manager - DEBUG - 成功更新车辆数据: YRN·03V
+2025-08-25 15:28:37 - EnhancedVehicleSimulator-ABC-696 - DEBUG - 车辆 ABC-696 - 行驶中(46.3km/h) | 电量90.7% | 位置: (149.133076, -35.288948)
+2025-08-25 15:28:37 - EnhancedVehicleSimulator-YRN·03V - DEBUG - 车辆 YRN·03V - 行驶中(50.6km/h) | 电量81.5% | 位置: (149.139321, -35.283302)
