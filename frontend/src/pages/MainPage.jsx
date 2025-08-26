@@ -4,7 +4,6 @@ import SearchBar from "../components/SearchBar";
 import CurrentWeatherCard from "../components/CurrentWeatherCard";
 import Map from "../components/Map";
 import axiosInstance from '../axiosInstance';
-import axios from 'axios';
 import DragChat from '../components/ChatPage';
 
 import { Popover, Typography, Divider, Tag } from '@douyinfe/semi-ui';

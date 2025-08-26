@@ -2,7 +2,7 @@
   "vehicles": [
     {
       "id": "vehicle_001",
-      "licensePlate": "YRN·03V",
+      "licensePlate": "ABC-123",
       "carModel": "Tesla Model S",
       "energyType": "Electric",
       "year": 2023,
@@ -56,7 +56,7 @@
     },
     {
       "id": "vehicle_002",
-      "licensePlate": "ABC-696",
+      "licensePlate": "DEF-456",
       "carModel": "BYD Han EV",
       "energyType": "Electric",
       "year": 2024,
@@ -107,6 +107,438 @@
         "restProbability": 0.15,
         "restDuration": [15, 45]
       }
+    },
+    {
+      "id": "vehicle_003",
+      "licensePlate": "GHI-789",
+      "carModel": "Tesla Model 3",
+      "energyType": "Electric",
+      "year": 2023,
+      "dimensions": {
+        "length": 5,
+        "width": 2,
+        "height": 1
+      },
+      "equipment": {
+        "radarModel": "Tesla Autopilot Radar",
+        "radarCount": 6,
+        "cameraModel": "Tesla Vision Camera",
+        "cameraCount": 6
+      },
+      "initialPosition": {
+        "longitude": 149.1100,
+        "latitude": -35.2700,
+        "description": "堪培拉北部"
+      },
+      "movementConfig": {
+        "maxSpeed": 110,
+        "acceleration": 3.0,
+        "deceleration": 3.8,
+        "movementRadius": 0.009,
+        "speedVariation": 18,
+        "directionChangeInterval": 35
+      },
+      "energyConfig": {
+        "maxEnergy": 100,
+        "initialEnergy": 78,
+        "consumptionRate": 0.7,
+        "chargingRate": 12.5,
+        "autoChargeThreshold": 12,
+        "chargingEfficiency": 0.93
+      },
+      "sensorRanges": {
+        "engineRPM": [0, 0],
+        "lubeOilPressure": [0, 0],
+        "fuelPressure": [0, 0],
+        "coolantPressure": [12, 28],
+        "lubeOilTemp": [18, 38],
+        "coolantTemp": [58, 78],
+        "engineCondition": [88, 98]
+      },
+      "drivingBehavior": {
+        "aggressiveness": 0.4,
+        "preferredSpeed": 180,
+        "restProbability": 0.12,
+        "restDuration": [12, 35]
+      }
+    },
+    {
+      "id": "vehicle_004",
+      "licensePlate": "JKL-012",
+      "carModel": "NIO ES8",
+      "energyType": "Electric",
+      "year": 2024,
+      "dimensions": {
+        "length": 5,
+        "width": 2,
+        "height": 2
+      },
+      "equipment": {
+        "radarModel": "NIO Lidar",
+        "radarCount": 4,
+        "cameraModel": "NIO Trinocular Camera",
+        "cameraCount": 7
+      },
+      "initialPosition": {
+        "longitude": 149.1500,
+        "latitude": -35.2600,
+        "description": "堪培拉东部"
+      },
+      "movementConfig": {
+        "maxSpeed": 105,
+        "acceleration": 2.5,
+        "deceleration": 3.2,
+        "movementRadius": 0.012,
+        "speedVariation": 14,
+        "directionChangeInterval": 40
+      },
+      "energyConfig": {
+        "maxEnergy": 100,
+        "initialEnergy": 65,
+        "consumptionRate": 0.9,
+        "chargingRate": 18.0,
+        "autoChargeThreshold": 8,
+        "chargingEfficiency": 0.88
+      },
+      "sensorRanges": {
+        "engineRPM": [0, 0],
+        "lubeOilPressure": [0, 0],
+        "fuelPressure": [0, 0],
+        "coolantPressure": [15, 32],
+        "lubeOilTemp": [22, 42],
+        "coolantTemp": [62, 82],
+        "engineCondition": [82, 95]
+      },
+      "drivingBehavior": {
+        "aggressiveness": 0.6,
+        "preferredSpeed": 135,
+        "restProbability": 0.18,
+        "restDuration": [20, 50]
+      }
+    },
+    {
+      "id": "vehicle_005",
+      "licensePlate": "MNO-345",
+      "carModel": "Lucid Air",
+      "energyType": "Electric",
+      "year": 2023,
+      "dimensions": {
+        "length": 5,
+        "width": 2,
+        "height": 1
+      },
+      "equipment": {
+        "radarModel": "Lucid DreamDrive Radar",
+        "radarCount": 5,
+        "cameraModel": "Lucid DreamDrive Camera",
+        "cameraCount": 14
+      },
+      "initialPosition": {
+        "longitude": 149.1400,
+        "latitude": -35.3000,
+        "description": "堪培拉南部"
+      },
+      "movementConfig": {
+        "maxSpeed": 130,
+        "acceleration": 4.0,
+        "deceleration": 4.5,
+        "movementRadius": 0.007,
+        "speedVariation": 20,
+        "directionChangeInterval": 25
+      },
+      "energyConfig": {
+        "maxEnergy": 100,
+        "initialEnergy": 95,
+        "consumptionRate": 0.5,
+        "chargingRate": 20.0,
+        "autoChargeThreshold": 5,
+        "chargingEfficiency": 0.97
+      },
+      "sensorRanges": {
+        "engineRPM": [0, 0],
+        "lubeOilPressure": [0, 0],
+        "fuelPressure": [0, 0],
+        "coolantPressure": [8, 22],
+        "lubeOilTemp": [16, 32],
+        "coolantTemp": [52, 72],
+        "engineCondition": [92, 100]
+      },
+      "drivingBehavior": {
+        "aggressiveness": 0.2,
+        "preferredSpeed": 65,
+        "restProbability": 0.08,
+        "restDuration": [8, 25]
+      }
+    },
+    {
+      "id": "vehicle_006",
+      "licensePlate": "PQR-678",
+      "carModel": "BMW iX",
+      "energyType": "Electric",
+      "year": 2024,
+      "dimensions": {
+        "length": 5,
+        "width": 2,
+        "height": 2
+      },
+      "equipment": {
+        "radarModel": "BMW Radar",
+        "radarCount": 5,
+        "cameraModel": "BMW Surround View",
+        "cameraCount": 4
+      },
+      "initialPosition": {
+        "longitude": 149.1200,
+        "latitude": -35.2500,
+        "description": "堪培拉西北部"
+      },
+      "movementConfig": {
+        "maxSpeed": 115,
+        "acceleration": 2.7,
+        "deceleration": 3.6,
+        "movementRadius": 0.011,
+        "speedVariation": 16,
+        "directionChangeInterval": 38
+      },
+      "energyConfig": {
+        "maxEnergy": 100,
+        "initialEnergy": 72,
+        "consumptionRate": 0.8,
+        "chargingRate": 14.0,
+        "autoChargeThreshold": 12,
+        "chargingEfficiency": 0.90
+      },
+      "sensorRanges": {
+        "engineRPM": [0, 0],
+        "lubeOilPressure": [0, 0],
+        "fuelPressure": [0, 0],
+        "coolantPressure": [11, 26],
+        "lubeOilTemp": [19, 36],
+        "coolantTemp": [59, 76],
+        "engineCondition": [86, 96]
+      },
+      "drivingBehavior": {
+        "aggressiveness": 0.35,
+        "preferredSpeed": 58,
+        "restProbability": 0.13,
+        "restDuration": [14, 38]
+      }
+    },
+    {
+      "id": "vehicle_007",
+      "licensePlate": "STU-901",
+      "carModel": "Mercedes EQS",
+      "energyType": "Electric",
+      "year": 2023,
+      "dimensions": {
+        "length": 5,
+        "width": 2,
+        "height": 1
+      },
+      "equipment": {
+        "radarModel": "Mercedes Radar",
+        "radarCount": 6,
+        "cameraModel": "Mercedes Surround View",
+        "cameraCount": 5
+      },
+      "initialPosition": {
+        "longitude": 149.1350,
+        "latitude": -35.2750,
+        "description": "堪培拉中部"
+      },
+      "movementConfig": {
+        "maxSpeed": 125,
+        "acceleration": 3.2,
+        "deceleration": 4.2,
+        "movementRadius": 0.009,
+        "speedVariation": 17,
+        "directionChangeInterval": 32
+      },
+      "energyConfig": {
+        "maxEnergy": 100,
+        "initialEnergy": 88,
+        "consumptionRate": 0.6,
+        "chargingRate": 16.0,
+        "autoChargeThreshold": 10,
+        "chargingEfficiency": 0.94
+      },
+      "sensorRanges": {
+        "engineRPM": [0, 0],
+        "lubeOilPressure": [0, 0],
+        "fuelPressure": [0, 0],
+        "coolantPressure": [9, 24],
+        "lubeOilTemp": [17, 34],
+        "coolantTemp": [56, 74],
+        "engineCondition": [89, 99]
+      },
+      "drivingBehavior": {
+        "aggressiveness": 0.25,
+        "preferredSpeed": 62,
+        "restProbability": 0.09,
+        "restDuration": [10, 28]
+      }
+    },
+    {
+      "id": "vehicle_008",
+      "licensePlate": "VWX-234",
+      "carModel": "Audi e-tron GT",
+      "energyType": "Electric",
+      "year": 2024,
+      "dimensions": {
+        "length": 5,
+        "width": 2,
+        "height": 1
+      },
+      "equipment": {
+        "radarModel": "Audi Radar",
+        "radarCount": 4,
+        "cameraModel": "Audi Virtual Cockpit",
+        "cameraCount": 6
+      },
+      "initialPosition": {
+        "longitude": 149.1150,
+        "latitude": -35.2850,
+        "description": "堪培拉西南部"
+      },
+      "movementConfig": {
+        "maxSpeed": 135,
+        "acceleration": 3.8,
+        "deceleration": 4.3,
+        "movementRadius": 0.008,
+        "speedVariation": 19,
+        "directionChangeInterval": 28
+      },
+      "energyConfig": {
+        "maxEnergy": 100,
+        "initialEnergy": 76,
+        "consumptionRate": 0.7,
+        "chargingRate": 17.5,
+        "autoChargeThreshold": 11,
+        "chargingEfficiency": 0.91
+      },
+      "sensorRanges": {
+        "engineRPM": [0, 0],
+        "lubeOilPressure": [0, 0],
+        "fuelPressure": [0, 0],
+        "coolantPressure": [13, 29],
+        "lubeOilTemp": [21, 39],
+        "coolantTemp": [61, 79],
+        "engineCondition": [87, 97]
+      },
+      "drivingBehavior": {
+        "aggressiveness": 0.55,
+        "preferredSpeed": 68,
+        "restProbability": 0.11,
+        "restDuration": [13, 32]
+      }
+    },
+    {
+      "id": "vehicle_009",
+      "licensePlate": "YZA-567",
+      "carModel": "Polestar 3",
+      "energyType": "Electric",
+      "year": 2024,
+      "dimensions": {
+        "length": 5,
+        "width": 2,
+        "height": 2
+      },
+      "equipment": {
+        "radarModel": "Polestar Lidar",
+        "radarCount": 3,
+        "cameraModel": "Polestar Camera Array",
+        "cameraCount": 8
+      },
+      "initialPosition": {
+        "longitude": 149.1450,
+        "latitude": -35.2650,
+        "description": "堪培拉东北部"
+      },
+      "movementConfig": {
+        "maxSpeed": 108,
+        "acceleration": 2.9,
+        "deceleration": 3.4,
+        "movementRadius": 0.010,
+        "speedVariation": 13,
+        "directionChangeInterval": 42
+      },
+      "energyConfig": {
+        "maxEnergy": 100,
+        "initialEnergy": 69,
+        "consumptionRate": 0.8,
+        "chargingRate": 13.5,
+        "autoChargeThreshold": 13,
+        "chargingEfficiency": 0.89
+      },
+      "sensorRanges": {
+        "engineRPM": [0, 0],
+        "lubeOilPressure": [0, 0],
+        "fuelPressure": [0, 0],
+        "coolantPressure": [14, 31],
+        "lubeOilTemp": [23, 41],
+        "coolantTemp": [63, 81],
+        "engineCondition": [84, 94]
+      },
+      "drivingBehavior": {
+        "aggressiveness": 0.45,
+        "preferredSpeed": 52,
+        "restProbability": 0.16,
+        "restDuration": [18, 42]
+      }
+    },
+    {
+      "id": "vehicle_010",
+      "licensePlate": "BCD-890",
+      "carModel": "Rivian R1T",
+      "energyType": "Electric",
+      "year": 2023,
+      "dimensions": {
+        "length": 6,
+        "width": 2,
+        "height": 2
+      },
+      "equipment": {
+        "radarModel": "Rivian Radar System",
+        "radarCount": 5,
+        "cameraModel": "Rivian Vision System",
+        "cameraCount": 11
+      },
+      "initialPosition": {
+        "longitude": 149.1250,
+        "latitude": -35.2950,
+        "description": "堪培拉西南部"
+      },
+      "movementConfig": {
+        "maxSpeed": 95,
+        "acceleration": 2.3,
+        "deceleration": 3.0,
+        "movementRadius": 0.013,
+        "speedVariation": 11,
+        "directionChangeInterval": 48
+      },
+      "energyConfig": {
+        "maxEnergy": 100,
+        "initialEnergy": 58,
+        "consumptionRate": 1.1,
+        "chargingRate": 11.0,
+        "autoChargeThreshold": 15,
+        "chargingEfficiency": 0.85
+      },
+      "sensorRanges": {
+        "engineRPM": [0, 0],
+        "lubeOilPressure": [0, 0],
+        "fuelPressure": [0, 0],
+        "coolantPressure": [16, 34],
+        "lubeOilTemp": [25, 43],
+        "coolantTemp": [65, 83],
+        "engineCondition": [80, 92]
+      },
+      "drivingBehavior": {
+        "aggressiveness": 0.7,
+        "preferredSpeed": 48,
+        "restProbability": 0.22,
+        "restDuration": [25, 55]
+      }
     }
   ]
-} 
+}

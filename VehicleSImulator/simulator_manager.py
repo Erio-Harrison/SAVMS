@@ -49,9 +49,16 @@ class SimulatorManager:
         """创建车辆模拟器实例"""
         # 预定义的车辆信息
         vehicles_info = [
-            {"id": "vehicle_001", "license": "YRN·03V"},
-            {"id": "vehicle_002", "license": "ABC-696"}
-
+            {"id": "vehicle_001", "license": "ABC-123"},
+            {"id": "vehicle_002", "license": "DEF-456"},
+            {"id": "vehicle_003", "license": "GHI-789"},
+            {"id": "vehicle_004", "license": "JKL-012"},
+            {"id": "vehicle_005", "license": "MNO-345"},
+            {"id": "vehicle_006", "license": "PQR-678"},
+            {"id": "vehicle_007", "license": "STU-901"},
+            {"id": "vehicle_008", "license": "VWX-234"},
+            {"id": "vehicle_009", "license": "YZA-567"},
+            {"id": "vehicle_010", "license": "BCD-890"}
         ]
         
         # 根据配置创建指定数量的车辆
