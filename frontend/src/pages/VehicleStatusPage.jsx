@@ -4,6 +4,7 @@ import { Tag, Table, Typography, Button, LocaleProvider, Toast, Badge } from '@d
 import { IconAlertTriangle, IconBell } from '@douyinfe/semi-icons';
 import en_US from '@douyinfe/semi-ui/lib/es/locale/source/en_US';
 import AlertModal from '../components/AlertModal';
+import '../styles/AlertStyles.css';
 
 const { Title, Text } = Typography;
 
@@ -38,8 +39,8 @@ export default function VehicleStatusPage() {
             width: 100,
             render: (speed) => (
                 <span className={`font-medium ${
-                    speed > 80 ? 'text-red-500' : 
-                    speed > 40 ? 'text-orange-500' : 
+                    speed > 150 ? 'text-red-500' : 
+                    speed > 120 ? 'text-orange-500' : 
                     'text-green-500'
                 }`}>
                     {typeof speed === 'number' ? speed.toFixed(2) : '0.00'} km/h
@@ -94,6 +95,44 @@ export default function VehicleStatusPage() {
             )
         },
         {
+            title: 'Alert Status',
+            key: 'alertStatus',
+            width: 120,
+            render: (_, vehicle) => {
+                const vehicleAlerts = alerts.filter(alert => alert.licensePlate === vehicle.licensePlate);
+                const criticalAlerts = vehicleAlerts.filter(alert => alert.severity === 'CRITICAL');
+                const highAlerts = vehicleAlerts.filter(alert => alert.severity === 'HIGH');
+                
+                if (criticalAlerts.length > 0) {
+                    return (
+                        <Tag size="small" type="danger" className="font-medium">
+                            CRITICAL ({criticalAlerts.length})
+                        </Tag>
+                    );
+                }
+                if (highAlerts.length > 0) {
+                    return (
+                        <Tag size="small" type="warning" className="font-medium">
+                            HIGH ({highAlerts.length})
+                        </Tag>
+                    );
+                }
+                const otherAlerts = vehicleAlerts.filter(alert => alert.severity === 'MEDIUM' || alert.severity === 'LOW');
+                if (otherAlerts.length > 0) {
+                    return (
+                        <Tag size="small" type="secondary" className="font-medium">
+                            {otherAlerts[0].severity} ({otherAlerts.length})
+                        </Tag>
+                    );
+                }
+                return (
+                    <Tag size="small" type="success" className="font-medium">
+                        OK
+                    </Tag>
+                );
+            }
+        },
+        {
             title: 'Last Updated',
             key: 'lastUpdated',
             width: 150,
@@ -133,7 +172,6 @@ export default function VehicleStatusPage() {
             // First, check and generate new alerts for each vehicle
             for (const vehicle of vehiclesList) {
                 try {
-                    console.log(`Checking alerts for vehicle: ${vehicle.licensePlate} with speed: ${vehicle.speed}`);
                     await axios.post(`http://34.151.113.63:8080/api/alert/${vehicle.licensePlate}/check`);
                 } catch (error) {
                     console.error(`Failed to check alerts for vehicle ${vehicle.licensePlate}:`, error);
@@ -152,7 +190,6 @@ export default function VehicleStatusPage() {
                 }
             }
             
-            console.log('All active alerts:', allAlerts);
             
             // Check for new critical alerts
             const criticalAlerts = allAlerts.filter(alert => alert.severity === 'CRITICAL');
@@ -221,6 +258,28 @@ export default function VehicleStatusPage() {
         fetchAlerts();
     };
 
+    const handleClearAndCheckAlerts = async () => {
+        try {
+            // First resolve all existing alerts to clear them
+            for (const alert of alerts) {
+                try {
+                    await axios.put(`http://34.151.113.63:8080/api/alert/${alert.id}/resolve`);
+                } catch (error) {
+                    console.error(`Failed to resolve alert ${alert.id}:`, error);
+                }
+            }
+            
+            Toast.info('Cleared existing alerts, generating fresh alerts...');
+            
+            // Wait a moment then fetch fresh alerts
+            setTimeout(() => {
+                fetchAlerts();
+            }, 1000);
+        } catch (error) {
+            console.error('Error clearing alerts:', error);
+        }
+    };
+
     const handleOpenAlerts = () => {
         setAlertModalVisible(true);
         setHasNewAlerts(false);
@@ -237,6 +296,22 @@ export default function VehicleStatusPage() {
 
     const criticalAlertCount = alerts.filter(alert => alert.severity === 'CRITICAL').length;
     const totalAlertCount = alerts.length;
+
+    // Function to get row class based on alert severity
+    const getRowClassName = (record) => {
+        const vehicleAlerts = alerts.filter(alert => alert.licensePlate === record.licensePlate);
+        const criticalAlerts = vehicleAlerts.filter(alert => alert.severity === 'CRITICAL');
+        const highAlerts = vehicleAlerts.filter(alert => alert.severity === 'HIGH');
+        
+        
+        if (criticalAlerts.length > 0) {
+            return 'critical-alert-row';
+        }
+        if (highAlerts.length > 0) {
+            return 'high-alert-row';
+        }
+        return '';
+    };
 
     return (
         <LocaleProvider locale={en_US}>
@@ -297,6 +372,7 @@ export default function VehicleStatusPage() {
                     dataSource={vehicles}
                     rowKey="id"
                     loading={loading}
+                    rowClassName={getRowClassName}
                     pagination={{
                         pageSize: 10,
                         showSizeChanger: true,
