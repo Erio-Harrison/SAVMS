@@ -6,6 +6,7 @@ import MainPage from "./MainPage.jsx";
 import MapPage from "./MapPage.jsx";
 import CurrentTasksPage from "./CurrentTasksPage.jsx";
 import TestPage from "./testPage.jsx";
+import VehicleStatusPage from "./VehicleStatusPage.jsx";
 // Client components
 import ClientTasksPage from "./ClientTasksPage.jsx";
 import ClientSidebar from "../components/ClientSidebar";
@@ -22,7 +23,7 @@ export default function SCUVMS() {
         return <SCUVMS_Client />;
     }
 
-    // 通过 selectedPage 渲染不同组件
+    // Render different components based on selectedPage
     const renderPage = () => {
         switch (selectedPage) {
             case "MainPage":
@@ -31,6 +32,8 @@ export default function SCUVMS() {
                 return <MapPage />;
             case "CurrentTasksPage":
                 return <CurrentTasksPage />;
+            case "VehicleStatusPage":
+                return <VehicleStatusPage />;
             case "testPage":
                 return <TestPage />;
             case "ProfilePage":

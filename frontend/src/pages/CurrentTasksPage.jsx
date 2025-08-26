@@ -7,6 +7,7 @@ import { Modal, Form, Button, Toast } from "@douyinfe/semi-ui";
 import TaskDetailCard from "../components/TaskDetailCard.jsx";
 import CreateTaskCard from "../components/CreateTaskCard.jsx";
 import axiosInstance from "../axiosInstance";
+import {Autocomplete} from "@react-google-maps/api";
 
 export default function CurrentTasksPage() {
     const [tasks, setTasks] = useState([]);
@@ -30,7 +31,7 @@ export default function CurrentTasksPage() {
     useEffect(() => {
         const fetchAssignedTasks = async () => {
             try {
-                const res = await axiosInstance.get("/api/tasks/status/1"); // 你的后端实际路径
+                const res = await axiosInstance.get("/api/tasks/status/1"); // Your actual backend path
                 const fetchedAssignTasks = res.data.data;
 
                 setAssignedTasks(fetchedAssignTasks);
@@ -44,7 +45,7 @@ export default function CurrentTasksPage() {
 
         const fetchUnAssignedTasks = async () => {
             try {
-                const res = await axiosInstance.get("/api/tasks/status/0"); // 你的后端实际路径
+                const res = await axiosInstance.get("/api/tasks/status/0"); // Your actual backend path
                 const fetchedUnAssignTasks = res.data.data;
 
                 setUnAssignedTasks(fetchedUnAssignTasks);
@@ -60,7 +61,7 @@ export default function CurrentTasksPage() {
 
     const handleMarkerClick = (marker) => {
         console.log("Task marker clicked:", marker);
-        // 根据点击的marker更新坐标
+        // Update coordinates based on clicked marker
         setCoordinate({ lat: marker.lat, lng: marker.lng });
     };
 
@@ -118,7 +119,7 @@ export default function CurrentTasksPage() {
                                         <div
                                             key={task.id}
                                             className="p-2 border-b border-gray-200 flex flex-col cursor-pointer"
-                                            onClick={() => handleTaskClick(task)} // 点击任务时更新选中的任务
+                                            onClick={() => handleTaskClick(task)} // Update selected task when clicking on task
                                         >
                                             <span className="font-semibold text-lg">{task.title}</span>
                                             <span className="text-sm text-gray-600">{task.description}</span>
@@ -147,7 +148,7 @@ export default function CurrentTasksPage() {
                                         <div
                                             key={task.id}
                                             className="p-2 border-b border-gray-200 flex flex-col cursor-pointer"
-                                            onClick={() => handleTaskClick(task)} // 点击任务时更新选中的任务
+                                            onClick={() => handleTaskClick(task)} // Update selected task when clicking on task
                                         >
                                             <span className="font-semibold text-lg">{task.title}</span>
                                             <span className="text-sm text-gray-600">{task.description}</span>
@@ -166,7 +167,7 @@ export default function CurrentTasksPage() {
             <div className="flex flex-col w-3/4 gap-4">
                 <div className="flex justify-between items-center h-1/4 gap-4 px-2">
                     <div className="w-2/3">
-                        {/* 显示选中的任务详情 */}
+                        {/* Display selected task details */}
                         <TaskDetailCard task={selectedTask} />
                     </div>
                     <div className="w-1/3">
@@ -174,7 +175,7 @@ export default function CurrentTasksPage() {
                     </div>
                 </div>
 
-                {/* 地图区域，占3/4高度 */}
+                {/* Map area, occupies 3/4 height */}
                 {/*<div className="h-3/4 bg-white rounded-3xl overflow-hidden">*/}
                 {/*    <Map*/}
                 {/*        lat={coordinate.lat}*/}
@@ -211,12 +212,36 @@ export default function CurrentTasksPage() {
                     footer={null}
                 >
                     <Form onSubmit={handleCreateTask}>
-                        <Form.Input field="id" label="Task ID" placeholder="e.g., 101" required />
-                        <Form.Input field="startTime" label="Start Time" placeholder="e.g., 2025-04-17 09:00" required />
-                        <Form.Input field="endTime" label="End Time" placeholder="e.g., 2025-04-17 10:30" required />
-                        <Form.Input field="startAddress" label="Start Address" placeholder="e.g., Civic Square" required />
-                        <Form.Input field="endAddress" label="End Address" placeholder="e.g., Gungahlin Station" required />
-                        <Form.Input field="license" label="Car License" placeholder="e.g., XYZ-123" required />
+                        <Form.Input field="title" label="Title" placeholder="The title of this task" required />
+                        <Form.Input field="description" label="Description" placeholder="The detail for this task" required />
+                        <Form.DatePicker
+                            field="startTime"
+                            label="Start Time"
+                            type="dateTime"           // Enables both date & time
+                            format="yyyy-MM-dd HH:mm" // Optional: Display format
+                            required
+                            placeholder="Select start date and time"
+                        />
+                        <Form.Slot label="Start Address" required>
+                            <Autocomplete
+                                onPlaceSelect={(place) => {
+                                    const address = place.formatted_address;
+                                    formApi.setValue('startAddress', address);
+                                }}
+                            >
+                                <Form.Input field="startAddress" placeholder="Search Start Address" />
+                            </Autocomplete>
+                        </Form.Slot>
+                        <Form.Slot label="End Address" required>
+                            <Autocomplete
+                                onPlaceSelect={(place) => {
+                                    const address = place.formatted_address;
+                                    formApi.setValue('endAddress', address);
+                                }}
+                            >
+                                <Form.Input field="endAddress" placeholder="Search End Address" />
+                            </Autocomplete>
+                        </Form.Slot>
 
                         <div className="flex justify-end pt-4">
                             <Button onClick={() => setCreateModalVisible(false)} style={{ marginRight: 8 }}>

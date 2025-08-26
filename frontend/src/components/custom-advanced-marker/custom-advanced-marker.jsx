@@ -22,7 +22,7 @@ const CustomAdvancedMarker = ({ realEstateListing, onMarkerClick }) => {
 
     const handleClick = () => {
         setClicked(!clicked);
-        onMarkerClick(position); // 传出坐标
+        onMarkerClick(position); // Pass out coordinates
     };
 
     const staticImages = [sideImage, frontImage, backImage];

@@ -1,0 +1,60 @@
+/* Alert styling for vehicle status table rows */
+
+.critical-alert-row {
+    background-color: #fef2f2 !important; /* Light red background */
+    border-left: 4px solid #dc2626 !important; /* Red border */
+    animation: pulse-red 2s infinite;
+}
+
+.critical-alert-row:hover {
+    background-color: #fee2e2 !important; /* Darker red on hover */
+}
+
+.high-alert-row {
+    background-color: #fffbeb !important; /* Light orange background */
+    border-left: 4px solid #f59e0b !important; /* Orange border */
+}
+
+.high-alert-row:hover {
+    background-color: #fef3c7 !important; /* Darker orange on hover */
+}
+
+/* Pulse animation for critical alerts */
+@keyframes pulse-red {
+    0%, 100% {
+        background-color: #fef2f2;
+    }
+    50% {
+        background-color: #fee2e2;
+    }
+}
+
+/* Override Semi Design table row styles for alert rows */
+.semi-table-tbody .critical-alert-row > .semi-table-cell {
+    background: transparent !important;
+    border-color: #fca5a5 !important;
+}
+
+.semi-table-tbody .high-alert-row > .semi-table-cell {
+    background: transparent !important;
+    border-color: #fcd34d !important;
+}
+
+/* Make alert status column more prominent */
+.semi-table-tbody .critical-alert-row .semi-tag-danger {
+    font-weight: 600;
+    animation: pulse-tag 1.5s infinite;
+}
+
+.semi-table-tbody .high-alert-row .semi-tag-warning {
+    font-weight: 600;
+}
+
+@keyframes pulse-tag {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}

@@ -1,0 +1,166 @@
+2025-08-12 15:24:22 - database_manager - INFO - 正在连接到MongoDB: mongodb+srv://kong:d13910854850@cluster0.kqakr.mongodb.net/123?retryWrites=true&w=majority&appName=Cluster0
+2025-08-12 15:24:22 - database_manager - INFO - 成功连接到数据库: 123.vehicle
+2025-08-12 15:24:22 - database_manager - INFO - 数据库连接已断开
+2025-08-12 15:24:22 - database_manager - INFO - 正在连接到MongoDB: mongodb+srv://kong:d13910854850@cluster0.kqakr.mongodb.net/123?retryWrites=true&w=majority&appName=Cluster0
+2025-08-12 15:24:22 - database_manager - INFO - 成功连接到数据库: 123.vehicle
+2025-08-12 15:24:22 - simulator_manager - INFO - 创建车辆模拟器: 京A12345
+2025-08-12 15:24:22 - simulator_manager - INFO - 创建车辆模拟器: 沪B67890
+2025-08-12 15:24:22 - simulator_manager - INFO - 模拟器管理器初始化完成，共创建 2 个车辆模拟器
+2025-08-12 15:24:22 - simulator_manager - INFO - 启动所有车辆模拟...
+2025-08-12 15:24:22 - database_manager - INFO - 成功插入车辆数据: 京A12345
+2025-08-12 15:24:22 - VehicleSimulator-京A12345 - INFO - 车辆 京A12345 已初始化到数据库
+2025-08-12 15:24:22 - VehicleSimulator-京A12345 - INFO - 车辆 京A12345 开始模拟循环
+2025-08-12 15:24:22 - VehicleSimulator-京A12345 - INFO - 车辆 京A12345 模拟已启动
+2025-08-12 15:24:22 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:24:22 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 46.79 km/h, 位置: (116.394707, 39.953788)
+2025-08-12 15:24:23 - database_manager - INFO - 成功插入车辆数据: 沪B67890
+2025-08-12 15:24:23 - VehicleSimulator-沪B67890 - INFO - 车辆 沪B67890 已初始化到数据库
+2025-08-12 15:24:23 - VehicleSimulator-沪B67890 - INFO - 车辆 沪B67890 开始模拟循环
+2025-08-12 15:24:23 - VehicleSimulator-沪B67890 - INFO - 车辆 沪B67890 模拟已启动
+2025-08-12 15:24:23 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:24:23 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 42.04 km/h, 位置: (116.364589, 40.076493)
+2025-08-12 15:24:23 - simulator_manager - INFO - 已启动 2 个车辆模拟器
+2025-08-12 15:24:28 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:24:28 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 41.86 km/h, 位置: (116.394151, 39.954083)
+2025-08-12 15:24:28 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:24:28 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 42.98 km/h, 位置: (116.365548, 40.076548)
+2025-08-12 15:24:33 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:24:33 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 49.37 km/h, 位置: (116.393299, 39.955028)
+2025-08-12 15:24:33 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:24:33 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 38.53 km/h, 位置: (116.364800, 40.077415)
+2025-08-12 15:24:38 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:24:38 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 31.07 km/h, 位置: (116.393779, 39.955008)
+2025-08-12 15:24:38 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:24:38 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 44.01 km/h, 位置: (116.363866, 40.077299)
+2025-08-12 15:24:43 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:24:43 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 40.16 km/h, 位置: (116.393262, 39.954952)
+2025-08-12 15:24:43 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:24:43 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 43.2 km/h, 位置: (116.364030, 40.077350)
+2025-08-12 15:24:48 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:24:48 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 40.26 km/h, 位置: (116.393645, 39.953997)
+2025-08-12 15:24:48 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:24:48 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 48.65 km/h, 位置: (116.363930, 40.077354)
+2025-08-12 15:24:53 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:24:53 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 50.48 km/h, 位置: (116.393938, 39.953063)
+2025-08-12 15:24:53 - simulator_manager - INFO - 停止所有车辆模拟...
+2025-08-12 15:24:53 - VehicleSimulator-京A12345 - INFO - 车辆 京A12345 模拟循环结束
+2025-08-12 15:24:53 - VehicleSimulator-京A12345 - INFO - 车辆 京A12345 模拟已停止
+2025-08-12 15:24:53 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:24:53 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 37.47 km/h, 位置: (116.364401, 40.077231)
+2025-08-12 15:24:53 - VehicleSimulator-沪B67890 - INFO - 车辆 沪B67890 模拟循环结束
+2025-08-12 15:24:53 - VehicleSimulator-沪B67890 - INFO - 车辆 沪B67890 模拟已停止
+2025-08-12 15:24:53 - database_manager - INFO - 数据库连接已断开
+2025-08-12 15:24:53 - simulator_manager - INFO - 所有车辆模拟已停止
+2025-08-12 15:25:32 - database_manager - INFO - 正在连接到MongoDB: mongodb+srv://kong:d13910854850@cluster0.kqakr.mongodb.net/123?retryWrites=true&w=majority&appName=Cluster0
+2025-08-12 15:25:33 - database_manager - INFO - 成功连接到数据库: 123.vehicle
+2025-08-12 15:25:33 - simulator_manager - INFO - 创建车辆模拟器: 京A12345
+2025-08-12 15:25:33 - simulator_manager - INFO - 创建车辆模拟器: 沪B67890
+2025-08-12 15:25:33 - simulator_manager - INFO - 模拟器管理器初始化完成，共创建 2 个车辆模拟器
+2025-08-12 15:25:33 - simulator_manager - INFO - 启动所有车辆模拟...
+2025-08-12 15:25:33 - VehicleSimulator-京A12345 - INFO - 车辆 京A12345 已存在于数据库中，将更新现有记录
+2025-08-12 15:25:33 - VehicleSimulator-京A12345 - INFO - 车辆 京A12345 开始模拟循环
+2025-08-12 15:25:33 - VehicleSimulator-京A12345 - INFO - 车辆 京A12345 模拟已启动
+2025-08-12 15:25:33 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:25:33 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 47.06 km/h, 位置: (116.334078, 40.034933)
+2025-08-12 15:25:33 - VehicleSimulator-沪B67890 - INFO - 车辆 沪B67890 已存在于数据库中，将更新现有记录
+2025-08-12 15:25:33 - VehicleSimulator-沪B67890 - INFO - 车辆 沪B67890 开始模拟循环
+2025-08-12 15:25:33 - VehicleSimulator-沪B67890 - INFO - 车辆 沪B67890 模拟已启动
+2025-08-12 15:25:33 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:25:33 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 48.41 km/h, 位置: (116.310808, 39.973620)
+2025-08-12 15:25:33 - simulator_manager - INFO - 已启动 2 个车辆模拟器
+2025-08-12 15:25:38 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:25:38 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 33.26 km/h, 位置: (116.333844, 40.035174)
+2025-08-12 15:25:38 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:25:38 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 64.34 km/h, 位置: (116.311737, 39.973053)
+2025-08-12 15:25:43 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:25:43 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 42.53 km/h, 位置: (116.333652, 40.035266)
+2025-08-12 15:25:43 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:25:43 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 54.89 km/h, 位置: (116.310955, 39.973379)
+2025-08-12 15:25:48 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:25:48 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 44.79 km/h, 位置: (116.333814, 40.035245)
+2025-08-12 15:25:48 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:25:48 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 52.56 km/h, 位置: (116.311790, 39.973455)
+2025-08-12 15:25:53 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:25:53 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 40.2 km/h, 位置: (116.333286, 40.035006)
+2025-08-12 15:25:53 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:25:53 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 56.76 km/h, 位置: (116.310819, 39.973371)
+2025-08-12 15:25:58 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:25:58 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 42.65 km/h, 位置: (116.333679, 40.035846)
+2025-08-12 15:25:58 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:25:58 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 60.96 km/h, 位置: (116.311558, 39.973514)
+2025-08-12 15:26:03 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:26:03 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 36.65 km/h, 位置: (116.333554, 40.035026)
+2025-08-12 15:26:03 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:26:03 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 61.3 km/h, 位置: (116.311260, 39.973125)
+2025-08-12 15:26:08 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:26:08 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 35.58 km/h, 位置: (116.333650, 40.034210)
+2025-08-12 15:26:08 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:26:08 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 47.68 km/h, 位置: (116.310329, 39.973504)
+2025-08-12 15:26:13 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:26:13 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 30.77 km/h, 位置: (116.333908, 40.034594)
+2025-08-12 15:26:13 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:26:13 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 53.49 km/h, 位置: (116.309830, 39.973445)
+2025-08-12 15:26:18 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:26:18 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 40.14 km/h, 位置: (116.334149, 40.035255)
+2025-08-12 15:26:18 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:26:18 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 57.63 km/h, 位置: (116.310648, 39.972934)
+2025-08-12 15:26:23 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:26:23 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 32.03 km/h, 位置: (116.334194, 40.034581)
+2025-08-12 15:26:23 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:26:23 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 63.16 km/h, 位置: (116.310877, 39.972696)
+2025-08-12 15:26:28 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:26:28 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 28.4 km/h, 位置: (116.333925, 40.034562)
+2025-08-12 15:26:28 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:26:28 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 62.83 km/h, 位置: (116.310498, 39.972188)
+2025-08-12 15:26:33 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:26:33 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 43.16 km/h, 位置: (116.334803, 40.033742)
+2025-08-12 15:26:33 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:26:33 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 53.75 km/h, 位置: (116.309878, 39.973003)
+2025-08-12 15:26:38 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:26:38 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 34.82 km/h, 位置: (116.333941, 40.033283)
+2025-08-12 15:26:38 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:26:38 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 58.22 km/h, 位置: (116.309180, 39.972752)
+2025-08-12 15:26:43 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:26:43 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 38.4 km/h, 位置: (116.334544, 40.033775)
+2025-08-12 15:26:43 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:26:43 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 60.81 km/h, 位置: (116.309888, 39.971842)
+2025-08-12 15:26:48 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:26:48 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 43.0 km/h, 位置: (116.334553, 40.034162)
+2025-08-12 15:26:48 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:26:48 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 61.92 km/h, 位置: (116.309045, 39.971278)
+2025-08-12 15:26:53 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:26:53 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 38.25 km/h, 位置: (116.334894, 40.033241)
+2025-08-12 15:26:53 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:26:53 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 62.6 km/h, 位置: (116.309028, 39.971761)
+2025-08-12 15:26:58 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:26:58 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 31.67 km/h, 位置: (116.334195, 40.032992)
+2025-08-12 15:26:58 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:26:58 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 52.78 km/h, 位置: (116.309704, 39.972157)
+2025-08-12 15:27:03 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:27:03 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 29.11 km/h, 位置: (116.334857, 40.032983)
+2025-08-12 15:27:03 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:27:03 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 61.59 km/h, 位置: (116.310635, 39.972729)
+2025-08-12 15:27:08 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:27:08 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 41.11 km/h, 位置: (116.334106, 40.032956)
+2025-08-12 15:27:09 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:27:09 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 57.42 km/h, 位置: (116.311202, 39.971896)
+2025-08-12 15:27:13 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:27:13 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 29.51 km/h, 位置: (116.333428, 40.032294)
+2025-08-12 15:27:14 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:27:14 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 59.72 km/h, 位置: (116.311615, 39.971509)
+2025-08-12 15:27:18 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:27:18 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 40.59 km/h, 位置: (116.332919, 40.032125)
+2025-08-12 15:27:19 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:27:19 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 57.13 km/h, 位置: (116.311624, 39.971805)
+2025-08-12 15:27:23 - database_manager - DEBUG - 成功更新车辆数据: 京A12345
+2025-08-12 15:27:23 - VehicleSimulator-京A12345 - DEBUG - 车辆 京A12345 数据已更新 - 速度: 39.6 km/h, 位置: (116.333758, 40.031169)
+2025-08-12 15:27:24 - database_manager - DEBUG - 成功更新车辆数据: 沪B67890
+2025-08-12 15:27:24 - VehicleSimulator-沪B67890 - DEBUG - 车辆 沪B67890 数据已更新 - 速度: 58.31 km/h, 位置: (116.311442, 39.971457)
+2025-08-12 15:27:27 - simulator_manager - INFO - 收到信号 2，正在关闭模拟器...
+2025-08-12 15:27:27 - simulator_manager - INFO - 停止所有车辆模拟...
+2025-08-12 15:27:27 - VehicleSimulator-京A12345 - INFO - 车辆 京A12345 模拟循环结束
+2025-08-12 15:27:27 - VehicleSimulator-京A12345 - INFO - 车辆 京A12345 模拟已停止
+2025-08-12 15:27:27 - VehicleSimulator-沪B67890 - INFO - 车辆 沪B67890 模拟循环结束
+2025-08-12 15:27:27 - VehicleSimulator-沪B67890 - INFO - 车辆 沪B67890 模拟已停止
+2025-08-12 15:27:27 - database_manager - INFO - 数据库连接已断开
+2025-08-12 15:27:27 - simulator_manager - INFO - 所有车辆模拟已停止
