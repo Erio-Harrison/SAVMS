@@ -2,6 +2,13 @@ package com.savms.controller;
 
 import com.savms.entity.User;
 import com.savms.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +22,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/users")
+@Tag(name = "User Management", description = "User management APIs")
 public class UserController
 {
 
@@ -25,8 +33,13 @@ public class UserController
      * Creates a new user.
      * @param user The user to be created.
      */
+    @Operation(summary = "Create User", description = "Create a new user in the system")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "User created successfully"),
+        @ApiResponse(responseCode = "400", description = "Invalid user data")
+    })
     @PostMapping("/create")
-    public void createUser( @RequestBody User user )
+    public void createUser(@RequestBody User user)
     {
         System.out.println("in /create");
         user.setRole(1);

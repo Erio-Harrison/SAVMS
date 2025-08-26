@@ -7,6 +7,12 @@ import com.savms.dto.LoginResponse;
 import com.savms.entity.User;
 import com.savms.service.UserService;
 import com.savms.utils.Result;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/auth")
+@Tag(name = "Authentication", description = "Authentication management APIs")
 public class LoginController {
 
     @Autowired
@@ -72,6 +79,12 @@ public class LoginController {
 //        }
 //    }
 
+@Operation(summary = "User Login", description = "Authenticate user and return JWT token")
+@ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Login successful",
+        content = @Content(schema = @Schema(implementation = Result.class))),
+    @ApiResponse(responseCode = "401", description = "Authentication failed")
+})
 @PostMapping("/login")
 public Result login(@RequestBody LoginRequest loginRequest) {
     System.out.println(loginRequest);
