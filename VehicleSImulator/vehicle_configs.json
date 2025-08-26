@@ -1,0 +1,112 @@
+{
+  "vehicles": [
+    {
+      "id": "vehicle_001",
+      "licensePlate": "YRN·03V",
+      "carModel": "Tesla Model S",
+      "energyType": "Electric",
+      "year": 2023,
+      "dimensions": {
+        "length": 5,
+        "width": 2,
+        "height": 1
+      },
+      "equipment": {
+        "radarModel": "Tesla Autopilot Radar",
+        "radarCount": 8,
+        "cameraModel": "Tesla Vision Camera",
+        "cameraCount": 8
+      },
+      "initialPosition": {
+        "longitude": 149.1300,
+        "latitude": -35.2809,
+        "description": "堪培拉市中心"
+      },
+      "movementConfig": {
+        "maxSpeed": 120,
+        "acceleration": 3.5,
+        "deceleration": 4.0,
+        "movementRadius": 0.01,
+        "speedVariation": 15,
+        "directionChangeInterval": 30
+      },
+      "energyConfig": {
+        "maxEnergy": 100,
+        "initialEnergy": 85,
+        "consumptionRate": 0.8,
+        "chargingRate": 15.0,
+        "autoChargeThreshold": 10,
+        "chargingEfficiency": 0.95
+      },
+      "sensorRanges": {
+        "engineRPM": [0, 0],
+        "lubeOilPressure": [0, 0],
+        "fuelPressure": [0, 0],
+        "coolantPressure": [10, 30],
+        "lubeOilTemp": [20, 40],
+        "coolantTemp": [60, 80],
+        "engineCondition": [90, 100]
+      },
+      "drivingBehavior": {
+        "aggressiveness": 0.3,
+        "preferredSpeed": 60,
+        "restProbability": 0.1,
+        "restDuration": [10, 30]
+      }
+    },
+    {
+      "id": "vehicle_002",
+      "licensePlate": "ABC-696",
+      "carModel": "BYD Han EV",
+      "energyType": "Electric",
+      "year": 2024,
+      "dimensions": {
+        "length": 5,
+        "width": 2,
+        "height": 1
+      },
+      "equipment": {
+        "radarModel": "BYD Millimeter Wave Radar",
+        "radarCount": 5,
+        "cameraModel": "BYD Surround View",
+        "cameraCount": 4
+      },
+      "initialPosition": {
+        "longitude": 149.1267,
+        "latitude": -35.2931,
+        "description": "堪培拉国会大厦区域"
+      },
+      "movementConfig": {
+        "maxSpeed": 100,
+        "acceleration": 2.8,
+        "deceleration": 3.5,
+        "movementRadius": 0.008,
+        "speedVariation": 12,
+        "directionChangeInterval": 45
+      },
+      "energyConfig": {
+        "maxEnergy": 100,
+        "initialEnergy": 92,
+        "consumptionRate": 0.6,
+        "chargingRate": 12.0,
+        "autoChargeThreshold": 15,
+        "chargingEfficiency": 0.92
+      },
+      "sensorRanges": {
+        "engineRPM": [0, 0],
+        "lubeOilPressure": [0, 0],
+        "fuelPressure": [0, 0],
+        "coolantPressure": [8, 25],
+        "lubeOilTemp": [15, 35],
+        "coolantTemp": [55, 75],
+        "engineCondition": [85, 98]
+      },
+      "drivingBehavior": {
+        "aggressiveness": 0.5,
+        "preferredSpeed": 45,
+        "restProbability": 0.15,
+        "restDuration": [15, 45]
+      }
+    }
+  ]
+} 
