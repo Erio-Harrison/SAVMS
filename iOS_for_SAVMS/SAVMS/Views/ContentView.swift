@@ -1,3 +1,10 @@
+//
+//  ContentView.swift
+//  SAVMS
+//
+//  Created by Yang Hu on 31/8/2025.
+//
+
 import SwiftUI
 
 struct ContentView: View {
@@ -75,19 +82,19 @@ struct ContentView: View {
     // 登录逻辑
     func login() {
         
-        AuthService.shared.signInWithUsername(
+        BackendAPIService.shared.signInWithUsername(
             username: username,
             password: password,
             role: userType
         ) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success():
-                    isLoggedIn = true
-                case .failure(let err):
-                    errorMessage = err.localizedDescription
-                    showAlert = true
-                }
+            switch result {
+            case .success(let loginResponse):
+                // 登录成功，可以获取用户信息
+                print("登录成功！用户：\(loginResponse.username), Token: \(loginResponse.token)")
+                isLoggedIn = true
+            case .failure(let error):
+                errorMessage = error.localizedDescription
+                showAlert = true
             }
         }
     }

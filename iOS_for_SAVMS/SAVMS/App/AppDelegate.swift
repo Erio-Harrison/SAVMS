@@ -7,7 +7,7 @@
 
 import GoogleMaps
 import UIKit
-import FirebaseCore
+// import FirebaseCore // 暂时禁用Firebase
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Override point for customization after application launch.
     GMSServices.provideAPIKey("AIzaSyBpc4ff0yc1yQ-5BuOozX9CZRw3l7tib2E")
     // init firebase
-    FirebaseApp.configure()
+    // FirebaseApp.configure() // 暂时禁用Firebase，使用BackendAPIService
     return true
   }
 
