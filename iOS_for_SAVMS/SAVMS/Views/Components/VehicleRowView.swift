@@ -107,11 +107,22 @@ private struct BatteryBar: View {
     let percentage: Int
     var clamped: Double { max(0, min(100, Double(percentage))) / 100.0 }
 
-    var fillColor: Color {
+    private var fillColor: Color {
         switch percentage {
         case ..<20: return .red
         case 20..<50: return .orange
         default: return .green
+        }
+    }
+
+    // Normal (non-bolt) symbols by level
+    private var batterySymbol: String {
+        switch percentage {
+        case ..<10:  return "battery.0"
+        case ..<35:  return "battery.25"
+        case ..<60:  return "battery.50"
+        case ..<85:  return "battery.75"
+        default:     return "battery.100"
         }
     }
 
@@ -120,21 +131,27 @@ private struct BatteryBar: View {
             ZStack(alignment: .leading) {
                 Capsule().fill(Color.gray.opacity(0.15))
                 Capsule()
-                    .fill(LinearGradient(colors: [fillColor.opacity(0.9), fillColor.opacity(0.6)],
-                                         startPoint: .leading, endPoint: .trailing))
+                    .fill(
+                        LinearGradient(
+                            colors: [fillColor.opacity(0.9), fillColor.opacity(0.6)],
+                            startPoint: .leading, endPoint: .trailing
+                        )
+                    )
                     .frame(width: geo.size.width * clamped)
             }
         }
         .frame(minHeight: 6)
         .overlay(
             HStack(spacing: 6) {
-                Image(systemName: "battery.100.bolt")
+                Image(systemName: batterySymbol)
+                    .symbolRenderingMode(.monochrome)  // ← ensure single-color rendering
                 Text("\(percentage)%")
             }
             .font(.caption2)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(.secondary)            // ← constant color for icon & text
             .padding(.leading, 6),
             alignment: .leading
         )
+        .accessibilityLabel(Text("Battery \(percentage)%"))
     }
 }
