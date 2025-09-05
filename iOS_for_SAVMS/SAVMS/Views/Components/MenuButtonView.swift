@@ -8,7 +8,7 @@
 import SwiftUI
 
 private enum MenuSheet: String, Identifiable {
-    case dataTest, speechTest, vehicles, tasks
+    case dataTest, speechTest, vehicles, tasks, profile
     var id: String { rawValue }
 }
 
@@ -22,8 +22,8 @@ struct MenuButtonView: View {
             Button("Home") { /* action */ }
             Button("Vehicles") { activeSheet = .vehicles }  // 打开车辆数据显示
             Button("Tasks") { activeSheet = .tasks }        // 打开任务数据显示
-            Button("Profile") { /* action */ }
-            Button("Settings") { /* action */ }
+            Button("Profile") { activeSheet = .profile }
+            //Button("Settings") { /* action */ }
         } label: {
             Image(systemName: "line.horizontal.3")
                 .font(.title2)
@@ -49,6 +49,8 @@ struct MenuButtonView: View {
                 VehiclesDataView()              // 新建的车辆数据页面
             case .tasks:
                 TasksDataView()                 // 新建的任务数据页面
+            case .profile:
+                ProfileView()
             }
         }
     }

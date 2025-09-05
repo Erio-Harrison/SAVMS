@@ -92,6 +92,7 @@ struct ContentView: View {
                 // 登录成功，可以获取用户信息
                 print("登录成功！用户：\(loginResponse.username), Token: \(loginResponse.token)")
                 isLoggedIn = true
+                AuthSession.shared.currentUser = loginResponse
             case .failure(let error):
                 errorMessage = error.localizedDescription
                 showAlert = true
