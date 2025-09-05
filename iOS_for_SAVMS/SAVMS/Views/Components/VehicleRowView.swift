@@ -51,7 +51,7 @@ struct VehicleRowView: View {
 
                         BatteryBar(percentage: vehicle.leftoverEnergy)
                             .frame(height: 8)
-                            .accessibilityLabel(Text("电量 \(vehicle.leftoverEnergy)%"))
+                            .accessibilityLabel(Text("Battery \(vehicle.leftoverEnergy)%"))
                     }
 
                     // Location

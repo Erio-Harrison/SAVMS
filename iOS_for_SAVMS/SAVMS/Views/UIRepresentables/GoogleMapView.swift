@@ -62,7 +62,7 @@ struct GoogleMapView: UIViewRepresentable {
                 CATransaction.setAnimationDuration(0.25)
                 marker.position = coord
                 marker.title = "\(v.licensePlate) • \(v.carModel)"   // still used for accessibility
-                marker.snippet = "速度 \(Int(v.speed)) km/h · 电量 \(v.leftoverEnergy)%"
+                marker.snippet = "Speed \(Int(v.speed)) km/h · Battery \(v.leftoverEnergy)%"
                 marker.icon = GMSMarker.markerImage(with: .systemRed) // ✅ red
                 marker.userData = v                                   // ✅ pass data for info card
                 marker.tracksInfoWindowChanges = true                 // reflect updates
@@ -71,7 +71,7 @@ struct GoogleMapView: UIViewRepresentable {
             } else {
                 let marker = GMSMarker(position: coord)
                 marker.title = "\(v.licensePlate) • \(v.carModel)"
-                marker.snippet = "速度 \(Int(v.speed)) km/h · 电量 \(v.leftoverEnergy)%"
+                marker.snippet = "Speed \(Int(v.speed)) km/h · Battery \(v.leftoverEnergy)%"
                 marker.icon = GMSMarker.markerImage(with: .systemRed) // ✅ red
                 marker.userData = v                                   // ✅ for custom card
                 marker.appearAnimation = .pop
@@ -110,8 +110,8 @@ final class MarkerInfoCard: UIView {
         title.numberOfLines = 1
 
         // ✅ renamed from Chip -> InfoPill
-        let speedChip = InfoPill(text: "速度 \(Int(v.speed)) km/h", color: .systemBlue)
-        let batteryChip = InfoPill(text: "电量 \(v.leftoverEnergy)%", color: MarkerInfoCard.batteryColor(v.leftoverEnergy))
+        let speedChip = InfoPill(text: "Speed \(Int(v.speed)) km/h", color: .systemBlue)
+        let batteryChip = InfoPill(text: "Battery \(v.leftoverEnergy)%", color: MarkerInfoCard.batteryColor(v.leftoverEnergy))
 
         let chipsRow = UIStackView(arrangedSubviews: [speedChip, batteryChip])
         chipsRow.axis = .horizontal
