@@ -388,7 +388,7 @@ struct TaskLocation: Codable {
 }
 
 // API错误类型
-enum APIError: Error {
+enum APIError: Error, Equatable {
     case invalidURL
     case noData
     case networkError(String)

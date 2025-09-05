@@ -5,37 +5,36 @@
 //  Created by Renken G on 5/9/2025.
 //
 
+
 import SwiftUI
 
 struct VehiclesDataView: View {
-    @State private var vehicles: [BackendVehicle] = []
-    @State private var errorMessage = ""
+    @EnvironmentObject var vehicleStore: VehicleStore
+    @State private var hasLoaded = false
     @State private var showAlert = false
-    @State private var isLoading = false
-    @State private var hasLoaded = false   // 避免 onAppear 触发多次重复请求
+    @State private var errorMessage = ""
 
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 16) {
-
-                    if isLoading {
-                        ProgressView("加载中…")
+                    if vehicleStore.isLoading {
+                        ProgressView("Loading…")
                             .padding(.top)
                     }
 
-                    if !vehicles.isEmpty {
+                    if !vehicleStore.vehicles.isEmpty {
                         VStack(alignment: .leading, spacing: 10) {
-                            Text("车辆数据 (\(vehicles.count)辆)")
+                            Text("Vehicles data: (\(vehicleStore.vehicles.count))")
                                 .font(.headline)
                                 .padding(.horizontal)
 
-                            ForEach(vehicles, id: \.id) { vehicle in
+                            ForEach(vehicleStore.vehicles, id: \.id) { vehicle in
                                 VehicleRowView(vehicle: vehicle)
                             }
                         }
-                    } else if !isLoading {
-                        Text("暂无车辆数据")
+                    } else if !vehicleStore.isLoading {
+                        Text("No vehicle data found.")
                             .foregroundColor(.secondary)
                             .padding(.top, 24)
                     }
@@ -43,39 +42,26 @@ struct VehiclesDataView: View {
                     Spacer(minLength: 24)
                 }
             }
-            .navigationTitle("车辆数据")
-            .alert("错误", isPresented: $showAlert) {
-                Button("确定") { }
+            .navigationTitle("Vehicles Data")
+            .alert("error", isPresented: $showAlert) {
+                Button("OK") { }
             } message: {
                 Text(errorMessage)
             }
             .onAppear {
                 if !hasLoaded {
                     hasLoaded = true
-                    fetchAllVehicles()
+                    vehicleStore.fetchAllVehicles()     // ✅ use shared store
                 }
             }
-            .refreshable {               // 下拉刷新
-                fetchAllVehicles()
+            .refreshable {
+                vehicleStore.fetchAllVehicles()
             }
-        }
-    }
-
-    // MARK: - API
-    private func fetchAllVehicles() {
-        isLoading = true
-        vehicles.removeAll()
-
-        BackendAPIService.shared.getAllVehicles { result in
-            isLoading = false
-            switch result {
-            case .success(let fetched):
-                vehicles = fetched
-                print("🎉 成功获取 \(fetched.count) 辆车辆")
-            case .failure(let error):
-                errorMessage = "获取车辆失败: \(error.localizedDescription)"
-                showAlert = true
-                print("❌ 获取车辆失败: \(error)")
+            .onChange(of: vehicleStore.error) { err in
+                if let e = err {
+                    errorMessage = e.localizedDescription
+                    showAlert = true
+                }
             }
         }
     }
@@ -83,4 +69,5 @@ struct VehiclesDataView: View {
 
 #Preview {
     VehiclesDataView()
+        .environmentObject(VehicleStore()) // preview supply a store
 }

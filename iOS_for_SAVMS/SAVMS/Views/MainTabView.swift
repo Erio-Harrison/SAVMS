@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @StateObject private var vehicleStore = VehicleStore()
+
     var body: some View {
         GeometryReader { geo in
             let h = geo.size.height
             let panelH = h * 0.8
 
             ZStack(alignment: .bottom) {
-                // Full-screen content
                 GoogleMapView()
+                    .environmentObject(vehicleStore)  // ✅ provide store to map
                     .ignoresSafeArea()
 
                 BottomPanelView(panelHeight: panelH) {
@@ -25,15 +27,18 @@ struct MainTabView: View {
                 }
                 .padding(.horizontal)
             }
-            
         }
         .overlay(alignment: .topLeading) {
             MenuButtonView()
+                .environmentObject(vehicleStore)     // ✅ pass to menu (and its sheets)
+        }
+        .onAppear {
+            // Fetch once on landing (so map shows markers even before opening the Vehicles screen)
+            if vehicleStore.vehicles.isEmpty {
+                vehicleStore.fetchAllVehicles()
+            }
         }
     }
 }
 
-
-#Preview {
-    MainTabView()
-}
+#Preview { MainTabView() }
