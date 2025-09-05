@@ -13,27 +13,18 @@ struct TasksDataView: View {
     @State private var errorMessage = ""
     @State private var showAlert = false
     @State private var isLoading = false
+    @State private var hasLoaded = false   // 避免 onAppear 重复请求
 
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 16) {
 
-                    // 测试按钮区域
-                    VStack(spacing: 12) {
-                        Button("获取所有任务") { fetchAllTasks() }
-                            .buttonStyle(.borderedProminent)
-
-                        Button("获取进行中的任务 (状态=1)") { fetchActiveTasks() }
-                            .buttonStyle(.bordered)
-
-                        if isLoading {
-                            ProgressView("加载中…")
-                        }
+                    if isLoading {
+                        ProgressView("加载中…")
+                            .padding(.top)
                     }
-                    .padding(.top)
 
-                    // 任务数据显示
                     if !tasks.isEmpty {
                         VStack(alignment: .leading, spacing: 10) {
                             Text("任务数据 (\(tasks.count)个)")
@@ -59,6 +50,15 @@ struct TasksDataView: View {
             } message: {
                 Text(errorMessage)
             }
+            .onAppear {
+                if !hasLoaded {
+                    hasLoaded = true
+                    fetchAllTasks()           // 如果你想默认只看进行中，改为 fetchActiveTasks()
+                }
+            }
+            .refreshable {                   // 下拉刷新
+                fetchAllTasks()
+            }
         }
     }
 
@@ -66,6 +66,7 @@ struct TasksDataView: View {
     private func fetchAllTasks() {
         isLoading = true
         tasks.removeAll()
+
         BackendAPIService.shared.getAllTasks { result in
             isLoading = false
             switch result {
@@ -83,6 +84,7 @@ struct TasksDataView: View {
     private func fetchActiveTasks() {
         isLoading = true
         tasks.removeAll()
+
         BackendAPIService.shared.getTasks(byStatus: 1) { result in
             isLoading = false
             switch result {

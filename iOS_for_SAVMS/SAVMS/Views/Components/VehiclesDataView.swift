@@ -12,24 +12,18 @@ struct VehiclesDataView: View {
     @State private var errorMessage = ""
     @State private var showAlert = false
     @State private var isLoading = false
+    @State private var hasLoaded = false   // 避免 onAppear 触发多次重复请求
 
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 16) {
 
-                    // 测试按钮区域
-                    VStack(spacing: 12) {
-                        Button("获取所有车辆") { fetchAllVehicles() }
-                            .buttonStyle(.borderedProminent)
-
-                        if isLoading {
-                            ProgressView("加载中…")
-                        }
+                    if isLoading {
+                        ProgressView("加载中…")
+                            .padding(.top)
                     }
-                    .padding(.top)
 
-                    // 车辆数据显示
                     if !vehicles.isEmpty {
                         VStack(alignment: .leading, spacing: 10) {
                             Text("车辆数据 (\(vehicles.count)辆)")
@@ -55,6 +49,15 @@ struct VehiclesDataView: View {
             } message: {
                 Text(errorMessage)
             }
+            .onAppear {
+                if !hasLoaded {
+                    hasLoaded = true
+                    fetchAllVehicles()
+                }
+            }
+            .refreshable {               // 下拉刷新
+                fetchAllVehicles()
+            }
         }
     }
 
@@ -62,6 +65,7 @@ struct VehiclesDataView: View {
     private func fetchAllVehicles() {
         isLoading = true
         vehicles.removeAll()
+
         BackendAPIService.shared.getAllVehicles { result in
             isLoading = false
             switch result {

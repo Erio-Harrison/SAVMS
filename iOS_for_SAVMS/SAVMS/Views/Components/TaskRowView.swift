@@ -12,47 +12,119 @@ struct TaskRowView: View {
     let task: BackendTask
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text("📋 \(task.title)")
-                .font(.subheadline)
-                .fontWeight(.medium)
+        ZStack(alignment: .leading) {
+            // Accent bar changes with status
+            Capsule()
+                .fill(LinearGradient(colors: [statusColor.opacity(0.95), statusColor.opacity(0.6)],
+                                     startPoint: .top, endPoint: .bottom))
+                .frame(width: 4)
 
-            Text(task.description)
-                .font(.caption)
-                .foregroundColor(.secondary)
+            HStack(alignment: .top, spacing: 12) {
+                // Icon bubble with status tint
+                ZStack {
+                    Circle()
+                        .fill(statusColor.opacity(0.15))
+                    Image(systemName: statusSymbol)
+                        .font(.title3)
+                        .foregroundStyle(statusColor)
+                        .symbolRenderingMode(.hierarchical)
+                }
+                .frame(width: 44, height: 44)
 
-            Text("状态: \(taskStatusText(task.status))")
-                .font(.caption)
-                .foregroundColor(taskStatusColor(task.status))
+                VStack(alignment: .leading, spacing: 10) {
+                    // Title + status chip
+                    HStack(alignment: .firstTextBaseline) {
+                        Text(task.title)
+                            .font(.headline)
+                            .lineLimit(2)
+                        Spacer()
+                        StatusChip(text: statusText, color: statusColor)
+                    }
 
-            Text("起点: \(task.startLocation.address)")
-                .font(.caption)
-                .foregroundColor(.secondary)
+                    // Description
+                    if !task.description.isEmpty {
+                        Text(task.description)
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(2)
+                    }
+
+                    // Address
+                    Label("起点: \(task.startLocation.address)",
+                          systemImage: "location.fill.viewfinder")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                        .truncationMode(.tail)
+                }
+            }
+            .padding(14)
+            .background(
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .fill(Color(.secondarySystemBackground))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .strokeBorder(Color.black.opacity(0.06))
+            )
+            .shadow(color: .black.opacity(0.06), radius: 8, x: 0, y: 4)
+            .padding(.leading, 4)
         }
-        .padding()
-        .background(Color.green.opacity(0.1))
-        .cornerRadius(8)
         .padding(.horizontal)
+        .contentShape(Rectangle())
     }
 
-    // MARK: - 辅助
-    private func taskStatusText(_ status: Int) -> String {
-        switch status {
+    // MARK: - Status mapping
+    private var statusText: String {
+        switch task.status {
         case 0: return "未分配"
         case 1: return "进行中"
         case 2: return "已完成"
         case 3: return "已取消"
-        default: return "未知(\(status))"
+        default: return "未知(\(task.status))"
         }
     }
 
-    private func taskStatusColor(_ status: Int) -> Color {
-        switch status {
+    private var statusColor: Color {
+        switch task.status {
         case 0: return .orange
         case 1: return .blue
         case 2: return .green
         case 3: return .red
         default: return .gray
         }
+    }
+
+    private var statusSymbol: String {
+        switch task.status {
+        case 0: return "tray.and.arrow.down.fill"
+        case 1: return "clock.badge.checkmark"
+        case 2: return "checkmark.seal.fill"
+        case 3: return "xmark.octagon.fill"
+        default: return "questionmark.circle.fill"
+        }
+    }
+}
+
+// MARK: - Reusable chip
+
+private struct StatusChip: View {
+    let text: String
+    let color: Color
+    var body: some View {
+        HStack(spacing: 6) {
+            Circle().fill(color).frame(width: 6, height: 6)
+            Text(text).bold()
+        }
+        .font(.caption)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
+        .background(
+            Capsule().fill(color.opacity(0.12))
+        )
+        .overlay(
+            Capsule().stroke(color.opacity(0.25))
+        )
+        .foregroundStyle(color)
     }
 }
