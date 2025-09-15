@@ -243,11 +243,23 @@ export default function CurrentTasksPage() {
                 {/*</div>*/}
 
                 <div className="h-3/4 bg-white rounded-3xl overflow-hidden">
-                    {selectedTask ? (
+                    {selectedTask && 
+                     selectedTask.startLocation?.lat && 
+                     selectedTask.endLocation?.lat && 
+                     selectedTask.vehicleLocation?.lat ? (
                         <TaskRouteMap
-                            origin={{ lat: parseFloat(selectedTask.startLocation.lat), lng: parseFloat(selectedTask.startLocation.lng) }}
-                            destination={{ lat: parseFloat(selectedTask.endLocation.lat), lng: parseFloat(selectedTask.endLocation.lng) }}
-                            vehiclePosition={{ lat: parseFloat(selectedTask.vehicleLocation.lat), lng: parseFloat(selectedTask.vehicleLocation.lng) }}
+                            origin={{ 
+                                lat: parseFloat(selectedTask.startLocation.lat), 
+                                lng: parseFloat(selectedTask.startLocation.lng) 
+                            }}
+                            destination={{ 
+                                lat: parseFloat(selectedTask.endLocation.lat), 
+                                lng: parseFloat(selectedTask.endLocation.lng) 
+                            }}
+                            vehiclePosition={{ 
+                                lat: parseFloat(selectedTask.vehicleLocation.lat), 
+                                lng: parseFloat(selectedTask.vehicleLocation.lng) 
+                            }}
                         />
                     ) : (
                         <Map
