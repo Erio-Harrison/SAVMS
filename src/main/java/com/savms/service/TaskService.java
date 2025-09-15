@@ -135,4 +135,30 @@ public class TaskService {
                                vehicle.getHealthStatus() == 1)
                 .collect(Collectors.toList());
     }
+
+    public void completeTask(String taskId) {
+        Optional<TaskNode> taskOpt = taskRepository.findById(taskId);
+        if (taskOpt.isEmpty()) {
+            throw new RuntimeException("Task not found with ID: " + taskId);
+        }
+
+        TaskNode task = taskOpt.get();
+        String vehicleId = task.getAssignedVehicleId();
+
+        // Set task as completed
+        task.setStatus(3);
+        task.setEndTime(LocalDateTime.now());
+
+        // Free up the vehicle if it was assigned
+        if (vehicleId != null) {
+            Optional<Vehicle> vehicleOpt = vehicleRepository.findByVehicleId(vehicleId);
+            if (vehicleOpt.isPresent()) {
+                Vehicle vehicle = vehicleOpt.get();
+                vehicle.setTaskStatus(0); // Make vehicle available again
+                vehicleRepository.saveVehicle(vehicle);
+            }
+        }
+
+        taskRepository.addTask(task);
+    }
 }

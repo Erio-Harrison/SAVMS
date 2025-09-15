@@ -64,6 +64,19 @@ export default function ClientTasksPage() {
         }
     };
 
+    const handleCompleteTask = async (taskId) => {
+        try {
+            await axiosInstance.post(`/api/tasks/${taskId}/complete`);
+            Toast.success("Task completed successfully");
+            // Refresh the assigned tasks list
+            const res = await axiosInstance.get("/api/tasks/status/1");
+            setAssignedTasks(res.data.data);
+        } catch (error) {
+            console.error("Error completing task:", error);
+            Toast.error("Failed to complete task");
+        }
+    };
+
 
     const handleCreateTask = (values) => {
         const newTask = {
@@ -121,7 +134,7 @@ export default function ClientTasksPage() {
                 <div className="flex justify-between items-center h-1/4 gap-4 px-2">
                     <div className="w-2/3">
                         {/* Display selected task details */}
-                        <TaskDetailCard task={selectedTask} />
+                        <TaskDetailCard task={selectedTask} onCompleteTask={handleCompleteTask} />
                     </div>
                     <div className="w-1/3">
                         <CreateTaskCard onCreate={() => setCreateModalVisible(true)} />

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import Map from "../components/Map";
 import TaskRouteMap from "../components/TaskRouteMap";
 import { Tabs, TabPane } from "@douyinfe/semi-ui";
-import { IconFile, IconGlobe } from "@douyinfe/semi-icons";
+import { IconFile, IconGlobe, IconChecklistStroked } from "@douyinfe/semi-icons";
 import { Modal, Form, Button, Toast } from "@douyinfe/semi-ui";
 import TaskDetailCard from "../components/TaskDetailCard.jsx";
 import CreateTaskCard from "../components/CreateTaskCard.jsx";
@@ -18,6 +18,7 @@ export default function CurrentTasksPage() {
     const [createModalVisible, setCreateModalVisible] = useState(false);
     const [assignedTasks, setAssignedTasks] = useState([]);
     const [unAssignedTasks, setUnAssignedTasks] = useState([]);
+    const [completedTasks, setCompletedTasks] = useState([]);
     const [alertVisible, setAlertVisible] = useState(false);
     const [assignmentModalVisible, setAssignmentModalVisible] = useState(false);
     const [taskToAssign, setTaskToAssign] = useState(null);
@@ -41,6 +42,7 @@ export default function CurrentTasksPage() {
     const refreshTasks = () => {
         fetchAssignedTasks();
         fetchUnAssignedTasks();
+        fetchCompletedTasks();
     };
 
     const fetchAssignedTasks = async () => {
@@ -64,6 +66,16 @@ export default function CurrentTasksPage() {
         }
     };
 
+    const fetchCompletedTasks = async () => {
+        try {
+            const res = await axiosInstance.get("/api/tasks/completed");
+            const fetchedCompletedTasks = res.data.data;
+            setCompletedTasks(fetchedCompletedTasks);
+        } catch (err) {
+            console.error("Error fetching completed tasks:", err);
+        }
+    };
+
     const handleAssignTask = (task) => {
         setTaskToAssign(task);
         setAssignmentModalVisible(true);
@@ -83,6 +95,17 @@ export default function CurrentTasksPage() {
     const handleAssignmentSuccess = () => {
         refreshTasks();
         setTaskToAssign(null);
+    };
+
+    const handleCompleteTask = async (taskId) => {
+        try {
+            await axiosInstance.post(`/api/tasks/${taskId}/complete`);
+            Toast.success("Task completed successfully");
+            refreshTasks();
+        } catch (error) {
+            console.error("Error completing task:", error);
+            Toast.error("Failed to complete task");
+        }
     };
 
     const handleMarkerClick = (marker) => {
@@ -217,6 +240,39 @@ export default function CurrentTasksPage() {
                             </div>
                         </div>
                     </TabPane>
+
+                    <TabPane
+                        tab={
+                            <span>
+                                <IconChecklistStroked style={{ marginRight: 4 }} />
+                                Finished Tasks
+                            </span>
+                        }
+                        itemKey="3"
+                    >
+                        <div className="bg-accent rounded-3xl p-4 flex flex-col max-h-[calc(100vh-10rem)] overflow-auto">
+                            <div className="overflow-y-auto">
+                                {completedTasks.length > 0 ? (
+                                    completedTasks.map((task) => (
+                                        <div
+                                            key={task.id}
+                                            className="p-3 border-b border-gray-200 flex flex-col cursor-pointer"
+                                            onClick={() => handleTaskClick(task)}
+                                        >
+                                            <span className="font-semibold text-lg">{task.title}</span>
+                                            <span className="text-sm text-gray-600">{task.description}</span>
+                                            <span className="text-xs text-green-600 mt-1">Status: Completed</span>
+                                            {task.endTime && (
+                                                <span className="text-xs text-gray-500">Completed: {new Date(task.endTime).toLocaleString()}</span>
+                                            )}
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="text-center text-gray-500">No completed tasks.</div>
+                                )}
+                            </div>
+                        </div>
+                    </TabPane>
                 </Tabs>
             </div>
 
@@ -225,7 +281,7 @@ export default function CurrentTasksPage() {
                 <div className="flex justify-between items-center h-1/4 gap-4 px-2">
                     <div className="w-2/3">
                         {/* Display selected task details */}
-                        <TaskDetailCard task={selectedTask} onUnassignTask={handleUnassignTask} />
+                        <TaskDetailCard task={selectedTask} onUnassignTask={handleUnassignTask} onCompleteTask={handleCompleteTask} />
                     </div>
                     <div className="w-1/3">
                         <CreateTaskCard onCreate={() => setCreateModalVisible(true)} />

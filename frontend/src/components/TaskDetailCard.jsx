@@ -1,5 +1,5 @@
 import '../assets/TaskCardStyle.css'
-export default function TaskDetailCard({ task, onEndTask, onUnassignTask }) {
+export default function TaskDetailCard({ task, onEndTask, onUnassignTask, onCompleteTask }) {
     if (!task) {
         return (
             <div className="task-card shadow-md rounded-2xl p-4 w-full">
@@ -36,13 +36,13 @@ export default function TaskDetailCard({ task, onEndTask, onUnassignTask }) {
 
             {/* Show action buttons based on task status */}
             {task.status === 1 && (
-                <div className="flex items-center justify-center w-1/3 gap-2">
-                    {onEndTask && (
+                <div className="flex items-center justify-center w-1/3 gap-2 flex-wrap">
+                    {onCompleteTask && (
                         <button
-                            onClick={() => onEndTask(task.id)}
-                            className="bg-red-600 text-white px-3 py-2 rounded-xl hover:bg-red-700 transition text-sm"
+                            onClick={() => onCompleteTask(task.id)}
+                            className="bg-green-600 text-white px-3 py-2 rounded-xl hover:bg-green-700 transition text-sm"
                         >
-                            End Task
+                            Finish
                         </button>
                     )}
                     {onUnassignTask && (
@@ -51,6 +51,14 @@ export default function TaskDetailCard({ task, onEndTask, onUnassignTask }) {
                             className="bg-orange-600 text-white px-3 py-2 rounded-xl hover:bg-orange-700 transition text-sm"
                         >
                             Unassign
+                        </button>
+                    )}
+                    {onEndTask && (
+                        <button
+                            onClick={() => onEndTask(task.id)}
+                            className="bg-red-600 text-white px-3 py-2 rounded-xl hover:bg-red-700 transition text-sm"
+                        >
+                            End Task
                         </button>
                     )}
                 </div>

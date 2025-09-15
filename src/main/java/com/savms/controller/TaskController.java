@@ -98,4 +98,19 @@ public class TaskController {
     public Result<?> getAvailableVehicles() {
         return Result.success(taskService.getAvailableVehicles());
     }
+
+    @PostMapping("/{taskId}/complete")
+    public Result<?> completeTask(@PathVariable String taskId) {
+        try {
+            taskService.completeTask(taskId);
+            return Result.success("Task completed successfully");
+        } catch (Exception e) {
+            return Result.error("Failed to complete task: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/completed")
+    public Result<?> getCompletedTasks() {
+        return Result.success(taskService.getTasksByStatus(3));
+    }
 }
