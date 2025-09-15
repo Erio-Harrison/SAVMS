@@ -68,4 +68,34 @@ public class TaskController {
     public Result<?> getTasksByStartLocation(@RequestParam String address) {
         return Result.success(taskService.getTasksByStartLocation(address));
     }
+
+    @PostMapping("/{taskId}/assign/{vehicleId}")
+    public Result<?> assignTaskToVehicle(@PathVariable String taskId, @PathVariable String vehicleId) {
+        try {
+            taskService.assignTaskToVehicle(taskId, vehicleId);
+            return Result.success("Task assigned to vehicle successfully");
+        } catch (Exception e) {
+            return Result.error("Failed to assign task: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/{taskId}/unassign")
+    public Result<?> unassignTask(@PathVariable String taskId) {
+        try {
+            taskService.unassignTask(taskId);
+            return Result.success("Task unassigned successfully");
+        } catch (Exception e) {
+            return Result.error("Failed to unassign task: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/pending")
+    public Result<?> getPendingTasks() {
+        return Result.success(taskService.getTasksByStatus(0));
+    }
+
+    @GetMapping("/available-vehicles")
+    public Result<?> getAvailableVehicles() {
+        return Result.success(taskService.getAvailableVehicles());
+    }
 }

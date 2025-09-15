@@ -6,6 +6,7 @@ import { IconFile, IconGlobe } from "@douyinfe/semi-icons";
 import { Modal, Form, Button, Toast } from "@douyinfe/semi-ui";
 import TaskDetailCard from "../components/TaskDetailCard.jsx";
 import CreateTaskCard from "../components/CreateTaskCard.jsx";
+import TaskAssignmentModal from "../components/TaskAssignmentModal.jsx";
 import axiosInstance from "../axiosInstance";
 import {Autocomplete} from "@react-google-maps/api";
 
@@ -18,6 +19,8 @@ export default function CurrentTasksPage() {
     const [assignedTasks, setAssignedTasks] = useState([]);
     const [unAssignedTasks, setUnAssignedTasks] = useState([]);
     const [alertVisible, setAlertVisible] = useState(false);
+    const [assignmentModalVisible, setAssignmentModalVisible] = useState(false);
+    const [taskToAssign, setTaskToAssign] = useState(null);
     const alertTimerRef = useRef(null);
 
     useEffect(() => {
@@ -29,35 +32,55 @@ export default function CurrentTasksPage() {
 
 
     useEffect(() => {
-        const fetchAssignedTasks = async () => {
-            try {
-                const res = await axiosInstance.get("/api/tasks/status/1"); // Your actual backend path
-                const fetchedAssignTasks = res.data.data;
-
-                setAssignedTasks(fetchedAssignTasks);
-                console.log("Fetched assigned tasks:", fetchedAssignTasks);
-            } catch (err) {
-                console.error("Error fetching tasks:", err);
-            }
-        };
-
-        fetchAssignedTasks();
-
-        const fetchUnAssignedTasks = async () => {
-            try {
-                const res = await axiosInstance.get("/api/tasks/status/0"); // Your actual backend path
-                const fetchedUnAssignTasks = res.data.data;
-
-                setUnAssignedTasks(fetchedUnAssignTasks);
-
-            } catch (err) {
-                console.error("Error fetching tasks:", err);
-            }
-        };
-
-        fetchUnAssignedTasks();
-
+        refreshTasks();
     }, []);
+
+    const refreshTasks = () => {
+        fetchAssignedTasks();
+        fetchUnAssignedTasks();
+    };
+
+    const fetchAssignedTasks = async () => {
+        try {
+            const res = await axiosInstance.get("/api/tasks/status/1");
+            const fetchedAssignTasks = res.data.data;
+            setAssignedTasks(fetchedAssignTasks);
+            console.log("Fetched assigned tasks:", fetchedAssignTasks);
+        } catch (err) {
+            console.error("Error fetching assigned tasks:", err);
+        }
+    };
+
+    const fetchUnAssignedTasks = async () => {
+        try {
+            const res = await axiosInstance.get("/api/tasks/status/0");
+            const fetchedUnAssignTasks = res.data.data;
+            setUnAssignedTasks(fetchedUnAssignTasks);
+        } catch (err) {
+            console.error("Error fetching unassigned tasks:", err);
+        }
+    };
+
+    const handleAssignTask = (task) => {
+        setTaskToAssign(task);
+        setAssignmentModalVisible(true);
+    };
+
+    const handleUnassignTask = async (taskId) => {
+        try {
+            await axiosInstance.post(`/api/tasks/${taskId}/unassign`);
+            Toast.success("Task unassigned successfully");
+            refreshTasks();
+        } catch (error) {
+            console.error("Error unassigning task:", error);
+            Toast.error("Failed to unassign task");
+        }
+    };
+
+    const handleAssignmentSuccess = () => {
+        refreshTasks();
+        setTaskToAssign(null);
+    };
 
     const handleMarkerClick = (marker) => {
         console.log("Task marker clicked:", marker);
@@ -136,7 +159,7 @@ export default function CurrentTasksPage() {
                         tab={
                             <span>
                                 <IconGlobe style={{ marginRight: 4 }} />
-                                Unassigned task
+                                Waiting List
                             </span>
                         }
                         itemKey="2"
@@ -147,15 +170,29 @@ export default function CurrentTasksPage() {
                                     unAssignedTasks.map((task) => (
                                         <div
                                             key={task.id}
-                                            className="p-2 border-b border-gray-200 flex flex-col cursor-pointer"
-                                            onClick={() => handleTaskClick(task)} // Update selected task when clicking on task
+                                            className="p-3 border-b border-gray-200 flex justify-between items-center"
                                         >
-                                            <span className="font-semibold text-lg">{task.title}</span>
-                                            <span className="text-sm text-gray-600">{task.description}</span>
+                                            <div
+                                                className="flex flex-col cursor-pointer flex-1"
+                                                onClick={() => handleTaskClick(task)}
+                                            >
+                                                <span className="font-semibold text-lg">{task.title}</span>
+                                                <span className="text-sm text-gray-600">{task.description}</span>
+                                                <span className="text-xs text-blue-600 mt-1">Status: Waiting for assignment</span>
+                                            </div>
+                                            <Button
+                                                theme="solid"
+                                                type="primary"
+                                                size="small"
+                                                onClick={() => handleAssignTask(task)}
+                                                className="ml-2"
+                                            >
+                                                Assign
+                                            </Button>
                                         </div>
                                     ))
                                 ) : (
-                                    <div className="text-center text-gray-500">No current tasks.</div>
+                                    <div className="text-center text-gray-500">No pending tasks.</div>
                                 )}
                             </div>
                         </div>
@@ -168,7 +205,7 @@ export default function CurrentTasksPage() {
                 <div className="flex justify-between items-center h-1/4 gap-4 px-2">
                     <div className="w-2/3">
                         {/* Display selected task details */}
-                        <TaskDetailCard task={selectedTask} />
+                        <TaskDetailCard task={selectedTask} onUnassignTask={handleUnassignTask} />
                     </div>
                     <div className="w-1/3">
                         <CreateTaskCard onCreate={() => setCreateModalVisible(true)} />
@@ -266,6 +303,14 @@ export default function CurrentTasksPage() {
                 >
                     <p>The system found the vehicle is off track, please report the issue!</p>
                 </Modal>
+
+                {/* Task Assignment Modal */}
+                <TaskAssignmentModal
+                    visible={assignmentModalVisible}
+                    onCancel={() => setAssignmentModalVisible(false)}
+                    task={taskToAssign}
+                    onAssignSuccess={handleAssignmentSuccess}
+                />
 
             </div>
         </div>

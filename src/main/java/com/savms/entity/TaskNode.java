@@ -20,7 +20,7 @@ public class TaskNode {
     private String description;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private int status;
+    private int status; // 0=pending/waiting, 1=assigned, 2=in_progress, 3=completed
     private Location startLocation;
     private Location endLocation;
     private Location vehicleLocation;
