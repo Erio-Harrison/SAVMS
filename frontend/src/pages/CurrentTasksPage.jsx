@@ -21,7 +21,10 @@ export default function CurrentTasksPage() {
     const [alertVisible, setAlertVisible] = useState(false);
     const [assignmentModalVisible, setAssignmentModalVisible] = useState(false);
     const [taskToAssign, setTaskToAssign] = useState(null);
+    const [startLocationCoords, setStartLocationCoords] = useState(null);
+    const [endLocationCoords, setEndLocationCoords] = useState(null);
     const alertTimerRef = useRef(null);
+    const formApiRef = useRef(null);
 
     useEffect(() => {
         // clear timer when unmounting component
@@ -106,18 +109,35 @@ export default function CurrentTasksPage() {
         }
     };
 
-    const handleCreateTask = (values) => {
-        const newTask = {
-            id: values.id,
-            title: `Task #${values.id}`,
-            description: `From ${values.startAddress} to ${values.endAddress}`,
-            lat: coordinate.lat,
-            lng: coordinate.lng,
-        };
-        setTasks(prev => [...prev, newTask]);
-        setMarkers(prev => [...prev, { lat: newTask.lat, lng: newTask.lng }]);
-        Toast.success("Task created!");
-        setCreateModalVisible(false);
+    const handleCreateTask = async (values) => {
+        try {
+            const newTask = {
+                title: values.title,
+                description: values.description,
+                startTime: values.startTime,
+                status: 0, // Default to pending
+                startLocation: {
+                    address: values.startAddress,
+                    lat: startLocationCoords?.lat || 0,
+                    lng: startLocationCoords?.lng || 0
+                },
+                endLocation: {
+                    address: values.endAddress,
+                    lat: endLocationCoords?.lat || 0,
+                    lng: endLocationCoords?.lng || 0
+                }
+            };
+            
+            const response = await axiosInstance.post('/api/tasks/create', newTask);
+            Toast.success("Task created successfully!");
+            setCreateModalVisible(false);
+            setStartLocationCoords(null);
+            setEndLocationCoords(null);
+            refreshTasks(); // Refresh the task lists
+        } catch (error) {
+            console.error("Error creating task:", error);
+            Toast.error("Failed to create task");
+        }
     };
 
     return (
@@ -245,10 +265,14 @@ export default function CurrentTasksPage() {
                 <Modal
                     title="Create New Task"
                     visible={createModalVisible}
-                    onCancel={() => setCreateModalVisible(false)}
+                    onCancel={() => {
+                        setCreateModalVisible(false);
+                        setStartLocationCoords(null);
+                        setEndLocationCoords(null);
+                    }}
                     footer={null}
                 >
-                    <Form onSubmit={handleCreateTask}>
+                    <Form onSubmit={handleCreateTask} getFormApi={(formApi) => (formApiRef.current = formApi)}>
                         <Form.Input field="title" label="Title" placeholder="The title of this task" required />
                         <Form.Input field="description" label="Description" placeholder="The detail for this task" required />
                         <Form.DatePicker
@@ -263,7 +287,10 @@ export default function CurrentTasksPage() {
                             <Autocomplete
                                 onPlaceSelect={(place) => {
                                     const address = place.formatted_address;
-                                    formApi.setValue('startAddress', address);
+                                    const lat = place.geometry.location.lat();
+                                    const lng = place.geometry.location.lng();
+                                    setStartLocationCoords({ lat, lng });
+                                    formApiRef.current?.setValue('startAddress', address);
                                 }}
                             >
                                 <Form.Input field="startAddress" placeholder="Search Start Address" />
@@ -273,7 +300,10 @@ export default function CurrentTasksPage() {
                             <Autocomplete
                                 onPlaceSelect={(place) => {
                                     const address = place.formatted_address;
-                                    formApi.setValue('endAddress', address);
+                                    const lat = place.geometry.location.lat();
+                                    const lng = place.geometry.location.lng();
+                                    setEndLocationCoords({ lat, lng });
+                                    formApiRef.current?.setValue('endAddress', address);
                                 }}
                             >
                                 <Form.Input field="endAddress" placeholder="Search End Address" />
@@ -281,7 +311,11 @@ export default function CurrentTasksPage() {
                         </Form.Slot>
 
                         <div className="flex justify-end pt-4">
-                            <Button onClick={() => setCreateModalVisible(false)} style={{ marginRight: 8 }}>
+                            <Button onClick={() => {
+                                setCreateModalVisible(false);
+                                setStartLocationCoords(null);
+                                setEndLocationCoords(null);
+                            }} style={{ marginRight: 8 }}>
                                 Cancel
                             </Button>
                             <Button theme="solid" type="primary" htmlType="submit">

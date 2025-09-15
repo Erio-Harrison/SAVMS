@@ -22,6 +22,13 @@ public class TaskService {
     private VehicleRepository vehicleRepository;
 
     public void createTask(TaskNode task) {
+        // Set default values if not provided
+        if (task.getStatus() == 0 && task.getAssignedVehicleId() == null) {
+            task.setStatus(0); // Default to pending status
+        }
+        if (task.getStartTime() == null) {
+            task.setStartTime(LocalDateTime.now());
+        }
         taskRepository.addTask(task);
     }
 
