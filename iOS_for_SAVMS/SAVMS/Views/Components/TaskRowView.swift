@@ -50,7 +50,7 @@ struct TaskRowView: View {
                     }
 
                     // Address
-                    Label("起点: \(task.startLocation.address)",
+                    Label("Start: \(task.startLocation.address)",
                           systemImage: "location.fill.viewfinder")
                         .font(.caption)
                         .foregroundStyle(.secondary)
@@ -77,11 +77,11 @@ struct TaskRowView: View {
     // MARK: - Status mapping
     private var statusText: String {
         switch task.status {
-        case 0: return "未分配"
-        case 1: return "进行中"
-        case 2: return "已完成"
-        case 3: return "已取消"
-        default: return "未知(\(task.status))"
+        case 0: return "Unassigned"
+        case 1: return "In Progress"
+        case 2: return "Completed"
+        case 3: return "Cancelled"
+        default: return "Unknown(\(task.status))"
         }
     }
 
@@ -126,5 +126,6 @@ private struct StatusChip: View {
             Capsule().stroke(color.opacity(0.25))
         )
         .foregroundStyle(color)
+        .frame(minWidth: 90, alignment: .trailing)
     }
 }

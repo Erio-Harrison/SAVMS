@@ -21,13 +21,13 @@ struct TasksDataView: View {
                 VStack(spacing: 16) {
 
                     if isLoading {
-                        ProgressView("加载中…")
+                        ProgressView("Loading…")
                             .padding(.top)
                     }
 
                     if !tasks.isEmpty {
                         VStack(alignment: .leading, spacing: 10) {
-                            Text("任务数据 (\(tasks.count)个)")
+                            Text("Task Data (\(tasks.count))")
                                 .font(.headline)
                                 .padding(.horizontal)
 
@@ -36,7 +36,7 @@ struct TasksDataView: View {
                             }
                         }
                     } else if !isLoading {
-                        Text("暂无任务数据")
+                        Text("No task data available")
                             .foregroundColor(.secondary)
                             .padding(.top, 24)
                     }
@@ -44,9 +44,9 @@ struct TasksDataView: View {
                     Spacer(minLength: 24)
                 }
             }
-            .navigationTitle("任务数据")
-            .alert("错误", isPresented: $showAlert) {
-                Button("确定") { }
+            .navigationTitle("Task Data")
+            .alert("Error", isPresented: $showAlert) {
+                Button("OK") { }
             } message: {
                 Text(errorMessage)
             }
@@ -72,11 +72,11 @@ struct TasksDataView: View {
             switch result {
             case .success(let fetched):
                 tasks = fetched
-                print("🎉 成功获取 \(fetched.count) 个任务")
+                print("🎉 Successfully fetched \(fetched.count) tasks")
             case .failure(let error):
-                errorMessage = "获取任务失败: \(error.localizedDescription)"
+                errorMessage = "Failed to fetch tasks: \(error.localizedDescription)"
                 showAlert = true
-                print("❌ 获取任务失败: \(error)")
+                print("❌ Failed to fetch tasks: \(error)")
             }
         }
     }
@@ -90,11 +90,11 @@ struct TasksDataView: View {
             switch result {
             case .success(let fetched):
                 tasks = fetched
-                print("🎉 成功获取 \(fetched.count) 个进行中的任务")
+                print("🎉 Successfully fetched \(fetched.count) active tasks")
             case .failure(let error):
-                errorMessage = "获取任务失败: \(error.localizedDescription)"
+                errorMessage = "Failed to fetch tasks: \(error.localizedDescription)"
                 showAlert = true
-                print("❌ 获取任务失败: \(error)")
+                print("❌ Failed to fetch tasks: \(error)")
             }
         }
     }

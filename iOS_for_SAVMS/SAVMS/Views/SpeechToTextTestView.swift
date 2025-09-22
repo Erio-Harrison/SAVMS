@@ -16,7 +16,7 @@ struct SpeechToTextTestView: View {
         NavigationView {
             VStack(spacing: 20) {
                 // 标题
-                Text("语音转文字测试")
+                Text("Speech-to-text test")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .padding(.top)
@@ -36,7 +36,7 @@ struct SpeechToTextTestView: View {
                     .animation(.easeInOut(duration: 0.6).repeatForever(autoreverses: true), value: speechService.isRecording)
                 
                 // 识别状态文本
-                Text(speechService.isRecording ? "正在录音..." : "点击开始录音")
+                Text(speechService.isRecording ? "Recording..." : "Tap to start recording")
                     .font(.headline)
                     .foregroundColor(speechService.isRecording ? .red : .gray)
                 
@@ -44,7 +44,7 @@ struct SpeechToTextTestView: View {
                 
                 // 识别结果显示区域
                 ScrollView {
-                    Text(speechService.recognizedText.isEmpty ? "识别结果将在此处显示..." : speechService.recognizedText)
+                    Text(speechService.recognizedText.isEmpty ? "Recognition results will be displayed here..." : speechService.recognizedText)
                         .font(.body)
                         .padding()
                         .frame(maxWidth: .infinity, minHeight: 120, alignment: .topLeading)
@@ -71,7 +71,7 @@ struct SpeechToTextTestView: View {
                         HStack {
                             Image(systemName: speechService.isRecording ? "stop.circle.fill" : "mic.circle.fill")
                                 .font(.title2)
-                            Text(speechService.isRecording ? "停止录音" : "开始录音")
+                            Text(speechService.isRecording ? "Stop recording" : "Start recording")
                                 .fontWeight(.semibold)
                         }
                         .foregroundColor(.white)
@@ -80,7 +80,7 @@ struct SpeechToTextTestView: View {
                         .background(speechService.isRecording ? Color.red : Color.blue)
                         .cornerRadius(25)
                     }
-                    .disabled(speechService.isRecording ? false : speechService.errorMessage.contains("权限"))
+                    .disabled(speechService.isRecording ? false : speechService.errorMessage.contains("Permission"))
                     
                     // 清除文本按钮
                     Button(action: {
@@ -89,7 +89,7 @@ struct SpeechToTextTestView: View {
                         HStack {
                             Image(systemName: "trash.circle.fill")
                                 .font(.title2)
-                            Text("清除")
+                            Text("Clear")
                                 .fontWeight(.semibold)
                         }
                         .foregroundColor(.white)
@@ -106,7 +106,7 @@ struct SpeechToTextTestView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("关闭") {
+                    Button("Close") {
                         dismiss()
                     }
                 }
@@ -122,10 +122,10 @@ struct SpeechToTextTestView: View {
                 }
             }
         }
-        .alert("权限需要", isPresented: $showingPermissionAlert) {
-            Button("确定") { }
+        .alert("Permission Required", isPresented: $showingPermissionAlert) {
+            Button("OK") { }
         } message: {
-            Text("请在设置中允许语音识别和麦克风权限")
+            Text("Please allow speech recognition and microphone access in Settings")
         }
     }
     

@@ -17,8 +17,8 @@ struct MenuButtonView: View {
 
     var body: some View {
         Menu {
-            Button("API数据测试") { activeSheet = .dataTest }
-            Button("语音转文字测试") { activeSheet = .speechTest }
+            Button("API Data Testing") { activeSheet = .dataTest }
+            Button("Speech-to-text test") { activeSheet = .speechTest }
             Button("Home") { /* action */ }
             Button("Vehicles") { activeSheet = .vehicles }  // 打开车辆数据显示
             Button("Tasks") { activeSheet = .tasks }        // 打开任务数据显示
