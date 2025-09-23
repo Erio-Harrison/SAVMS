@@ -36,6 +36,11 @@ public class ChatController {
                     .body(Result.error("User ID is required"));
             }
 
+            if (request.getSessionId() == null || request.getSessionId().trim().isEmpty()) {
+                return ResponseEntity.badRequest()
+                    .body(Result.error("Session ID is required"));
+            }
+
             ChatResponse response = chatService.sendMessage(request);
             return ResponseEntity.ok(Result.success(response));
 
