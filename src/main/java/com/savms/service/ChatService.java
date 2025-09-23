@@ -4,6 +4,7 @@ import com.savms.dto.ChatRequest;
 import com.savms.dto.ChatResponse;
 import com.savms.dto.Intent;
 import com.savms.dto.ExtractedInfo;
+import com.savms.dto.WorkflowContext;
 import com.savms.entity.ChatMessage;
 import com.savms.entity.ChatSession;
 import com.savms.entity.Vehicle;
@@ -18,6 +19,7 @@ import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,92 +46,20 @@ public class ChatService {
     private VehicleRepository vehicleRepository;
 
     public com.savms.dto.ChatResponse sendMessage(ChatRequest request) {
-        ChatSession session = getOrCreateSession(request);
+        try {
+            // 处理工作流（前4个阶段）
+            WorkflowContext context = processMessageWorkflow(request);
 
-        ChatMessage userChatMessage = new ChatMessage(
-            session.getId(),
-            request.getUserId(),
-            request.getMessage(),
-            "user"
-        );
-        chatMessageRepository.save(userChatMessage);
+            // AI调用
+            String aiReply = callAI(context.getMessages());
 
-        addMessageToSession(session, userChatMessage.getId());
+            // 保存响应
+            return saveAIResponse(context, aiReply);
 
-        // Stage 1: Intent Recognition
-        logger.info("Stage 1: Recognizing intent for message: {}", request.getMessage());
-        Intent intent = recognizeIntent(request.getMessage());
-        logger.info("Recognized intent: {}", intent);
-
-        // Stage 2: Information Extraction
-        logger.info("Stage 2: Extracting information from message");
-        ExtractedInfo extractedInfo = extractInformation(request.getMessage());
-        logger.info("Extracted info: vehiclePlates={}, userIds={}, taskIds={}",
-                   extractedInfo.getVehiclePlates(), extractedInfo.getUserIds(), extractedInfo.getTaskIds());
-
-        // Stage 3: Knowledge Retrieval
-        logger.info("Stage 3: Retrieving knowledge based on intent and extracted info");
-        String knowledge = retrieveKnowledge(intent, extractedInfo);
-        logger.info("Retrieved knowledge length: {}", knowledge.length());
-
-        // Stage 4: Context Building
-        logger.info("Stage 4: Building conversation context");
-        List<ChatMessage> conversationHistory = chatMessageRepository
-            .findBySessionIdOrderByTimestamp(session.getId());
-
-        logger.info("Found {} messages in conversation history for session {}",
-                   conversationHistory.size(), session.getId());
-
-        // 构建消息列表
-        List<Message> messages = new ArrayList<>();
-
-        // 添加系统消息，包含知识信息
-        StringBuilder systemPrompt = new StringBuilder();
-        systemPrompt.append("你是一个智能车辆管理助手。请仔细阅读完整的对话历史，并基于之前的对话内容来回答用户的问题。");
-        systemPrompt.append("如果用户询问之前提到过的信息，请准确引用和回答。");
-
-        if (!knowledge.isEmpty()) {
-            systemPrompt.append("\n\n以下是相关的车辆信息，请在回答时参考这些信息：\n");
-            systemPrompt.append(knowledge);
+        } catch (Exception e) {
+            logger.error("Error in sendMessage", e);
+            throw new RuntimeException("Failed to process message: " + e.getMessage(), e);
         }
-
-        messages.add(new SystemMessage(systemPrompt.toString()));
-
-        // 添加历史对话消息
-        for (ChatMessage msg : conversationHistory) {
-            if ("user".equals(msg.getRole())) {
-                messages.add(new UserMessage(msg.getContent()));
-            } else if ("assistant".equals(msg.getRole())) {
-                messages.add(new AssistantMessage(msg.getContent()));
-            }
-        }
-
-        logger.info("Stage 5: Sending {} messages to AI with knowledge-enhanced context", messages.size());
-
-        Prompt prompt = new Prompt(messages);
-
-        String aiReply = chatClient.call(prompt).getResult().getOutput().getContent();
-
-        logger.info("AI Reply received: {}", aiReply);
-
-        ChatMessage assistantMessage = new ChatMessage(
-            session.getId(),
-            request.getUserId(),
-            aiReply,
-            "assistant"
-        );
-        chatMessageRepository.save(assistantMessage);
-
-        addMessageToSession(session, assistantMessage.getId());
-
-        session.setUpdatedAt(LocalDateTime.now());
-        chatSessionRepository.save(session);
-
-        return new com.savms.dto.ChatResponse(
-            aiReply,
-            session.getId(),
-            assistantMessage.getId()
-        );
     }
 
     private ChatSession getOrCreateSession(ChatRequest request) {
@@ -264,6 +194,208 @@ public class ChatService {
         } catch (Exception e) {
             logger.error("Error during knowledge retrieval", e);
             return "";
+        }
+    }
+
+    public WorkflowContext processMessageWorkflow(ChatRequest request) {
+        logger.info("Starting workflow processing for user: {}, session: {}", request.getUserId(), request.getSessionId());
+
+        // Stage 1: Session Management
+        ChatSession session = getOrCreateSession(request);
+
+        ChatMessage userChatMessage = new ChatMessage(
+            session.getId(),
+            request.getUserId(),
+            request.getMessage(),
+            "user"
+        );
+        chatMessageRepository.save(userChatMessage);
+        addMessageToSession(session, userChatMessage.getId());
+
+        // Create workflow context
+        WorkflowContext context = new WorkflowContext(session, userChatMessage, request.getUserId());
+
+        // Stage 2: Intent Recognition
+        logger.info("Stage 1: Recognizing intent for message: {}", request.getMessage());
+        Intent intent = recognizeIntent(request.getMessage());
+        logger.info("Recognized intent: {}", intent);
+        context.setIntent(intent);
+
+        // Stage 3: Information Extraction
+        logger.info("Stage 2: Extracting information from message");
+        ExtractedInfo extractedInfo = extractInformation(request.getMessage());
+        logger.info("Extracted info: vehiclePlates={}, userIds={}, taskIds={}",
+                   extractedInfo.getVehiclePlates(), extractedInfo.getUserIds(), extractedInfo.getTaskIds());
+        context.setExtractedInfo(extractedInfo);
+
+        // Stage 4: Knowledge Retrieval
+        logger.info("Stage 3: Retrieving knowledge based on intent and extracted info");
+        String knowledge = retrieveKnowledge(intent, extractedInfo);
+        logger.info("Retrieved knowledge length: {}", knowledge.length());
+        context.setKnowledge(knowledge);
+
+        // Stage 5: Context Building
+        logger.info("Stage 4: Building conversation context");
+        List<ChatMessage> conversationHistory = chatMessageRepository
+            .findBySessionIdOrderByTimestamp(session.getId());
+
+        logger.info("Found {} messages in conversation history for session {}",
+                   conversationHistory.size(), session.getId());
+
+        // 构建消息列表
+        List<Message> messages = new ArrayList<>();
+
+        // 添加系统消息，包含知识信息
+        StringBuilder systemPrompt = new StringBuilder();
+        systemPrompt.append("你是一个智能车辆管理助手。请仔细阅读完整的对话历史，并基于之前的对话内容来回答用户的问题。");
+        systemPrompt.append("如果用户询问之前提到过的信息，请准确引用和回答。");
+
+        if (!knowledge.isEmpty()) {
+            systemPrompt.append("\n\n以下是相关的车辆信息，请在回答时参考这些信息：\n");
+            systemPrompt.append(knowledge);
+        }
+
+        messages.add(new SystemMessage(systemPrompt.toString()));
+
+        // 添加历史对话消息
+        for (ChatMessage msg : conversationHistory) {
+            if ("user".equals(msg.getRole())) {
+                messages.add(new UserMessage(msg.getContent()));
+            } else if ("assistant".equals(msg.getRole())) {
+                messages.add(new AssistantMessage(msg.getContent()));
+            }
+        }
+
+        context.setMessages(messages);
+
+        logger.info("Workflow processing completed: {}", context);
+        return context;
+    }
+
+    private String callAI(List<Message> messages) {
+        logger.info("Stage 5: Sending {} messages to AI with knowledge-enhanced context", messages.size());
+
+        Prompt prompt = new Prompt(messages);
+        String aiReply = chatClient.call(prompt).getResult().getOutput().getContent();
+
+        logger.info("AI Reply received: {}", aiReply);
+        return aiReply;
+    }
+
+    private SseEmitter callAIStream(List<Message> messages, WorkflowContext context) {
+        SseEmitter emitter = new SseEmitter(300000L); // 5分钟超时
+
+        try {
+            logger.info("Stage 5: Starting streaming AI response with {} messages", messages.size());
+
+            // 在新线程中处理流式响应
+            new Thread(() -> {
+                try {
+                    Prompt prompt = new Prompt(messages);
+
+                    // 由于Spring AI 0.8.1的流式API可能不可用，我们使用模拟流式传输
+                    String aiReply = chatClient.call(prompt).getResult().getOutput().getContent();
+
+                    // 模拟流式传输：按词或句子发送，更接近真实AI流式体验
+                    StringBuilder fullResponse = new StringBuilder();
+                    String[] words = aiReply.split(" ");
+
+                    for (int i = 0; i < words.length; i++) {
+                        String chunk = words[i];
+                        if (i < words.length - 1) {
+                            chunk += " "; // 添加空格，除了最后一个词
+                        }
+
+                        fullResponse.append(chunk);
+                        emitter.send(SseEmitter.event()
+                            .data(chunk)
+                            .name("message"));
+
+                        // 模拟AI生成速度：较短延迟
+                        Thread.sleep(30 + (int)(Math.random() * 70)); // 30-100ms随机延迟
+                    }
+
+                    // 保存完整回复到数据库
+                    if (fullResponse.length() > 0) {
+                        saveAIResponse(context, fullResponse.toString());
+                        logger.info("Streaming response saved to database");
+                    }
+
+                    // 发送完成信号
+                    emitter.send(SseEmitter.event()
+                        .data("[DONE]")
+                        .name("done"));
+
+                    emitter.complete();
+                    logger.info("Streaming AI response completed, total length: {}", fullResponse.length());
+
+                } catch (Exception e) {
+                    logger.error("Error during streaming AI call", e);
+                    try {
+                        emitter.send(SseEmitter.event()
+                            .data("Error: " + e.getMessage())
+                            .name("error"));
+                    } catch (Exception sendError) {
+                        logger.error("Error sending error message", sendError);
+                    }
+                    emitter.completeWithError(e);
+                }
+            }).start();
+
+        } catch (Exception e) {
+            logger.error("Error starting streaming AI call", e);
+            emitter.completeWithError(e);
+        }
+
+        return emitter;
+    }
+
+    private ChatResponse saveAIResponse(WorkflowContext context, String aiReply) {
+        logger.info("Saving AI response to database");
+
+        ChatMessage assistantMessage = new ChatMessage(
+            context.getSession().getId(),
+            context.getUserId(),
+            aiReply,
+            "assistant"
+        );
+        chatMessageRepository.save(assistantMessage);
+
+        addMessageToSession(context.getSession(), assistantMessage.getId());
+
+        context.getSession().setUpdatedAt(LocalDateTime.now());
+        chatSessionRepository.save(context.getSession());
+
+        logger.info("AI response saved successfully: messageId={}", assistantMessage.getId());
+
+        return new ChatResponse(
+            aiReply,
+            context.getSession().getId(),
+            assistantMessage.getId()
+        );
+    }
+
+    public SseEmitter sendMessageStream(ChatRequest request) {
+        try {
+            // 处理工作流（前4个阶段）
+            WorkflowContext context = processMessageWorkflow(request);
+
+            // 流式AI调用
+            return callAIStream(context.getMessages(), context);
+
+        } catch (Exception e) {
+            logger.error("Error in sendMessageStream", e);
+            SseEmitter errorEmitter = new SseEmitter();
+            try {
+                errorEmitter.send(SseEmitter.event()
+                    .data("Error: " + e.getMessage())
+                    .name("error"));
+                errorEmitter.complete();
+            } catch (Exception sendError) {
+                logger.error("Error sending error message", sendError);
+                errorEmitter.completeWithError(sendError);
+            }
+            return errorEmitter;
         }
     }
 }

@@ -10,7 +10,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.util.List;
 
@@ -47,6 +49,65 @@ public class ChatController {
         } catch (Exception e) {
             return ResponseEntity.internalServerError()
                 .body(Result.error("Failed to process message: " + e.getMessage()));
+        }
+    }
+
+    @PostMapping(value = "/messagestream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @Operation(summary = "Send a message to AI with streaming response", description = "Send a message to AI and get a streaming response using Server-Sent Events")
+    public SseEmitter sendMessageStream(@RequestBody ChatRequest request) {
+        try {
+            if (request.getMessage() == null || request.getMessage().trim().isEmpty()) {
+                SseEmitter errorEmitter = new SseEmitter();
+                try {
+                    errorEmitter.send(SseEmitter.event()
+                        .data("Error: Message cannot be empty")
+                        .name("error"));
+                    errorEmitter.complete();
+                } catch (Exception e) {
+                    errorEmitter.completeWithError(e);
+                }
+                return errorEmitter;
+            }
+
+            if (request.getUserId() == null || request.getUserId().trim().isEmpty()) {
+                SseEmitter errorEmitter = new SseEmitter();
+                try {
+                    errorEmitter.send(SseEmitter.event()
+                        .data("Error: User ID is required")
+                        .name("error"));
+                    errorEmitter.complete();
+                } catch (Exception e) {
+                    errorEmitter.completeWithError(e);
+                }
+                return errorEmitter;
+            }
+
+            if (request.getSessionId() == null || request.getSessionId().trim().isEmpty()) {
+                SseEmitter errorEmitter = new SseEmitter();
+                try {
+                    errorEmitter.send(SseEmitter.event()
+                        .data("Error: Session ID is required")
+                        .name("error"));
+                    errorEmitter.complete();
+                } catch (Exception e) {
+                    errorEmitter.completeWithError(e);
+                }
+                return errorEmitter;
+            }
+
+            return chatService.sendMessageStream(request);
+
+        } catch (Exception e) {
+            SseEmitter errorEmitter = new SseEmitter();
+            try {
+                errorEmitter.send(SseEmitter.event()
+                    .data("Error: Failed to process message: " + e.getMessage())
+                    .name("error"));
+                errorEmitter.complete();
+            } catch (Exception sendError) {
+                errorEmitter.completeWithError(sendError);
+            }
+            return errorEmitter;
         }
     }
 
