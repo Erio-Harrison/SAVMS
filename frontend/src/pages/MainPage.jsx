@@ -12,7 +12,6 @@ const { Title, Text } = Typography;
 
 import CarOperationButton from '../components/Cars/CarOperationButton';
 import '../styles/PopoverStyles.css';
-import axios from "axios";
 
 export default function MainPage() {
     // Vehicle-related and interface state
