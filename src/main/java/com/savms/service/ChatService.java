@@ -108,7 +108,9 @@ public class ChatService {
 
     private Intent recognizeIntent(String userMessage) {
         try {
-            String intentPrompt = "请分析以下用户消息的意图，只返回以下选项之一：VEHICLE_INQUIRY、USER_INQUIRY、TASK_INQUIRY、GENERAL_CHAT、UNKNOWN。\n\n用户消息：" + userMessage + "\n\n只需返回意图名称，不要其他内容。";
+            String intentPrompt = "请分析以下用户消息的意图，只返回以下选项之一：VEHICLE_INQUIRY、USER_INQUIRY、TASK_INQUIRY、GENERAL_CHAT、UNKNOWN。\n\n" +
+                "注意：当用户询问\"有哪辆车\"、\"所有车辆\"、\"车辆列表\"、\"查看车辆\"等类似问题时，应识别为VEHICLE_INQUIRY。\n\n" +
+                "用户消息：" + userMessage + "\n\n只需返回意图名称，不要其他内容。";
 
             Prompt prompt = new Prompt(new UserMessage(intentPrompt));
             String response = chatClient.call(prompt).getResult().getOutput().getContent().trim();
@@ -164,26 +166,51 @@ public class ChatService {
         StringBuilder knowledge = new StringBuilder();
 
         try {
-            if (intent == Intent.VEHICLE_INQUIRY && extractedInfo.getVehiclePlates() != null) {
-                for (String licensePlate : extractedInfo.getVehiclePlates()) {
-                    Optional<Vehicle> vehicleOpt = vehicleRepository.findByLicensePlate(licensePlate);
-                    if (vehicleOpt.isPresent()) {
-                        Vehicle vehicle = vehicleOpt.get();
-                        knowledge.append("车牌号 ").append(licensePlate).append(" 的车辆信息：\n");
-                        knowledge.append("- 车型：").append(vehicle.getCarModel()).append("\n");
-                        knowledge.append("- 年份：").append(vehicle.getYear()).append("\n");
-                        knowledge.append("- 能源类型：").append(vehicle.getEnergyType()).append("\n");
-                        knowledge.append("- 当前速度：").append(vehicle.getSpeed()).append(" km/h\n");
-                        knowledge.append("- 剩余电量：").append(vehicle.getLeftoverEnergy()).append("%\n");
-                        knowledge.append("- 连接状态：").append(vehicle.getConnectionStatus() == 1 ? "已连接" : "未连接").append("\n");
-                        knowledge.append("- 任务状态：").append(vehicle.getTaskStatus() == 1 ? "执行中" : "空闲").append("\n");
-                        knowledge.append("- 健康状态：").append(vehicle.getHealthStatus() == 1 ? "正常" : "异常").append("\n");
-                        knowledge.append("- 当前位置：纬度 ").append(vehicle.getLatitude()).append(", 经度 ").append(vehicle.getLongitude()).append("\n\n");
+            if (intent == Intent.VEHICLE_INQUIRY) {
+                // 如果提取到了具体的车牌号，查询特定车辆
+                if (extractedInfo.getVehiclePlates() != null && !extractedInfo.getVehiclePlates().isEmpty()) {
+                    for (String licensePlate : extractedInfo.getVehiclePlates()) {
+                        Optional<Vehicle> vehicleOpt = vehicleRepository.findByLicensePlate(licensePlate);
+                        if (vehicleOpt.isPresent()) {
+                            Vehicle vehicle = vehicleOpt.get();
+                            knowledge.append("车牌号 ").append(licensePlate).append(" 的车辆信息：\n");
+                            knowledge.append("- 车型：").append(vehicle.getCarModel()).append("\n");
+                            knowledge.append("- 年份：").append(vehicle.getYear()).append("\n");
+                            knowledge.append("- 能源类型：").append(vehicle.getEnergyType()).append("\n");
+                            knowledge.append("- 当前速度：").append(vehicle.getSpeed()).append(" km/h\n");
+                            knowledge.append("- 剩余电量：").append(vehicle.getLeftoverEnergy()).append("%\n");
+                            knowledge.append("- 连接状态：").append(vehicle.getConnectionStatus() == 1 ? "已连接" : "未连接").append("\n");
+                            knowledge.append("- 任务状态：").append(vehicle.getTaskStatus() == 1 ? "执行中" : "空闲").append("\n");
+                            knowledge.append("- 健康状态：").append(vehicle.getHealthStatus() == 1 ? "正常" : "异常").append("\n");
+                            knowledge.append("- 当前位置：纬度 ").append(vehicle.getLatitude()).append(", 经度 ").append(vehicle.getLongitude()).append("\n\n");
 
-                        logger.info("Found vehicle information for license plate: {}", licensePlate);
+                            logger.info("Found vehicle information for license plate: {}", licensePlate);
+                        } else {
+                            knowledge.append("车牌号 ").append(licensePlate).append(" 的车辆未在系统中找到。\n\n");
+                            logger.info("No vehicle found for license plate: {}", licensePlate);
+                        }
+                    }
+                } else {
+                    // 如果没有提取到具体车牌号，返回所有车辆信息
+                    List<Vehicle> allVehicles = vehicleRepository.getAllVehicles();
+                    if (allVehicles.isEmpty()) {
+                        knowledge.append("数据库中暂无车辆信息。\n");
+                        logger.info("No vehicles found in database");
                     } else {
-                        knowledge.append("车牌号 ").append(licensePlate).append(" 的车辆未在系统中找到。\n\n");
-                        logger.info("No vehicle found for license plate: {}", licensePlate);
+                        knowledge.append("数据库中共有 ").append(allVehicles.size()).append(" 辆车：\n\n");
+                        for (Vehicle vehicle : allVehicles) {
+                            knowledge.append("车牌号：").append(vehicle.getLicensePlate()).append("\n");
+                            knowledge.append("- 车型：").append(vehicle.getCarModel()).append("\n");
+                            knowledge.append("- 年份：").append(vehicle.getYear()).append("\n");
+                            knowledge.append("- 能源类型：").append(vehicle.getEnergyType()).append("\n");
+                            knowledge.append("- 当前速度：").append(vehicle.getSpeed()).append(" km/h\n");
+                            knowledge.append("- 剩余电量：").append(vehicle.getLeftoverEnergy()).append("%\n");
+                            knowledge.append("- 连接状态：").append(vehicle.getConnectionStatus() == 1 ? "已连接" : "未连接").append("\n");
+                            knowledge.append("- 任务状态：").append(vehicle.getTaskStatus() == 1 ? "执行中" : "空闲").append("\n");
+                            knowledge.append("- 健康状态：").append(vehicle.getHealthStatus() == 1 ? "正常" : "异常").append("\n");
+                            knowledge.append("- 当前位置：纬度 ").append(vehicle.getLatitude()).append(", 经度 ").append(vehicle.getLongitude()).append("\n\n");
+                        }
+                        logger.info("Retrieved information for {} vehicles", allVehicles.size());
                     }
                 }
             }
