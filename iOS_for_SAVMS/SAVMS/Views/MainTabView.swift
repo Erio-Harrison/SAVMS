@@ -20,12 +20,8 @@ struct MainTabView: View {
                     .environmentObject(vehicleStore)  // ✅ provide store to map
                     .ignoresSafeArea()
 
-                BottomPanelView(panelHeight: panelH) {
-                    Text("Panel content goes here")
-                        .font(.headline)
-                        .padding(.horizontal)
-                }
-                .padding(.horizontal)
+                
+                
             }
         }
         .overlay(alignment: .topLeading) {
