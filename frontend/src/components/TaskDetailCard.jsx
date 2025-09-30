@@ -1,5 +1,5 @@
 import '../assets/TaskCardStyle.css'
-export default function TaskDetailCard({ task, onEndTask }) {
+export default function TaskDetailCard({ task, onEndTask, onUnassignTask, onCompleteTask }) {
     if (!task) {
         return (
             <div className="task-card shadow-md rounded-2xl p-4 w-full">
@@ -24,18 +24,43 @@ export default function TaskDetailCard({ task, onEndTask }) {
                     {task.status !== 0 && task.vehicle?.plateNumber && (
                         <div><strong>Car License:</strong> {task.vehicle.plateNumber}</div>
                     )}
+                    {/* Show status */}
+                    <div><strong>Status:</strong> {
+                        task.status === 0 ? 'Waiting for assignment' :
+                        task.status === 1 ? 'Assigned' :
+                        task.status === 2 ? 'In Progress' :
+                        task.status === 3 ? 'Completed' : 'Unknown'
+                    }</div>
                 </div>
             </div>
 
-            {/* Show finish button only if task has been assigned to vehicle (assuming status ≠ 0) */}
-            {task.status !== 0 && (
-                <div className="flex items-center justify-center w-1/3">
-                    <button
-                        onClick={() => onEndTask(task.id)}
-                        className="bg-red-600 text-white px-4 py-2 rounded-xl hover:bg-red-700 transition"
-                    >
-                        End Task
-                    </button>
+            {/* Show action buttons based on task status */}
+            {task.status === 1 && (
+                <div className="flex items-center justify-center w-1/3 gap-2 flex-wrap">
+                    {onCompleteTask && (
+                        <button
+                            onClick={() => onCompleteTask(task.id)}
+                            className="bg-green-600 text-white px-3 py-2 rounded-xl hover:bg-green-700 transition text-sm"
+                        >
+                            Finish
+                        </button>
+                    )}
+                    {onUnassignTask && (
+                        <button
+                            onClick={() => onUnassignTask(task.id)}
+                            className="bg-orange-600 text-white px-3 py-2 rounded-xl hover:bg-orange-700 transition text-sm"
+                        >
+                            Unassign
+                        </button>
+                    )}
+                    {onEndTask && (
+                        <button
+                            onClick={() => onEndTask(task.id)}
+                            className="bg-red-600 text-white px-3 py-2 rounded-xl hover:bg-red-700 transition text-sm"
+                        >
+                            End Task
+                        </button>
+                    )}
                 </div>
             )}
         </div>

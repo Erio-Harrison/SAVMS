@@ -1,6 +1,9 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, { useState, useCallback, useRef, useEffect, useContext } from 'react';
 import { Button, Modal, Chat, DragMove, Input, Space } from '@douyinfe/semi-ui';
 import { IconMicrophone, IconStop } from '@douyinfe/semi-icons';
+import { UserContext } from '../UserContext';
+import ChatAPI from '../services/chatAPI';
+import SessionManager from '../utils/sessionManager';
 import './DragChat.css';
 
 // Custom Voice Input Hook
@@ -68,7 +71,7 @@ function useVoiceInput() {
 }
 
 // Custom Input Component
-function CustomChatInput({ onSend }) {
+function CustomChatInput({ onSend, disabled = false }) {
     const [inputValue, setInputValue] = useState('');
     const { isListening, transcript, toggleListening, clearTranscript, isSupported } = useVoiceInput();
 
@@ -81,11 +84,11 @@ function CustomChatInput({ onSend }) {
     }, [transcript, clearTranscript]);
 
     const handleSend = useCallback(() => {
-        if (inputValue.trim()) {
+        if (inputValue.trim() && !disabled) {
             onSend(inputValue.trim());
             setInputValue('');
         }
-    }, [inputValue, onSend]);
+    }, [inputValue, onSend, disabled]);
 
     const handleKeyPress = useCallback((e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
@@ -102,14 +105,16 @@ function CustomChatInput({ onSend }) {
                     value={inputValue}
                     onChange={setInputValue}
                     onKeyPress={handleKeyPress}
-                    placeholder="Enter message..."
+                    placeholder={disabled ? "AI is typing..." : "Enter message..."}
                     autoSize={{ minRows: 1, maxRows: 4 }}
+                    disabled={disabled}
                 />
                 {isSupported && (
                     <Button
                         type={isListening ? "danger" : "tertiary"}
                         icon={isListening ? <IconStop /> : <IconMicrophone />}
                         onClick={toggleListening}
+                        disabled={disabled}
                         style={{
                             backgroundColor: isListening ? '#ff4d4f' : undefined,
                             color: isListening ? '#fff' : undefined
@@ -119,7 +124,8 @@ function CustomChatInput({ onSend }) {
                 <Button
                     type="primary"
                     onClick={handleSend}
-                    disabled={!inputValue.trim()}
+                    disabled={!inputValue.trim() || disabled}
+                    loading={disabled}
                 >
                     Send
                 </Button>
@@ -164,15 +170,83 @@ export default function DragChat() {
             role: 'assistant',
             id: getId(),
             createAt: Date.now(),
-            content: "Hello, I'm your local AI assistant. How can I help you today?",
+            content: "Hello, I'm your AI assistant. How can I help you today?",
         },
     ]);
+
+    // Get user context and session management
+    const userContext = useContext(UserContext);
+    const [currentSessionId, setCurrentSessionId] = useState(() => SessionManager.getCurrentSessionId());
+    const [isLoading, setIsLoading] = useState(false);
 
     // Store mouse position when pressed
     const startPos = useRef({ x: 0, y: 0 });
 
-    // Chat send callback
+    // Load session messages on mount
+    useEffect(() => {
+        loadSessionMessages();
+    }, [currentSessionId]);
+
+    const loadSessionMessages = useCallback(async (sessionId = currentSessionId) => {
+        try {
+            const userId = SessionManager.getUserId(userContext);
+            const result = await ChatAPI.getSessionMessages(sessionId, userId);
+
+            if (result.success && result.data) {
+                // Convert backend messages to frontend format
+                const convertedMessages = result.data.map(msg => ({
+                    role: msg.role,
+                    id: msg.id || getId(),
+                    createAt: new Date(msg.timestamp).getTime(),
+                    content: msg.content
+                }));
+
+                // Add welcome message if no messages exist
+                if (convertedMessages.length === 0) {
+                    setMessages([
+                        {
+                            role: 'assistant',
+                            id: getId(),
+                            createAt: Date.now(),
+                            content: "Hello, I'm your AI assistant. How can I help you today?",
+                        },
+                    ]);
+                } else {
+                    setMessages(convertedMessages);
+                }
+            } else {
+                // No messages found, show welcome message
+                setMessages([
+                    {
+                        role: 'assistant',
+                        id: getId(),
+                        createAt: Date.now(),
+                        content: "Hello, I'm your AI assistant. How can I help you today?",
+                    },
+                ]);
+            }
+        } catch (error) {
+            console.error('Failed to load session messages:', error);
+            // Show welcome message on error
+            setMessages([
+                {
+                    role: 'assistant',
+                    id: getId(),
+                    createAt: Date.now(),
+                    content: "Hello, I'm your AI assistant. How can I help you today?",
+                },
+            ]);
+        }
+    }, [currentSessionId, userContext]);
+
+
+    // Chat send callback using backend API
     const onMessageSend = useCallback(async (userInput) => {
+        if (isLoading) return; // Prevent multiple simultaneous requests
+
+        setIsLoading(true);
+        const userId = SessionManager.getUserId(userContext);
+
         // 1. Add user message
         const userMessage = {
             role: 'user',
@@ -182,78 +256,72 @@ export default function DragChat() {
         };
         setMessages(prev => [...prev, userMessage]);
 
+        // 2. Add placeholder AI message
+        const assistantMessage = {
+            role: 'assistant',
+            id: getId(),
+            createAt: Date.now(),
+            content: "",
+        };
+        setMessages(prev => [...prev, assistantMessage]);
+
         try {
-            // 2. Call Ollama streaming interface
-            const response = await fetch('http://localhost:11434/api/generate', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    model: 'deepseek-r1:14b',
-                    prompt: userInput,
-                    stream: true,
-                }),
-            });
-            if (!response.body) {
-                throw new Error('No streaming data received; the Ollama API may not support stream.');
-            }
+            let aggregatedContent = "";
 
-            // 3. Placeholder AI message
-            const assistantMessage = {
-                role: 'assistant',
-                id: getId(),
-                createAt: Date.now(),
-                content: "",
-            };
-            setMessages(prev => [...prev, assistantMessage]);
+            console.log('🚀 Sending message:', { userId, sessionId: currentSessionId, message: userInput });
 
-            // 4. Parse ND-JSON data stream
-            const reader = response.body.getReader();
-            const decoder = new TextDecoder();
-
-            let buffer = "";
-            let aggregated = "";
-
-            while (true) {
-                const { value, done } = await reader.read();
-                if (done) break;
-
-                buffer += decoder.decode(value, { stream: true });
-                const lines = buffer.split('\n');
-                buffer = lines.pop() || "";
-
-                for (const line of lines) {
-                    if (!line.trim()) continue;
-                    try {
-                        const obj = JSON.parse(line);
-                        if (obj.response) {
-                            aggregated += obj.response;
-                            setMessages(prevMsgs => {
-                                const copy = [...prevMsgs];
-                                copy[copy.length - 1] = {
-                                    ...copy[copy.length - 1],
-                                    content: aggregated,
-                                };
-                                return copy;
-                            });
-                        }
-                    } catch {
-                        // Ignore parsing errors
-                    }
+            // 3. Call backend streaming API
+            await ChatAPI.sendMessageStream(
+                userId,
+                currentSessionId,
+                userInput,
+                // onMessage callback
+                (data) => {
+                    console.log('📨 Received data chunk:', `"${data}"`);
+                    console.log('📨 Data length:', data.length);
+                    console.log('📨 Data char codes:', [...data].map(c => c.charCodeAt(0)).join(','));
+                    aggregatedContent += data;
+                    setMessages(prevMsgs => {
+                        const copy = [...prevMsgs];
+                        copy[copy.length - 1] = {
+                            ...copy[copy.length - 1],
+                            content: aggregatedContent,
+                        };
+                        return copy;
+                    });
+                },
+                // onError callback
+                (error) => {
+                    console.error("❌ Streaming error:", error);
+                    setMessages(prevMsgs => {
+                        const copy = [...prevMsgs];
+                        copy[copy.length - 1] = {
+                            ...copy[copy.length - 1],
+                            content: "⚠️ Error occurred while processing your message. Please try again.",
+                        };
+                        return copy;
+                    });
+                    setIsLoading(false);
+                },
+                // onComplete callback
+                () => {
+                    console.log('✅ Streaming completed');
+                    setIsLoading(false);
                 }
-            }
+            );
         } catch (error) {
-            console.error("Failed to call the Ollama API:", error);
-            setMessages(prev => [
-                ...prev,
-                {
-                    role: 'assistant',
-                    id: getId(),
-                    createAt: Date.now(),
-                    content: "⚠️ Unable to connect to the local AI. Please check if the Ollama server is running.",
-                }
-            ]);
+            console.error("Failed to call backend API:", error);
+            setMessages(prev => {
+                const copy = [...prev];
+                copy[copy.length - 1] = {
+                    ...copy[copy.length - 1],
+                    content: "⚠️ Unable to connect to the AI service. Please try again later.",
+                };
+                return copy;
+            });
+            setIsLoading(false);
         }
-    }, []);
+    }, [currentSessionId, userContext, isLoading]);
 
     return (
         <>
@@ -297,7 +365,7 @@ export default function DragChat() {
                             renderInputArea={() => null} // Hide default input area
                         />
                     </div>
-                    <CustomChatInput onSend={onMessageSend} />
+                    <CustomChatInput onSend={onMessageSend} disabled={isLoading} />
                 </div>
             </Modal>
         </>

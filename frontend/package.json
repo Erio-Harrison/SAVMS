@@ -12,6 +12,7 @@
   "dependencies": {
     "@douyinfe/semi-icons": "^2.79.0",
     "@douyinfe/semi-ui": "^2.78.0",
+    "@react-google-maps/api": "^2.20.7",
     "@vis.gl/react-google-maps": "^1.5.2",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.4",

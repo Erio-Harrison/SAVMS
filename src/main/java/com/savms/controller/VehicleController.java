@@ -3,6 +3,13 @@ package com.savms.controller;
 import com.savms.entity.Vehicle;
 import com.savms.service.VehicleService;
 import com.savms.utils.Result;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.geo.GeoResults;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +24,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/vehicles")
+@Tag(name = "Vehicle Management", description = "Vehicle management and tracking APIs")
 public class VehicleController {
     @Autowired
     private VehicleService vehicleService;
@@ -25,6 +33,11 @@ public class VehicleController {
      * Creates a new vehicle.
      * @param vehicle The vehicle to be created.
      */
+    @Operation(summary = "Create Vehicle", description = "Register a new vehicle in the system")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Vehicle created successfully"),
+        @ApiResponse(responseCode = "400", description = "Invalid vehicle data")
+    })
     @PostMapping("/create")
     public void createVehicle(@RequestBody Vehicle vehicle) {
         vehicleService.saveVehicle(vehicle);
