@@ -1,89 +1,79 @@
-# SAVMS 数据模拟系统
+# SAVMS Data Simulation System
 
-这是Smart Autonomous Vehicle Management System (SAVMS) 项目的数据模拟系统，用于生成和接收模拟的车辆遥测数据和异常事件。该系统由两个Python脚本组成，一个负责模拟数据生成，另一个负责数据接收和显示。
+This module provides data simulation for the Smart Autonomous Vehicle Management System (SAVMS). It generates and receives simulated vehicle telemetry and anomaly events. The system consists of two Python scripts: a data generator (sender) and a data receiver (consumer/visualizer).
 
-## 文件结构
+## File Structure
 
-- `simulator_sender.py` - 数据模拟器，用于生成车辆遥测数据和异常事件
-- `simulator_receive.py` - 数据接收器，用于接收和显示模拟数据
+- `simulator_sender.py` — Data generator: produces vehicle telemetry and anomaly events
+- `simulator_receive.py` — Data receiver: watches directories, reads JSON, and prints/displays data
 
-## 安装依赖
+## Installation
 
-该系统仅需几个Python标准库和一个第三方库：
+Requires Python 3 and one third-party dependency:
 
 ```bash
 pip install watchdog
 ```
 
-watchdog库用于监视文件系统变化，接收器使用它来检测新的数据批次。
+`watchdog` is used to monitor filesystem changes so the receiver can detect new data batches.
 
-## 使用方法
+## Usage
 
-### 步骤1：启动数据模拟器
-
-在一个终端中运行数据模拟器：
+### Step 1: Start the data generator
 
 ```bash
 python simulator_sender.py
 ```
 
-### 步骤2：启动数据接收器
-
-在另一个终端中运行数据接收器：
+### Step 2: Start the data receiver
 
 ```bash
 python simulator_receive.py
 ```
 
-如果需要查看详细的遥测数据，可以启用详细模式：
+To print detailed telemetry, enable verbose mode:
 
 ```bash
 python simulator_receive.py --verbose
 ```
 
-## 模拟器参数说明
+## Sender Parameters
 
-数据模拟器支持以下命令行参数：
+- `--output` Output directory (default: `savms_data`)
+- `--rate` Generation interval in milliseconds (default: `1000`)
+- `--anomaly-prob` Probability of anomaly events in percent (default: `5`)
+- `--speed` Simulation speed multiplier (default: `1`)
 
-- `--output` - 指定输出目录，默认为 `savms_data`
-- `--rate` - 指定数据生成间隔(毫秒)，默认为 `1000`
-- `--anomaly-prob` - 指定异常事件生成概率百分比，默认为 `5`
-- `--speed` - 指定模拟速度倍率，默认为 `1`
-
-例如，以下命令将以500毫秒的间隔生成数据，异常概率设为10%，模拟速度为实时的10倍：
+Example: generate data every 500 ms, 10% anomaly probability, at 10x real-time speed:
 
 ```bash
 python simulator_sender.py --rate 500 --anomaly-prob 10 --speed 10
 ```
 
-## 接收器参数说明
+## Receiver Parameters
 
-数据接收器支持以下命令行参数：
+- `--input` Input directory (default: `savms_data`)
+- `--verbose` or `-v` Enable verbose output
 
-- `--input` - 指定输入目录，默认为 `savms_data`
-- `--verbose` 或 `-v` - 启用详细输出模式，显示所有遥测数据
-
-## 数据格式
-
-该系统生成的数据使用JSON格式，存储在以下目录结构中：
+## Data Directory Layout
 
 ```
 savms_data/
-├── live/                      # 实时数据（最新状态）
-│   ├── telemetry.json        # 所有车辆的最新状态
-│   └── anomaly.json          # 最新的异常事件
-│
-├── batch_0/                   # 历史数据批次
-│   ├── telemetry.json        # 该批次的车辆数据
-│   └── anomaly.json          # 该批次的异常事件
-│
-├── batch_1/
-...
+  live/                    # Real-time data (latest state)
+    telemetry.json         # Latest state for all vehicles
+    anomaly.json           # Latest anomaly event(s)
+
+  batch_0/                 # Historical batch (example)
+    telemetry.json         # Telemetry for that batch
+    anomaly.json           # Anomalies for that batch
+
+  batch_1/
+  ...
 ```
 
-### 遥测数据格式
+## Data Examples
 
-遥测数据包含车辆的完整状态信息：
+### Telemetry
 
 ```json
 {
@@ -106,11 +96,7 @@ savms_data/
     "torque": 120.5
   },
   "sensors": {
-    "acceleration": {
-      "x": 0.12,
-      "y": -0.05,
-      "z": 9.8
-    },
+    "acceleration": { "x": 0.12, "y": -0.05, "z": 9.8 },
     "gps": {
       "latitude": 39.9042,
       "longitude": 116.4074,
@@ -118,18 +104,12 @@ savms_data/
       "speed": 65.8,
       "heading": 120.5
     },
-    "gyroscope": {
-      "x": 0.01,
-      "y": 0.03,
-      "z": -0.02
-    }
+    "gyroscope": { "x": 0.01, "y": 0.03, "z": -0.02 }
   }
 }
 ```
 
-### 异常事件格式
-
-异常事件数据示例：
+### Anomaly
 
 ```json
 {
@@ -146,21 +126,21 @@ savms_data/
 }
 ```
 
-## 故障排除
+## Troubleshooting
 
-如果遇到文件读写错误，可能是由于文件系统的竞争条件导致的。尝试以下解决方法：
+If you encounter file read/write errors, it may be due to filesystem contention:
 
-1. 确保数据接收器的启动时间晚于数据模拟器
-2. 降低数据生成速率（增加`--rate`参数）
-3. 确保输出目录存在且有写入权限
-4. 如果在Windows上遇到权限问题，请以管理员身份运行
+1. Start the receiver after the sender
+2. Reduce data generation rate (increase `--rate` value)
+3. Ensure the output directory exists and is writable
+4. On Windows, run the terminal as Administrator if permission errors occur
 
-## 集成到SpringBoot项目
+## Integrating with Spring Boot
 
-要将这个模拟系统集成到SpringBoot项目中，可以：
+Keep the simulator scripts running independently to decouple them from the backend:
 
-1. 保持模拟器Python脚本不变，生成数据文件
-2. 在SpringBoot项目中实现类似的文件监视逻辑来读取数据
-3. 将数据转换为Java对象并进行进一步处理
+1. The sender writes JSON files to `savms_data/` periodically or in real time
+2. The backend watches or periodically scans these files and parses JSON
+3. Map parsed data to domain objects and persist or forward to the frontend
 
-参考`VehicleDataService.java`类作为在SpringBoot中读取模拟数据的实现示例。
+Consider encapsulating file scanning and parsing in a service layer or scheduled task for maintainability and testability.
