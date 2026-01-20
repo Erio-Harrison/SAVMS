@@ -23,12 +23,35 @@ final class SAVMSUITests: XCTestCase {
     }
 
     @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testTabNavigation() throws {
         let app = XCUIApplication()
         app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let tabBar = app.tabBars.firstMatch
+        XCTAssertTrue(tabBar.exists, "TabBar should exist")
+        
+        let mapTab = tabBar.buttons["Map"]
+        let otherTab = tabBar.buttons["Other"]
+        
+        XCTAssertTrue(mapTab.exists, "Map tab should exist")
+        XCTAssertTrue(otherTab.exists, "Other tab should exist")
+        
+        otherTab.tap()
+        let otherText = app.staticTexts["Other Feature"]
+        XCTAssertTrue(otherText.exists, "Other Feature text should be visible")
+        
+        mapTab.tap()
+    }
+    
+    @MainActor
+    func testMapViewExists() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        let mapTab = app.tabBars.buttons["Map"]
+        XCTAssertTrue(mapTab.exists, "Map tab should exist")
+        
+        sleep(2)
     }
 
     @MainActor
